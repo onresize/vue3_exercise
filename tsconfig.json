@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "useDefineForClassFields": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "jsx": "preserve",
+    "jsxFactory": "h",
+    "jsxFragmentFactory": "Fragment",
+    "sourceMap": true,
+    "baseUrl": "./",
+    "types": ["element-plus/global"],
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "paths": {
+      "@/*": ["src/*"],
+      "@img/*": ["src/assets/img/*"],
+      "@less/*": ["src/assets/less/*"],
+      "@css/*": ["src/assets/css/*"],
+      "@fonts/*": ["src/assets/fonts/*"],
+      "@libs/*": ["src/libs/*"],
+      "@cp/*": ["src/components/*"],
+      "@views/*": ["src/views/*"],
+      "@plugins/*": ["src/plugins/*"]
+    },
+    "lib": ["esnext", "dom", "dom.iterable"]
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
+}

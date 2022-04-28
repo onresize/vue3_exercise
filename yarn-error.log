@@ -1,0 +1,80 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\onresize\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add @element-plus/icons-vue
+
+PATH: 
+  C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;D:\git\xxxx\Git\cmd;D:\php\PHPTutorial\php\php-7.2.1-nts;D:\mysql\mysql-5.7.23-winx64\bin;D:\Cmder\cmder;C:\Program Files\nodejs\;C:\Program Files\Java\jdk1.8.0_291\bin;C:\jeecg-server-Idea\apache-maven-3.8.3\bin;D:\微信小程序开发\开发工具\微信web开发者工具\dll;C:\Program Files\dotnet\;D:\python3.72\py\Scripts\;D:\python3.72\py\;C:\Users\onresize\AppData\Local\Microsoft\WindowsApps;C:\Users\onresize\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\Bandizip\;D:\MongoDB\xxx\bin;C:\Users\onresize\AppData\Local\GitHubDesktop\bin;D:\IDEA\idea\IntelliJ IDEA 2020.1.1\bin;;C:\Users\onresize\AppData\Roaming\npm;D:\webStorm\webstorm\WebStorm 211.4961.31\bin;;D:\Fiddler抓包\filddler\Fiddler;D:\webStorm\WebStorm 2021.2.1\bin;
+
+Yarn version: 
+  1.22.17
+
+Node version: 
+  14.17.4
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: EPERM: operation not permitted, unlink 'C:\Users\onresize\Desktop\vue3_exercise\node_modules\esbuild-windows-64\esbuild.exe'
+
+npm manifest: 
+  {
+    "name": "vue3",
+    "version": "0.0.0",
+    "description": "",
+    "author": "",
+    "license": "MIT",
+    "private": true,
+    "scripts": {
+      "dev": "vite --host 0.0.0.0",
+      "build": "vue-tsc --noEmit && vite build",
+      "build:vite": "vite build",
+      "serve": "vite preview",
+      "lint": "eslint src --ext .js,.ts",
+      "format": "prettier --write src",
+      "backup": "git add . && git commit -m \"chore: save the coding progress\" && git push"
+    },
+    "dependencies": {
+      "@vueuse/core": "^8.2.3",
+      "axios": "^0.26.1",
+      "element-plus": "^2.0.5",
+      "vue": "^3.2.30",
+      "vue-router": "^4.0.12",
+      "vuex": "^4.0.2",
+      "xgplayer": "^2.31.4"
+    },
+    "devDependencies": {
+      "@types/node": "^16.11.11",
+      "@typescript-eslint/eslint-plugin": "^5.6.0",
+      "@typescript-eslint/parser": "^5.6.0",
+      "@vitejs/plugin-vue": "^1.9.3",
+      "@vitejs/plugin-vue-jsx": "^1.3.9",
+      "eslint": "^8.4.1",
+      "eslint-config-prettier": "^8.3.0",
+      "eslint-plugin-prettier": "^4.0.0",
+      "eslint-plugin-vue": "^8.2.0",
+      "less": "^4.1.1",
+      "lint-staged": "^12.1.2",
+      "prettier": "^2.5.1",
+      "typescript": "^4.4.3",
+      "unplugin-vue-components": "^0.17.6",
+      "vite": "^2.6.4",
+      "vite-plugin-banner": "^0.1.3",
+      "vue-tsc": "^0.3.0",
+      "yorkie": "^2.0.0"
+    },
+    "gitHooks": {
+      "pre-commit": "lint-staged --concurrent false"
+    },
+    "lint-staged": {
+      "*.{js,jsx,vue,ts,tsx}": [
+        "prettier --write",
+        "eslint --fix"
+      ]
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

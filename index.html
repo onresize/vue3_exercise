@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vue3</title>
+    <script>
+      window.onload = function () {
+        let r = new Date().getTime() - performance.timing.navigationStart;
+        console.log("白屏时间", r);
+      };
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- 传送门小窗口视频 -->
+    <div class="conSmallVideo"></div>
+    <!-- 传送门loading效果 -->
+    <div class="mode"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
+
+<style>
+  .conSmallVideo {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 400px;
+    height: 270px;
+  }
+</style>
