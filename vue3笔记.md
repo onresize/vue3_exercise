@@ -1,7 +1,7 @@
 ### vue3 需注意要点：
 
 ```js
-1.在setUp方式下 引入组件直接import就可以直接再template中使用
+1.在setUp方式下 引入组件直接import就可以直接在template中使用、不需要cmponents
 2.setup下、直接就是vue2的created生命周期
 3.顶层await、 setup模式下，请求只需要写 await 可以省略async、定义函数还是要两个都写
 ```
@@ -10,7 +10,7 @@
 
 ```js
 # ref /reactive 响应式API
-ref一般定义除了数组和对象其他的类型，script操作要用.value取值、dom结构上不需要.value
+ref一般定义除了数组和对象其他的类型，script操作要用.value取值、dom结构上不需要.value、写jsx或tsx时dom层要用.value
 reactive定义数组和对象的响应式数据、正常取值
 ```
 

@@ -2,6 +2,11 @@ import { ref } from "vue";
 let v = ref<string>("");
 let arr = [1, 3, 4, 5, 6];
 const renderDom = (props, emits) => {
+  const divClick = (v, emits) => {
+    console.log("点击了", e);
+    emits.emit("myClick", v);
+  };
+
   return (
     <div>
       <div>
@@ -15,7 +20,10 @@ const renderDom = (props, emits) => {
           {arr.map((v) => {
             return (
               // click方法用 bind传参、直接传会调用该函数
-              <el-button onClick={divClick.bind(this, v, emits)} data-index={v}>
+              // <el-button onClick={divClick.bind(this, v, emits)}>
+              //   ${v}
+              // </el-button>
+              <el-button onClick={() => divClick(v, emits)}>
                 ${v}
               </el-button>
             );
@@ -24,10 +32,6 @@ const renderDom = (props, emits) => {
       </div>
     </div>
   );
-};
-const divClick = (v, emits) => {
-  console.log("点击了", v);
-  emits.emit("myClick", v);
 };
 
 export default renderDom;

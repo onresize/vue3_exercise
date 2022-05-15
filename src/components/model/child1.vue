@@ -1,34 +1,37 @@
 <template>
-  <div v-if="propData.modelValue" class="dialog">
+  <div v-if="modelValue" class="dialog">
     <div class="dialog-header">
       <h3>标题---{{ title }}</h3>
       <div @click="closeClick" class="cancel">x</div>
     </div>
-    <div class="dialog-content">这里是子组件子组件子组件</div>
+    <div class="dialog-content">这里是子组件1子组件1子组件1</div>
   </div>
 </template>
 
-<script setup lang="ts">
-type Props = {
-  modelValue: boolean;
-  title: string;
-  myName: string;
-};
-
-// const propData = defineProps<Props>();
-
-const propData = defineProps(["modelValue", "title", "myName"]);
-
-const emits = defineEmits([
-  "update:modelValue",
-  "update:title",
-  "update:myName",
-]);
-
-const closeClick = () => {
-  emits("update:modelValue", false);
-  emits("update:title", "改变标题");
-  emits("update:myName", "李四");
+<script>
+import { ref, reactive, toRefs } from "vue";
+export default {
+  props: {
+    modelValue: Boolean,
+    title: String,
+    myName: {
+      type: String,
+      default: "王大胖",
+    },
+  },
+  emits: ["update:modelValue", "update:title", "update:myName"],
+  setup(prop, { attrs, emit, expose }) {
+    const methods = reactive({
+      // 子组件触发
+      closeClick() {
+        console.log("走了closeClick");
+        emit("update:modelValue", false);
+        emit("update:title", "子组件修改了标题");
+        emit("update:myName", "王杰");
+      },
+    });
+    return { ...toRefs(methods) };
+  },
 };
 </script>
 

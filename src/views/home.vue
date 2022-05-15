@@ -34,6 +34,7 @@ let key = computed(() =>
 let RouterList = reactive<string[]>([
   "computed",
   "child",
+  "myChild1",
   "model",
   "watch",
   "otherComponent",
@@ -45,6 +46,7 @@ let RouterList = reactive<string[]>([
   "globalData",
   "routerName",
   "vueTsx",
+  "myjsx",
   "costomRef",
   "suspense",
 ]);
@@ -93,6 +95,7 @@ a {
 
 .home_container_aside {
   height: 100vh;
+  padding-bottom: 30px;
   overflow-x: hidden;
 }
 

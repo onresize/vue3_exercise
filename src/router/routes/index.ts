@@ -18,6 +18,10 @@ const routes: RouteRecordRaw[] = [
         component: () => import("@cp/child/index.vue"),
       },
       {
+        path: "/myChild1",
+        component: () => import("@cp/myChild1/index.vue"),
+      },
+      {
         path: "/model",
         component: () => import("@cp/model/index.vue"),
       },
@@ -56,6 +60,10 @@ const routes: RouteRecordRaw[] = [
       {
         path: '/vueTsx',
         component: () => import("@cp/tsx的使用/index.vue"),
+      },
+      {
+        path: '/myjsx',
+        component: () => import("@cp/myjsx/index.jsx"),
       },
       {
         path: '/costomRef',
