@@ -49,6 +49,9 @@ let RouterList = reactive<string[]>([
   "myjsx",
   "costomRef",
   "suspense",
+  "nextTick",
+  "icon",
+  "i18",
 ]);
 </script>
 

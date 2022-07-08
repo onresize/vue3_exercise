@@ -1,9 +1,10 @@
 <template>
-  <img :src="bgUrl" alt style="width: 800px"/>
+  <img :src="bgUrl" alt style="width: 800px" />
 </template>
 
 <script setup>
 import bg from "@img/bg.jpg";
+
 const getBg = () => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {

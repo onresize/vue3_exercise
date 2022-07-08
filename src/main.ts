@@ -11,6 +11,20 @@ import "@less/global.less";
 
 const app = createApp(App);
 
+// 全局注册图标
+import * as Icons from "@element-plus/icons-vue";
+Object.keys(Icons).forEach((key) => {
+  app.component(key, Icons[key]);
+});
+console.log("全局引入图标", Object.keys(Icons));
+
+// i18国际化
+// import { setupI18n } from "./plugins/i18n";
+// // app.config.globalProperties.$il18n = i18n // 全局定义
+// app.use(setupI18n);
+import i18n from "./plugins/i18n";
+app.use(i18n);
+
 // //全局遍历注册
 // Object.values(myComponents).forEach(i => {
 //   app.component(i.name, i)

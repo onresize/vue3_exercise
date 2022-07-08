@@ -8,12 +8,12 @@
     </a>
   </h3>
   <el-button @click="show = !show">开关</el-button>
-  <h3>{{ show }}---{{ title }}---{{ myName }}</h3>
+  <h3>{{ show }}---{{ title1 }}---{{ myName1 }}</h3>
   <Dialog
     ref="chidRef"
     v-model="show"
-    v-model:title="title"
-    v-model:myName="myName"
+    v-model:title="title1"
+    v-model:myName="myName1"
   ></Dialog>
 </template>
 
@@ -22,8 +22,8 @@
 import Dialog from "./child1.vue";
 import { ref } from "vue";
 let show = ref<boolean>(false);
-let title = ref<string>("默认标题");
-let myName = ref<string>();
+let title1 = ref<string>("默认标题");
+let myName1 = ref<string>('张三');
 </script>
 
 <style></style>

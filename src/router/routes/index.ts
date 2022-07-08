@@ -58,20 +58,32 @@ const routes: RouteRecordRaw[] = [
         component: () => import("@cp/全局变量和函数/index.vue"),
       },
       {
-        path: '/vueTsx',
+        path: "/vueTsx",
         component: () => import("@cp/tsx的使用/index.vue"),
       },
       {
-        path: '/myjsx',
+        path: "/myjsx",
         component: () => import("@cp/myjsx/index.jsx"),
       },
       {
-        path: '/costomRef',
+        path: "/costomRef",
         component: () => import("@cp/costomRef实现敏感词替换/index.vue"),
       },
       {
-        path: '/suspense',
+        path: "/suspense",
         component: () => import("@cp/suspense实现骨架屏/index.vue"),
+      },
+      {
+        path: "/nextTick",
+        component: () => import("@cp/nextTickTest/index.vue"),
+      },
+      {
+        path: "/icon",
+        component: () => import("@cp/icon/index.vue"),
+      },
+      {
+        path: "/i18",
+        component: () => import("@cp/i18国际化/index.vue"),
       },
       // 应用场景tab切换、命名视图
       {

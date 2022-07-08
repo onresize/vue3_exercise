@@ -1,4 +1,36 @@
+```js
+# toRaw() 
+// 应用场景：从reactive或ref中得到原始数据、提升性能
+// 做一些不想被监听的事情(提升性能)
+
+# unref() 
+// 应用场景：解决ref和reactive取值问题、直接用unref()包裹ref的变量就可以直接使用、不需要再.value、
+//他是 (val = isRef(val) ? val.value : val) 的语法糖
+
+# toRefs()
+// 应用场景：将响应式对象转换成普通对象、普通对象才能被解构、在一个组合逻辑函数中返回响应式对象、使用toRefs()结解构、并且不会丢失响应式
+
+# toRef()
+// 应用场景：转换响应式对象中的某个属性为 单独响应式数据、并且转换后的值和之前是关联的
+//（ref函数也可以转换、但值是非关联的）
+setup() {
+    const obj = reactive({
+        name: '张三',
+        age：18
+    })
+    const name  = toRef(obj, 'name')
+    const updateName = () => {
+        name.value = '李四' // 这里需要使用.value
+    }
+    return { name, updateName }
+}
+```
+
+**vite打包异常参考：**[csdn](https://blog.csdn.net/qq_43413883/article/details/124198747)
+
 ### vue3 需注意要点：
+
+[总结参考](https://blog.csdn.net/Mr_JavaScript/article/details/124554063)
 
 ```js
 1.在setUp方式下 引入组件直接import就可以直接在template中使用、不需要cmponents
@@ -8,10 +40,31 @@
 
 ### ref /reactive
 
+（[reactive重新赋值会导致视图不更新参考]('https://blog.csdn.net/qq_38974163/article/details/122426426')）
+
 ```js
 # ref /reactive 响应式API
 ref一般定义除了数组和对象其他的类型，script操作要用.value取值、dom结构上不需要.value、写jsx或tsx时dom层要用.value
 reactive定义数组和对象的响应式数据、正常取值
+
+# reactive重新赋值会导致视图不更新
+通常解决办法： 
+setup() {
+	const state = reactive({
+		list: [],
+	    name: ''
+	})
+    // 重新赋值这样使用 state.list = xxx
+    const methods = reactive({
+        // 定义函数也可以这样操作
+        getList() {}
+    })
+	return {
+	    ...toRefs(state),
+        ...toRefs(methods)
+	}
+}
+
 ```
 
 ### computed使用方法

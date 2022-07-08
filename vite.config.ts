@@ -6,6 +6,7 @@ import banner from "vite-plugin-banner";
 import pkg from "./package.json";
 //安装jsx插件 npm install @vitejs/plugin-vue-jsx -D
 import vueJsx from "@vitejs/plugin-vue-jsx";
+import VueI18n from '@intlify/vite-plugin-vue-i18n'
 
 const resolve = (dir: string): string => path.resolve(__dirname, dir);
 
@@ -120,6 +121,11 @@ export default defineConfig({
   plugins: [
     vue(),
     vueJsx(),
+     // https://github.com/intlify/vite-plugin-vue-i18n
+     VueI18n({
+      // define the locales files directory
+      include: [resolve(__dirname, 'src/locales/**')],
+    }),
 
     /**
      * 自动导入组件，不用每次都 import
