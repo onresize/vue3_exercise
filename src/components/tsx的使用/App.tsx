@@ -3,7 +3,7 @@ let v = ref<string>("");
 let arr = [1, 3, 4, 5, 6];
 const renderDom = (props, emits) => {
   const divClick = (v, emits) => {
-    console.log("点击了", e);
+    console.log("点击了", v);
     emits.emit("myClick", v);
   };
 

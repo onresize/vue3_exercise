@@ -12,24 +12,12 @@ const messages = {
 // // 默认语言
 const langDefault = "en";
 // const langDefault = 'en'
-// export const i18n = createI18n({
-//   legacy: false, // 使用CompotitionAPI必须添加这条.
-//   locale: langDefault, //默认显示的语言
-//   globalInjection: true, // 全局模式，可以直接使用 $t
-//   messages,
-// });
-
-// export const setupI18n = {
-//   install(app) {
-//     app.use(i18n);
-//   },
-// };
 
 const install = (app: App) => {
   const i18n = createI18n({
-    legacy: false,
-    locale: langDefault,
-    globalInjection: true,
+    legacy: false, // 使用CompotitionAPI必须添加这条.
+    locale: langDefault, //默认显示的语言
+    globalInjection: true, // 全局模式，可以直接使用 $t
     messages,
   });
 

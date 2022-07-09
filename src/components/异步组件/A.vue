@@ -15,10 +15,13 @@ import {
   defineAsyncComponent,
 } from "vue";
 import Axios from "axios";
-let {
-  data: { list: List },
-} = await Axios("./data.json");
-console.log(List);
+let List = ref([]);
+
+setTimeout(async () => {
+  const res = await Axios("./data.json");
+  console.log(res.data.list);
+  List.value = res.data.list;
+}, 200);
 </script>
 
 <style scoped></style>

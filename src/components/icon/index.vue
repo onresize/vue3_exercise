@@ -11,7 +11,7 @@
     <h3>
       <el-tag color="yellow" class="ft-20">
         注意这里使用setup 方式必须写components当成组件一样注册图标、而
-        script标签上setup那种方式只需要引入就能直接使用、不需要要再写components
+        script标签上setup那种方式只需要引入就能直接使用、不需要再写components
       </el-tag>
     </h3>
     <div>

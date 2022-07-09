@@ -4,6 +4,13 @@
     <h3 style="color: red">
       注意： 这里teleport的 to 属性在 index.html中的标签下才有效果
     </h3>
+    <h2>
+       <el-link
+        href="https://blog.csdn.net/Boale_H/article/details/120288101"
+        target="_blank"
+        >关于外链视频请求403报错问题参考：</el-link
+      >
+    </h2>
     <!-- 被监听的大视频窗口 -->
     <div class="videoContainer" id="videoContainer">
       <!-- 传送门到夫级 -->
@@ -37,7 +44,8 @@ onMounted(() => {
   let player = new Player({
     volume: 0.1,
     id: "msId",
-    url: "https://media.w3.org/2010/05/sintel/trailer.mp4",
+    // url: "https://media.w3.org/2010/05/sintel/trailer.mp4",
+    url: "https://ckplayer-video.oss-cn-shanghai.aliyuncs.com/mp4/1_1920x1080.mp4",
   });
   const { stop } = useIntersectionObserver(
     document.getElementById("videoContainer"),

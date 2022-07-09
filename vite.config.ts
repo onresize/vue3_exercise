@@ -124,7 +124,7 @@ export default defineConfig({
      // https://github.com/intlify/vite-plugin-vue-i18n
      VueI18n({
       // define the locales files directory
-      include: [resolve(__dirname, 'src/locales/**')],
+      include: [resolve(__dirname, '@/src/locales/**')],
     }),
 
     /**
