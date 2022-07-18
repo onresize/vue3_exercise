@@ -13,7 +13,7 @@ const messages = {
 const langDefault = "en";
 // const langDefault = 'en'
 
-const install = (app: App) => {
+const install = (app) => {
   const i18n = createI18n({
     legacy: false, // 使用CompotitionAPI必须添加这条.
     locale: langDefault, //默认显示的语言

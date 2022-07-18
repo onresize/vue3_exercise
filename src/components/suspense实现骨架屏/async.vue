@@ -12,7 +12,7 @@ const getBg = () => {
     }, 2000);
   });
 };
-const bgUrl = await getBg();
+let bgUrl = await getBg();
 </script>
 
 <style scoped></style>

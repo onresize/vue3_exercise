@@ -52,10 +52,22 @@ let RouterList = reactive<string[]>([
   "nextTick",
   "icon",
   "i18",
+  "regExp",
 ]);
 </script>
 
 <style scoped lang="less">
+// 设置隐藏滚动条且还能滚动
+.container {
+  overflow: hidden;
+}
+.home_container_main {
+  height: 100vh;
+  overflow: scroll;
+}
+
+
+
 .aa {
   margin: 10px;
   width: 100%;

@@ -85,6 +85,10 @@ const routes: RouteRecordRaw[] = [
         path: "/i18",
         component: () => import("@cp/i18国际化/index.vue"),
       },
+      {
+        path: "/regExp",
+        component: () => import("@cp/正则踩坑/index.vue"),
+      },
       // 应用场景tab切换、命名视图
       {
         path: "/routerName",

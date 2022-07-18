@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>
-      i18国际化基本使用(安装三个库)：
+      i18国际化基本使用：
       <!-- <el-tag class="bg-pink ft-22 h-30 ft-white">
         npm i @types/node -D
       </el-tag> -->
