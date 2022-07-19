@@ -89,6 +89,14 @@ const routes: RouteRecordRaw[] = [
         path: "/regExp",
         component: () => import("@cp/正则踩坑/index.vue"),
       },
+      {
+        path: "/asyncAction",
+        component: () => import("@cp/微任务宏任务执行顺序/index.vue"),
+      },
+      {
+        path: "/customHook",
+        component: () => import("@cp/自定义Hook/index.vue"),
+      },
       // 应用场景tab切换、命名视图
       {
         path: "/routerName",

@@ -9,10 +9,10 @@
       >
     </h2>
     <h3>
-      <el-tag color="yellow" class="ft-20">
-        注意这里使用setup return方式必须写components当成组件一样注册图标、而
-        script标签上setup那种方式只需要引入就能直接使用、不需要再写components
-      </el-tag>
+      <div class="ft-20 tag">
+        注意这里使用setup return方式必须写components当成组件一样注册图标、
+        而script标签上setup那种方式只需要引入就能直接使用、不需要再写components
+      </div>
     </h3>
     <div>
       <h3 class="mg-l-20">
@@ -59,4 +59,14 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped lang="less">
+.tag {
+  width: calc(100vw - 310px);
+  background-color: yellow;
+  color: rgb(87, 196, 230);
+  border-radius: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+  user-select: none;
+}
+</style>

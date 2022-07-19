@@ -53,6 +53,8 @@ let RouterList = reactive<string[]>([
   "icon",
   "i18",
   "regExp",
+  "asyncAction",
+  "customHook",
 ]);
 </script>
 

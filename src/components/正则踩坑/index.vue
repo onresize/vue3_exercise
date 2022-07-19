@@ -38,7 +38,7 @@
            5.replace(a, b)方法用于在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。
            a参数为正则表达式、b参数为替换的字符串 或 一个替换文本的箭头函数
           </span>
-          str1.replace(reg, '123'); <span class="nSpan">// "the 123"</span>
+          str1.replace(reg, '123'); <span class="nSpan">// the 123</span>
       </pre>
     </div>
 
@@ -52,9 +52,13 @@
     </div>
     <div class="pre-div noSelect">
       <pre>
-      <span>2.字符串：驼峰转下划线 (aB -> a_b)</span>
+      <span>2.字符串：驼峰转下划线 (aB -> a_b) (aB -> a*b)</span>
       const formatToLine = (value) => {
         return value.replace(/([A-Z])/g, '_$1').toLowerCase()
+      }
+
+      const formatToLine1 = (value) => {
+        return value.replace(/([A-Z])/g, '*$1').toLowerCase()
       }
       </pre>
     </div>
@@ -62,6 +66,7 @@
 </template>
 
 <script setup>
+import { nextTick } from "vue";
 //XXX 1.将str转成去除'-'、转成驼峰命名、(get-element-by-id -> getElementById)
 let str = "get-element-by-id";
 let arr = [];
@@ -81,6 +86,29 @@ function code(str) {
   return str.replace(/[A-Z]/g, (word) => "_" + word.toLowerCase());
 }
 console.log("正则转化后的str2----------", code(str2));
+
+
+
+
+// console.log("----------start-----------");
+
+// setTimeout(() => {
+//   console.log("setTimeout");
+// }, 0);
+
+// new Promise((res, rej) => {
+//   for (var i = 0; i < 4; i++) {
+//     console.log(i);
+//   }
+//   res();
+// }).then(() => {
+//   console.log("Promise.then()");
+// });
+// nextTick(() => {
+//   console.log("nextTick");
+// });
+
+// console.log("----------end-----------");
 </script>
 
 <style scoped lang="less">
@@ -91,10 +119,13 @@ console.log("正则转化后的str2----------", code(str2));
   background-color: pink;
   border-radius: 10px;
   padding: 2px 0 0 0;
-  font-size: 20px;
-  font-weight: bold;
-  color: white;
 
+  pre {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+    font-family: "楷体";
+  }
   .nSpan {
     color: #ff9933;
     font-size: 19px;
