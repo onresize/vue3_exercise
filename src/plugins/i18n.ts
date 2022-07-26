@@ -15,7 +15,7 @@ const langDefault = "en";
 
 const install = (app) => {
   const i18n = createI18n({
-    legacy: false, // 使用CompotitionAPI必须添加这条.
+    legacy: false, // 使用v3 CompotitionAPI必须添加这条.
     locale: langDefault, //默认显示的语言
     globalInjection: true, // 全局模式，可以直接使用 $t
     messages,
