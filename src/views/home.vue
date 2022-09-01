@@ -15,8 +15,12 @@
     </el-card>
     <!-- 右侧内容 -->
     <el-main class="home_container_main">
-      <!-- home改用嵌套路由 占位符 -->
-      <router-view :key="key"></router-view>
+      <!--XXX 设置跨路由的动画、所有的router-view加上key只会导致动画失效 -->
+      <router-view v-slot="{ Component }">
+        <transition name="slide-fade">
+          <component class="child-view" :is="Component" />
+        </transition>
+      </router-view>
     </el-main>
   </el-container>
 </template>
@@ -55,20 +59,43 @@ let RouterList = reactive<string[]>([
   "regExp",
   "asyncAction",
   "customHook",
+  "jsonStringIfy",
+  "FileReader",
+  "encrypt",
+  "introCom",
+  "waterfall",
+  "loading",
 ]);
 </script>
 
 <style scoped lang="less">
+// 跨路由动画
+.child-view {
+  // position: absolute;
+  // z-index: -1;
+  width: calc(100vw - 330px);
+  height: 100%;
+  transition: all 0.7s cubic-bezier(0.58, 0.09, 0.33, 0.91);
+}
+
+/* 进入 */
+.slide-fade-enter-from {
+  transform: translateX(-calc(100vw));
+  opacity: 0;
+}
+/* 离开 */
+.slide-fade-leave-to {
+  transform: translateX(260px);
+  opacity: 0;
+}
 // 设置隐藏滚动条且还能滚动
 .container {
-  overflow: hidden;
+  overflow: hidden !important;
 }
 .home_container_main {
   height: 100vh;
-  overflow: scroll;
+  overflow-y: scroll;
 }
-
-
 
 .aa {
   margin: 10px;
@@ -83,10 +110,12 @@ let RouterList = reactive<string[]>([
   background: #ccffff;
   border-radius: 10px;
   text-align: center;
+  transition: 0.6s;
 }
 
 .info_style {
   text-decoration: none;
+  transition: 0.6s;
 }
 
 .cc {

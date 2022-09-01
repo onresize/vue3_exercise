@@ -3,38 +3,59 @@ import type { RouteRecordRaw } from "vue-router";
 const routes: RouteRecordRaw[] = [
   {
     path: "/",
-    redirect: "/computed",
+    redirect: "/welcome",
   },
+  // 匹配不到页面跳404
+  { path: "/:pathMatch(.*)", redirect: { name: "404" } },
   {
     path: "/home",
     component: () => import("@views/home.vue"),
     children: [
       {
+        path: "/404",
+        name: "404",
+        meta: { title: "404" },
+        component: () => import("@views/404.vue"),
+      },
+      {
+        path: "/welCome",
+        name: "welcome",
+        meta: { title: "welCome" },
+        component: () => import("@views/welCome.vue"),
+      },
+      {
         path: "/computed",
+        meta: { title: "computed" },
         component: () => import("@cp/computed/index.vue"),
       },
       {
         path: "/child",
+        meta: { title: "child" },
         component: () => import("@cp/child/index.vue"),
       },
       {
         path: "/myChild1",
+        meta: { title: "myChild1" },
         component: () => import("@cp/myChild1/index.vue"),
       },
       {
         path: "/model",
+        meta: { title: "model" },
         component: () => import("@cp/model/index.vue"),
       },
       {
         path: "/watch",
+        meta: { title: "watch" },
         component: () => import("@cp/watch/index.vue"),
       },
       {
         path: "/otherComponent",
+        meta: { title: "otherComponent" },
         component: () => import("@cp/动态组件component/index.vue"),
       },
       {
         path: "/slot",
+        meta: { title: "slot" },
         component: () => import("@cp/slot插槽/index.vue"),
       },
       {
@@ -96,6 +117,30 @@ const routes: RouteRecordRaw[] = [
       {
         path: "/customHook",
         component: () => import("@cp/自定义Hook/index.vue"),
+      },
+      {
+        path: "/jsonStringIfy",
+        component: () => import("@cp/JSON.stringify妙用/index.vue"),
+      },
+      {
+        path: "/FileReader",
+        component: () => import("@cp/FileReader/index.vue"),
+      },
+      {
+        path: "/encrypt",
+        component: () => import("@cp/加密解密/index.vue"),
+      },
+      {
+        path: "/introCom",
+        component: () => import("@cp/步骤引导组件使用/index.vue"),
+      },
+      {
+        path: "/waterfall",
+        component: () => import("@cp/瀑布流/index.vue"),
+      },
+      {
+        path: "/loading",
+        component: () => import("@cp/loading动画/index.vue"),
       },
       // 应用场景tab切换、命名视图
       {

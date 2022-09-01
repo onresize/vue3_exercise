@@ -1,7 +1,9 @@
 <template>
   <h2>使用自定义useTimer倒计时Hook</h2>
-  {{ count }}
-  <el-button @click="setTimer(5)">设置数字</el-button>
+  <h3>
+    {{ time }}
+    <el-button @click="setTimer(5)">设置数字</el-button>
+  </h3>
 
   <pre class="ft-20 ft-bold bg-pink border-10 pg-t-20" style="color: #ff6600">
     <span class="span-top">自定义Hook:</span>
@@ -24,7 +26,7 @@
         count.value = tim;
         getNow();
       }
-      return [count, setTimer];
+      return [time, setTimer];
     }
 
    </pre>
@@ -33,7 +35,7 @@
 <script setup lang="ts">
 import { useTimer } from "./useTimer";
 
-const [count, setTimer] = useTimer(3);
+const [time, setTimer] = useTimer(3);
 </script>
 
 <style scoped>

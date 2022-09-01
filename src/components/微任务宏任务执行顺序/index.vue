@@ -1,8 +1,12 @@
 <template>
-  <div>
+  <div class="div-mb">
     <h2>探究宏任务微任务执行顺序 (两者都是异步)</h2>
     <h3>宏任务： 定时器、RAF、Dom操作、ajax请求</h3>
-    <h3>微任务：Promise.then()回调、async/await、nextTick()</h3>
+    <h3>微任务：Promise.then()回调、async/await后面的代码块</h3>
+    <h3>执行顺序：同步 -> 微任务 -> dom渲染 -> nextTick -> 宏任务</h3>
+    <h4 style="color: green">
+      (nextTick在第一个宏任务执行之前执行、在微任务和宏任务之间)
+    </h4>
     <pre class="ft-20 ft-bold bg-pink border-10 pg-t-20">
       <span class="pSpan">
       console.log('----------start-----------')
@@ -23,6 +27,15 @@
           console.log('Promise.then()')
       })
 
+      const methods = reactive({
+        async funA() {
+          console.log('111')
+          const a = await Promise.resolve("222");
+          console.log(a);
+        },
+      });
+      methods.funA();
+
       console.log('----------end-----------')
       </span>
 
@@ -35,8 +48,10 @@
       1
       2
       3
+      111
       ----------end-----------
       Promise.then()
+      222
       nextTick
       setTimeout
       </span>
@@ -45,7 +60,7 @@
 </template>
 
 <script setup>
-import { nextTick } from "vue";
+import { nextTick, reactive } from "vue";
 console.log("----------start-----------");
 
 setTimeout(() => {
@@ -64,14 +79,23 @@ new Promise((res, rej) => {
   console.log("Promise.then()");
 });
 
+const methods = reactive({
+  async funA() {
+    console.log("111");
+    const a = await Promise.resolve("222");
+    console.log(a);
+  },
+});
+methods.funA();
+
 console.log("----------end-----------");
 </script>
 
 <style scoped>
 .pSpan {
-  color: #CC6600
+  color: #cc6600;
 }
 .nSpan {
-  color: #999999
+  color: #999999;
 }
 </style>

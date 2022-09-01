@@ -1,5 +1,5 @@
 <template>
-  <router-view :key="key" />
+  <router-view />
 </template>
 
 <script setup lang="ts">

@@ -44,7 +44,7 @@ setup() {
 
 ```js
 # ref /reactive 响应式API
-ref一般定义除了数组和对象其他的类型，script操作要用.value取值、dom结构上不需要.value、写jsx或tsx时dom层要用.value
+ref一般定义除了对象其他的类型，script操作要用.value取值、dom结构上不需要.value、写jsx或tsx时dom层要用.value
 reactive定义数组和对象的响应式数据、正常取值
 
 # reactive重新赋值会导致视图不更新
@@ -65,6 +65,28 @@ setup() {
 	}
 }
 
+# 争对数组类型、reactive和ref都能定义
+使用reactive定义数组、直接对数组赋值或concat无法获取响应式数据
+
+// 方法一：对于已经获取的数组进行遍历，逐项push进变量里
+let list = reactive([])
+for(let i = 0; i < arr.length; i++){
+    list.push(arr[i])
+}
+
+// 方法二：方法一太过麻烦，可以采用下面解构方法：
+let list = reactive([])
+list.push(...arr)
+
+// 方法三：既然reactive可以用在对象上，那我们就嵌套一层对象在外层
+let obj = reactive({
+  list: []
+})
+obj.list = arr
+
+// 方法四：我们可以使用ref去定义
+let list = ref([])
+list.value = arr
 ```
 
 ### computed使用方法
@@ -113,6 +135,7 @@ watch([value1, value2], (newVal, oldVal) => {
 })
 
 // 3.watch第一个参数可以携程函数，第三个参数设置 deep: true | immediate: true
+#应用场景： 监听props下的某个属性
 watch(() => value3.name, (newVal, oldVal) => {
     console.log('新值', newVal)
     console.log('旧值', oldVal)

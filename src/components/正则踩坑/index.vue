@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="div-mb">
     <h2>正则基本使用</h2>
     <div class="pre-div">
       <pre>
@@ -86,9 +86,6 @@ function code(str) {
   return str.replace(/[A-Z]/g, (word) => "_" + word.toLowerCase());
 }
 console.log("正则转化后的str2----------", code(str2));
-
-
-
 
 // console.log("----------start-----------");
 

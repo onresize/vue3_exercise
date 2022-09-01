@@ -6,10 +6,13 @@ import store from "@/store";
 import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";
 
+import 'animate.css'
+
 // 全局样式
 import "@less/global.less";
 
 const app = createApp(App);
+
 
 // 全局注册图标
 import * as Icons from "@element-plus/icons-vue";
