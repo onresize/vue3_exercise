@@ -65,6 +65,9 @@ let RouterList = reactive<string[]>([
   "introCom",
   "waterfall",
   "loading",
+  "animation1",
+  "animation2",
+  "animation3",
 ]);
 </script>
 

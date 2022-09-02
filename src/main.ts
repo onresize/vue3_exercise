@@ -3,6 +3,7 @@ import App from "@/App.vue";
 import router from "@/router";
 import store from "@/store";
 
+
 import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";
 
@@ -11,7 +12,12 @@ import 'animate.css'
 // 全局样式
 import "@less/global.less";
 
+// vue3中使用$bus通信、mitt和tiny-emitter是官方推荐库
+import mitt from "mitt"
+
 const app = createApp(App);
+app.config.globalProperties.$bus = mitt()
+
 
 
 // 全局注册图标
@@ -69,3 +75,4 @@ app.config.globalProperties.$env = "这是一个main.ts下声明的全局变量"
 
 app.use(ElementPlus);
 app.use(store).use(router).mount("#app");
+

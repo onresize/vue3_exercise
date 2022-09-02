@@ -6,7 +6,7 @@ const routes: RouteRecordRaw[] = [
     redirect: "/welcome",
   },
   // 匹配不到页面跳404
-  { path: "/:pathMatch(.*)", redirect: { name: "404" } },
+  // { path: "/:pathMatch(.*)", redirect: { name: "404" } },
   {
     path: "/home",
     component: () => import("@views/home.vue"),
@@ -142,6 +142,37 @@ const routes: RouteRecordRaw[] = [
         path: "/loading",
         component: () => import("@cp/loading动画/index.vue"),
       },
+      {
+        path: "/animation1",
+        component: () => import("@cp/动画/index1.vue"),
+      },
+      {
+        path: "/animation2",
+        component: () => import("@cp/动画/index2.vue"),
+      },
+      {
+        path: "/animation3",
+        component: () => import("@cp/动画/index3.vue"),
+        children: [
+          {
+            path: "/page1",
+            name: 'page1',
+            // components: {
+            //   default: () => import("@cp/动画/RouterAnimation/page1.vue"),
+            // },
+            component: () => import("@cp/动画/RouterAnimation/page1.vue"),
+          },
+          {
+            path: "/page2",
+            name: 'page2',
+            // components: {
+            //   default: () => import("@cp/动画/RouterAnimation/page2.vue"),
+            // },
+            component: () => import("@cp/动画/RouterAnimation/page2.vue"),
+          },
+        ],
+      },
+
       // 应用场景tab切换、命名视图
       {
         path: "/routerName",
