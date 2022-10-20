@@ -1,6 +1,7 @@
 <template>
   <div class="page2 w240">
-    <h2 @click="emitCount">{{ Store.state.shoesCount }}</h2>
+    <!-- <h2 @click="emitCount">{{ Store.state.shoesCount }}</h2> -->
+    <h2 @click="emitCount1">{{ PiniaStore.shoesCount }}</h2>
   </div>
 </template>
 
@@ -9,9 +10,11 @@ import { ref, onMounted, getCurrentInstance } from "vue";
 import { gsap } from "gsap";
 import { useRoute, onBeforeRouteLeave } from "vue-router";
 import { useStore } from "vuex";
+import { useMainStore } from "@/store/main.ts";
 
 const route = useRoute();
 const Store = useStore();
+const PiniaStore = useMainStore();
 
 const count = ref(0);
 const toX = ref(200);
@@ -21,6 +24,9 @@ const toRotation = ref(90);
 
 const emitCount = () => {
   Store.dispatch("asyncAddCount", 1);
+};
+const emitCount1 = () => {
+  PiniaStore.addDelayCount(1);
 };
 
 onBeforeRouteLeave((to) => {

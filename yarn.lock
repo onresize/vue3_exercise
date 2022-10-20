@@ -2161,6 +2161,11 @@ js-yaml@^4.1.0:
   dependencies:
     argparse "^2.0.1"
 
+jsbn@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.npmmirror.com/jsbn/-/jsbn-1.1.0.tgz#b01307cb29b618a1ed26ec79e911f803c4da0040"
+  integrity sha512-4bYVV3aAMtDTTu4+xsDYa6sy9GyJ69/amsu9sYF2zqjiEoZA5xJi3BrfX3uY+/IekIu7MwdObdbDWpoZdBv3/A==
+
 jsencrypt@^3.2.1:
   version "3.2.1"
   resolved "https://registry.npmmirror.com/jsencrypt/-/jsencrypt-3.2.1.tgz"
@@ -2575,6 +2580,11 @@ pify@^4.0.1:
   resolved "https://registry.npmmirror.com/pify/-/pify-4.0.1.tgz"
   integrity sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g==
 
+pinia-plugin-persistedstate@^2.2.0:
+  version "2.3.0"
+  resolved "https://registry.npmmirror.com/pinia-plugin-persistedstate/-/pinia-plugin-persistedstate-2.3.0.tgz#12fc1452ac0fe1a4730f162a1e458d339d340b03"
+  integrity sha512-K7vzt68Z3lbMDjb23Ki2vgHVBP2QFvjl7WNwzIwqY/DAkhSt8mi/z6bN/cXTst7fJjXWF0lC9NyxFKHfxWehuw==
+
 pinia@^2.0.22:
   version "2.0.22"
   resolved "https://registry.npmmirror.com/pinia/-/pinia-2.0.22.tgz#435468e8e6d6aa6f319cb727b23bd51db0844c4a"
@@ -2917,6 +2927,13 @@ slice-ansi@^5.0.0:
   dependencies:
     ansi-styles "^6.0.0"
     is-fullwidth-code-point "^4.0.0"
+
+sm-crypto@^0.3.11:
+  version "0.3.11"
+  resolved "https://registry.npmmirror.com/sm-crypto/-/sm-crypto-0.3.11.tgz#43308a7ed99de74036cd9c9def3b3308a08f34e6"
+  integrity sha512-qBIyyTknmwfF8nStKHshL4Caw1AAfkar8B/voiEReENeCLtudbPt6B16QJ1mgAn1B4w0T+QDcu5XzGc7s22fWw==
+  dependencies:
+    jsbn "^1.1.0"
 
 socket.io-adapter@~2.4.0:
   version "2.4.0"
