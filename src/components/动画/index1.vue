@@ -14,8 +14,8 @@
 import { ref } from "vue";
 import _ from "lodash";
 
-const numbers = ref([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
-const numCounter = ref(10);
+const numbers = ref(Object.keys([...Array(100)]));
+const numCounter = ref(100);
 
 function addNum() {
   numbers.value.splice(

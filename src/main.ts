@@ -1,24 +1,33 @@
 import { createApp } from "vue";
 import App from "@/App.vue";
 import router from "@/router";
-import store from "@/store";
-
 
 import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";
 
-import 'animate.css'
+import "animate.css";
 
 // 全局样式
 import "@less/global.less";
 
 // vue3中使用$bus通信、mitt和tiny-emitter是官方推荐库
-import mitt from "mitt"
+// import mitt from "mitt"
 
 const app = createApp(App);
-app.config.globalProperties.$bus = mitt()
+// app.config.globalProperties.$bus = mitt()
 
+// 使用vueX
+import store from "@/store";
+app.use(store);
 
+//引入持久化插件
+import piniaPersist from "pinia-plugin-persistedstate";
+
+// 使用pinia
+import { createPinia } from "pinia";
+const pinia = createPinia();
+pinia.use(piniaPersist); // 全局缓存pinia数据
+app.use(pinia);
 
 // 全局注册图标
 import * as Icons from "@element-plus/icons-vue";
@@ -74,5 +83,4 @@ app.config.globalProperties.$filters = {
 app.config.globalProperties.$env = "这是一个main.ts下声明的全局变量";
 
 app.use(ElementPlus);
-app.use(store).use(router).mount("#app");
-
+app.use(router).mount("#app");

@@ -8,17 +8,17 @@
 
       <!-- XXX以下简写 -->
       <!-- <template #default="{ data, i }"> -->
-      <!-- <template v-slot="{ data, i }">
+      <template v-slot="{ data, i }">
         <div>作用域插槽 {{ data.name }} -- {{ data.age }} -- {{ i }}</div>
-      </template> -->
+      </template>
 
       <!-- XXX以下简写 -->
       <!-- <template #footer> -->
       <!-- 动态插槽 -->
       <!-- <template #[slotName]> -->
-      <template v-slot:footer>
+      <!-- <template v-slot:footer>
         <div>具名插槽</div>
-      </template>
+      </template> -->
     </children>
   </div>
 </template>

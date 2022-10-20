@@ -42,10 +42,13 @@ setup() {
 
 （[reactive重新赋值会导致视图不更新参考]('https://blog.csdn.net/qq_38974163/article/details/122426426')）
 
+[reactive注意点参考](https://www.cnblogs.com/fsg6/p/14484090.html)
+
 ```js
 # ref /reactive 响应式API
 ref一般定义除了对象其他的类型，script操作要用.value取值、dom结构上不需要.value、写jsx或tsx时dom层要用.value
 reactive定义数组和对象的响应式数据、正常取值
+// reactive中定义基本类型（数字、字符串、布尔）无法创建陈proxy对象 、也就无法实现监听、无法实现响应式、如果是Date类型、则使用重新赋值的操作修改它
 
 # reactive重新赋值会导致视图不更新
 通常解决办法： 

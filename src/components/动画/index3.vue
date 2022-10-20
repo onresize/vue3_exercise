@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="shoesBox">
     <h2>通过 组件onBeforeRouteLeave路由钩子 + gasp动画库 实现跨路由连续动画</h2>
     <el-button @click="router.push('/page1')">跳转页面1</el-button>
     <el-button @click="router.push('/page2')">跳转页面2</el-button>
@@ -15,4 +15,9 @@ const route = useRoute();
 const router = useRouter();
 </script>
 
-<style scoped></style>
+<style scoped>
+.shoesBox {
+  box-sizing: border-box;
+  height: 90vh !important;
+}
+</style>

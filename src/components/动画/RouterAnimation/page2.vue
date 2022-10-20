@@ -65,8 +65,8 @@ onMounted(() => {
   line-height: 240px;
   text-align: end;
   border-radius: 50%;
-  background-image: url("https://www.nikestore.com.cn/prod%2FNIKEOUTLETS%2FDIP-g15p1800g3quekj9g6bc%2FUNEX%2FDV1681-100-%E5%88%97%E8%A1%A8%E5%9B%BE-1.png?etag=1657603532165");
-  background-size: 100% 83%;
+  background-image: url("@/assets/img/shoes.webp");
+  background-size: 100% 100%;
   background-repeat: no-repeat;
 }
 h2 {
