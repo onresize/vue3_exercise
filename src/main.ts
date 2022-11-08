@@ -64,6 +64,7 @@ console.log("版本号：", version);
 
 // XXX 环境变量、正式环境不存在import.meta.env
 console.log("环境变量", import.meta.env);
+//参考： https://blog.csdn.net/Smile_ping/article/details/116295981
 
 // global-import 批量导入
 const globModules = import.meta.glob("./glob/*");
