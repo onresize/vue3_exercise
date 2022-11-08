@@ -36,6 +36,7 @@ let key = computed(() =>
     : String(router.path) + new Date()
 );
 let RouterList = reactive<string[]>([
+  "screen",
   "computed",
   "child",
   "myChild1",

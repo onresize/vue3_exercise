@@ -6,7 +6,11 @@ const routes: RouteRecordRaw[] = [
     redirect: "/welcome",
   },
   // 匹配不到页面跳404
-  // { path: "/:pathMatch(.*)", redirect: { name: "404" } },
+  { path: "/:pathMatch(.*)", redirect: { name: "404" } },
+  {
+    path: "/screen",
+    component: () => import("~@cp/大屏适配/index.vue"),
+  },
   {
     path: "/home",
     component: () => import("@views/home.vue"),
@@ -156,7 +160,7 @@ const routes: RouteRecordRaw[] = [
         children: [
           {
             path: "/page1",
-            name: 'page1',
+            name: "page1",
             // components: {
             //   default: () => import("@cp/动画/RouterAnimation/page1.vue"),
             // },
@@ -164,7 +168,7 @@ const routes: RouteRecordRaw[] = [
           },
           {
             path: "/page2",
-            name: 'page2',
+            name: "page2",
             // components: {
             //   default: () => import("@cp/动画/RouterAnimation/page2.vue"),
             // },

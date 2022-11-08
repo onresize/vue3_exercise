@@ -10,11 +10,21 @@ import "animate.css";
 // 全局样式
 import "@less/global.less";
 
+
 // vue3中使用$bus通信、mitt和tiny-emitter是官方推荐库
 // import mitt from "mitt"
 
 const app = createApp(App);
 // app.config.globalProperties.$bus = mitt()
+
+// 大屏适配
+import Fit from 'vue-fit-next'
+app.use( Fit({
+  width: 1920, // 设计稿宽度
+  height: 1080, // 设计稿高度
+  mode: 'scale', // 可选， 支持 scale 和 zoom 两种方案，默认为 scale
+  scaleStep: 0.05 // 可选，默认 0.05， 每次鼠标滚动缩放的增量，分辨率很大的时候会比较有用
+}))
 
 // 使用vueX
 import store from "@/store";
