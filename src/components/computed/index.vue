@@ -40,11 +40,27 @@
         </el-button>
       </div>
     </div>
+    <el-select
+      v-model="value"
+      multiple
+      filterable
+      allow-create
+      default-first-option
+      :reserve-keyword="false"
+      placeholder="Choose tags for your article"
+    >
+      <el-option
+        v-for="item in options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value"
+      />
+    </el-select>
   </el-card>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed, onMounted } from "vue";
+import { ref, reactive, computed, watch, onMounted } from "vue";
 
 let r = ref<string | number>(0);
 let total = ref(0);
@@ -82,6 +98,33 @@ const myComputed = computed(() => (price: number) => {
 onMounted(() => {
   console.log("总价total：", total.value);
 });
+
+const value = ref<string[]>([]);
+const options = [
+  {
+    value: "HTML",
+    label: "HTML",
+  },
+  {
+    value: "CSS",
+    label: "CSS",
+  },
+  {
+    value: "JavaScript",
+    label: "JavaScript",
+  },
+];
+
+watch(
+  value,
+  (val) => {
+    console.log("监听select值----", val);
+  },
+  {
+    immediate: true,
+    deep: true,
+  }
+);
 </script>
 
 <style scoped>
