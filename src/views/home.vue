@@ -37,6 +37,8 @@ let key = computed(() =>
 );
 let RouterList = reactive<string[]>([
   "screen",
+  "postMeaasge",
+  "downLoadZip",
   "computed",
   "child",
   "myChild1",

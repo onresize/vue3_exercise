@@ -28,6 +28,16 @@ const routes: RouteRecordRaw[] = [
         component: () => import("@views/welCome.vue"),
       },
       {
+        path: "/postMeaasge",
+        meta: { title: "postMeaasge" },
+        component: () => import("@cp/postMeaasge/index.vue"),
+      },
+      {
+        path: "/downLoadZip",
+        meta: { title: "downLoadZip" },
+        component: () => import("@cp/downLoadZip/index.vue"),
+      },
+      {
         path: "/computed",
         meta: { title: "computed" },
         component: () => import("@cp/computed/index.vue"),
