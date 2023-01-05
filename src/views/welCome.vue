@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <div className="text_title">
-      vue3 + vue-router4.0 + vite2 + element-Plus
+  <div class="box">
+    <div :class="[isShow ? 'none' : 'text_title']">
+      <em>vue3 + vue-router4.0 + vite2 + element-Plus</em>
     </div>
-    <div class="flex">
+    <div :class="['flex', !isShow ? 'infoZIndex' : 'beforeZIndex']">
       <el-tag v-for="item in objArr" :key="item" class="tag" color="#000">
         <div
           v-for="(val, key) in item"
@@ -49,8 +49,16 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed } from "vue";
+import { ref, reactive, computed, onMounted } from "vue";
 import { dependencies, devDependencies } from "../../package.json";
+
+const isShow = ref(true);
+
+onMounted(() => {
+  setTimeout(() => {
+    isShow.value = false;
+  }, 1000);
+});
 
 const delStr = (str) => {
   //XXX 正则匹配到 不包含str中'bgColor'的部分
@@ -91,24 +99,62 @@ console.log(objArr);
 </script>
 
 <style scoped lang="less">
+.box {
+  // border: 3px solid red;
+  position: relative;
+  bottom: 30px;
+}
+.none {
+  display: none;
+}
 .text_title {
-  display: flex;
-  justify-content: center;
-  font-size: 30px;
+  // border: 3px solid red;
+  position: absolute;
+  top: 100px;
+  left: calc(50% - 31vw);
+  font-size: 3vw;
+  width: 63vw;
+  height: 80px;
+  transition: all 1s ease;
   font-weight: bold;
-  zoom: 2.5;
   user-select: none;
-  text-shadow: 5px 5px 5px #ccffcc;
+  text-shadow: 5px 5px 5px #ccc;
+  animation-name: zoomInDown;
+  animation-duration: 1s;
+  // animation-delay: 1.2s;
+  @keyframes zoomInDown {
+    from {
+      opacity: 0;
+      transform: scale3d(0.1, 0.1, 0.1) translate3d(0, -1000px, 0);
+      animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+
+    60% {
+      opacity: 1;
+      transform: scale3d(0.475, 0.475, 0.475) translate3d(0, 60px, 0);
+      animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+    }
+  }
 }
 .bottom_box {
-  width: calc(100vw - 300px);
-  height: 300px;
-  display: flex;
-  justify-content: center;
+  animation-name: rightToLeft;
+  animation-duration: 1s;
+  position: absolute;
+  top: 440px;
+  left: calc(100% - 55vw);
+
+  @keyframes rightToLeft {
+    from {
+      transform: translateX(100vw);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
 
   .card {
     margin-top: 10px;
-    height: 41vh;
+    height: 32vh;
     width: 38vw;
     max-width: 450px;
     cursor: pointer;
@@ -152,9 +198,9 @@ console.log(objArr);
     transform: translateZ(2rem);
     margin-top: 15px;
     border-radius: 10px;
-    width: 28vw;
+    width: 18vw;
     max-width: 360px;
-    height: 38vh;
+    height: 28vh;
     max-height: 380px;
   }
   .subtitle {
@@ -175,10 +221,30 @@ console.log(objArr);
   }
 }
 .flex {
+  border: 3px solid transparent;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px #333 inset;
+  padding: 10px 0 5px 0;
+  overflow: scroll;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  width: calc(100vw - 300px);
+  width: calc(100vw - 400px);
+  height: 220px;
+  animation-name: leftToRight;
+  animation-duration: 1s;
+  position: absolute;
+  top: 200px;
+  left: 40px;
+
+  @keyframes leftToRight {
+    from {
+      transform: translateX(-100vw);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
 
   .tag {
     font-size: 20px;
@@ -188,5 +254,11 @@ console.log(objArr);
     text-shadow: 0 0 0.1rem #00c6ff, 0 0 0.2rem #00c6ff, 0 0 0.3rem #00c6ff,
       0 0 0.4rem #00c6ff;
   }
+}
+.infoZIndex {
+  z-index: 1;
+}
+.beforeZIndex {
+  z-index: -1;
 }
 </style>

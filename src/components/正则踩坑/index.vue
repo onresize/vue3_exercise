@@ -1,5 +1,5 @@
 <template>
-  <div class="div-mb">
+  <div>
     <h2>正则基本使用</h2>
     <div class="pre-div">
       <pre>
