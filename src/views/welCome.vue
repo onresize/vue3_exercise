@@ -1,6 +1,6 @@
 <template>
   <div class="box">
-    <div :class="[isShow ? 'none' : 'text_title']">
+    <div :class="[isShow ? 'none' : 'text_title', 'linear colorful']">
       <em>vue3 + vue-router4.0 + vite2 + element-Plus</em>
     </div>
     <div :class="['flex', !isShow ? 'infoZIndex' : 'beforeZIndex']">
@@ -260,5 +260,69 @@ console.log(objArr);
 }
 .beforeZIndex {
   z-index: -1;
+}
+
+@property --offset {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 5px;
+}
+
+@property --deg {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 1deg;
+}
+
+.linear {
+  color: #000;
+  cursor: pointer;
+}
+
+.linear:hover {
+  color: transparent;
+  background: repeating-radial-gradient(
+    circle at 0 0,
+    #000 calc(var(--offset) - 5px),
+    #000 var(--offset),
+    #fff var(--offset),
+    #fff calc(var(--offset) + 5px)
+  );
+  -webkit-background-clip: text;
+  animation: move 0.5s infinite linear;
+}
+
+.colorful:hover {
+  background-image: linear-gradient(
+      var(--deg),
+      red,
+      orange,
+      yellow,
+      green,
+      cyan,
+      blue,
+      darkviolet
+    ),
+    repeating-radial-gradient(
+      circle at 0 0,
+      #000 calc(var(--offset) - 5px),
+      #000 var(--offset),
+      #fff var(--offset),
+      #fff calc(var(--offset) + 5px)
+    );
+  background-blend-mode: screen;
+  animation: move 0.5s infinite linear, rotate 20s infinite linear;
+}
+
+@keyframes move {
+  to {
+    --offset: 15px;
+  }
+}
+
+@keyframes rotate {
+  to {
+    --deg: 361deg;
+  }
 }
 </style>
