@@ -165,6 +165,18 @@ const routes: RouteRecordRaw[] = [
         component: () => import("@cp/动画/index2.vue"),
       },
       {
+        path: "/fatherChild",
+        component: () => import("@cp/父子组件更简单的传参/index.vue"),
+      },
+      {
+        path: "/fatherPrivate",
+        component: () => import("@cp/父子组件setup私有数据defineExpose/index.vue"),
+      },
+      {
+        path: "/slotCss",
+        component: () => import("@cp/slot插槽css伪选择器/index.vue"),
+      },
+      {
         path: "/animation3",
         component: () => import("@cp/动画/index3.vue"),
         children: [
