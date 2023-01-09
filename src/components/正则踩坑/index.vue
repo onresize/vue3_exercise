@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h2>正则基本使用</h2>
+  <div class="reg_box">
+    <h3>正则基本使用</h3>
     <div class="pre-div">
       <pre>
         <span>检测正则表达式的方法：</span>
@@ -42,7 +42,7 @@
       </pre>
     </div>
 
-    <div class="pre-div noSelect">
+    <div class="pre-div">
       <pre>
       <span>1.字符串：下划线转驼峰 (a_b -> aB)</span>
       const formatToHump = (value) => {
@@ -50,7 +50,7 @@
       }
       </pre>
     </div>
-    <div class="pre-div noSelect">
+    <div class="pre-div last_div">
       <pre>
       <span>2.字符串：驼峰转下划线 (aB -> a_b) (aB -> a*b)</span>
       const formatToLine = (value) => {
@@ -109,6 +109,9 @@ console.log("正则转化后的str2----------", code(str2));
 </script>
 
 <style scoped lang="less">
+.reg_box {
+  margin-bottom: 15vh;
+}
 .noSelect {
   user-select: none; // 不可选中文本
 }
