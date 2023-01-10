@@ -74,6 +74,7 @@ let RouterList = reactive<string[]>([
   "fatherChild",
   "fatherPrivate",
   "slotCss",
+  "directive",
 ]);
 </script>
 
