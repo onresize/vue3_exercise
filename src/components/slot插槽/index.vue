@@ -14,11 +14,13 @@
 
       <!-- XXX以下简写 -->
       <!-- <template #footer> -->
+
       <!-- 动态插槽 -->
       <!-- <template #[slotName]> -->
-      <!-- <template v-slot:footer>
+
+      <template v-slot:footer>
         <div>具名插槽</div>
-      </template> -->
+      </template>
     </children>
   </div>
 </template>

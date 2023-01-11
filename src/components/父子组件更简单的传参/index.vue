@@ -1,5 +1,5 @@
 <template>
-  <h2>更简单的方式传递多个props、和触发emit</h2>
+  <h2>更简单的方式传递多个props、和触发多个emit</h2>
   <div class="father">
     <mark>父组件</mark>
   </div>

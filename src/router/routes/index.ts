@@ -170,7 +170,8 @@ const routes: RouteRecordRaw[] = [
       },
       {
         path: "/fatherPrivate",
-        component: () => import("@cp/父子组件setup私有数据defineExpose/index.vue"),
+        component: () =>
+          import("@cp/父子组件setup私有数据defineExpose/index.vue"),
       },
       {
         path: "/slotCss",
@@ -211,6 +212,7 @@ const routes: RouteRecordRaw[] = [
         meta: { name: "路由元信息1" }, // 路由元信息
         // 默认重定向显示v1页面、并传参
         redirect: (to) => {
+          console.log("路由重定向", to);
           return {
             path: "/v1",
             query: {

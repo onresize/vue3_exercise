@@ -8,6 +8,6 @@ declare module "*.vue" {
 }
 
 // 声明.env文件中VITE_TITLE的类型、用的时候直接.v就会联想出在.env定义的常量
-interface ImportMetaEnv {
-  VITE_TITLE: string;
-}
+// interface ImportMetaEnv {
+//   VITE_TITLE: string;
+// }

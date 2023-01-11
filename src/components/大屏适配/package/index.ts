@@ -1,3 +1,3 @@
-import VScaleScreen from './VScaleScreen.vue'
+import VScaleScreen from "./VScaleScreen.vue";
 
-export default VScaleScreen
+export default VScaleScreen;

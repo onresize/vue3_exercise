@@ -10,6 +10,9 @@ module.exports = {
     parser: "@typescript-eslint/parser",
     ecmaVersion: 2020,
     sourceType: "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
   },
   plugins: ["@typescript-eslint", "prettier"],
   rules: {

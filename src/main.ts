@@ -37,7 +37,8 @@ const app = createApp(App);
 
 // 引入自定义指令
 import directive from "./directiveJs.ts";
-directive(app)
+// directive(app)
+app.use(directive, app);
 
 // 大屏适配
 import Fit from "vue-fit-next";

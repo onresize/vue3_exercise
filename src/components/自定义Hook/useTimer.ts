@@ -1,4 +1,4 @@
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 
 export function useTimer(end: number) {
   const count = ref<number>(end);
