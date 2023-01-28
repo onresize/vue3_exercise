@@ -182,6 +182,10 @@ const routes: RouteRecordRaw[] = [
         component: () => import("@cp/自定义指令/index.vue"),
       },
       {
+        path: "/onlyId",
+        component: () => import("@cp/唯一id/index.vue"),
+      },
+      {
         path: "/animation3",
         component: () => import("@cp/动画/index3.vue"),
         children: [

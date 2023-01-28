@@ -1,6 +1,6 @@
 <template>
   <!-- 内容主体区 -->
-  <el-container class="container">
+  <el-container class="container" @onscroll="homeScroll($event)">
     <!-- 侧边栏 -->
     <el-card style="height: 100vh; box-sizing: border-box">
       <el-aside class="home_container_aside" :width="'220px'">
@@ -14,7 +14,28 @@
       </el-aside>
     </el-card>
     <!-- 右侧内容 -->
-    <el-main class="home_container_main">
+    <el-main
+      class="home_container_main"
+      @contextmenu.prevent="showMenu($event)"
+    >
+      <ul
+        v-show="visible"
+        :style="{ left: left + 'px', top: top + 'px' }"
+        class="contextmenu"
+      >
+        <li @click="refresh">
+          <RefreshRight
+            style="width: 1em; height: 1em; margin-right: 2px"
+          ></RefreshRight>
+          刷新页面
+        </li>
+        <li v-if="route.name !== 'welcome'" @click="closePage">
+          <CircleClose
+            style="width: 1em; height: 1em; margin-right: 2px"
+          ></CircleClose>
+          关闭当前
+        </li>
+      </ul>
       <!--XXX 设置跨路由的动画、所有的router-view加上key只会导致动画失效 -->
       <router-view v-slot="{ Component }">
         <transition name="slide-fade">
@@ -26,14 +47,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive } from "vue";
-import { useRoute } from "vue-router";
+import { watch, computed, reactive, ref, onMounted } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
-let router = useRoute();
-let key = computed(() =>
-  router.name
-    ? String(router.name) + new Date()
-    : String(router.path) + new Date()
+const route = useRoute();
+const Router = useRouter();
+const key = computed(() =>
+  route.name ? String(route.name) + new Date() : String(route.path) + new Date()
 );
 let RouterList = reactive<string[]>([
   "screen",
@@ -75,10 +95,72 @@ let RouterList = reactive<string[]>([
   "fatherPrivate",
   "slotCss",
   "directive",
+  "onlyId",
 ]);
+
+let visible = ref(false);
+let left = ref<number | string>(0);
+let top = ref<number | string>(0);
+
+const closeMenu = () => {
+  visible.value = false;
+};
+
+watch(visible, (val) => {
+  if (val) {
+    document.body.addEventListener("click", closeMenu);
+  } else {
+    document.body.addEventListener("click", closeMenu);
+  }
+});
+
+const showMenu = (e: any) => {
+  // console.log("点击了右键", e);
+  top.value = e.clientY;
+  left.value = e.clientX;
+  visible.value = true;
+};
+
+const homeScroll = (e: any) => {
+  // console.log("页面滚动了", e);
+  visible.value = false;
+};
+
+const refresh = () => {
+  Router.go(0);
+};
+
+const closePage = () => {
+  Router.push("/");
+};
+
+onMounted(() => {
+  window.addEventListener("scroll", homeScroll, true);
+});
 </script>
 
 <style scoped lang="less">
+.contextmenu {
+  margin: 0;
+  background: #fff;
+  z-index: 3000;
+  position: absolute;
+  list-style-type: none;
+  padding: 5px 0;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 400;
+  color: #333;
+  box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.3);
+  li {
+    margin: 0;
+    padding: 7px 16px;
+    cursor: pointer;
+    &:hover {
+      background: #eee;
+    }
+  }
+}
 // 跨路由动画
 .child-view {
   // position: absolute;
