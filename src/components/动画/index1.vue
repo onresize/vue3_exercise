@@ -1,5 +1,6 @@
 <template>
   <div>
+    <br />
     <el-button @click="addNum">添加数字</el-button>
     <el-button @click="removeNum">删除数字</el-button>
     <el-button @click="shuffleNum">数字洗牌</el-button>
@@ -18,11 +19,7 @@ const numbers = ref(Object.keys([...Array(100)]));
 const numCounter = ref(100);
 
 function addNum() {
-  numbers.value.splice(
-    randomIndex(),
-    0,
-    numCounter.value++
-  );
+  numbers.value.splice(randomIndex(), 0, numCounter.value++);
 }
 function removeNum() {
   numbers.value.splice(randomIndex(), 1);
