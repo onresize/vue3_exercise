@@ -1,9 +1,11 @@
 import type { RouteRecordRaw } from "vue-router";
 
+import Layout from "@/layout/index.vue";
+
 const routes: RouteRecordRaw[] = [
   {
     path: "/",
-    redirect: "/welcome",
+    redirect: "welcome",
   },
   // 匹配不到页面跳404
   { path: "/:pathMatch(.*)", redirect: { name: "404" } },
@@ -12,8 +14,9 @@ const routes: RouteRecordRaw[] = [
     component: () => import("~@cp/大屏适配/index.vue"),
   },
   {
-    path: "/home",
-    component: () => import("@views/home.vue"),
+    path: "/layoutPage",
+    component: Layout,
+    redirect: "welCome",
     children: [
       {
         path: "/404",
@@ -180,6 +183,10 @@ const routes: RouteRecordRaw[] = [
       {
         path: "/directive",
         component: () => import("@cp/自定义指令/index.vue"),
+      },
+      {
+        path: "/onlyId",
+        component: () => import("@cp/唯一id/index.vue"),
       },
       {
         path: "/animation3",

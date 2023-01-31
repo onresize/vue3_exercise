@@ -1,5 +1,5 @@
 <template>
-  <div class="box">
+  <div class="box" style="margin-top: 36px">
     <h2>参照若依加密解密: npm i jsencrypt -S</h2>
     <el-form
       ref="ruleFormRef"

@@ -5,7 +5,7 @@
   </div>
 </template>
 
-<!-- <script setup>
+<script setup>
 // XXX vue3组合式api方式使用 defineExpose
 import { ref, computed } from "vue";
 
@@ -19,10 +19,11 @@ const privateCom2 = computed(() => {
 defineExpose({
   privateCom1,
 });
-</!-->
--->
+</script>
 
-<script>
+
+
+<!-- <script>
 // XXX vue2 选项是api方式使用 expose
 export default {
   // 暴露公有数据
@@ -36,4 +37,4 @@ export default {
     },
   },
 };
-</script>
+</!--> -->

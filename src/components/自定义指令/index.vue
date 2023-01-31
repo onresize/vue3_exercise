@@ -1,5 +1,5 @@
 <template>
-  <div v-dom-bgc="bgcColor">
+  <div v-dom-bgc="bgcColor" style="margin-top: 36px">
     <h3>vue3自定义指令、main.ts注册指令</h3>
     <a href="https://www.bilibili.com/video/BV1dW4y1a7f8/">b站视频</a>
     <hr />
@@ -28,8 +28,6 @@ const changeFontSizeColor = () => {
 const changeDomBgcColor = () => {
   bgcColor.value = bgcColor.value == "yellow" ? "pink" : "yellow";
 };
-
-
 
 //XXX 情况 2
 const styleField = ref("fontSize");

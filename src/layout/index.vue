@@ -36,6 +36,27 @@
           关闭当前
         </li>
       </ul>
+      <div class="fixed_div">
+        <div class="tags-view-wrapper">
+          <router-link
+            v-for="tag in visitedViews.arr"
+            ref="tag"
+            :key="tag.name"
+            :to="{ path: tag.name }"
+            tag="span"
+            class="tags-view-item"
+            :class="route.fullPath === tag.name ? 'active' : ''"
+          >
+            {{ tag.title }}
+            <CircleClose
+              v-show="tag.name !== '/welcome'"
+              style="width: 1em; height: 1em"
+              class="close"
+              @click.prevent.stop="closeSelectedTag(tag.name)"
+            ></CircleClose>
+          </router-link>
+        </div>
+      </div>
       <!--XXX 设置跨路由的动画、所有的router-view加上key只会导致动画失效 -->
       <router-view v-slot="{ Component }">
         <transition name="slide-fade">
@@ -48,13 +69,16 @@
 
 <script setup lang="ts">
 import { watch, computed, reactive, ref, onMounted } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { useRoute, useRouter, onBeforeRouteUpdate } from "vue-router";
 
 const route = useRoute();
 const Router = useRouter();
 const key = computed(() =>
   route.name ? String(route.name) + new Date() : String(route.path) + new Date()
 );
+let visitedViews = reactive({
+  arr: [{ name: "/welcome", title: "欢迎页" }],
+});
 let RouterList = reactive<string[]>([
   // "screen",
   "postMeaasge",
@@ -98,6 +122,16 @@ let RouterList = reactive<string[]>([
   "onlyId",
 ]);
 
+onBeforeRouteUpdate((to) => {
+  console.log("路由改变", to);
+  let r = visitedViews.arr.some((v) => v.name === to.path);
+  if (r) return;
+  visitedViews.arr.push({
+    name: to.path,
+    title: to.path.substr(1),
+  });
+});
+
 let visible = ref(false);
 let left = ref<number | string>(0);
 let top = ref<number | string>(0);
@@ -134,12 +168,89 @@ const closePage = () => {
   Router.push("/");
 };
 
+const closeSelectedTag = (name: any) => {
+  visitedViews.arr = visitedViews.arr.filter((v) => v.name !== name);
+};
+
 onMounted(() => {
   window.addEventListener("scroll", homeScroll, true);
 });
 </script>
 
 <style scoped lang="less">
+.fixed_div {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 9;
+  width: calc(100% - 262px);
+  height: 36px;
+  transition: width 0.28s;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.14);
+  padding-top: 5px;
+  box-sizing: border-box;
+  .tags-view-wrapper {
+    width: 100%;
+    height: 100%;
+    white-space: nowrap;
+    overflow: scroll;
+    .tags-view-item {
+      width: fit-content;
+      display: inline-block;
+      position: relative;
+      text-decoration: transparent;
+      cursor: pointer;
+      height: 24px;
+      line-height: 24px;
+      border: 1px solid #d8dce5;
+      color: #495060;
+      background: #fff;
+      padding: 0 6px;
+      font-size: 12px;
+      margin-left: 5px;
+      border-radius: 4px;
+      transition: all 0.1s ease-in-out;
+      .close {
+        transition: all 0.3s ease-in;
+        &:hover {
+          color: red;
+        }
+      }
+      &::before {
+        content: "";
+        background: #fff;
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        position: relative;
+        margin-right: 2px;
+      }
+      &:first-of-type {
+        margin-left: 10px;
+      }
+      &:last-of-type {
+        margin-right: 10px;
+      }
+      &.active {
+        background-color: #1890ff;
+        color: #fff;
+        border-color: #1890ff;
+        &::before {
+          content: "";
+          background: #fff;
+          display: inline-block;
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          position: relative;
+          margin-right: 2px;
+        }
+      }
+    }
+  }
+}
 .contextmenu {
   margin: 0;
   background: #fff;
@@ -169,7 +280,6 @@ onMounted(() => {
   height: 100%;
   transition: all 0.7s cubic-bezier(0.58, 0.09, 0.33, 0.91);
 }
-
 /* 进入 */
 .slide-fade-enter-from {
   transform: translateX(-calc(100vw));

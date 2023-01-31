@@ -4,6 +4,7 @@
       <div class="round"></div>
     </div>
   </div>
+  <br />
   <el-button @click="change">显示 / 隐藏</el-button>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <div>watch基本使用</div>
+  <h2>watch基本使用</h2>
   <el-input v-model="value1" style="width: 150px"></el-input>
   <el-input v-model="value2" style="width: 150px"></el-input>
   <el-input v-model="value3.name" style="width: 150px"></el-input>
