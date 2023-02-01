@@ -30,6 +30,6 @@ import {
   background-color: red;
   position: absolute;
   right: 10px;
-  top: 10px;
+  top: 60px;
 }
 </style>
