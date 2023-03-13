@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed } from "vue";
+import { ref, reactive, computed, watch } from "vue";
 
 let arr = reactive<number[]>([1, 4, 5]);
 const getAA = () => {
@@ -32,14 +32,14 @@ const getAA = () => {
   );
 };
 
-type obj = {
-  name: string;
-  title: string;
-};
-type props = {
-  list?: obj[];
-  abc: Number;
-};
+// type obj = {
+//   name: string;
+//   title: string;
+// };
+// type props = {
+//   list?: obj[];
+//   abc: Number;
+// };
 
 // 设置定义的接口 父组件传参的默认值
 // withDefaults(defineProps<props>(), {
@@ -56,6 +56,19 @@ let newList = computed(() => {
   return Props.abc + "----";
 });
 console.log("拿到修改后的值", newList.value);
+
+let myAbc = computed(() => Props.abc);
+
+watch(
+  myAbc,
+  (val) => {
+    console.log("子组件监听props的abc值", val);
+  },
+  {
+    immediate: true,
+    deep: true,
+  }
+);
 
 const emit = defineEmits(["getTitle"]);
 const clickBtn = (title: string): void => {
