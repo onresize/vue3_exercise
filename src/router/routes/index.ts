@@ -31,6 +31,11 @@ const routes: RouteRecordRaw[] = [
         component: () => import("@views/welCome.vue"),
       },
       {
+        path: "/baiduMap",
+        meta: { title: "baiduMap" },
+        component: () => import("@cp/百度Map/map.vue"),
+      },
+      {
         path: "/postMeaasge",
         meta: { title: "postMeaasge" },
         component: () => import("@cp/postMeaasge/index.vue"),

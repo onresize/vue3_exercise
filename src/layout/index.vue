@@ -81,6 +81,7 @@ let visitedViews = reactive({
 });
 let RouterList = reactive<string[]>([
   // "screen",
+  "baiduMap",
   "postMeaasge",
   "downLoadZip",
   "computed",
