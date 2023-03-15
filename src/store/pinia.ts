@@ -43,7 +43,7 @@ export const useMainStore = defineStore("main", {
   //   paths: ["AuthRoutes", "ActiveBread"],
   //   storage: localStorage,
   // },
-  // persist: true,
+  persist: true,
   // persist: {
   // enabled: true,
   // },

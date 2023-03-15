@@ -88,6 +88,7 @@ let visitedViews = reactive({
 let RouteList = reactive({
   routes: [],
 });
+
 let userStore = window.localStorage.getItem("user");
 let visitedViewsStore = window.localStorage.getItem("visitedViews");
 
@@ -122,7 +123,7 @@ const closeMenu = () => {
 };
 
 watch(visible, (val) => {
-  console.log("监听------------------", val);
+  // console.log("监听------------------", val);
   if (val) {
     document.body.addEventListener("click", closeMenu);
   } else {
@@ -144,7 +145,7 @@ const homeScroll = (e) => {
 };
 
 const refresh = async () => {
-  Router.go(0);
+  Router.replace({ path: "/redirect" + PathName.value });
   // window.location.pathname = PathName.value
 };
 

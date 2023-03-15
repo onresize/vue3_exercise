@@ -8,6 +8,17 @@ const routes: RouteRecordRaw[] = [
     redirect: "login",
   },
   {
+    path: "/redirect",
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: "/redirect/:path(.*)",
+        component: () => import("@/views/redirect/index.vue"),
+      },
+    ],
+  },
+  {
     path: "/login",
     name: "login",
     meta: { title: "login" },
