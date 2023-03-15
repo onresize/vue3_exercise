@@ -80,18 +80,18 @@ app.use(i18n);
 
 // 测试
 import { version } from "/package.json";
-console.log("版本号：", version);
+// console.log("版本号：", version);
 
 // XXX 环境变量、正式环境不存在import.meta.env
-console.log("环境变量", import.meta.env);
+// console.log("环境变量", import.meta.env);
 //参考： https://blog.csdn.net/Smile_ping/article/details/116295981
 
 // global-import 批量导入
 const globModules = import.meta.glob("./glob/*");
 // const globModules = import.meta.glob("./glob/*.json"); // 拿到匹配.json文件
-console.log("批量引入", globModules);
+// console.log("批量引入", globModules);
 Object.entries(globModules).forEach(([k, v]) => {
-  v().then((m) => console.log(k + ":", m.default));
+  // v().then((m) => console.log(k + ":", m.default));
 });
 
 type Filter = {

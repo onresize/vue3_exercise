@@ -11,5 +11,15 @@ const { params, query } = route;
 const { path } = params;
 console.log("重定向页面：", path);
 
-router.replace({ path: "/" + path, query });
+const toPage = (url) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve("/" + url);
+    }, 200);
+  });
+};
+
+toPage(path).then((path) => {
+  router.replace({ path });
+});
 </script>

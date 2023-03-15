@@ -92,6 +92,7 @@ let RouteList = reactive({
 let userStore = window.localStorage.getItem("user");
 let visitedViewsStore = window.localStorage.getItem("visitedViews");
 
+// 左侧菜单数据
 if (userStore == "Admin") {
   PiniaStore.changeAuthRoutes(AdminRoutes);
 } else {

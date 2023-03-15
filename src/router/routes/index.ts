@@ -8,9 +8,9 @@ const routes: RouteRecordRaw[] = [
     redirect: "login",
   },
   {
+    // 重定向配置、项目内置页面刷新规则
     path: "/redirect",
     component: Layout,
-    hidden: true,
     children: [
       {
         path: "/redirect/:path(.*)",

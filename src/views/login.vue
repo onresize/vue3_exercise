@@ -17,21 +17,14 @@ const Router = useRouter();
 
 const toPage = (name) => {
   if (name == "admin") {
-    console.log("当前账户admin路由：", AdminRoutes);
+    // console.log("当前账户admin路由：", AdminRoutes);
     window.localStorage.setItem("user", "Admin");
-    AdminRoutes.forEach((v) => {
-      Router.addRoute("layoutPage", v);
-    });
-    // Router.replace(Router.currentRoute.value.fullPath);
   }
   if (name == "ordinary") {
-    console.log("当前账户ordinary路由：", OriginRoutes);
+    // console.log("当前账户ordinary路由：", OriginRoutes);
     window.localStorage.setItem("user", "Origin");
-    OriginRoutes.forEach((v) => {
-      Router.addRoute("layoutPage", v);
-    });
   }
-  Router.push({ name: "layoutPage" });
+  Router.push({ name: "welcome" });
 };
 
 onMounted(() => {

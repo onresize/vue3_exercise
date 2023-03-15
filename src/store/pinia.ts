@@ -1,11 +1,12 @@
 // XXX pinia演示
 import { defineStore } from "pinia";
+
 export const useMainStore = defineStore("main", {
   // 声明store
   state: () => ({
     shoesCount: 18,
-    AuthRoutes: [],
-    ActiveBread: [{ name: "/welcome", title: "欢迎页" }],
+    AuthRoutes: [], // 左侧路由菜单数据
+    ActiveBread: [{ name: "/welcome", title: "欢迎页" }], // 顶部激活页面
   }),
   // 声明getters
   getters: {
@@ -20,15 +21,15 @@ export const useMainStore = defineStore("main", {
   actions: {
     // 同步
     addCount(num) {
-      console.log("pinia方法addCount");
+      // console.log("pinia方法addCount");
       this.shoesCount += num;
     },
     changeAuthRoutes(res) {
-      console.log("pinia方法changeAuthRoutes", res);
+      // console.log("pinia方法changeAuthRoutes", res);
       this.AuthRoutes = res;
     },
     changeActiveBread(res) {
-      console.log("pinia方法changeActiveBread", res);
+      // console.log("pinia方法changeActiveBread", res);
       this.ActiveBread = res;
     },
     //异步
