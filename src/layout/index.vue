@@ -4,10 +4,10 @@
     <!-- 侧边栏 -->
     <el-card style="height: 100vh; box-sizing: border-box">
       <el-aside class="home_container_aside" :width="'220px'">
-        <div v-for="(item, index) in RouterList" :key="index" class="aa">
+        <div v-for="(item, index) in RouteList.routes" :key="index" class="aa">
           <div class="cc">
-            <router-link :to="item" active-class="bb" class="info_style"
-              >{{ item }}测试
+            <router-link :to="item.path" active-class="bb" class="info_style"
+              >{{ item.path.substr(1) }}测试
             </router-link>
           </div>
         </div>
@@ -67,61 +67,38 @@
   </el-container>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { watch, computed, reactive, ref, onMounted } from "vue";
 import { useRoute, useRouter, onBeforeRouteUpdate } from "vue-router";
+import { storeToRefs } from "pinia";
+import { AdminRoutes, OriginRoutes } from "@/router/AuthRoutes";
+import { useMainStore } from "@/store/pinia.ts";
 
 const route = useRoute();
 const Router = useRouter();
+const PiniaStore = useMainStore();
+let { AuthRoutes, ActiveBread } = storeToRefs(PiniaStore); // 不丢失响应式
 const key = computed(() =>
   route.name ? String(route.name) + new Date() : String(route.path) + new Date()
 );
 let visitedViews = reactive({
   arr: [{ name: "/welcome", title: "欢迎页" }],
 });
-let RouterList = reactive<string[]>([
-  // "screen",
-  "baiduMap",
-  "postMeaasge",
-  "downLoadZip",
-  "computed",
-  "child",
-  "myChild1",
-  "model",
-  "watch",
-  "otherComponent",
-  "slot",
-  "actionComP",
-  "teleport",
-  "teleport-video",
-  "vueUse",
-  "globalData",
-  "routerName",
-  "vueTsx",
-  "myjsx",
-  "costomRef",
-  "suspense",
-  "nextTick",
-  "icon",
-  "i18",
-  "regExp",
-  "asyncAction",
-  "customHook",
-  "jsonStringIfy",
-  "FileReader",
-  "encrypt",
-  "introCom",
-  "waterfall",
-  "loading",
-  "animation1",
-  "animation2",
-  "animation3",
-  "fatherChild",
-  "fatherPrivate",
-  "slotCss",
-  "directive",
-  "onlyId",
-]);
+
+let RouteList = reactive({
+  routes: [],
+});
+let userStore = window.localStorage.getItem("user");
+let visitedViewsStore = window.localStorage.getItem("visitedViews");
+
+if (userStore == "Admin") {
+  PiniaStore.changeAuthRoutes(AdminRoutes);
+} else {
+  PiniaStore.changeAuthRoutes(OriginRoutes);
+}
+RouteList.routes = AuthRoutes;
+visitedViews.arr = JSON.parse(visitedViewsStore) || visitedViews.arr;
+console.log("拿到visitedViews存储的值：", visitedViews.arr);
 
 onBeforeRouteUpdate((to) => {
   console.log("路由改变", to);
@@ -131,17 +108,21 @@ onBeforeRouteUpdate((to) => {
     name: to.path,
     title: to.path.substr(1),
   });
+  PiniaStore.changeActiveBread(visitedViews.arr);
+  localStorage.setItem("visitedViews", JSON.stringify(visitedViews.arr));
 });
 
 let visible = ref(false);
-let left = ref<number | string>(0);
-let top = ref<number | string>(0);
+let left = ref(0);
+let top = ref(0);
+let PathName = ref("");
 
 const closeMenu = () => {
   visible.value = false;
 };
 
 watch(visible, (val) => {
+  console.log("监听------------------", val);
   if (val) {
     document.body.addEventListener("click", closeMenu);
   } else {
@@ -149,28 +130,33 @@ watch(visible, (val) => {
   }
 });
 
-const showMenu = (e: any) => {
-  // console.log("点击了右键", e);
+const showMenu = (e) => {
+  console.log("点击了右键", e.srcElement.pathname || window.location.pathname);
+  PathName.value = e.srcElement.pathname || window.location.pathname;
   top.value = e.clientY;
   left.value = e.clientX;
   visible.value = true;
 };
 
-const homeScroll = (e: any) => {
+const homeScroll = (e) => {
   // console.log("页面滚动了", e);
   visible.value = false;
 };
 
-const refresh = () => {
+const refresh = async () => {
   Router.go(0);
+  // window.location.pathname = PathName.value
 };
 
 const closePage = () => {
-  Router.push("/");
+  closeSelectedTag(PathName.value);
+  Router.push("/welcome");
 };
 
-const closeSelectedTag = (name: any) => {
+const closeSelectedTag = (name) => {
   visitedViews.arr = visitedViews.arr.filter((v) => v.name !== name);
+  PiniaStore.changeActiveBread(visitedViews.arr);
+  Router.push("/welcome");
 };
 
 onMounted(() => {

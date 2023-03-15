@@ -10,7 +10,7 @@ import { ref, onMounted, getCurrentInstance } from "vue";
 import { gsap } from "gsap";
 import { useRoute, onBeforeRouteLeave } from "vue-router";
 import { useStore } from "vuex";
-import { useMainStore } from "@/store/main.ts";
+import { useMainStore } from "@/store/pinia.ts";
 
 const route = useRoute();
 const Store = useStore();

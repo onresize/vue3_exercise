@@ -9,6 +9,8 @@ import "animate.css";
 // 全局样式
 import "@less/global.less";
 
+import './permission'
+
 // 胶囊版本号
 console.log(
   `%cvue:%c${"^3.2.6"}`,
@@ -52,24 +54,17 @@ app.use(
 );
 
 // 使用vueX
-import store from "@/store";
+import store from "@/store/index";
 app.use(store);
 
-//引入持久化插件
-import piniaPersist from "pinia-plugin-persistedstate";
-
-// 使用pinia
-import { createPinia } from "pinia";
-const pinia = createPinia();
-pinia.use(piniaPersist); // 全局缓存pinia数据
-app.use(pinia);
+import pinia from "@/store/store";
 
 // 全局注册图标
 import * as Icons from "@element-plus/icons-vue";
 Object.keys(Icons).forEach((key) => {
   app.component(key, Icons[key]);
 });
-console.log("全局引入图标", Object.keys(Icons));
+// console.log("全局引入图标", Object.keys(Icons));
 
 // i18国际化
 // import { setupI18n } from "./plugins/i18n";
@@ -118,5 +113,4 @@ app.config.globalProperties.$filters = {
 // 声明全局变量 代替vue2的prototype
 app.config.globalProperties.$env = "这是一个main.ts下声明的全局变量";
 
-app.use(ElementPlus);
-app.use(router).mount("#app");
+app.use(ElementPlus).use(pinia).use(router).mount("#app");

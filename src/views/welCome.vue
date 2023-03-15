@@ -95,7 +95,7 @@ for (let item of arr) {
 objArr.forEach((item) => {
   item.bgColor = randomColor();
 });
-console.log(objArr);
+// console.log(objArr);
 </script>
 
 <style scoped lang="less">
