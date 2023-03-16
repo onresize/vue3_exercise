@@ -24,7 +24,7 @@ const toPage = (name) => {
     // console.log("当前账户ordinary路由：", OriginRoutes);
     window.localStorage.setItem("user", "Origin");
   }
-  Router.push({ name: "welcome" });
+  Router.push({ path: "/welcome" });
 };
 
 onMounted(() => {

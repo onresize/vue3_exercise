@@ -13,9 +13,7 @@ console.log("重定向页面：", path);
 
 const toPage = (url) => {
   return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve("/" + url);
-    }, 200);
+    resolve("/" + url);
   });
 };
 

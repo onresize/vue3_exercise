@@ -24,8 +24,6 @@ const routes: RouteRecordRaw[] = [
     meta: { title: "login" },
     component: () => import("@views/login.vue"),
   },
-  // 匹配不到页面跳404
-  { path: "/:pathMatch(.*)", redirect: { name: "404" } },
   {
     path: "/screen",
     component: () => import("~@cp/大屏适配/index.vue"),
@@ -36,9 +34,10 @@ const routes: RouteRecordRaw[] = [
     component: Layout,
     redirect: "welCome",
     children: [
+      // 匹配不到页面跳404
       {
-        path: "/404",
-        name: "404",
+        path: "/:pathMatch(.*)",
+        name: "NotFound",
         meta: { title: "404" },
         component: () => import("@views/404.vue"),
       },

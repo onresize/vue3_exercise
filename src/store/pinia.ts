@@ -1,10 +1,13 @@
 // XXX pinia演示
 import { defineStore } from "pinia";
+import router from "@/router";
+import { AdminRoutes, OriginRoutes } from "@/router/AuthRoutes";
 
 export const useMainStore = defineStore("main", {
   // 声明store
   state: () => ({
     shoesCount: 18,
+    registerRouteFresh: true, // 定义标识，记录路由是否添加
     AuthRoutes: [], // 左侧路由菜单数据
     ActiveBread: [{ name: "/welcome", title: "欢迎页" }], // 顶部激活页面
   }),
@@ -24,9 +27,12 @@ export const useMainStore = defineStore("main", {
       // console.log("pinia方法addCount");
       this.shoesCount += num;
     },
+    changeState(state) {
+      this.registerRouteFresh = state;
+    },
     changeAuthRoutes(res) {
-      // console.log("pinia方法changeAuthRoutes", res);
       this.AuthRoutes = res;
+      console.log("pinia方法改变左侧菜单数据", res);
     },
     changeActiveBread(res) {
       // console.log("pinia方法changeActiveBread", res);
@@ -37,6 +43,26 @@ export const useMainStore = defineStore("main", {
       setTimeout(() => {
         this.shoesCount += num;
       }, 2000);
+    },
+    PromiseRoutes() {
+      let user = window.localStorage.getItem("user") || null;
+      return new Promise((resolve) => {
+        if (!this.AuthRoutes.length) {
+          if (user == "Admin") {
+            // 路由数据
+            AdminRoutes.forEach((v: any) => {
+              router.addRoute("layoutPage", v);
+            });
+            this.changeAuthRoutes(AdminRoutes); // 左侧菜单数据
+          } else if (user == "Origin") {
+            OriginRoutes.forEach((v: any) => {
+              router.addRoute("layoutPage", v);
+            });
+            this.changeAuthRoutes(OriginRoutes);
+          }
+        }
+        resolve();
+      });
     },
   },
   // 全局引入pinia缓存插件缓存数据配置、下面三种写法、默认缓存到localStorage
