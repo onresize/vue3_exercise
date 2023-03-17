@@ -80,7 +80,9 @@
       <!--XXX 设置跨路由的动画、所有的router-view加上key只会导致动画失效 -->
       <router-view v-slot="{ Component }">
         <transition name="slide-fade">
-          <component class="child-view" :is="Component" />
+          <keep-alive include="onlyId">
+            <component class="child-view" :is="Component" :key="route.path" />
+          </keep-alive>
         </transition>
       </router-view>
     </el-main>

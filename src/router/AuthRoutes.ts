@@ -160,6 +160,8 @@ export const AdminRoutes = [
   },
   {
     path: "/onlyId",
+    name: "onlyId",
+    meta: { keepAlive: true }, // 做缓存
     component: () => import("@cp/唯一id/index.vue"),
   },
   {

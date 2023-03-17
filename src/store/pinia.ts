@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 import router from "@/router";
 import { AdminRoutes, OriginRoutes } from "@/router/AuthRoutes";
 
-export const useMainStore = defineStore("main", {
+export const useMainStore = defineStore("piniaStore", {
   // 声明store
   state: () => ({
     shoesCount: 18,
@@ -40,9 +40,9 @@ export const useMainStore = defineStore("main", {
     },
     //异步
     addDelayCount(num) {
-      setTimeout(() => {
-        this.shoesCount += num;
-      }, 2000);
+      // setTimeout(() => {
+      this.shoesCount += num;
+      // }, 2000);
     },
     PromiseRoutes() {
       let user = window.localStorage.getItem("user") || null;
@@ -66,11 +66,17 @@ export const useMainStore = defineStore("main", {
     },
   },
   // 全局引入pinia缓存插件缓存数据配置、下面三种写法、默认缓存到localStorage
-  // persist: {
-  //   paths: ["AuthRoutes", "ActiveBread"],
-  //   storage: localStorage,
-  // },
-  persist: true,
+  persist: {
+    enabled: true,
+    strategies: [
+      {
+        storage: localStorage,
+        paths: ["shoesCount"], //指定要长久化的字段
+      },
+    ],
+    // storage: window.sessionStorage,
+  },
+  // persist: true,
   // persist: {
   // enabled: true,
   // },
