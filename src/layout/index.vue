@@ -40,7 +40,6 @@
         <div class="tags-view-wrapper">
           <router-link
             v-for="tag in visitedViews.arr"
-            ref="tag"
             :key="tag.name"
             :to="{ path: tag.name }"
             tag="span"
@@ -81,7 +80,7 @@
       <router-view v-slot="{ Component }">
         <transition name="slide-fade">
           <keep-alive include="onlyId">
-            <component class="child-view" :is="Component" :key="route.path" />
+            <component class="child-view" :is="Component"/>
           </keep-alive>
         </transition>
       </router-view>
@@ -93,16 +92,15 @@
 import { watch, computed, reactive, ref, onMounted } from "vue";
 import { useRoute, useRouter, onBeforeRouteUpdate } from "vue-router";
 import { storeToRefs } from "pinia";
-import { AdminRoutes, OriginRoutes } from "@/router/AuthRoutes";
 import { useMainStore } from "@/store/pinia.ts";
 
 const route = useRoute();
 const Router = useRouter();
 const PiniaStore = useMainStore();
-let { AuthRoutes, ActiveBread } = storeToRefs(PiniaStore); // 不丢失响应式
-const key = computed(() =>
-  route.name ? String(route.name) + new Date() : String(route.path) + new Date()
-);
+let { AuthRoutes } = storeToRefs(PiniaStore); // 不丢失响应式
+// const key = computed(() =>
+//   route.name ? String(route.name) + new Date() : String(route.path) + new Date()
+// );
 let visitedViews = reactive({
   arr: [{ name: "/welcome", title: "欢迎页" }],
 });
@@ -111,7 +109,6 @@ let RouteList = reactive({
   routes: [],
 });
 
-let userStore = window.localStorage.getItem("user");
 let visitedViewsStore = window.localStorage.getItem("visitedViews");
 
 RouteList.routes = AuthRoutes;
@@ -164,7 +161,7 @@ const showMenu = (e) => {
 };
 
 const homeScroll = (e) => {
-  // console.log("页面滚动了", e);
+  console.log("页面滚动了", e);
   visible.value = false;
 };
 

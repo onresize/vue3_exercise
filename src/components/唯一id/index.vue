@@ -10,6 +10,7 @@
       tim
     }}
   </h1>
+  <h3>PS：缓存使用过多消耗内存</h3>
   <pre>
     注意：keep-alive中的include匹配name的组件在vue3中、没有name
     <mark>方式一：是通过写两个script标签来解决，一个使用setup，一个不使用</mark>
@@ -39,12 +40,12 @@
   </pre>
 </template>
 
-<script>
+<!-- <script>
 export default {
   name: "onlyId",
 };
-</script>
-<script setup>
+</script> -->
+<script setup name="onlyId">
 import {
   ref,
   reactive,
@@ -55,7 +56,7 @@ import {
 } from "vue";
 import { useRoute } from "vue-router";
 
-const route = useRoute();
+// const route = useRoute();
 // console.log("唯一id:", crypto.randomUUID());
 let obj = reactive({ arr: [1, 2, 3, 4, 5, 6] });
 

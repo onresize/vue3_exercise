@@ -3,25 +3,19 @@ import path from "path";
 import vue from "@vitejs/plugin-vue";
 import components from "unplugin-vue-components/vite";
 import banner from "vite-plugin-banner";
+import AutoImport from "unplugin-auto-import/vite";
+import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
+import VueSetupExtend from "vite-plugin-vue-setup-extend";
 import pkg from "./package.json";
 //安装jsx插件 npm install @vitejs/plugin-vue-jsx -D
 import vueJsx from "@vitejs/plugin-vue-jsx";
-import VueI18n from '@intlify/vite-plugin-vue-i18n'
+import VueI18n from "@intlify/vite-plugin-vue-i18n";
 
 const resolve = (dir: string): string => path.resolve(__dirname, dir);
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  /**
-   * 如果生产部署和开发路径不一样，可以在这里动态配置
-   * @see https://cn.vitejs.dev/config/#base
-   */
   base: "/",
-
-  /**
-   * 本地开发服务，也可以配置接口代理
-   * @see https://cn.vitejs.dev/config/#server-proxy
-   */
   server: {
     port: 3010,
     // proxy: {
@@ -61,10 +55,6 @@ export default defineConfig({
   // },
 
   resolve: {
-    /**
-     * 配置目录别名
-     * @see https://cn.vitejs.dev/config/#resolve-alias
-     */
     alias: {
       // 兼容webpack的习惯
       "@": resolve("src"),
@@ -119,14 +109,19 @@ export default defineConfig({
   },
 
   plugins: [
-    vue(),
-    vueJsx(),
-     // https://github.com/intlify/vite-plugin-vue-i18n
-     VueI18n({
-      // define the locales files directory
-      include: [resolve(__dirname, '@/src/locales/**')],
+    vue({
+      refTransform: true, // 开启ref转换、使用$ref响应式定义、不需要.value
     }),
-
+    vueJsx(),
+    // https://github.com/intlify/vite-plugin-vue-i18n
+    VueI18n({
+      include: [resolve(__dirname, "@/src/locales/**")],
+    }),
+    VueSetupExtend(), // name增强
+    // 自动引入element
+    AutoImport({
+      resolvers: [ElementPlusResolver()],
+    }),
     /**
      * 自动导入组件，不用每次都 import
      * @see https://github.com/antfu/unplugin-vue-components#configuration
@@ -136,6 +131,7 @@ export default defineConfig({
       extensions: ["vue", "ts"],
       deep: true,
       dts: false,
+      resolvers: [ElementPlusResolver()],
     }),
 
     /**

@@ -3,16 +3,14 @@ import "nprogress/nprogress.css";
 import pinia from "@/store/store";
 import { useMainStore } from "@/store/pinia.ts";
 import router from "@/router";
-import { AdminRoutes, OriginRoutes } from "@/router/AuthRoutes";
 import config from "@/config";
-import { ref } from "vue";
 
 const PiniaStore = useMainStore(pinia);
 
 // router4.0版本、next参数可选、vue2不支持router4.0
 // TODO浏览器大刷新页面跳404
 router.beforeEach((to, from, next) => {
-  console.log("mainJS进入了路由:", to);
+  console.log("mainJS进入了路由:", to, from);
   NProgress.start();
   if (["/", "/login"].indexOf(to.path) !== -1) {
     console.log("路由11111111111111111111111111");

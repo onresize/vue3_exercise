@@ -6,4 +6,4 @@ import { createPinia } from "pinia";
 const pinia = createPinia();
 pinia.use(piniaPersist); // 全局缓存pinia数据
 
-export default pinia
+export default pinia;

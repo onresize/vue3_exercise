@@ -9,7 +9,7 @@ import "animate.css";
 // 全局样式
 import "@less/global.less";
 
-import './permission'
+import "./permission";
 
 // 胶囊版本号
 console.log(
@@ -80,7 +80,7 @@ app.use(i18n);
 
 // 测试
 import { version } from "/package.json";
-// console.log("版本号：", version);
+console.log("版本号：", version);
 
 // XXX 环境变量、正式环境不存在import.meta.env
 // console.log("环境变量", import.meta.env);
@@ -91,19 +91,19 @@ const globModules = import.meta.glob("./glob/*");
 // const globModules = import.meta.glob("./glob/*.json"); // 拿到匹配.json文件
 // console.log("批量引入", globModules);
 Object.entries(globModules).forEach(([k, v]) => {
-  // v().then((m) => console.log(k + ":", m.default));
+  v().then((m) => console.log(k + ":", m.default));
 });
 
-type Filter = {
-  format: <T>(str: T) => string;
-};
+// type Filter = {
+//   format: <T>(str: T) => string;
+// };
 // 声明文件、在ts中防止报错、vue3移除了filters 可以用全局函数代替
-declare module "@vue/runtime-core" {
-  export interface ComponentCustomProperties {
-    $env: string;
-    $filters: Filter;
-  }
-}
+// declare module "@vue/runtime-core" {
+//   export interface ComponentCustomProperties {
+//     $env: string;
+//     $filters: Filter;
+//   }
+// }
 
 app.config.globalProperties.$filters = {
   format<T>(str: T): string {
