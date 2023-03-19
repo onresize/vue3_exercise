@@ -31,6 +31,9 @@ console.log("ヽ_ﾉ　　(_／　 │／／");
 console.log("　7　　　　　　|／");
 console.log("　＞―r ￣`ｰ―＿");
 
+// 环境变量、正式环境不存在import.meta.env
+console.log("环境变量", import.meta.env);
+
 // vue3中使用$bus通信、mitt和tiny-emitter是官方推荐库
 // import mitt from "mitt"
 
@@ -90,9 +93,9 @@ console.log("版本号：", version);
 const globModules = import.meta.glob("./glob/*");
 // const globModules = import.meta.glob("./glob/*.json"); // 拿到匹配.json文件
 // console.log("批量引入", globModules);
-Object.entries(globModules).forEach(([k, v]) => {
-  v().then((m) => console.log(k + ":", m.default));
-});
+// Object.entries(globModules).forEach(([k, v]) => {
+//   v().then((m) => console.log(k + ":", m.default));
+// });
 
 // type Filter = {
 //   format: <T>(str: T) => string;
@@ -104,6 +107,10 @@ Object.entries(globModules).forEach(([k, v]) => {
 //     $filters: Filter;
 //   }
 // }
+
+// errorHandler
+import errorHandler from "@/utils/errorHandler.js";
+app.config.errorHandler = errorHandler;
 
 app.config.globalProperties.$filters = {
   format<T>(str: T): string {

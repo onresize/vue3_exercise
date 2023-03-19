@@ -6,14 +6,8 @@
  
 <script setup lang='ts'>
 import bgGeoMap from "./bgGeoMap.vue";
-// defineProps defineEmits defineExpose withDefaults onMounted onUnmounted
 import {
-  ref,
-  reactive,
-  computed,
-  watch,
-  watchEffect,
-  defineAsyncComponent,
+  onMounted
 } from "vue";
 
 const JsonData = Object.freeze({
@@ -1070,6 +1064,9 @@ const JsonData = Object.freeze({
     },
   ],
 });
+onMounted(() => {
+  console.log('onMounted')
+}) 
 </script>
  
 <style scoped >

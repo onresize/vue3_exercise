@@ -13,20 +13,15 @@ router.beforeEach((to, from, next) => {
   console.log("mainJS进入了路由:", to, from);
   NProgress.start();
   if (["/", "/login"].indexOf(to.path) !== -1) {
-    console.log("路由11111111111111111111111111");
     next();
   } else {
-    console.log("路由222222222222222222222222222");
     if (PiniaStore.registerRouteFresh && PiniaStore.AuthRoutes == 0) {
-      console.log("路由3333333333333333333333333");
       router.removeRoute("NotFound");
       PiniaStore.PromiseRoutes().then(() => {
-        console.log("路由44444444444444444444444");
         PiniaStore.changeState(false);
         next({ path: to.path });
       });
     } else {
-      console.log("路由555555555555555555555555555");
       router.addRoute("layoutPage", {
         path: "/:pathMatch(.*)",
         name: "NotFound",
