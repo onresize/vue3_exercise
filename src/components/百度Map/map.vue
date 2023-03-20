@@ -4,7 +4,7 @@
   </div>
 </template>
  
-<script setup lang='ts'>
+<script setup>
 import bgGeoMap from "./bgGeoMap.vue";
 import {
   onMounted
@@ -1066,6 +1066,9 @@ const JsonData = Object.freeze({
 });
 onMounted(() => {
   console.log('onMounted')
+  new Promise().then((res) => {
+    abc()
+  })
 }) 
 </script>
  

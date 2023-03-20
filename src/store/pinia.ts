@@ -49,7 +49,6 @@ export const useMainStore = defineStore("piniaStore", {
       return new Promise((resolve) => {
         if (!this.AuthRoutes.length) {
           if (user == "Admin") {
-            // 路由数据
             AdminRoutes.forEach((v: any) => {
               router.addRoute("layoutPage", v);
             });

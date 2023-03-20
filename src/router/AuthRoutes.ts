@@ -159,6 +159,10 @@ export const AdminRoutes = [
     component: () => import("@cp/自定义指令/index.vue"),
   },
   {
+    path: "/labelIndex",
+    component: () => import("@cp/label滚动到指定位置/index.vue"),
+  },
+  {
     path: "/onlyId",
     name: "onlyId",
     meta: { keepAlive: true }, // 做缓存

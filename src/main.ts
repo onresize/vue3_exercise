@@ -45,6 +45,9 @@ import directive from "./directiveJs.ts";
 // directive(app)
 app.use(directive, app);
 
+// custom directives
+import directives from "@/directives/index";
+
 // 大屏适配
 import Fit from "vue-fit-next";
 app.use(
@@ -90,7 +93,7 @@ console.log("版本号：", version);
 //参考： https://blog.csdn.net/Smile_ping/article/details/116295981
 
 // global-import 批量导入
-const globModules = import.meta.glob("./glob/*");
+// const globModules = import.meta.glob("./glob/*");
 // const globModules = import.meta.glob("./glob/*.json"); // 拿到匹配.json文件
 // console.log("批量引入", globModules);
 // Object.entries(globModules).forEach(([k, v]) => {
@@ -120,4 +123,4 @@ app.config.globalProperties.$filters = {
 // 声明全局变量 代替vue2的prototype
 app.config.globalProperties.$env = "这是一个main.ts下声明的全局变量";
 
-app.use(ElementPlus).use(pinia).use(router).mount("#app");
+app.use(ElementPlus).use(pinia).use(router).use(directives).mount("#app");
