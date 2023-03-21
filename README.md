@@ -107,3 +107,16 @@ See: [Learning Vue3](https://vue3.chengpeiquan.com/)
 feat: 添加xxx
 fix: 修改xxx
 ```
+
+##### git commit提交代码时跳过 eslint校验
+
+```js
+在使用命令 git commit -m '提交信息' 将本地代码提交到远程仓库时候， 如果项目安装了 per-commit，则会在Git键入提交信息前进行代码风格检查，如果代码不符合相应规则，则报错。
+
+解决方法有两种：
+1、简单粗暴，删除掉pre-commit钩子
+进入项目的.git文件夹（隐藏文件），根据路径 ./git/hooks/pre-commit 找到对应的pre-commit文件，直接删除。
+
+2、使用--no -verify跳过检查。
+```
+
