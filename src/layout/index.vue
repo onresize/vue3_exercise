@@ -6,10 +6,8 @@
       <el-aside class="home_container_aside" width="220px">
         <div v-for="(item, index) in RouteList.routes" :key="index" class="aa">
           <div class="cc">
-            <a :href="`#${item.path.substr(1)}`">
-              <router-link :to="item.path" active-class="bb" class="info_style">{{ item.path.substr(1) }}测试
-              </router-link>
-            </a>
+            <router-link :to="item.path" active-class="bb" class="info_style" @click="scrollBy(item.path)">{{ item.path.substr(1) }}测试
+            </router-link>
           </div>
         </div>
       </el-aside>
@@ -27,9 +25,9 @@
         </li>
       </ul>
       <div class="fixed_div">
-        <div class="tags-view-wrapper">
-          <el-scrollbar>
-            <router-link :id="tag.name" v-for="tag in visitedViews.arr" :key="tag.name" :to="{ path: tag.name }" tag="span"
+        <div class="tags-view-wrapper" >
+          <el-scrollbar ref="scrollbarRef">
+            <router-link v-for="tag in visitedViews.arr" :key="tag.name" :to="{ path: tag.name }" tag="span"
               :class="[route.fullPath === tag.name ? 'active' : '', 'tags-view-item']">
               {{ tag.title }}
               <CircleClose v-show="tag.name !== '/welcome'" style="width: 1em; height: 1em" class="close"
@@ -67,11 +65,13 @@
 import { watch, computed, reactive, ref, onMounted } from "vue";
 import { useRoute, useRouter, onBeforeRouteUpdate } from "vue-router";
 import { storeToRefs } from "pinia";
+import { AdminRoutes, OriginRoutes } from "@/router/AuthRoutes";
 import { useMainStore } from "@/store/pinia.ts";
 
 const route = useRoute();
 const Router = useRouter();
 const PiniaStore = useMainStore();
+const scrollbarRef = ref(null)
 let { AuthRoutes } = storeToRefs(PiniaStore); // 不丢失响应式
 // const key = computed(() =>
 //   route.name ? String(route.name) + new Date() : String(route.path) + new Date()
@@ -84,11 +84,18 @@ let RouteList = reactive({
   routes: [],
 });
 
+let userStore = window.localStorage.getItem("user") || null;
 let visitedViewsStore = window.localStorage.getItem("visitedViews");
+
+// if (userStore == "Admin") {
+//   PiniaStore.changeAuthRoutes(AdminRoutes);
+// } else if (userStore == "Origin") {
+//   PiniaStore.changeAuthRoutes(OriginRoutes);
+// }
 
 RouteList.routes = AuthRoutes;
 visitedViews.arr = JSON.parse(visitedViewsStore) || visitedViews.arr;
-// console.log("拿到visitedViews存储的值：", visitedViews.arr);
+console.log("拿到visitedViews存储的值：", visitedViews.arr);
 
 onBeforeRouteUpdate((to) => {
   console.log("路由改变", to);
@@ -107,9 +114,25 @@ let left = ref(0);
 let top = ref(0);
 let PathName = ref("");
 
+const scrollBy = (name) => {
+  let pIndex = null
+  visitedViews.arr.find((v,i) => {
+    if (v.name == name) {
+      pIndex = i
+    }
+  })
+  if (pIndex >= 18) {
+    scrollbarRef.value.setScrollLeft(4000)
+  } else {
+    scrollbarRef.value.setScrollLeft(0)
+  }
+  console.log('移动顶部滚动条----------------', pIndex)
+}
+
 const closeMenu = () => {
   visible.value = false;
 };
+
 
 watch(visible, (val) => {
   // console.log("监听------------------", val);
@@ -194,7 +217,6 @@ onMounted(() => {
       font-size: 12px;
       margin-left: 5px;
       border-radius: 4px;
-      transition: all 0.1s ease-in-out;
 
       .close {
         transition: all 0.3s ease-in;

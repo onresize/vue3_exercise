@@ -33,7 +33,17 @@
     //   } catch (err) { }
     // };
     // check();
-
+    
+    // 阻断地址栏修改时重定向到欢迎页
+    let storageUser = window.localStorage.getItem("user") || null;
+    if (storageUser) {
+      if (['/', '/login'].includes(window.location.pathname)) {
+        // alert('即将跳转登录页面')
+        window.location.pathname = '/welcome'
+      }
+    } else if (!['/', '/login'].includes(window.location.pathname)) {
+      window.location.pathname = '/login'
+    }
   </script>
 </head>
 
