@@ -9,20 +9,12 @@
 ```bash
 npm create preset@latest init
 ```
-
-点击阅读：[Vue3.0学习教程与实战案例](https://vue3.chengpeiquan.com/)
-[b站视频学习(小满zs):](https://www.bilibili.com/video/BV1dS4y1y7vd)
+b站视频学习: [(小满zs)](https://www.bilibili.com/video/BV1dS4y1y7vd)
 
 ## 工程启动指南
 
 1. npm install
 2. npm run dev
-
-## git commit 指南
-
-```bash
-<类型>[可选 范围]: <描述>
-```
 
 ### commit 类型
 
@@ -70,13 +62,8 @@ npm create preset@latest init
 
 - 提升性能:zap:
 
-### commit 范围
-
-本次 commit 影响的范围（可选）
 
 ### commit 描述
-
-本次 commit 的简短描述，结尾不加句号或者其他标点符号
 
 根据以上 git commit 指南，将是如下的格式：
 
