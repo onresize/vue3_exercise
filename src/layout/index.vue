@@ -6,32 +6,64 @@
       <el-aside class="home_container_aside" width="220px">
         <div v-for="(item, index) in RouteList.routes" :key="index" class="aa">
           <div class="cc">
-            <router-link :to="item.path" active-class="bb" class="info_style" @click="scrollBy(item.path)">{{ item.path.substr(1) }}测试
+            <router-link
+              :to="item.path"
+              active-class="bb"
+              class="info_style"
+              @click="scrollBy(item.path)"
+              >{{ item.path.substr(1) }}测试
             </router-link>
           </div>
         </div>
       </el-aside>
     </el-card>
     <!-- 右侧内容 -->
-    <el-main class="home_container_main" @contextmenu.prevent="showMenu($event)">
-      <ul v-show="visible" :style="{ left: left + 'px', top: top + 'px' }" class="contextmenu">
+    <el-main class="home_container_main">
+      <ul
+        v-show="visible"
+        :style="{ left: left + 'px', top: top + 'px' }"
+        class="contextmenu"
+      >
         <li @click="refresh">
-          <RefreshRight style="width: 1em; height: 1em; margin-right: 2px"></RefreshRight>
+          <RefreshRight
+            style="width: 1em; height: 1em; margin-right: 2px"
+          ></RefreshRight>
           刷新页面
         </li>
         <li v-if="route.name !== 'welcome'" @click="closePage">
-          <CircleClose style="width: 1em; height: 1em; margin-right: 2px"></CircleClose>
+          <CircleClose
+            style="width: 1em; height: 1em; margin-right: 2px"
+          ></CircleClose>
           关闭当前
+        </li>
+        <li v-if="visitedViews.arr.length >= 2" @click="closeOtherPage">
+          <CircleClose
+            style="width: 1em; height: 1em; margin-right: 2px"
+          ></CircleClose>
+          关闭其他
         </li>
       </ul>
       <div class="fixed_div">
-        <div class="tags-view-wrapper" >
+        <div class="tags-view-wrapper">
           <el-scrollbar ref="scrollbarRef">
-            <router-link v-for="tag in visitedViews.arr" :key="tag.name" :to="{ path: tag.name }" tag="span"
-              :class="[route.fullPath === tag.name ? 'active' : '', 'tags-view-item']">
+            <router-link
+              v-for="tag in visitedViews.arr"
+              :key="tag.name"
+              :to="{ path: tag.name }"
+              tag="span"
+              :class="[
+                route.fullPath === tag.name ? 'active' : '',
+                'tags-view-item',
+              ]"
+              @contextmenu.prevent="showMenu($event)"
+            >
               {{ tag.title }}
-              <CircleClose v-show="tag.name !== '/welcome'" style="width: 1em; height: 1em" class="close"
-                @click.prevent.stop="closeSelectedTag(tag.name)"></CircleClose>
+              <CircleClose
+                v-show="tag.name !== '/welcome'"
+                style="width: 1em; height: 1em"
+                class="close"
+                @click.prevent.stop="closeSelectedTag(tag.name)"
+              ></CircleClose>
             </router-link>
           </el-scrollbar>
         </div>
@@ -39,15 +71,24 @@
       <div class="right_quit">
         <el-tooltip effect="dark" content="退出登录" placement="left-start">
           <div @click="quit">
-            <svg t="1678947494218" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
-              p-id="2767" width="30" height="30">
+            <svg
+              t="1678947494218"
+              class="icon"
+              viewBox="0 0 1024 1024"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              p-id="2767"
+              width="30"
+              height="30"
+            >
               <path
                 d="M887.3 492.3L759.8 333c-6.2-7.7-15.4-12-24.9-12-3.5 0-7.1 0.6-10.5 1.8-12.8 4.5-21.3 16.6-21.3 30.1v95.6h-255c-35.2 0-63.7 28.5-63.7 63.7s28.5 63.7 63.7 63.7H703v95.6c0 13.5 8.6 25.6 21.3 30.1 3.5 1.2 7 1.8 10.5 1.8 9.5 0 18.7-4.3 24.9-12L887.2 532c9.4-11.5 9.4-28 0.1-39.7zM575.5 767.2H320.1c-34.9 0-63.3-28.5-63.3-63.7V321v-0.5c0-34.9 28.5-63.2 63.8-63.2h254.9c35.2 0 63.8-28.5 63.8-63.7s-28.5-63.7-63.8-63.7H256.8c-70.4 0-127.5 57.1-127.5 127.5v510c0 70.4 57.1 127.5 127.5 127.5h318.7c35.2 0 63.8-28.5 63.8-63.7 0-35.4-28.6-64-63.8-64z m0 0"
-                fill="#666666" p-id="2768"></path>
+                fill="#666666"
+                p-id="2768"
+              ></path>
             </svg>
           </div>
         </el-tooltip>
-
       </div>
       <!--XXX 设置跨路由的动画、所有的router-view加上key只会导致动画失效 -->
       <router-view v-slot="{ Component }">
@@ -65,13 +106,13 @@
 import { watch, computed, reactive, ref, onMounted } from "vue";
 import { useRoute, useRouter, onBeforeRouteUpdate } from "vue-router";
 import { storeToRefs } from "pinia";
-import { AdminRoutes, OriginRoutes } from "@/router/AuthRoutes";
 import { useMainStore } from "@/store/pinia.ts";
+import { setStorage, getStorage } from "@/utils/funcTools";
 
 const route = useRoute();
 const Router = useRouter();
 const PiniaStore = useMainStore();
-const scrollbarRef = ref(null)
+const scrollbarRef = ref(null);
 let { AuthRoutes } = storeToRefs(PiniaStore); // 不丢失响应式
 // const key = computed(() =>
 //   route.name ? String(route.name) + new Date() : String(route.path) + new Date()
@@ -84,29 +125,23 @@ let RouteList = reactive({
   routes: [],
 });
 
-let userStore = window.localStorage.getItem("user") || null;
-let visitedViewsStore = window.localStorage.getItem("visitedViews");
-
-// if (userStore == "Admin") {
-//   PiniaStore.changeAuthRoutes(AdminRoutes);
-// } else if (userStore == "Origin") {
-//   PiniaStore.changeAuthRoutes(OriginRoutes);
-// }
-
 RouteList.routes = AuthRoutes;
-visitedViews.arr = JSON.parse(visitedViewsStore) || visitedViews.arr;
-console.log("拿到visitedViews存储的值：", visitedViews.arr);
 
+if (
+  getStorage("ActiveBread")?.length &&
+  getStorage("ActiveBread")?.length != 1
+) {
+  visitedViews.arr = getStorage("ActiveBread");
+}
 onBeforeRouteUpdate((to) => {
-  console.log("路由改变", to);
+  // console.log("路由改变", to);
   let r = visitedViews.arr.some((v) => v.name === to.path);
   if (r) return;
   visitedViews.arr.push({
     name: to.path,
     title: to.path.substr(1),
   });
-  PiniaStore.changeActiveBread(visitedViews.arr);
-  localStorage.setItem("visitedViews", JSON.stringify(visitedViews.arr));
+  setStorage("ActiveBread", visitedViews.arr);
 });
 
 let visible = ref(false);
@@ -115,24 +150,23 @@ let top = ref(0);
 let PathName = ref("");
 
 const scrollBy = (name) => {
-  let pIndex = null
-  visitedViews.arr.find((v,i) => {
+  let pIndex = null;
+  PiniaStore.ActiveBread.find((v, i) => {
     if (v.name == name) {
-      pIndex = i
+      pIndex = i;
     }
-  })
+  });
   if (pIndex >= 18) {
-    scrollbarRef.value.setScrollLeft(4000)
+    scrollbarRef.value.setScrollLeft(4000);
   } else {
-    scrollbarRef.value.setScrollLeft(0)
+    scrollbarRef.value.setScrollLeft(0);
   }
-  console.log('移动顶部滚动条----------------', pIndex)
-}
+  // console.log("移动顶部滚动条----------------", pIndex);
+};
 
 const closeMenu = () => {
   visible.value = false;
 };
-
 
 watch(visible, (val) => {
   // console.log("监听------------------", val);
@@ -147,10 +181,13 @@ const quit = () => {
   Router.push("/login");
   window.localStorage.clear();
   PiniaStore.changeAuthRoutes([]);
+  PiniaStore.changeActiveBread([{ name: "/welcome", title: "欢迎页" }]);
   PiniaStore.changeState(true);
 };
 
 const showMenu = (e) => {
+  e.returnValue = false; // ie禁用默认事件
+  e.preventDefault();
   console.log("点击了右键", e.srcElement.pathname || window.location.pathname);
   PathName.value = e.srcElement.pathname || window.location.pathname;
   top.value = e.clientY;
@@ -165,7 +202,6 @@ const homeScroll = (e) => {
 
 const refresh = async () => {
   Router.replace({ path: "/redirect" + PathName.value });
-  // window.location.pathname = PathName.value
 };
 
 const closePage = () => {
@@ -173,9 +209,19 @@ const closePage = () => {
   Router.push("/welcome");
 };
 
+const closeOtherPage = () => {
+  let arr = visitedViews.arr.filter((v) => v.name == PathName.value);
+  PathName.value != "/welcome" &&
+    arr.unshift({ name: "/welcome", title: "欢迎页" });
+  visitedViews.arr = arr;
+  setStorage("ActiveBread", visitedViews.arr);
+  setStorage("ActiveBread", visitedViews.arr);
+  Router.push(PathName.value);
+};
+
 const closeSelectedTag = (name) => {
   visitedViews.arr = visitedViews.arr.filter((v) => v.name !== name);
-  PiniaStore.changeActiveBread(visitedViews.arr);
+  setStorage("ActiveBread", visitedViews.arr);
   Router.push("/welcome");
 };
 

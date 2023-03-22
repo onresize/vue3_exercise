@@ -13,6 +13,7 @@ import { gsap } from "gsap";
 import { useRoute, onBeforeRouteLeave } from "vue-router";
 import { useStore } from "vuex";
 import { useMainStore } from "@/store/pinia.ts";
+import { setStorage, getStorage } from "@/utils/funcTools";
 
 const route = useRoute();
 const VuexStore = useStore();
@@ -22,6 +23,10 @@ console.log(
   PiniaStore.doubleCount,
   PiniaStore.doubleCountPlus(3)
 );
+
+if (getStorage("shoesCount")) {
+  PiniaStore.shoesCount = getStorage("shoesCount");
+}
 
 const x = ref(100);
 const y = ref(100);
@@ -43,6 +48,7 @@ const emitCount = () => {
   // 3.pinia调用actions方法三
   // PiniaStore.addCount(2);
   PiniaStore.addDelayCount(2);
+  setStorage("shoesCount", PiniaStore.shoesCount);
 };
 
 onBeforeRouteLeave((to) => {

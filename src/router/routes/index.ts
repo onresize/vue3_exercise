@@ -1,7 +1,5 @@
 import type { RouteRecordRaw } from "vue-router";
 
-import Layout from "@/layout/index.vue";
-
 const routes: RouteRecordRaw[] = [
   {
     path: "/",
@@ -10,7 +8,7 @@ const routes: RouteRecordRaw[] = [
   {
     // 重定向配置、项目内置页面刷新规则
     path: "/redirect",
-    component: Layout,
+    component: () => import("@/layout/index.vue"),
     children: [
       {
         path: "/redirect/:path(.*)",
@@ -31,7 +29,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: "/layoutPage",
     name: "layoutPage",
-    component: Layout,
+    component: () => import("@/layout/index.vue"),
     redirect: "welCome",
     children: [
       // 匹配不到页面跳404

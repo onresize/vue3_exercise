@@ -5,17 +5,19 @@ import { useMainStore } from "@/store/pinia.ts";
 import router from "@/router";
 import config from "@/config";
 
+// 🍒这里为了解决动态路由浏览器大刷404页面、使用到了pinia在这里重新挂载、如果放在导航前置守卫里面挂载pinia能持久化、刷新404问题又复现
+// 🍒参考：https://blog.csdn.net/u012533474/article/details/129263196
 const PiniaStore = useMainStore(pinia);
 
 // router4.0版本、next参数可选、vue2不支持router4.0
-// TODO浏览器大刷新页面跳404
 router.beforeEach((to, from, next) => {
-  console.log("mainJS进入了路由:", to, from);
+  // console.log("mainJS进入了路由:", to, from);
+  
   NProgress.start();
   if (["/", "/login"].indexOf(to.path) !== -1) {
     next();
   } else {
-    if (PiniaStore.registerRouteFresh && PiniaStore.AuthRoutes == 0) {
+    if (PiniaStore.registerRouteFresh) {
       router.removeRoute("NotFound");
       PiniaStore.PromiseRoutes().then(() => {
         PiniaStore.changeState(false);

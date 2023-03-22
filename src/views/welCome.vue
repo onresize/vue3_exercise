@@ -1,7 +1,7 @@
 <template>
   <div class="box">
     <div :class="[isShow ? 'none' : 'text_title', 'linear colorful']">
-      <em> vue3 + vue-router4.0 + vite2 + element-Plus </em>
+      <em> vue3 + vue-router4.0 + vite + element-Plus </em>
     </div>
     <div :class="['flex', !isShow ? 'infoZIndex' : 'beforeZIndex']">
       <el-tag v-for="item in objArr" :key="item" class="tag" color="#000">

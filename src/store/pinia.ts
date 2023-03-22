@@ -6,9 +6,9 @@ import { AdminRoutes, OriginRoutes } from "@/router/AuthRoutes";
 export const useMainStore = defineStore("piniaStore", {
   // 声明store
   state: () => ({
+    registerRouteFresh: true, // 定义标识，记录路由是否刷新、这个不做持久化操作、否则会导致刷新导航守卫404问题
+    AuthRoutes: [], // 左侧路由菜单数据、不做持久化
     shoesCount: 18,
-    registerRouteFresh: true, // 定义标识，记录路由是否添加
-    AuthRoutes: [], // 左侧路由菜单数据
     ActiveBread: [{ name: "/welcome", title: "欢迎页" }], // 顶部激活页面
   }),
   // 声明getters
@@ -32,7 +32,7 @@ export const useMainStore = defineStore("piniaStore", {
     },
     changeAuthRoutes(res) {
       this.AuthRoutes = res;
-      console.log("pinia方法改变左侧菜单数据", res);
+      // console.log("pinia方法改变左侧菜单数据", res);
     },
     changeActiveBread(res) {
       // console.log("pinia方法changeActiveBread", res);
@@ -65,16 +65,10 @@ export const useMainStore = defineStore("piniaStore", {
     },
   },
   // 全局引入pinia缓存插件缓存数据配置、下面三种写法、默认缓存到localStorage
-  persist: {
-    enabled: true,
-    strategies: [
-      {
-        storage: localStorage,
-        paths: ["shoesCount"], //指定要长久化的字段
-      },
-    ],
-    // storage: window.sessionStorage,
-  },
+  // 🍒🍒这里因为项目使用了动态路由、为了解决刷新404问题、这里持久化写了也会失效、折中采用持久化手动storage存取
+  // persist: {
+  //   paths: ["AuthRoutes", "shoesCount", "ActiveBread"],
+  // },
   // persist: true,
   // persist: {
   // enabled: true,

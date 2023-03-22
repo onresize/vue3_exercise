@@ -18,21 +18,21 @@ console.log(
   "padding: 3px; color: white; background: #219EBC;border-radius: 0 5px 5px 0;"
 );
 
-console.log("|　　　　 ／|");
-console.log("/ | 　  ∠ /　");
-console.log("│ | ＿,  ＜ ／　　 /`");
-console.log("/　　　　　 ヽ　　/ /　");
-console.log("Y　　　　　  `　 / /");
-console.log("ｲ ●　､　●　　⊂⊃〈 〈");
-console.log("()　 へ　　　　|　＼ /");
-console.log("　>ｰ ､_　 ィ　 ) ／／");
-console.log("/ へ　　 /　ﾉ ＼＼");
-console.log("ヽ_ﾉ　　(_／　 │／／");
-console.log("　7　　　　　　|／");
-console.log("　＞―r ￣`ｰ―＿");
+// console.log("|　　　　 ／|");
+// console.log("/ | 　  ∠ /　");
+// console.log("│ | ＿,  ＜ ／　　 /`");
+// console.log("/　　　　　 ヽ　　/ /　");
+// console.log("Y　　　　　  `　 / /");
+// console.log("ｲ ●　､　●　　⊂⊃〈 〈");
+// console.log("()　 へ　　　　|　＼ /");
+// console.log("　>ｰ ､_　 ィ　 ) ／／");
+// console.log("/ へ　　 /　ﾉ ＼＼");
+// console.log("ヽ_ﾉ　　(_／　 │／／");
+// console.log("　7　　　　　　|／");
+// console.log("　＞―r ￣`ｰ―＿");
 
 // 环境变量、正式环境不存在import.meta.env
-console.log("环境变量", import.meta.env);
+// console.log("环境变量", import.meta.env);
 
 // vue3中使用$bus通信、mitt和tiny-emitter是官方推荐库
 // import mitt from "mitt"
@@ -123,4 +123,4 @@ app.config.globalProperties.$filters = {
 // 声明全局变量 代替vue2的prototype
 app.config.globalProperties.$env = "这是一个main.ts下声明的全局变量";
 
-app.use(ElementPlus).use(pinia).use(router).use(directives).mount("#app");
+app.use(ElementPlus).use(router).use(pinia).use(directives).mount("#app");

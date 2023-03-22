@@ -11,6 +11,7 @@ npm create preset@latest init
 ```
 
 点击阅读：[Vue3.0学习教程与实战案例](https://vue3.chengpeiquan.com/)
+[b站视频学习(小满zs):](https://www.bilibili.com/video/BV1dS4y1y7vd)
 
 ## 工程启动指南
 
