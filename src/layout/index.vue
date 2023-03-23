@@ -108,6 +108,7 @@ import { useRoute, useRouter, onBeforeRouteUpdate } from "vue-router";
 import { storeToRefs } from "pinia";
 import { useMainStore } from "@/store/pinia.ts";
 import { setStorage, getStorage } from "@/utils/funcTools";
+import loginBroadcast from '@/utils/loginBroadcast'
 
 const route = useRoute();
 const Router = useRouter();
@@ -179,6 +180,7 @@ watch(visible, (val) => {
 
 const quit = () => {
   Router.push("/login");
+  loginBroadcast.postMessage("false");
   window.localStorage.clear();
   PiniaStore.changeAuthRoutes([]);
   PiniaStore.changeActiveBread([{ name: "/welcome", title: "欢迎页" }]);

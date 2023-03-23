@@ -12,6 +12,7 @@
 import { onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { AdminRoutes, OriginRoutes } from "@/router/AuthRoutes";
+import loginBroadcast from '@/utils/loginBroadcast'
 
 const Router = useRouter();
 
@@ -25,6 +26,7 @@ const toPage = (name) => {
     window.localStorage.setItem("user", "Origin");
   }
   Router.push({ path: "/welcome" });
+  loginBroadcast.postMessage('true')
 };
 
 onMounted(() => {
