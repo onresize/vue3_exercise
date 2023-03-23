@@ -1,14 +1,9 @@
-# vue3-ts-vite-starter
+# vue3-ts-vite-pinia
 
-这个模板应该能帮你快速创建一个基于 Vite 的 Vue 3 项目，默认使用 TypeScript 作为开发语言。
+基于 Vite 的 Vue 3 项目，默认使用 TypeScript 作为开发语言。
 
-## Usage
+## 为什么学习这个🤷‍♂️
 
-你可以使用 [create-preset](https://github.com/awesome-starter/create-preset) 之类的工具通过此模板来搭建你的项目。
-
-```bash
-npm create preset@latest init
-```
 b站视频学习: [(小满zs)](https://www.bilibili.com/video/BV1dS4y1y7vd)
 
 ## 工程启动指南

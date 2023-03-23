@@ -1,6 +1,6 @@
 <template>
-  <div class="box">
-    <div :class="[isShow ? 'none' : 'text_title', 'linear colorful']">
+  <div class="box" :style="{ backgroundImage: `url(${dataImg})` }">
+    <div :class="[isShow ? 'none' : 'text_title']">
       <em> vue3 + vue-router4.0 + vite + element-Plus </em>
     </div>
     <div :class="['flex', !isShow ? 'infoZIndex' : 'beforeZIndex']">
@@ -18,7 +18,7 @@
       <div class="card">
         <div class="content">
           <div class="front">
-            <h3 class="title">请作者喝杯冰阔落🍻</h3>
+            <h3 class="title linear colorful">请作者喝杯冰阔落🍻</h3>
             <h3 class="title-pay">
               使用微信支付 <span>鼠标悬停使用支付宝支付</span>
             </h3>
@@ -49,10 +49,23 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed, onMounted } from "vue";
+import { ref, reactive, onMounted } from "vue";
 import { dependencies, devDependencies } from "../../package.json";
+import { getWallpaper } from "@/api/welcome.js";
 
+let dataImg = ref("");
 const isShow = ref(true);
+
+const Wallpaper = async () => {
+  const [err, data] = await getWallpaper();
+  if (err) {
+    return false;
+  } else {
+    console.log(data.data);
+    dataImg.value = data.data;
+  }
+};
+Wallpaper();
 
 onMounted(() => {
   setTimeout(() => {
@@ -100,9 +113,14 @@ objArr.forEach((item) => {
 
 <style scoped lang="less">
 .box {
-  // border: 3px solid red;
+  height: 97%;
   position: relative;
+  top: 30px;
   bottom: 30px;
+  border-radius: 20px;
+  background-origin: center center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 .none {
   display: none;
@@ -279,7 +297,7 @@ objArr.forEach((item) => {
   cursor: pointer;
 }
 
-.linear:hover {
+.linear {
   color: transparent;
   background: repeating-radial-gradient(
     circle at 0 0,
@@ -292,7 +310,7 @@ objArr.forEach((item) => {
   animation: move 0.5s infinite linear;
 }
 
-.colorful:hover {
+.colorful {
   background-image: linear-gradient(
       var(--deg),
       red,

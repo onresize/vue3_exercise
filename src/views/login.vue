@@ -7,12 +7,11 @@
     </div>
   </div>
 </template>
- 
+
 <script setup>
 import { onMounted } from "vue";
 import { useRouter } from "vue-router";
-import { AdminRoutes, OriginRoutes } from "@/router/AuthRoutes";
-import loginBroadcast from '@/utils/loginBroadcast'
+import { loginBroadcast } from "@/utils/broadcast";
 
 const Router = useRouter();
 
@@ -26,7 +25,7 @@ const toPage = (name) => {
     window.localStorage.setItem("user", "Origin");
   }
   Router.push({ path: "/welcome" });
-  loginBroadcast.postMessage('true')
+  loginBroadcast.postMessage("true");
 };
 
 onMounted(() => {
@@ -220,7 +219,7 @@ onMounted(() => {
   }, 100);
 });
 </script>
- 
+
 <style scoped lang="less">
 .login_bg {
   width: 100%;

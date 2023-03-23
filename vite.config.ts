@@ -21,13 +21,13 @@ export default defineConfig(({ mode }) => {
     base: "/",
     server: {
       port: 3010,
-      // proxy: {
-      //   '/devapi': {
-      //     target: 'http://192.168.10.198',
-      //     changeOrigin: true,
-      //     rewrite: (path) => path.replace(/^\/devapi/, ''),
-      //   },
-      // },
+      proxy: {
+        '/BaseApi': {
+          target: env.VITE_APP_BASE_API,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/BaseApi/, ''),
+        },
+      },
     },
     resolve: {
       alias: {
