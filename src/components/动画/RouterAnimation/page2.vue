@@ -10,7 +10,8 @@ import { ref, onMounted, getCurrentInstance } from "vue";
 import { gsap } from "gsap";
 import { useRoute, onBeforeRouteLeave } from "vue-router";
 import { useStore } from "vuex";
-import { useMainStore } from "@/store/main.ts";
+import { useMainStore } from "@/store/pinia.ts";
+import { setStorage, getStorage } from "@/utils/funcTools";
 
 const route = useRoute();
 const Store = useStore();
@@ -22,11 +23,16 @@ const toY = ref(200);
 const toScale = ref(1.2);
 const toRotation = ref(90);
 
+if (getStorage("shoesCount")) {
+  PiniaStore.shoesCount = getStorage("shoesCount");
+}
+
 const emitCount = () => {
   Store.dispatch("asyncAddCount", 1);
 };
 const emitCount1 = () => {
   PiniaStore.addDelayCount(1);
+  setStorage("shoesCount", PiniaStore.shoesCount);
 };
 
 onBeforeRouteLeave((to) => {

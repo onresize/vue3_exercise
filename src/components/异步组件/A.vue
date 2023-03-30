@@ -1,19 +1,11 @@
 <template>
   <div>
-    <div v-for="(item, i) in List" :key="i">{{ item.name }}</div>
+    <h2 v-for="(item, i) in List" :key="i">{{ item.name }}</h2>
   </div>
 </template>
 
-<script setup lang="ts">
-// defineProps defineEmits defineExpose withDefaults onMounted onUnmounted
-import {
-  ref,
-  reactive,
-  computed,
-  watch,
-  watchEffect,
-  defineAsyncComponent,
-} from "vue";
+<script setup>
+import { ref } from "vue";
 import Axios from "axios";
 let List = ref([]);
 

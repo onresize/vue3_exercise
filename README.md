@@ -1,51 +1,15 @@
-# vue3-ts-vite-starter
+# vue3-ts-vite-pinia
 
-This template should help you quickly create a Vue 3 project based on Vite, using TypeScript as the development language by default.
+基于 Vite 的 Vue 3 项目，默认使用 TypeScript 作为开发语言。
 
-这个模板应该能帮你快速创建一个基于 Vite 的 Vue 3 项目，默认使用 TypeScript 作为开发语言。
+## 为什么学习这个🤷‍♂️
 
-## Usage
-
-You can use a tool like [create-preset](https://github.com/awesome-starter/create-preset) to scaffold your project with this template.
-
-你可以使用 [create-preset](https://github.com/awesome-starter/create-preset) 之类的工具通过此模板来搭建你的项目。
-
-```bash
-npm create preset@latest init
-```
-
-## Why Use This Template
-
-Why not use [create-vite](https://github.com/vitejs/vite/tree/main/packages/create-vite) to generate the basic template of the project?
-
-Because the basic template only has the simplest basic configuration, and the actual production project requires a lot of additional tool dependencies to improve development efficiency.
-
-为什么不使用 [create-vite](https://github.com/vitejs/vite/tree/main/packages/create-vite) 来生成项目的基础模板？
-
-因为基础模板只有最简单的配置，而实际生产的项目里，需要很多额外的提高开发效率的工具依赖。
-
-## How to learn
-
-If you are not very familiar with Vue 3 and TypeScript, or even have no contact at all, don’t worry, I have compiled an introductory guide, suitable for developers who do not have Vue 3 development experience to read, a book written based on the development process of a project , It is recommended to read and coding at the same time.
-
-> Btw: Currently only Chinese version, it is recommended to read through Google Translate with Chrome.
-
-See: [Learning Vue3](https://vue3.chengpeiquan.com/)
-
-如果你对 Vue 3 和 TypeScript 不是很熟悉，甚至完全没有接触过，不用担心，我整理了一个入门指南，适合没有 Vue 3 开发经验的开发者阅读，以一个项目的开发过程来写的一本书，建议一边 Reading ，一边 Coding 。
-
-点击阅读：[Vue3.0学习教程与实战案例](https://vue3.chengpeiquan.com/)
+b站视频学习: [(小满zs)](https://www.bilibili.com/video/BV1dS4y1y7vd)
 
 ## 工程启动指南
 
 1. npm install
 2. npm run dev
-
-## git commit 指南
-
-```bash
-<类型>[可选 范围]: <描述>
-```
 
 ### commit 类型
 
@@ -93,13 +57,8 @@ See: [Learning Vue3](https://vue3.chengpeiquan.com/)
 
 - 提升性能:zap:
 
-### commit 范围
-
-本次 commit 影响的范围（可选）
 
 ### commit 描述
-
-本次 commit 的简短描述，结尾不加句号或者其他标点符号
 
 根据以上 git commit 指南，将是如下的格式：
 
@@ -107,3 +66,17 @@ See: [Learning Vue3](https://vue3.chengpeiquan.com/)
 feat: 添加xxx
 fix: 修改xxx
 ```
+
+##### git commit提交代码时跳过 eslint校验
+
+```js
+在使用命令 git commit -m '提交信息' 将本地代码提交到远程仓库时候， 如果项目安装了 per-commit，则会在Git键入提交信息前进行代码风格检查，如果代码不符合相应规则，则报错。
+
+解决方法有两种：
+1、简单粗暴，删除掉pre-commit钩子
+进入项目的.git文件夹（隐藏文件），根据路径 ./git/hooks/pre-commit 找到对应的pre-commit文件，直接删除。
+
+2、使用--no -verify跳过检查。
+git commit -m '提交信息' --no-verify
+```
+

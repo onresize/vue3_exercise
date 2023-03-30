@@ -7,14 +7,14 @@ export default createStore({
   },
   mutations: {
     addCount(state, num) {
-      console.log("执行了同步方法addCount", num);
+      console.log("VUEX执行了同步方法addCount", num);
       state.shoesCount += num;
     },
   },
   actions: {
     asyncAddCount(store, num) {
       setTimeout(() => {
-        console.log("执行了异步方法asyncAddCount", num);
+        console.log("VUEX执行了异步方法asyncAddCount", num);
         store.commit("addCount", num);
       }, 1000);
     },

@@ -1,27 +1,28 @@
 import { createRouter, createWebHistory } from "vue-router";
-import NProgress from "nprogress";
-import "nprogress/nprogress.css";
-
 import routes from "./routes";
-import config from "@/config";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    } else {
+      return { top: 0 };
+    }
+  },
 });
 
-// router4.0版本取消了next()函数、vue2不支持router4.0
-router.beforeEach((to, from) => {
-  console.log("进入了路由:", to.fullPath, from);
-  NProgress.start();
-});
-
-router.afterEach((to, from) => {
-  NProgress.done();
-  console.log("离开了路由:", to.fullPath, from);
-  const { title } = to.meta;
-  const { websiteTitle } = config;
-  document.title = title ? `${title + "页"}` : websiteTitle;
-});
+//路由重复的问题 解决
+router.$addRoute = (params) => {
+  console.log("重写路由");
+  router.matcher = new Router({
+    // 重置路由规则
+    scrollBehavior: () => ({
+      y: 0,
+    }),
+  }).matcher;
+  router.addRoute(params); // 添加路由
+};
 
 export default router;
