@@ -71,6 +71,7 @@ const Wallpaper = async () => {
   } else {
     console.log(data.data);
     dataImg.value = data.data;
+    // dataImg.value = `https://img.alicdn.com/imgextra/i4/O1CN01tc92ri1YHA4hoBZu5_!!6000000003033-2-tps-1920-1300.png`;
   }
 };
 Wallpaper();
