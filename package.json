@@ -12,7 +12,7 @@
     "preview": "vite preview",
     "lint": "eslint src --fix --ext .js,.ts",
     "format": "prettier --write src",
-		"commit": "git pull && git add -A && git-cz && git push"
+    "commit": "git pull && git add -A && git-cz && git push"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.6",
@@ -28,6 +28,7 @@
     "pinia": "^2.0.33",
     "sm-crypto": "^0.3.11",
     "socket.io": "^4.5.1",
+    "three": "^0.151.3",
     "v-scale-screen": "^2.0.12",
     "vue": "^3.2.6",
     "vue-content-loader": "^2.0.1",

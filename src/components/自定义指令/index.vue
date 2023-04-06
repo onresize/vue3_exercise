@@ -40,13 +40,22 @@
         </g>
       </svg>
     </el-card>
+    <h3>演示按钮权限v-permission(当前路由只给了下面按钮增、改的权限)</h3>
+    <el-row>
+      <el-button v-permission="[Route.path, 'add']">增加</el-button>
+      <el-button v-permission="[Route.path, 'remove']">删除</el-button>
+      <el-button v-permission="[Route.path, 'edit']">修改</el-button>
+      <el-button v-permission="[Route.path, 'search']">查询</el-button>
+    </el-row>
     <el-button circle v-draggable class="drag-box">拖拽指令</el-button>
   </div>
 </template>
 
 <script setup>
 import { ref, inject, useSlots } from "vue";
+import { useRoute } from "vue-router";
 
+const Route = useRoute()
 const slots = useSlots();
 console.log('当前slots：', slots)
 const data = ref("我是被复制的内容 🍒 🍉 🍊");

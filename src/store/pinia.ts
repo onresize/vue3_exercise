@@ -10,7 +10,7 @@ export const useMainStore = defineStore("piniaStore", {
     AuthRoutes: [], // 左侧路由菜单数据、不做持久化
     shoesCount: 18,
     ActiveBread: [{ name: "/welcome", title: "欢迎页" }], // 顶部激活页面
-    crossText: '',
+    crossText: "",
   }),
   // 声明getters
   getters: {
@@ -39,8 +39,8 @@ export const useMainStore = defineStore("piniaStore", {
       // console.log("pinia方法changeActiveBread", res);
       this.ActiveBread = res;
     },
-    changeCrossText(res){
-      this.crossText = res
+    changeCrossText(res) {
+      this.crossText = res;
     },
     //异步
     addDelayCount(num) {

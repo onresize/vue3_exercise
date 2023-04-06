@@ -165,8 +165,14 @@ export const AdminRoutes = [
   {
     path: "/onlyId",
     name: "onlyId",
-     // 做缓存
+    // 做缓存
     component: () => import("@cp/唯一id/index.vue"),
+  },
+  {
+    path: "/threeJS_vue",
+    name: "threeJS_vue",
+    // 做缓存
+    component: () => import("@cp/threeJS_vue/index.vue"),
   },
   {
     path: "/animation3",

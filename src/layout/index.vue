@@ -6,12 +6,8 @@
       <el-aside class="home_container_aside" width="220px">
         <div v-for="(item, index) in RouteList.routes" :key="index" class="aa">
           <div class="cc">
-            <router-link
-              :to="item.path"
-              active-class="bb"
-              class="info_style"
-              @click="scrollBy(item.path)"
-              >{{ item.path.substr(1) }}测试
+            <router-link :to="item.path" active-class="bb" class="info_style" @click="scrollBy(item.path)">{{
+              item.path.substr(1) }}测试
             </router-link>
           </div>
         </div>
@@ -19,51 +15,30 @@
     </el-card>
     <!-- 右侧内容 -->
     <el-main class="home_container_main">
-      <ul
-        v-show="visible"
-        :style="{ left: left + 'px', top: top + 'px' }"
-        class="contextmenu"
-      >
+      <ul v-show="visible" :style="{ left: left + 'px', top: top + 'px' }" class="contextmenu">
         <li @click="refresh">
-          <RefreshRight
-            style="width: 1em; height: 1em; margin-right: 2px"
-          ></RefreshRight>
+          <RefreshRight style="width: 1em; height: 1em; margin-right: 2px"></RefreshRight>
           刷新页面
         </li>
         <li v-if="route.name !== 'welcome'" @click="closePage">
-          <CircleClose
-            style="width: 1em; height: 1em; margin-right: 2px"
-          ></CircleClose>
+          <CircleClose style="width: 1em; height: 1em; margin-right: 2px"></CircleClose>
           关闭当前
         </li>
         <li v-if="visitedViews.arr.length >= 2" @click="closeOtherPage">
-          <CircleClose
-            style="width: 1em; height: 1em; margin-right: 2px"
-          ></CircleClose>
+          <CircleClose style="width: 1em; height: 1em; margin-right: 2px"></CircleClose>
           关闭其他
         </li>
       </ul>
       <div class="fixed_div">
         <div class="tags-view-wrapper">
           <el-scrollbar ref="scrollbarRef">
-            <router-link
-              v-for="tag in visitedViews.arr"
-              :key="tag.name"
-              :to="{ path: tag.name }"
-              tag="span"
-              :class="[
-                route.fullPath === tag.name ? 'active' : '',
-                'tags-view-item',
-              ]"
-              @contextmenu.prevent="showMenu($event)"
-            >
+            <router-link v-for="tag in visitedViews.arr" :key="tag.name" :to="{ path: tag.name }" tag="span" :class="[
+              route.fullPath === tag.name ? 'active' : '',
+              'tags-view-item',
+            ]" @contextmenu.prevent="showMenu($event)">
               {{ tag.title }}
-              <CircleClose
-                v-show="tag.name !== '/welcome'"
-                style="width: 1em; height: 1em"
-                class="close"
-                @click.prevent.stop="closeSelectedTag(tag.name)"
-              ></CircleClose>
+              <CircleClose v-show="tag.name !== '/welcome'" style="width: 1em; height: 1em" class="close"
+                @click.prevent.stop="closeSelectedTag(tag.name)"></CircleClose>
             </router-link>
           </el-scrollbar>
         </div>
@@ -71,21 +46,11 @@
       <div class="right_quit">
         <el-tooltip effect="dark" content="退出登录" placement="left-start">
           <div @click="quit">
-            <svg
-              t="1678947494218"
-              class="icon"
-              viewBox="0 0 1024 1024"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              p-id="2767"
-              width="30"
-              height="30"
-            >
+            <svg t="1678947494218" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+              p-id="2767" width="30" height="30">
               <path
                 d="M887.3 492.3L759.8 333c-6.2-7.7-15.4-12-24.9-12-3.5 0-7.1 0.6-10.5 1.8-12.8 4.5-21.3 16.6-21.3 30.1v95.6h-255c-35.2 0-63.7 28.5-63.7 63.7s28.5 63.7 63.7 63.7H703v95.6c0 13.5 8.6 25.6 21.3 30.1 3.5 1.2 7 1.8 10.5 1.8 9.5 0 18.7-4.3 24.9-12L887.2 532c9.4-11.5 9.4-28 0.1-39.7zM575.5 767.2H320.1c-34.9 0-63.3-28.5-63.3-63.7V321v-0.5c0-34.9 28.5-63.2 63.8-63.2h254.9c35.2 0 63.8-28.5 63.8-63.7s-28.5-63.7-63.8-63.7H256.8c-70.4 0-127.5 57.1-127.5 127.5v510c0 70.4 57.1 127.5 127.5 127.5h318.7c35.2 0 63.8-28.5 63.8-63.7 0-35.4-28.6-64-63.8-64z m0 0"
-                fill="#666666"
-                p-id="2768"
-              ></path>
+                fill="#666666" p-id="2768"></path>
             </svg>
           </div>
         </el-tooltip>
@@ -351,6 +316,10 @@ onMounted(() => {
   width: calc(100vw - 330px);
   height: 100%;
   transition: all 0.7s cubic-bezier(0.58, 0.09, 0.33, 0.91);
+  // 掘金背景
+  background-image: linear-gradient(90deg, rgba(60, 10, 30, .04) 3%, transparent 0), linear-gradient(1turn, rgba(60, 10, 30, .04) 3%, transparent 0);
+  background-size: 20px 20px;
+  background-position: 50%;
 }
 
 /* 进入 */
