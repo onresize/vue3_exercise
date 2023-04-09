@@ -171,8 +171,12 @@ export const AdminRoutes = [
   {
     path: "/threeJS_vue",
     name: "threeJS_vue",
-    // 做缓存
     component: () => import("@cp/threeJS_vue/index.vue"),
+  },
+  {
+    path: "/games",
+    name: "games",
+    component: () => import("@cp/games/index.vue"),
   },
   {
     path: "/animation3",

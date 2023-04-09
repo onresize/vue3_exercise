@@ -32,7 +32,7 @@
       <div class="fixed_div">
         <div class="tags-view-wrapper">
           <el-scrollbar ref="scrollbarRef">
-            <router-link v-for="tag in visitedViews.arr" :key="tag.name" :to="{ path: tag.name }" tag="span" :class="[
+            <router-link v-for="tag in visitedViews.arr" :key="tag.name" :to="{ path: tag.name }" :class="[
               route.fullPath === tag.name ? 'active' : '',
               'tags-view-item',
             ]" @contextmenu.prevent="showMenu($event)">
@@ -349,7 +349,7 @@ onMounted(() => {
 
 .home_container_main {
   height: 100vh;
-  overflow-y: scroll;
+  overflow-y: auto;
   flex: 1;
 }
 

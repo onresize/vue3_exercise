@@ -5,12 +5,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import router from "@/router";
 import pinia from "@/store/store";
 import { useMainStore } from "@/store/pinia";
-import { AdminRoutes, OriginRoutes } from "@/router/AuthRoutes";
 
 const PiniaStore = useMainStore(pinia);
 
@@ -18,4 +17,20 @@ const route = useRoute();
 const key = computed(() =>
   route.name ? String(route.name) + new Date() : String(route.path) + new Date()
 );
+onMounted(() => {
+  beforeRefreshClose();
+});
+
+/** 在刷新和关闭之前询问 **/
+const beforeRefreshClose = () => {
+  window.onbeforeunload = function (e) {
+    if (route.path) {
+      e = e || window.event;
+      // Chrome, Safari, Firefox 4+, Opera 12+ , IE 9+
+      return 1; // 不能自定义关闭提示
+    } else {
+      window.onbeforeunload = null;
+    }
+  };
+};
 </script>
