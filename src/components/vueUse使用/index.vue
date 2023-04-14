@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>vueUse基本使用 安装：npm i @vueuse/core</h2>
+    <h2>vueUse基本使用（vue hooks库） 安装：npm i @vueuse/core</h2>
     <el-link href="https://vueuse.org/" target="_blank"
       >官网：https://vueuse.org/</el-link
     >

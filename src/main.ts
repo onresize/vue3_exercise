@@ -11,6 +11,7 @@ import "@less/global.less";
 
 import "./permission";
 
+
 // 胶囊版本号
 console.log(
   `%cvue:%c${"^3.2.6"}`,
@@ -39,6 +40,10 @@ console.log(
 
 const app = createApp(App);
 // app.config.globalProperties.$bus = mitt()
+
+// 全局注册SvgIcon组件
+import SvgIcon from '@/myCom/SvgIcon/index.vue'
+app.component('svg-icon', SvgIcon)
 
 // 引入自定义指令
 import directive from "./directiveJs.ts";

@@ -11,7 +11,7 @@ import Child from "./child.vue";
 const ChildRef = ref();
 
 onMounted(() => {
-  console.log("父组件拿到私有数据privateCom2：", ChildRef.value.privateCom2);
+  console.log("父组件拿到私有数据privateCom2（此时拿不到）：", ChildRef.value.privateCom2);
   console.log("父组件拿到公有数据privateCom1：", ChildRef.value.privateCom1);
 });
 </script>

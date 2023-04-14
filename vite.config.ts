@@ -12,6 +12,9 @@ import pkg from "./package.json";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import VueI18n from "@intlify/vite-plugin-vue-i18n";
 
+// SvgIcon插件
+import { svgBuilder } from './src/plugins/svgBuilder';
+
 const resolve = (dir: string): string => path.resolve(__dirname, dir);
 
 export default defineConfig(({ mode }) => {
@@ -85,10 +88,11 @@ export default defineConfig(({ mode }) => {
       vue({
         refTransform: true, // 开启ref转换、使用$ref响应式定义、不需要.value
       }),
+      svgBuilder('./src/assets/svg/'), // 导入所有svg
       vueJsx(),
       // https://github.com/intlify/vite-plugin-vue-i18n
       VueI18n({
-        include: [resolve(__dirname, "@/src/locales/**")],
+        include: [resolve(__dirname, "./src/locales/**")],
       }),
       VueSetupExtend(), // * name 可以写在 script 标签上
       // 自动引入element

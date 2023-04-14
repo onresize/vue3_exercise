@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="box">
+    <h2>我是子组件</h2>
     <p>私有数据：{{ privateCom2 }}</p>
     <p>公有数据：{{ privateCom1 }}</p>
   </div>
@@ -38,3 +39,10 @@ export default {
   },
 };
 </!--> -->
+
+<style scoped lang="less">
+.box {
+  border: 3px solid red;
+  padding: 20px;
+}
+</style>
