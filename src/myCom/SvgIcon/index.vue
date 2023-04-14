@@ -14,7 +14,7 @@
 import { computed } from 'vue'
 
 const props = defineProps(["name", "className", "color"])
-console.log('当前props：', props)
+// console.log('当前props：', props)
 const iconName = computed(() => `#icon-${props.name}`)
 const svgClass = computed(() => {
   if (props.className) {

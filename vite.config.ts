@@ -13,7 +13,7 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 import VueI18n from "@intlify/vite-plugin-vue-i18n";
 
 // SvgIcon插件
-import { svgBuilder } from './src/plugins/svgBuilder';
+import { svgBuilder } from "./src/plugins/svgBuilder";
 
 const resolve = (dir: string): string => path.resolve(__dirname, dir);
 
@@ -25,10 +25,10 @@ export default defineConfig(({ mode }) => {
     server: {
       port: 3010,
       proxy: {
-        '/BaseApi': {
+        "/BaseApi": {
           target: env.VITE_APP_BASE_API,
           changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/BaseApi/, ''),
+          rewrite: (path) => path.replace(/^\/BaseApi/, ""),
         },
       },
     },
@@ -88,7 +88,7 @@ export default defineConfig(({ mode }) => {
       vue({
         refTransform: true, // 开启ref转换、使用$ref响应式定义、不需要.value
       }),
-      svgBuilder('./src/assets/svg/'), // 导入所有svg
+      svgBuilder("./src/assets/svg/"), // 导入所有svg
       vueJsx(),
       // https://github.com/intlify/vite-plugin-vue-i18n
       VueI18n({
@@ -127,20 +127,15 @@ export default defineConfig(({ mode }) => {
         `/**\n * name: ${pkg.name}\n * version: v${pkg.version}\n * description: v${pkg.description}\n * author: ${pkg.author}\n */`
       ),
     ],
-    // * 打包去除 console.log && debugger
-    esbuild: {
-      pure: env.VITE_DROP_CONSOLE ? ["console.log", "debugger"] : [],
-    },
     build: {
-      outDir: "myDist",
-      // minify: "esbuild",
-      // esbuild 打包更快，但是不能去除 console.log，terser打包慢，但能去除 console.log
+      outDir: "dist",
       // 报错安装: npm i terser --legacy--peer-deps
       minify: "terser",
       terserOptions: {
         compress: {
-          drop_console: env.VITE_DROP_CONSOLE,
-          drop_debugger: env.VITE_DROP_CONSOLE,
+          //XXX 下面选项更改true 或 false无效果、待研究
+          drop_console: env.VITE_DROP_CONSOLE, // 打包去除console
+          drop_debugger: env.VITE_DROP_CONSOLE, // 打包去除debugger
         },
       },
       chunkSizeWarningLimit: 1500,
@@ -155,4 +150,3 @@ export default defineConfig(({ mode }) => {
     },
   };
 });
-

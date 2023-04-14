@@ -13,6 +13,12 @@ import { useMainStore } from "@/store/pinia";
 
 const PiniaStore = useMainStore(pinia);
 
+console.log("APP----------------------------");
+// 测试线上和本地sourcemap
+setTimeout(() => {
+  console.log("这是一个测试错误:", aaa2);
+}, 6000);
+
 const route = useRoute();
 const key = computed(() =>
   route.name ? String(route.name) + new Date() : String(route.path) + new Date()

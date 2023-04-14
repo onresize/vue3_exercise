@@ -7,7 +7,7 @@
   "private": true,
   "scripts": {
     "dev": "vite --host",
-    "build": "vite build",
+    "build": "vite build --mode production",
     "build:pro": "vue-tsc --noEmit && vite build --mode production",
     "preview": "vite preview",
     "lint": "eslint src --fix --ext .js,.ts",
@@ -28,6 +28,7 @@
     "pinia": "^2.0.33",
     "sm-crypto": "^0.3.11",
     "socket.io": "^4.5.1",
+    "terser": "^5.16.9",
     "three": "^0.151.3",
     "v-scale-screen": "^2.0.12",
     "vue": "^3.2.6",
