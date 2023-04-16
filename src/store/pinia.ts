@@ -11,6 +11,7 @@ export const useMainStore = defineStore("piniaStore", {
     shoesCount: 18,
     ActiveBread: [{ name: "/welcome", title: "欢迎页" }], // 顶部激活页面
     crossText: "",
+    iconList: [], // 缓存所有svg
   }),
   // 声明getters
   getters: {
@@ -27,6 +28,9 @@ export const useMainStore = defineStore("piniaStore", {
     addCount(num) {
       // console.log("pinia方法addCount");
       this.shoesCount += num;
+    },
+    changeSvgList(list) {
+      this.iconList = list;
     },
     changeState(state) {
       this.registerRouteFresh = state;

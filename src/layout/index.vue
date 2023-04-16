@@ -17,7 +17,7 @@
                 class="info_style"
                 @click="scrollBy(item.path)"
               >
-                <svg-icon name="bug" />
+                <svg-icon :name="item.ICON" />
                 {{ item.path.substr(1) }}页
               </router-link>
             </div>
@@ -125,6 +125,7 @@ let { AuthRoutes } = storeToRefs(PiniaStore); // 不丢失响应式
 // const key = computed(() =>
 //   route.name ? String(route.name) + new Date() : String(route.path) + new Date()
 // );
+
 let visitedViews = reactive({
   arr: [{ name: "/welcome", title: "欢迎页" }],
 });
@@ -133,6 +134,14 @@ let RouteList = reactive({
   routes: [],
 });
 
+const randomSvg = () => {
+  return PiniaStore.iconList.sort(() => Math.random() - Math.random()).at(0);
+};
+
+// 迭代塞入svg
+AuthRoutes.value.forEach((v) => {
+  v.ICON = randomSvg() || "bug";
+});
 RouteList.routes = AuthRoutes;
 
 if (

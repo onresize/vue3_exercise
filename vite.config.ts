@@ -31,7 +31,7 @@ export default defineConfig(({ mode }) => {
           rewrite: (path) => path.replace(/^\/BaseApi/, ""),
         },
       },
-    },
+    }, 
     resolve: {
       alias: {
         // 兼容webpack的习惯
@@ -88,7 +88,7 @@ export default defineConfig(({ mode }) => {
       vue({
         refTransform: true, // 开启ref转换、使用$ref响应式定义、不需要.value
       }),
-      svgBuilder("./src/assets/svg/"), // 导入所有svg
+      svgBuilder("./src/assets/icons/svg/"), // 导入所有svg
       vueJsx(),
       // https://github.com/intlify/vite-plugin-vue-i18n
       VueI18n({

@@ -40,6 +40,7 @@ console.log(
 const app = createApp(App);
 // app.config.globalProperties.$bus = mitt()
 
+import "./assets/icons/index"; // 引入所有svg
 // 全局注册SvgIcon组件
 import SvgIcon from "@/myCom/SvgIcon/index.vue";
 app.component("svg-icon", SvgIcon);
