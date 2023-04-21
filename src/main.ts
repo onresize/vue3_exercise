@@ -70,6 +70,9 @@ app.use(store);
 
 import pinia from "@/store/store";
 
+// 应用层provide
+app.provide('provideKey', '则是一个main.ts定义的一个字符串')
+
 // 全局注册图标
 import * as Icons from "@element-plus/icons-vue";
 Object.keys(Icons).forEach((key) => {

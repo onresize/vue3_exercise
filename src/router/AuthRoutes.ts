@@ -184,6 +184,11 @@ export const AdminRoutes = [
     component: () => import("@cp/全局封装防抖节流测试/index.vue"),
   },
   {
+    path: "/provide_inject",
+    name: "provide_inject",
+    component: () => import("@cp/依赖注入/index.vue"),
+  },
+  {
     path: "/animation3",
     component: () => import("@cp/动画/index3.vue"),
     children: [
