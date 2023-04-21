@@ -1,9 +1,9 @@
 <template>
   <div>
     <h2>演示各种GamesDemo</h2>
-    <!-- <el-card class="flex">
+    <el-card class="flex">
       <Rocket />
-    </el-card> -->
+    </el-card>
 
     <el-card class="flex">
       <Ball />
