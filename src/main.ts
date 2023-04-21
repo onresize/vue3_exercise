@@ -116,6 +116,10 @@ console.log("版本号：", version);
 //   }
 // }
 
+// 引入全局工具函数
+import utilsFunc from '@/utils/index'
+app.use(utilsFunc)
+
 // errorHandler
 import errorHandler from "@/utils/errorHandler.js";
 app.config.errorHandler = errorHandler;

@@ -179,6 +179,11 @@ export const AdminRoutes = [
     component: () => import("@cp/games/index.vue"),
   },
   {
+    path: "/debounce_throttle",
+    name: "debounce_throttle",
+    component: () => import("@cp/全局封装防抖节流测试/index.vue"),
+  },
+  {
     path: "/animation3",
     component: () => import("@cp/动画/index3.vue"),
     children: [

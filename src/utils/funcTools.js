@@ -22,3 +22,56 @@ export const setStorage = (key, value) => {
 export const getStorage = (key) => {
   return JSON.parse(localStorage.getItem(key));
 };
+
+
+// 防抖
+let timeout = null
+export function Debounce(func, delay, immediate = false) {
+  if (timeout !== null) clearTimeout(timeout)
+  // 立即执行，此类情况一般用不到
+  if (immediate) {
+    const callNow = !timeout
+    timeout = setTimeout(() => {
+      timeout = null
+    }, delay)
+    if (callNow) typeof func === 'function' && func()
+  } else {
+    // 设置定时器，当最后一次操作后，timeout不会再被清除，所以在延时delay毫秒后执行func回调方法
+    timeout = setTimeout(() => {
+      typeof func === 'function' && func()
+    }, delay)
+  }
+}
+
+
+/**
+ * 节流原理：在一定时间内，只能触发一次
+ * @param {Function} func 要执行的回调函数
+ * @param {Number} wait 延时的时间
+ * @param {Boolean} immediate 是否立即执行
+ * @return null
+ */
+let timer
+let flag
+
+export function Throttle(func, wait = 500, immediate = true) {
+  if (immediate) {
+    if (!flag) {
+      flag = true
+      // 如果是立即执行，则在wait毫秒内开始时执行
+      typeof func === 'function' && func()
+      timer = setTimeout(() => {
+        flag = false
+      }, wait)
+    }
+  } else if (!flag) {
+    flag = true
+    // 如果是非立即执行，则在wait毫秒内的结束处执行
+    timer = setTimeout(() => {
+      flag = false
+      typeof func === 'function' && func()
+    }, wait)
+  }
+}
+
+
