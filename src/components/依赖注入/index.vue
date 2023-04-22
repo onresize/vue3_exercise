@@ -30,5 +30,12 @@ provide('fatherObjState', { name, age, changeName })
 <style scoped lang="less">
 .father_box {
   margin-top: 30px;
+  width: 300px;
+  height: 200px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 3px solid skyblue;
+  display: grid;
+  place-items: center;
 }
 </style>

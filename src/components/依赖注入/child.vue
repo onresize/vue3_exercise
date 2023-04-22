@@ -22,12 +22,12 @@ const { name, age, changeName } = inject("fatherObjState")
 
 <style scoped lang="less">
 .child_box {
-  margin-top: 10px;
   width: 300px;
-  height: 100px;
+  height: 100%;
   border-radius: 10px;
   border: 3px solid red;
   display: grid;
   place-items: center;
+  box-sizing: border-box;
 }
 </style>
