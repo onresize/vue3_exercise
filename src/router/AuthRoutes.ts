@@ -165,7 +165,7 @@ export const AdminRoutes = [
   {
     path: "/onlyId",
     name: "onlyId",
-    // 做缓存
+    // 该页面做了缓存
     component: () => import("@cp/唯一id/index.vue"),
   },
   {

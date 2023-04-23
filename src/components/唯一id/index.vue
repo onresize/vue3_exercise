@@ -70,7 +70,7 @@ let r = setInterval(() => {
   }
 }, 1000);
 
-// 写多个if判断时、if内部有定时器、return放定时器内外的区别
+// 写多个if判断时、if内部有定时器、return放定时器内外的区别、return放定时器外部符合预期
 onMounted(() => {
   console.log("执行onMounted------------");
   for (let i = 0; i < obj.arr.length; i++) {

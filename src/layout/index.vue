@@ -96,7 +96,7 @@
             </div>
           </el-tooltip>
         </div>
-        <!--XXX 设置跨路由的动画、所有的router-view加上key只会导致动画失效 -->
+        <!--XXX 设置跨路由的动画、所有的router-view加上key值会导致动画失效 -->
         <router-view v-slot="{ Component }">
           <transition name="slide-fade">
             <keep-alive include="onlyId">
