@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="box">
     <h2>
       JSON.stringify妙用
       <el-link
@@ -117,6 +117,9 @@ console.log(JSON.stringify(json1));
 </script>
 
 <style scoped>
+.box {
+  overflow-y: scroll;
+}
 .card {
   width: fit-content;
   /* aspect-ratio: 1/0.2; */

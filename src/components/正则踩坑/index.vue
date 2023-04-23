@@ -110,6 +110,7 @@ console.log("正则转化后的str2----------", code(str2));
 
 <style scoped lang="less">
 .reg_box {
+  overflow-y: scroll;
   margin-bottom: 15vh;
 }
 .noSelect {

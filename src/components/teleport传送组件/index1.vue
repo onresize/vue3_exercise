@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <el-card style="overflow-y: scroll;">
     <h2>teleport传送门实现滚动小窗口播放器同状态切换video播放</h2>
     <h3 style="color: red">
       注意： 这里teleport的 to 属性在 index.html中的标签下才有效果
@@ -13,7 +13,7 @@
     </h2>
     <!-- 被监听的大视频窗口 -->
     <div class="videoContainer" id="videoContainer">
-      <!-- 传送门到夫级 -->
+      <!-- 传送门到父级 -->
       <teleport to=".conSmallVideo" :disabled="isModel">
         <div id="msId"></div>
       </teleport>
@@ -21,7 +21,7 @@
 
     <!-- 模拟滚动 -->
     <div style="height: 2000px"></div>
-  </div>
+  </el-card>
 </template>
 
 <script setup lang="ts">

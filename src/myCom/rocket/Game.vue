@@ -78,6 +78,7 @@ function resetGame() {
   margin-top: 20px;
   display: flex;
   align-items: center;
+  user-select: none;
   button {
     width: 100px;
     height: 36px;

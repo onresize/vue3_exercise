@@ -9,8 +9,7 @@
 <script setup>
 import { ref, reactive } from "vue";
 
-const imgList = reactive(
-  [
+const imgList = reactive([
   {
     url: "https://img0.baidu.com/it/u=1346293879,1216188986&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500",
   },
@@ -47,10 +46,12 @@ const imgList = reactive(
   {
     url: "https://img0.baidu.com/it/u=1037755496,1126803478&fm=253&fmt=auto&app=138&f=JPEG?w=400&h=710",
   },
-]
-);
+]);
 </script>
 
 <style scoped lang="less">
-
+.box {
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
 </style>

@@ -1,17 +1,18 @@
 <template>
-  <h2>唯一id两种形式</h2>
-  <mark>1.第三方uuid模块 import { v4 as uuidv4 } from 'uuid'</mark>
-  <br />
-  <br />
-  <mark>2.系统内置加密模块、直接使用 console.log(crypto.randomUUID())</mark>
-  <h1>
-    <!-- XXX切换页面数字状态仍在累加 -->
-    使用keepAlive对此组件做了缓存默认执行onActivated、onDeactivated周期、验证组件是否缓存：{{
-      tim
-    }}
-  </h1>
-  <h3>PS：缓存使用过多消耗内存</h3>
-  <pre>
+  <div class="box">
+    <h2>唯一id两种形式</h2>
+    <mark>1.第三方uuid模块 import { v4 as uuidv4 } from 'uuid'</mark>
+    <br />
+    <br />
+    <mark>2.系统内置加密模块、直接使用 console.log(crypto.randomUUID())</mark>
+    <h1>
+      <!-- XXX切换页面数字状态仍在累加 -->
+      使用keepAlive对此组件做了缓存默认执行onActivated、onDeactivated周期、验证组件是否缓存：{{
+        tim
+      }}
+    </h1>
+    <h3>PS：缓存使用过多消耗内存</h3>
+    <pre>
     注意：keep-alive中的include匹配name的组件在vue3中、没有name
     <mark>方式一：是通过写两个script标签来解决，一个使用setup，一个不使用</mark>
     &lt;script>
@@ -38,6 +39,7 @@
     &lt;script name='testAddName'>&lt;/script>
     &lt;script setup name='testAddName'>&lt;/script>
   </pre>
+  </div>
 </template>
 
 <!-- <script>
@@ -100,6 +102,9 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+.box {
+  overflow-y: scroll;
+}
 pre {
   border: 2px solid red;
   font-size: 18px;

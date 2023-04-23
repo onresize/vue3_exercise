@@ -35,8 +35,7 @@ initMap();
 
 <style lang="less">
 #MapContainer {
-  height: calc(100% - 60px);
-  margin-top: 50px;
+  height: calc(100%);
 }
 #MapContainer .BMap_cpyCtrl {
   display: none;

@@ -99,6 +99,9 @@
         <!--XXX 设置跨路由的动画、所有的router-view加上key值会导致动画失效 -->
         <router-view v-slot="{ Component }">
           <transition name="slide-fade">
+            <!-- 多个用逗号分隔字符串   include="home,about"-->
+            <!-- 正则表达式 (使用 `v-bind`  :include="/home|about/") -->
+            <!-- 数组 (使用 `v-bind`  :include="['home', 'about']") -->
             <keep-alive include="onlyId">
               <component class="child-view" :is="Component" />
             </keep-alive>
@@ -404,8 +407,10 @@ onMounted(() => {
 }
 
 .home_container_main {
-  height: 100vh;
-  overflow-y: auto;
+  height: calc(100vh - 38px);
+  margin-top: 36px;
+  overflow-y: hidden;
+  overflow-x: hidden;
   flex: 1;
 }
 

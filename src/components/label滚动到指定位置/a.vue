@@ -30,6 +30,7 @@ import { ref, reactive } from 'vue'
     height: 40px;
     border: 3px solid red;
     overflow-y: hidden;
+    overflow-x: hidden;
     scroll-behavior: smooth;
     display: flex;
     flex-wrap: nowrap;
