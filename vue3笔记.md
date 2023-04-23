@@ -3,16 +3,15 @@
 // 应用场景：从reactive或ref中得到原始数据、提升性能
 // 做一些不想被监听的事情(提升性能)
 
+# markRaw()
+// 这里设置markRaw、为了让组件不被代理、节约性能
+
 # unref() 
 // 应用场景：解决ref和reactive取值问题、直接用unref()包裹ref的变量就可以直接使用、不需要再.value、
 //他是 (val = isRef(val) ? val.value : val) 的语法糖
 
 # toRefs()
 // 应用场景：将响应式对象转换成普通对象、普通对象才能被解构、在一个组合逻辑函数中返回响应式对象、使用toRefs()结解构、并且不会丢失响应式
-
-# useAttrs()
-
-# useSlots()
 
 # toRef()
 // 应用场景：转换响应式对象中的某个属性为 单独响应式数据、并且转换后的值和之前是关联的
@@ -28,6 +27,10 @@ setup() {
     }
     return { name, updateName }
 }
+
+# useAttrs()
+
+# useSlots()
 ```
 
 **vite打包异常参考：**[csdn](https://blog.csdn.net/qq_43413883/article/details/124198747)

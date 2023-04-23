@@ -14,8 +14,7 @@
 </template>
 
 <script setup lang="ts">
-// defineProps defineEmits defineExpose withDefaults onMounted onUnmounted
-import { ref, reactive, computed, watch, watchEffect, markRaw } from "vue";
+import { ref, reactive, markRaw } from "vue";
 import A from "./A.vue";
 import B from "./B.vue";
 
