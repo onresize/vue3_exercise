@@ -31,6 +31,17 @@ setup() {
 # useAttrs()
 
 # useSlots()
+
+# h()函数、不写template渲染dom（适合v3写js文件封装组件、或写单独jsx文件）
+优点：更简单的组件封装、动态渲染
+CSDN：https://blog.csdn.net/NGUP_LEE/article/details/128207449
+官方：https://cn.vuejs.org/guide/extras/render-function.html
+const vnode = h('div', { id: 'foo' }, [])
+
+vnode.type // 'div'
+vnode.props // { id: 'foo' }
+vnode.children // []
+vnode.key // null
 ```
 
 **vite打包异常参考：**[csdn](https://blog.csdn.net/qq_43413883/article/details/124198747)
