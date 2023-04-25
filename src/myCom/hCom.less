@@ -1,0 +1,45 @@
+.textBox {
+  width: 300px;
+  height: 300px;
+  border: 5px solid red;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-content: space-between;
+  .slotTop {
+    border: 5px solid green;
+    width: 100%;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+    box-sizing: border-box;
+  }
+  .defaultBox {
+    border: 5px solid green;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+  }
+  .slotBottom {
+    border: 5px solid green;
+    width: 100%;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+    box-sizing: border-box;
+  }
+}
+
+.picBox {
+  user-select: none;
+  cursor: pointer;
+  transition: transform 0.8s ease-out;
+  &:hover {
+    transform: rotate(360deg);
+  }
+}

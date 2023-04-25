@@ -189,6 +189,11 @@ export const AdminRoutes = [
     component: () => import("@cp/依赖注入/index.vue"),
   },
   {
+    path: "/hFun",
+    name: "hFun",
+    component: () => import("@cp/H函数封装组件/index.vue"),
+  },
+  {
     path: "/animation3",
     component: () => import("@cp/动画/index3.vue"),
     children: [

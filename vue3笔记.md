@@ -34,7 +34,9 @@ setup() {
 
 # h()函数、不写template渲染dom（适合v3写js文件封装组件、或写单独jsx文件）
 优点：更简单的组件封装、动态渲染
-CSDN：https://blog.csdn.net/NGUP_LEE/article/details/128207449
+CSDN: https://blog.csdn.net/NGUP_LEE/article/details/128207449
+	  https://www.zhangshengrong.com/p/ArXGZr44Nj/
+	  https://blog.csdn.net/weixin_45291937/article/details/129258862
 官方：https://cn.vuejs.org/guide/extras/render-function.html
 const vnode = h('div', { id: 'foo' }, [])
 
