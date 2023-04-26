@@ -194,6 +194,11 @@ export const AdminRoutes = [
     component: () => import("@cp/H函数封装组件/index.vue"),
   },
   {
+    path: "/css_vBind",
+    name: "css_vBind",
+    component: () => import("@cp/css_scss_less_vBind使用/index.vue"),
+  },
+  {
     path: "/animation3",
     component: () => import("@cp/动画/index3.vue"),
     children: [
