@@ -1,10 +1,10 @@
 <template>
   <div class="demo">
     <div class="box">
-      <div class="list"><input id="oneID" readonly />1</div>
-      <div class="list bg-blue"><input id="twoID" readonly />2</div>
-      <div class="list bg-olive"><input id="threeID" readonly />3</div>
-      <div class="list bg-orange"><input id="fourID" readonly />4</div>
+      <div class="list"><input id="oneID" readonly />11</div>
+      <div class="list bg-blue"><input id="twoID" readonly />22</div>
+      <div class="list bg-olive"><input id="threeID" readonly />33</div>
+      <div class="list bg-orange"><input id="fourID" readonly />44</div>
     </div>
     <div>
       <label class="click" for="oneID">1</label>
@@ -17,7 +17,7 @@
  
 <script setup>
 // defineProps defineEmits defineExpose withDefaults
-import { ref, reactive } from 'vue'
+import { ref, reactive } from "vue";
 </script>
  
 <style scoped>

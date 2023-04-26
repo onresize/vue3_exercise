@@ -1,10 +1,10 @@
 <template>
   <div class="demo">
     <div class="box">
-      <div class="list green" id="one">1</div>
-      <div class="list yellow" id="two">2</div>
-      <div class="list red" id="three">3</div>
-      <div class="list pink" id="four">4</div>
+      <div class="list green" id="one">11</div>
+      <div class="list yellow" id="two">22</div>
+      <div class="list red" id="three">33</div>
+      <div class="list pink" id="four">44</div>
     </div>
 
     <div class="a_box">
