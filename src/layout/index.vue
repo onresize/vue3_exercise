@@ -15,7 +15,7 @@
                 :to="item.path"
                 active-class="bb"
                 class="info_style"
-                @click="scrollBy(item.path)"
+                @click="scrollBy(item)"
               >
                 <svg-icon :name="item.ICON" />
                 {{ item.path.substr(1) }}页
@@ -55,20 +55,20 @@
             <el-scrollbar ref="scrollbarRef">
               <router-link
                 v-for="tag in visitedViews.arr"
-                :key="tag.name"
-                :to="{ path: tag.name }"
+                :key="tag.path"
+                :to="{ path: tag.path }"
                 :class="[
-                  route.fullPath === tag.name ? 'active' : '',
+                  route.fullPath === tag.path ? 'active' : '',
                   'tags-view-item',
                 ]"
                 @contextmenu.prevent="showMenu($event)"
               >
-                {{ tag.title }}
+                {{ tag.path?.substr(1) }}
                 <CircleClose
-                  v-show="tag.name !== '/welcome'"
+                  v-show="tag.path !== '/welcome'"
                   style="width: 1em; height: 1em"
                   class="close"
-                  @click.prevent.stop="closeSelectedTag(tag.name)"
+                  @click.prevent.stop="closeSelectedTag(tag.path)"
                 ></CircleClose>
               </router-link>
             </el-scrollbar>
@@ -130,11 +130,12 @@ let { AuthRoutes } = storeToRefs(PiniaStore); // 不丢失响应式
 // );
 
 let visitedViews = reactive({
-  arr: [{ name: "/welcome", title: "欢迎页" }],
+  arr: [{ path: "/welcome", title: "欢迎页" }],
 });
 
 let RouteList = reactive({
   routes: [],
+  MapArr: [],
 });
 
 const randomSvg = () => {
@@ -155,10 +156,10 @@ if (
 }
 onBeforeRouteUpdate((to) => {
   // console.log("路由改变", to);
-  let r = visitedViews.arr.some((v) => v.name === to.path);
+  let r = visitedViews.arr.some((v) => v.path === to.path);
   if (r) return;
   visitedViews.arr.push({
-    name: to.path,
+    path: to.path,
     title: to.path.substr(1),
   });
   setStorage("ActiveBread", visitedViews.arr);
@@ -169,17 +170,33 @@ let left = ref(0);
 let top = ref(0);
 let PathName = ref("");
 
-const scrollBy = (name) => {
+const scrollBy = (item) => {
   let pIndex = null;
-  PiniaStore.ActiveBread.find((v, i) => {
-    if (v.name == name) {
+  let activeRouterArr = PiniaStore.ActiveBread;
+  activeRouterArr.find((v, i) => {
+    if (v.path == item.path) {
       pIndex = i;
     }
   });
+
+  // 当前面包屑数组没有包含点击的路由、就添加到面包屑数组中
+  RouteList.MapArr = activeRouterArr.map((v) => v.path);
+
+  if (!RouteList.MapArr.includes(item.path)) {
+    activeRouterArr.push(item);
+    PiniaStore.changeActiveBread(activeRouterArr);
+  }
+  // console.log("当前路由面包屑数组：--------", PiniaStore.ActiveBread, pIndex);
   if (pIndex >= 18) {
-    scrollbarRef.value.setScrollLeft(4000);
+    scrollbarRef.value.scrollTo({
+      left: 4000,
+      behavior: "smooth",
+    });
   } else {
-    scrollbarRef.value.setScrollLeft(0);
+    scrollbarRef.value.scrollTo({
+      left: 0,
+      behavior: "smooth",
+    });
   }
   // console.log("移动顶部滚动条----------------", pIndex);
 };
@@ -202,7 +219,7 @@ const quit = () => {
   loginBroadcast.postMessage("false");
   window.localStorage.clear();
   PiniaStore.changeAuthRoutes([]);
-  PiniaStore.changeActiveBread([{ name: "/welcome", title: "欢迎页" }]);
+  PiniaStore.changeActiveBread([{ path: "/welcome", title: "欢迎页" }]);
   PiniaStore.changeState(true);
 };
 
@@ -231,18 +248,19 @@ const closePage = () => {
 };
 
 const closeOtherPage = () => {
-  let arr = visitedViews.arr.filter((v) => v.name == PathName.value);
+  let arr = visitedViews.arr.filter((v) => v.path == PathName.value);
   PathName.value != "/welcome" &&
-    arr.unshift({ name: "/welcome", title: "欢迎页" });
+    arr.unshift({ path: "/welcome", title: "欢迎页" });
   visitedViews.arr = arr;
   setStorage("ActiveBread", visitedViews.arr);
-  setStorage("ActiveBread", visitedViews.arr);
+  PiniaStore.changeActiveBread(visitedViews.arr);
   Router.push(PathName.value);
 };
 
 const closeSelectedTag = (name) => {
-  visitedViews.arr = visitedViews.arr.filter((v) => v.name !== name);
+  visitedViews.arr = visitedViews.arr.filter((v) => v.path !== name);
   setStorage("ActiveBread", visitedViews.arr);
+  PiniaStore.changeActiveBread(visitedViews.arr);
   Router.push("/welcome");
 };
 

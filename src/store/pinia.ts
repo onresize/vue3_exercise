@@ -9,7 +9,7 @@ export const useMainStore = defineStore("piniaStore", {
     registerRouteFresh: true, // 定义标识，记录路由是否刷新、这个不做持久化操作、否则会导致刷新导航守卫404问题
     AuthRoutes: [], // 左侧路由菜单数据、不做持久化
     shoesCount: 18,
-    ActiveBread: [{ name: "/welcome", title: "欢迎页" }], // 顶部激活页面
+    ActiveBread: [{ path: "/welcome", title: "欢迎页" }], // 顶部激活页面
     crossText: "",
     iconList: [], // 缓存所有svg
   }),
@@ -40,7 +40,7 @@ export const useMainStore = defineStore("piniaStore", {
       // console.log("pinia方法改变左侧菜单数据", res);
     },
     changeActiveBread(res) {
-      // console.log("pinia方法changeActiveBread", res);
+      console.log("pinia方法获取到面包屑数组：", res);
       this.ActiveBread = res;
     },
     changeCrossText(res) {

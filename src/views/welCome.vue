@@ -3,7 +3,7 @@
     <div :class="[isShow ? 'none' : 'text_title']">
       <em> vue3 + vue-router4.0 + vite + element-Plus </em>
     </div>
-    <div :class="['flex', !isShow ? 'infoZIndex' : 'beforeZIndex']">
+    <div :class="['flex', !isShow ? 'infoZIndex' : 'beforeZIndex']" style="overflow-x: hidden;">
       <el-tag v-for="item in objArr" :key="item" class="tag" color="#000">
         <div
           v-for="(val, key) in item"
