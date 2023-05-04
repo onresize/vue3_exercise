@@ -199,6 +199,11 @@ export const AdminRoutes = [
     component: () => import("@cp/css_scss_less_vBind使用/index.vue"),
   },
   {
+    path: "/delete",
+    name: "delete",
+    component: () => import("@cp/delete使用/index.vue"),
+  },
+  {
     path: "/animation3",
     component: () => import("@cp/动画/index3.vue"),
     children: [
