@@ -26,7 +26,7 @@ export const getStorage = (key) => {
 
 // 防抖
 let timeout = null
-export function Debounce(func, delay, immediate = false) {
+export function Debounce(func, delay, event = {}, immediate = false) {
   if (timeout !== null) clearTimeout(timeout)
   // 立即执行，此类情况一般用不到
   if (immediate) {
@@ -34,11 +34,11 @@ export function Debounce(func, delay, immediate = false) {
     timeout = setTimeout(() => {
       timeout = null
     }, delay)
-    if (callNow) typeof func === 'function' && func()
+    if (callNow) typeof func === 'function' && func(event)
   } else {
     // 设置定时器，当最后一次操作后，timeout不会再被清除，所以在延时delay毫秒后执行func回调方法
     timeout = setTimeout(() => {
-      typeof func === 'function' && func()
+      typeof func === 'function' && func(event)
     }, delay)
   }
 }
@@ -54,12 +54,12 @@ export function Debounce(func, delay, immediate = false) {
 let timer
 let flag
 
-export function Throttle(func, wait = 500, immediate = true) {
+export function Throttle(func, wait = 500, event = {}, immediate = true) {
   if (immediate) {
     if (!flag) {
       flag = true
       // 如果是立即执行，则在wait毫秒内开始时执行
-      typeof func === 'function' && func()
+      typeof func === 'function' && func(event)
       timer = setTimeout(() => {
         flag = false
       }, wait)
@@ -69,7 +69,7 @@ export function Throttle(func, wait = 500, immediate = true) {
     // 如果是非立即执行，则在wait毫秒内的结束处执行
     timer = setTimeout(() => {
       flag = false
-      typeof func === 'function' && func()
+      typeof func === 'function' && func(event)
     }, wait)
   }
 }

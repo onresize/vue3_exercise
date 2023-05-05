@@ -147,6 +147,10 @@ export const AdminRoutes = [
     component: () => import("@cp/父子组件更简单的传参/index.vue"),
   },
   {
+    path: "/fa_ch_grandCh",
+    component: () => import("@cp/父子孙组件/index.vue"),
+  },
+  {
     path: "/fatherPrivate",
     component: () => import("@cp/父子组件setup私有数据defineExpose/index.vue"),
   },

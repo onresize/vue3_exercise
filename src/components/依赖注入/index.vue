@@ -1,4 +1,5 @@
 <template>
+  <h2>provide只能向下传递、不能向上传递</h2>
   <div class="father_box">
     <el-button @click="changeName('李四', 30)">父组件-修改-父组件name</el-button>
     <Child></Child>

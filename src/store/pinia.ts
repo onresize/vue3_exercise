@@ -12,6 +12,9 @@ export const useMainStore = defineStore("piniaStore", {
     ActiveBread: [{ path: "/welcome", title: "欢迎页" }], // 顶部激活页面
     crossText: "",
     iconList: [], // 缓存所有svg
+    fatherColor: 'transparent',
+    childColor: 'transparent',
+    grandchildColor: 'transparent',
   }),
   // 声明getters
   getters: {

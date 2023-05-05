@@ -28,7 +28,7 @@ let state = ref({
   border: "3px solid red",
 });
 
-let pWidth = ref("300px");
+let pWidth = ref("120px");
 
 const myBox = () => {
   return [h("div", { class: "myBoxComClass" }, "盒子22")];
@@ -41,7 +41,7 @@ const myBox = () => {
   margin-top: 10px;
   display: flex;
   flex-wrap: wrap;
-  width: 100px;
+  width: v-bind(pWidth);
   height: v-bind("state.height");
 
   border: 5px solid red;
