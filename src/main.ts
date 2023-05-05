@@ -64,6 +64,10 @@ app.use(
   })
 );
 
+// 瀑布流插件
+import {VueMasonryPlugin} from 'vue-masonry';
+app.use(VueMasonryPlugin)
+
 // 使用vueX
 import store from "@/store/index";
 app.use(store);

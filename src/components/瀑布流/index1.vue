@@ -1,28 +1,11 @@
 <template>
-  <div class="box">
-    <h3>基于vue3封装的瀑布流组件、CSS和JS两种模式</h3>
-    <el-link href="https://blog.csdn.net/Dandrose/article/details/130221417">
-      v3参考：
-    </el-link>
-    <el-link href="https://blog.csdn.net/Dandrose/article/details/128197705">
-      v2参考：
-    </el-link>
-    <div style="height: calc(100vh - 200px); overflow-y: auto">
-      <Waterfall
-        :images="imgList"
-        :columnCount="2"
-        :columnGap="30"
-        :width="600"
-        mode="CSS"
-        backgroundColor="#F2F4F8"
-      />
-    </div>
+  <div>
+    <h2>待更新</h2>
   </div>
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from "vue";
-import Waterfall from "@/myCom/waterfall/waterfall.vue";
+import { ref, reactive } from "vue";
 
 const imgList = ref([
   {
@@ -76,9 +59,4 @@ const imgList = ref([
 ]);
 </script>
 
-<style scoped lang="less">
-.box {
-  overflow-y: scroll;
-  overflow-x: hidden;
-}
-</style>
+<style scoped lang="less"></style>

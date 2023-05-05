@@ -7,6 +7,7 @@ import debounce from "./modules/debounce";
 import throttle from "./modules/throttle";
 import longpress from "./modules/longpress";
 import permission from "./modules/permission";
+import lazy from "./modules/lazy";
 
 const directivesList: any = {
   // Custom directives
@@ -18,6 +19,7 @@ const directivesList: any = {
   throttle,
   longpress,
   permission,
+  lazy,
 };
 
 const directives = {

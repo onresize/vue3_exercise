@@ -131,6 +131,10 @@ export const AdminRoutes = [
     component: () => import("@cp/瀑布流/index.vue"),
   },
   {
+    path: "/waterfall1",
+    component: () => import("@cp/瀑布流/index1.vue"),
+  },
+  {
     path: "/loading",
     component: () => import("@cp/loading动画/index.vue"),
   },
@@ -206,6 +210,11 @@ export const AdminRoutes = [
     path: "/delete",
     name: "delete",
     component: () => import("@cp/delete使用/index.vue"),
+  },
+  {
+    path: "/testLazyCom",
+    name: "testLazyCom",
+    component: () => import("@cp/测试封装懒加载组件/index.vue"),
   },
   {
     path: "/animation3",

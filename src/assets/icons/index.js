@@ -18,7 +18,7 @@ modules.forEach((v) => {
   iconList.push(getStr(v))
 })
 
-console.log('本地图片svg：', iconList)
+// console.log('本地图片svg：', iconList)
 
 PiniaStore.changeSvgList(iconList)
 

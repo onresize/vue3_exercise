@@ -35,8 +35,8 @@
     "vue-content-loader": "^2.0.1",
     "vue-fit-next": "^0.3.2",
     "vue-i18n": "^9.1.9",
+    "vue-masonry": "^0.16.0",
     "vue-router": "^4.1.4",
-    "vue-waterfall2": "^1.10.1",
     "vue3-intro-step": "^1.0.5",
     "vuex": "^4.0.2",
     "xgplayer": "^2.31.4"
