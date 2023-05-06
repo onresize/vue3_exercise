@@ -8,7 +8,6 @@
       2. import xxx from 'xxx.jpg'
     </h4>
     <div class="lazy-com-box">
-      <!-- <div class="box" id="targetID" ref="targetID"></div> -->
       <picCard
         class="item-box"
         v-for="(item, i) in pArr"
@@ -138,8 +137,6 @@ let pArr = ref(
   )
 );
 onMounted(() => {
-  //XXX HOOKs方式
-  // const result = useLazyData(document.getElementById("targetID"), findNew);
   // XXX 直接写方式、不用考虑pinia传值
   // const { stop } = useIntersectionObserver(
   //   document.getElementById("targetID"),
@@ -161,7 +158,7 @@ onMounted(() => {
 <style scoped lang="less">
 .lazy-com-box {
   width: 500px;
-  height: 600px;
+  height: 645px;
   border: 3px solid red;
   display: flex;
   flex-wrap: wrap;
