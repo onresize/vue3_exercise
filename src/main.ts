@@ -127,6 +127,7 @@ console.log("版本号：", version);
 import utilsFunc from '@/utils/index'
 app.use(utilsFunc)
 
+
 // 全局捕获错误
 import errorHandler from "@/utils/errorHandler.js";
 app.config.errorHandler = errorHandler;

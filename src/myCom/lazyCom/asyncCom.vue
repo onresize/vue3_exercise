@@ -1,9 +1,20 @@
 <template>
-  <div class="p-card">
+  <div
+    class="p-card"
+    v-loading="imgLoading"
+    element-loading-background="rgba(255, 255, 255, 1)"
+  >
     <div class="t-box">
-      <img :src="bgUrl" alt="#" v-lazy class="image" />
+      <img
+        :src="bgUrl"
+        alt="#"
+        v-lazy
+        class="image"
+        @load="imgLoad"
+        @error="imgError"
+      />
     </div>
-    <h3>img{{ $attrs.pIndex }}</h3>
+    <h3>{{ $attrs.pTitle }}</h3>
   </div>
 </template>
 
@@ -11,10 +22,13 @@
 import { ref, reactive, useAttrs } from "vue";
 
 const attrs = useAttrs();
+const imgLoading = ref(false);
+
 // const getBg = () => {
+//   const img = new Image();
 //   return new Promise((resolve, reject) => {
 //     setTimeout(() => {
-//       resolve(attrs.pic);
+//     resolve(attrs.pic);
 //     }, 2000);
 //   });
 // };
@@ -22,6 +36,15 @@ const attrs = useAttrs();
 
 const getBg = () => attrs.pic;
 let bgUrl = getBg();
+
+const imgError = () => {
+  imgLoading.value = true;
+  console.log("图片加载失败");
+};
+const imgLoad = () => {
+  imgLoading.value = false;
+  console.log("图片加载成功");
+};
 </script>
 
 <style scoped lang="less">
@@ -46,6 +69,10 @@ let bgUrl = getBg();
     height: 200px;
     display: grid;
     place-content: center;
+    .image {
+      width: 100%;
+      height: 100%;
+    }
   }
   h3 {
     width: 100%;

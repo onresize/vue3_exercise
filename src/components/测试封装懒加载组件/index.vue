@@ -7,151 +7,117 @@
       <br />
       2. import xxx from 'xxx.jpg'
     </h4>
-    <div class="lazy-com-box">
+    <div class="lazy-com-box" id="scrollBox">
       <picCard
         class="item-box"
         v-for="(item, i) in pArr"
         :key="i"
-        :pIndex="i"
+        :pTitle="item.title"
         :pic="item.src"
       ></picCard>
     </div>
+    <el-button
+      v-show="isShow"
+      circle
+      title="返回顶部"
+      class="toTop"
+      @click.prevent="toTopClick"
+      >👆</el-button
+    >
   </div>
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, watch } from "vue";
+import { ref, reactive, onMounted, watch, getCurrentInstance } from "vue";
 import { useIntersectionObserver } from "@vueuse/core";
-// import picCard from "@/myCom/lazyCom/index.vue";
-import picCard from "@/myCom/lazyCom/asyncCom.vue";
+import picCard from "@/myCom/lazyCom/index.vue";
+// import picCard from "@/myCom/lazyCom/asyncCom.vue";
 import { findNew } from "./apiArr.js";
 import { useLazyData } from "@/hooks/useLazyData.js";
 
-let isFalse = ref(true);
-let pArr = ref(
-  new Array(
-    {
-      title: "img0",
-      src: new URL("@/assets/lazyPic/1.jpg", import.meta.url).href,
-    },
-    {
-      title: "img1",
-      src: new URL("@/assets/lazyPic/2.jpg", import.meta.url).href,
-    },
-    {
-      title: "img2",
-      src: new URL("@/assets/lazyPic/3.jpg", import.meta.url).href,
-    },
-    {
-      title: "img3",
-      src: new URL("@/assets/lazyPic/4.jpg", import.meta.url).href,
-    },
-    {
-      title: "img4",
-      src: new URL("@/assets/lazyPic/5.jpg", import.meta.url).href,
-    },
-    {
-      title: "img5",
-      src: new URL("@/assets/lazyPic/6.jpg", import.meta.url).href,
-    },
-    {
-      title: "img6",
-      src: new URL("@/assets/lazyPic/7.jpg", import.meta.url).href,
-    },
-    {
-      title: "img7",
-      src: new URL("@/assets/lazyPic/8.jpg", import.meta.url).href,
-    },
-    {
-      title: "img8",
-      src: new URL("@/assets/lazyPic/9.jpg", import.meta.url).href,
-    },
-    {
-      title: "img9",
-      src: new URL("@/assets/lazyPic/10.jpg", import.meta.url).href,
-    },
-    {
-      title: "img10",
-      src: new URL("@/assets/lazyPic/11.jpg", import.meta.url).href,
-    },
-    {
-      title: "img11",
-      src: new URL("@/assets/lazyPic/12.jpg", import.meta.url).href,
-    },
-    {
-      title: "img12",
-      src: new URL("@/assets/lazyPic/13.jpg", import.meta.url).href,
-    },
-    {
-      title: "img13",
-      src: new URL("@/assets/lazyPic/14.jpg", import.meta.url).href,
-    },
-    {
-      title: "img14",
-      src: new URL("@/assets/lazyPic/15.jpg", import.meta.url).href,
-    },
-    {
-      title: "img15",
-      src: new URL("@/assets/lazyPic/16.jpg", import.meta.url).href,
-    },
-    {
-      title: "img16",
-      src: new URL("@/assets/lazyPic/17.jpg", import.meta.url).href,
-    },
-    {
-      title: "img17",
-      src: new URL("@/assets/lazyPic/18.jpg", import.meta.url).href,
-    },
-    {
-      title: "img18",
-      src: new URL("@/assets/lazyPic/19.jpg", import.meta.url).href,
-    },
-    {
-      title: "img19",
-      src: new URL("@/assets/lazyPic/20.jpg", import.meta.url).href,
-    },
-    {
-      title: "img20",
-      src: new URL("@/assets/lazyPic/21.jpg", import.meta.url).href,
-    },
-    {
-      title: "img21",
-      src: new URL("@/assets/lazyPic/22.jpg", import.meta.url).href,
-    },
-    {
-      title: "img22",
-      src: new URL("@/assets/lazyPic/23.jpg", import.meta.url).href,
-    },
-    {
-      title: "img23",
-      src: new URL("@/assets/lazyPic/24.jpg", import.meta.url).href,
-    },
-    {
-      title: "img24",
-      src: new URL("@/assets/lazyPic/25.jpg", import.meta.url).href,
-    },
-    {
-      title: "img25",
-      src: new URL("@/assets/lazyPic/26.jpg", import.meta.url).href,
+// 获取全局定义的方法
+let { appContext, proxy } = getCurrentInstance();
+console.log(appContext.config.globalProperties);
+
+let pArr = ref([
+  {
+    title: "img0",
+    src: new URL("@/assets/lazyPic/1.jpg", import.meta.url).href,
+  },
+  {
+    title: "img1",
+    src: new URL("@/assets/lazyPic/2.jpg", import.meta.url).href,
+  },
+  {
+    title: "img2",
+    src: new URL("@/assets/lazyPic/3.jpg", import.meta.url).href,
+  },
+  {
+    title: "img3",
+    src: new URL("@/assets/lazyPic/4.jpg", import.meta.url).href,
+  },
+  {
+    title: "img4",
+    src: new URL("@/assets/lazyPic/5.jpg", import.meta.url).href,
+  },
+  {
+    title: "img5",
+    src: new URL("@/assets/lazyPic/6.jpg", import.meta.url).href,
+  },
+  {
+    title: "img6",
+    src: new URL("@/assets/lazyPic/7.jpg", import.meta.url).href,
+  },
+  {
+    title: "img7",
+    src: new URL("@/assets/lazyPic/8.jpg", import.meta.url).href,
+  },
+]);
+
+let isShow = ref(false);
+let pageNum = ref(0);
+
+const rolling = async () => {
+  // 滚动过的距离
+  var scrollTop = document.getElementById("scrollBox").scrollTop;
+  // 当前可视区的高度
+  var clientHeight = document.getElementById("scrollBox").clientHeight;
+  // 滚动条的长度
+  var scrollHeight = document.getElementById("scrollBox").scrollHeight;
+
+  // 当滚动过的距离+可视区的高度>=滚动条长度时，就相当于滚动到了底部
+  if (Math.ceil(scrollTop) + Math.ceil(clientHeight) >= scrollHeight) {
+    pageNum.value++;
+    console.log("滚动到底部------------了", pArr.value.length);
+    if (pArr.value.length >= 26) {
+      pageNum.value = 0;
+      appContext.config.globalProperties.$D(messageWarn, 400);
+      return;
     }
-  )
-);
+    const { result: res } = await findNew(pageNum.value);
+    console.log("获取数据:", res);
+    pArr.value = [...pArr.value, ...res];
+  }
+};
+
+const messageWarn = () => {
+  isShow.value = true;
+  ElMessage.warning("暂无更多数据 🎉🎉🎉");
+};
+
+const toTopClick = () => {
+  document.getElementById("scrollBox").scrollTo({
+    left: 0,
+    top: 0,
+    behavior: "smooth",
+  });
+  isShow.value = false;
+};
+
 onMounted(() => {
-  // XXX 直接写方式、不用考虑pinia传值
-  // const { stop } = useIntersectionObserver(
-  //   document.getElementById("targetID"),
-  //   ([{ isIntersecting }], observerElement) => {
-  //     // isIntersecting 布尔值 视口区域内 true 否则就是 false
-  //     isFalse.value = isIntersecting;
-  //     console.log("监听窗口是否在页面", isIntersecting);
-  //     if (!isIntersecting) {
-  //       findNew().then((data) => {
-  //         console.log("获取数据：", data);
-  //         // pArr.value = [...data.result, ...pArr.value];
-  //       });
-  //     }
-  //   }
-  // );
+  document
+    .getElementById("scrollBox")
+    .addEventListener("scroll", rolling, false);
 });
 </script>
 
@@ -170,14 +136,13 @@ onMounted(() => {
   user-select: none;
   box-sizing: border-box;
   position: relative;
-  .box {
-    position: absolute;
-    width: 470px;
-    height: 630px;
-    border: 3px solid green;
-  }
   .item-box {
     margin-top: 10px;
   }
+}
+.toTop {
+  position: absolute;
+  left: 830px;
+  bottom: 50px;
 }
 </style>
