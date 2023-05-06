@@ -8,6 +8,7 @@ const lazy: Directive = {
     const imgSrc = el.src
     el.style.width = '40px'
     el.style.height = '40px'
+    el.style.transition="all .6s ease-out"
     el.src = loadingGif
 
     // 观察者
