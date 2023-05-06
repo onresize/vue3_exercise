@@ -1,6 +1,14 @@
 <template>
   <div>
-    <h2>待更新</h2>
+    <h2>css布局方式实现瀑布流</h2>
+    <div class="content">
+      <div class="box">
+        <el-card class="item" v-for="(item, i) in imgList" :key="i">
+          <img :src="item.src" :alt="item.title" />
+          <h3>{{ item.title }}</h3>
+        </el-card>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -59,4 +67,27 @@ const imgList = ref([
 ]);
 </script>
 
-<style scoped lang="less"></style>
+<style scoped lang="less">
+.content {
+  width: 600px;
+  height: 600px;
+  border: 3px solid red;
+  overflow-y: auto;
+}
+.box {
+  margin: 10px;
+  column-count: 3;
+  column-gap: 10px;
+}
+.item {
+  margin-bottom: 10px;
+  h3 {
+    width: 100%;
+    text-align: center;
+  }
+}
+.item img {
+  width: 100%;
+  height: 100%;
+}
+</style>

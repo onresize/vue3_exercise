@@ -25,17 +25,15 @@ const attrs = useAttrs();
 const imgLoading = ref(false);
 
 // const getBg = () => {
-//   const img = new Image();
 //   return new Promise((resolve, reject) => {
 //     setTimeout(() => {
-//     resolve(attrs.pic);
-//     }, 2000);
+//       resolve(attrs.pic);
+//     }, 1000);
 //   });
 // };
-// let bgUrl = await getBg();
 
 const getBg = () => attrs.pic;
-let bgUrl = getBg();
+let bgUrl = await getBg();
 
 const imgError = () => {
   imgLoading.value = true;
