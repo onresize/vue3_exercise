@@ -22,10 +22,10 @@
   />
 
   <pre>
-    CSDN: https://blog.csdn.net/NGUP_LEE/article/details/128207449
-          https://www.zhangshengrong.com/p/ArXGZr44Nj/
-          https://blog.csdn.net/weixin_45291937/article/details/129258862
-    官方：https://cn.vuejs.org/guide/extras/render-function.html
+    CSDN: <span class="text">https://blog.csdn.net/NGUP_LEE/article/details/128207449</span>
+          <span class="text">https://www.zhangshengrong.com/p/ArXGZr44Nj/</span>
+          <span class="text">https://blog.csdn.net/weixin_45291937/article/details/129258862</span>
+    官方: <span class="text">https://cn.vuejs.org/guide/extras/render-function.html</span>
   </pre>
 </template>
 
@@ -36,8 +36,11 @@ import { myTextCom, myPicCom } from "@/myCom/hCom";
 const modelValue = ref("h函数-双向绑定值");
 </script>
 
-<style scoped>
+<style scoped lang="less">
 pre {
   font-size: 22px;
+  .text {
+    text-decoration: underline;
+  }
 }
 </style>
