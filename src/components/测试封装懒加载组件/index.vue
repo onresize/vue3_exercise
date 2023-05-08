@@ -28,7 +28,14 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, watch, getCurrentInstance } from "vue";
+import {
+  ref,
+  reactive,
+  onMounted,
+  watch,
+  getCurrentInstance,
+  nextTick,
+} from "vue";
 import { useIntersectionObserver } from "@vueuse/core";
 import picCard from "@/myCom/lazyCom/index.vue";
 // import picCard from "@/myCom/lazyCom/asyncCom.vue";
@@ -86,17 +93,20 @@ const rolling = async () => {
   var scrollHeight = document.getElementById("scrollBox").scrollHeight;
 
   // 当滚动过的距离+可视区的高度>=滚动条长度时，就相当于滚动到了底部
-  if (Math.ceil(scrollTop) + Math.ceil(clientHeight) >= scrollHeight) {
+  if (Math.ceil(scrollTop) + Math.ceil(clientHeight) + 5 >= scrollHeight) {
     pageNum.value++;
     console.log("滚动到底部------------了", pArr.value.length);
     if (pArr.value.length >= 26) {
+      console.log("执行return");
       pageNum.value = 0;
       appContext.config.globalProperties.$D(messageWarn, 400);
       return;
     }
     const { result: res } = await findNew(pageNum.value);
     console.log("获取数据:", res);
-    pArr.value = [...pArr.value, ...res];
+    setTimeout(() => {
+      pArr.value = [...pArr.value, ...res];
+    }, 1000);
   }
 };
 
@@ -123,21 +133,18 @@ onMounted(() => {
 
 <style scoped lang="less">
 .lazy-com-box {
-  width: 500px;
-  height: 645px;
+  width: 505px;
+  height: 640px;
   border: 3px solid red;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  align-content: flex-start;
-  padding: 10px;
   overflow-y: scroll;
   overflow-x: hidden;
   user-select: none;
   box-sizing: border-box;
   position: relative;
   .item-box {
-    margin-top: 10px;
+    margin: 7px;
   }
 }
 .toTop {

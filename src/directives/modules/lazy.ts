@@ -6,9 +6,11 @@ const lazy: Directive = {
   mounted(el: HTMLElement, binding: DirectiveBinding) {
     // console.log('图片懒加载指令:',el)
     const imgSrc = el.src
-    el.style.width = '40px'
-    el.style.height = '40px'
+    el.style.width = '0px'
+    el.style.height = '0px'
     el.style.transition="all .6s ease-out"
+    // el.style.width = '40px'
+    // el.style.height = '40px'
     // el.src = loadingGif
     el.src = ''
 
