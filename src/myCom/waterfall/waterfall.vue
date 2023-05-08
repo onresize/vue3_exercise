@@ -86,7 +86,7 @@ function onLoad(url: string, i: number) {
     image.src = url;
     image.onload = function () {
       // 图片加载完成时执行，此时可通过image.width和image.height获取到图片原始宽高
-      var height = image.height / (image.width / imageWidth.value);
+      var height = image.height / (image.width / imageWidth.value) + 60;
       imagesProperty.value[i] = {
         // 存储图片宽高和位置信息
         width: imageWidth.value,
@@ -108,6 +108,7 @@ async function onPreload() {
   for (let i = 0; i < len; i++) {
     await onLoad(props.images[i].src, i);
   }
+  console.log("Js瀑布流图片参数数组：", imagesProperty.value);
 }
 </script>
 <template>
@@ -118,17 +119,21 @@ async function onPreload() {
     ref="waterfall"
     :style="`background-color: ${backgroundColor}; width: ${totalWidth}; height: ${height}px;`"
   >
+    <div
+      class="pCard"
+      v-for="(property, index) in imagesProperty"
+      :key="index"
+      :style="`
+      width: ${imageWidth}px;
+      top: ${property && property.top}px;
+      left: ${property && property.left}px;`"
+    >
       <img
-        class="u-img"
-        v-for="(property, index) in imagesProperty"
-        :key="index"
-        :style="`width: ${imageWidth}px; top: ${
-          property && property.top
-        }px; left: ${property && property.left}px;`"
+        v-lazy
         :src="images[index].src"
-        :title="images[index].title"
-        :alt="images[index].title"
       />
+      <h3>{{ images[index].title }}</h3>
+    </div>
   </div>
   <div
     v-if="mode === 'CSS'"
@@ -171,11 +176,27 @@ async function onPreload() {
 .m-waterfall-js {
   box-sizing: border-box;
   position: relative;
-  .u-img {
+  .pCard {
     position: absolute;
     display: inline-block;
-    object-fit: contain;
-    vertical-align: bottom;
+    box-sizing: border-box;
+    // padding: 10px;
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.12);
+    border: 1px solid #e4e7ed;
+    border-radius: 10px;
+    background-color: #ffffff;
+    overflow: hidden;
+    color: #303133;
+    transition: 0.3s;
+    .u-img {
+      width: 100%;
+      object-fit: contain;
+      vertical-align: bottom;
+    }
+    h3 {
+      width: 100%;
+      text-align: center;
+    }
   }
 }
 </style>

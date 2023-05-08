@@ -13,7 +13,7 @@
         :columnCount="2"
         :columnGap="30"
         :width="600"
-        mode="CSS"
+        mode="JS"
         backgroundColor="#F2F4F8"
       />
     </div>
