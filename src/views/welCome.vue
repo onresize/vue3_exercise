@@ -1,9 +1,20 @@
 <template>
   <div class="box" :style="{ backgroundImage: `url(${dataImg})` }">
-    <div :class="[isShow ? 'none' : 'text_title']">
+    <video
+      ref="videoBoxRef"
+      src="@/assets/video/05+.mp4"
+      poster="@/assets/img/tt.jpg"
+      style="width: 100%; height: 100%"
+      loop
+      @click="pauseVideo"
+    ></video>
+    <div
+      :class="[isShow ? 'none' : 'text_title']"
+      v-show="showBtn == 'none' ? false : true"
+    >
       <em> vue3 + vue-router4.0 + vite + element-Plus </em>
     </div>
-    <div
+    <!-- <div
       :class="[
         'flex',
         'animation-Box',
@@ -20,46 +31,14 @@
           {{ delStr(key) }}
         </div>
       </el-tag>
-    </div>
-    <div class="bottom_box">
-      <div class="card">
-        <div class="content">
-          <div class="front">
-            <h3 class="title linear colorful">请作者喝杯冰阔落🍻</h3>
-            <h3 class="title-pay">
-              使用微信支付 <span>鼠标悬停使用支付宝支付</span>
-            </h3>
-            <img
-              class="subtitle-img"
-              src="../assets/img/wx.jpg"
-              alt=""
-              srcset=""
-            />
-          </div>
-
-          <div class="back">
-            <h3 class="title">请作者喝杯咖啡☕️</h3>
-            <h3 class="title-pay">
-              使用支付宝支付 <span>移开鼠标使用微信支付</span>
-            </h3>
-            <img
-              class="subtitle-img"
-              src="../assets/img/zfb.jpg"
-              alt=""
-              srcset=""
-            />
-          </div>
-        </div>
-      </div>
-      <!-- <iframe
-        width="500"
-        height="300"
-        :src="'https://www.bilibili.com'"
-        frameborder="3"
-        sandbox="allow-forms allow-scripts allow-same-origin allow-popups"
-        scrolling="auto"
-      ></iframe> -->
-    </div>
+    </div> -->
+    <img
+      class="img-btn"
+      src="https://dm30webimages.lynkco.com.cn/LynkCoPortal/Content/images/icon_play@2x.png"
+      alt=""
+      @click="playVideo"
+      :style="{ display: showBtn }"
+    />
   </div>
 </template>
 
@@ -69,7 +48,19 @@ import { dependencies, devDependencies } from "../../package.json";
 import { getWallpaper } from "@/api/welcome.js";
 
 let dataImg = ref("");
+const videoBoxRef = ref(null);
+const showBtn = ref("block");
 const isShow = ref(true);
+
+const playVideo = () => {
+  showBtn.value = "none";
+  videoBoxRef.value.play();
+};
+
+const pauseVideo = () => {
+  showBtn.value = "block";
+  videoBoxRef.value.pause();
+};
 
 const Wallpaper = async () => {
   const [err, data] = await getWallpaper();
@@ -81,7 +72,7 @@ const Wallpaper = async () => {
     // dataImg.value = `https://img.alicdn.com/imgextra/i4/O1CN01tc92ri1YHA4hoBZu5_!!6000000003033-2-tps-1920-1300.png`;
   }
 };
-Wallpaper();
+// Wallpaper();
 
 onMounted(() => {
   setTimeout(() => {
@@ -129,16 +120,29 @@ objArr.forEach((item) => {
 
 <style scoped lang="less">
 .box {
-  height: 97%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   position: relative;
-  top: 30px;
-  bottom: 30px;
   border-radius: 20px;
-  background-origin: center center;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
+  video {
+    position: relative;
+    object-fit: cover;
+    z-index: 1;
+    border-radius: 10px;
+  }
+  .img-btn {
+    position: absolute;
+    z-index: 4;
+    top: 50%;
+    left: 50%;
+    cursor: pointer;
+    zoom: 0.4;
+    transform: translate(-50%, -50%);
+  }
   .animation-Box {
-    transition: width .8s ease-out;
+    transition: width 0.8s ease-out;
   }
 }
 .none {
@@ -147,8 +151,8 @@ objArr.forEach((item) => {
 .text_title {
   // border: 3px solid red;
   position: absolute;
-  top: 100px;
-  left: calc(50% - 31vw);
+  top: 10%;
+  z-index: 2;
   font-size: 3vw;
   width: 63vw;
   height: 80px;
@@ -171,195 +175,6 @@ objArr.forEach((item) => {
       transform: scale3d(0.475, 0.475, 0.475) translate3d(0, 60px, 0);
       animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
     }
-  }
-}
-.bottom_box {
-  animation-name: rightToLeft;
-  animation-duration: 1s;
-  position: absolute;
-  top: 440px;
-  left: calc(100% - 55vw);
-
-  @keyframes rightToLeft {
-    from {
-      transform: translateX(100vw);
-    }
-    to {
-      transform: translateX(0);
-    }
-  }
-
-  .card {
-    margin-top: 10px;
-    height: 32vh;
-    width: 38vw;
-    max-width: 450px;
-    cursor: pointer;
-  }
-
-  .content {
-    border-radius: 10px;
-    text-align: center;
-    position: relative;
-    transition: all 2.25s;
-    background-color: #00c250;
-    padding: 5em;
-    transform-style: preserve-3d;
-    height: 100%;
-    margin-left: 15px;
-  }
-
-  .card:hover .content {
-    transform: rotateY(0.5turn);
-  }
-
-  .front,
-  .back {
-    border-radius: 10px;
-    color: #fff;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    padding: 1em;
-    transform-style: preserve-3d;
-    backface-visibility: hidden;
-  }
-
-  .title {
-    transform: translateZ(5rem);
-    font-size: 1.7rem;
-  }
-  .subtitle-img {
-    transform: translateZ(2rem);
-    margin-top: 15px;
-    border-radius: 10px;
-    width: 18vw;
-    max-width: 360px;
-    height: 28vh;
-    max-height: 380px;
-  }
-  .subtitle {
-    transform: translateZ(2rem);
-  }
-
-  .back {
-    transform: rotateY(0.5turn);
-    background-color: #1677ff;
-  }
-
-  .title-pay {
-    transform: translateZ(3rem);
-  }
-  .title-pay span {
-    transform: translateZ(3rem);
-    font-size: 0.7em;
-  }
-}
-.flex {
-  border: 3px solid transparent;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px #333 inset;
-  padding: 10px 0 5px 0;
-  overflow: scroll;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  width: calc(100vw - 400px);
-  height: 220px;
-  animation-name: leftToRight;
-  animation-duration: 1s;
-  position: absolute;
-  top: 200px;
-  left: 40px;
-
-  @keyframes leftToRight {
-    from {
-      transform: translateX(-100vw);
-    }
-    to {
-      transform: translateX(0);
-    }
-  }
-
-  .tag {
-    font-size: 20px;
-    font-weight: bold;
-    height: 40px;
-    margin: 3px;
-    text-shadow: 0 0 0.1rem #00c6ff, 0 0 0.2rem #00c6ff, 0 0 0.3rem #00c6ff,
-      0 0 0.4rem #00c6ff;
-  }
-}
-.infoZIndex {
-  z-index: 1;
-}
-.beforeZIndex {
-  z-index: -1;
-}
-
-@property --offset {
-  syntax: "<length>";
-  inherits: false;
-  initial-value: 5px;
-}
-
-@property --deg {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: 1deg;
-}
-
-.linear {
-  color: #000;
-  cursor: pointer;
-}
-
-.linear {
-  color: transparent;
-  background: repeating-radial-gradient(
-    circle at 0 0,
-    #000 calc(var(--offset) - 5px),
-    #000 var(--offset),
-    #fff var(--offset),
-    #fff calc(var(--offset) + 5px)
-  );
-  -webkit-background-clip: text;
-  animation: move 0.5s infinite linear;
-}
-
-.colorful {
-  background-image: linear-gradient(
-      var(--deg),
-      red,
-      orange,
-      yellow,
-      green,
-      cyan,
-      blue,
-      darkviolet
-    ),
-    repeating-radial-gradient(
-      circle at 0 0,
-      #000 calc(var(--offset) - 5px),
-      #000 var(--offset),
-      #fff var(--offset),
-      #fff calc(var(--offset) + 5px)
-    );
-  background-blend-mode: screen;
-  animation: move 0.5s infinite linear, rotate 20s infinite linear;
-}
-
-@keyframes move {
-  to {
-    --offset: 15px;
-  }
-}
-
-@keyframes rotate {
-  to {
-    --deg: 361deg;
   }
 }
 </style>

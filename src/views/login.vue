@@ -5,6 +5,9 @@
       <div class="show" @click="toPage('admin')">admin用户</div>
       <div class="show" @click="toPage('ordinary')">普通用户</div>
     </div>
+    <div class="left-box">
+      <payCom style="payBox"></payCom>
+    </div>
   </div>
 </template>
 
@@ -12,6 +15,7 @@
 import { onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { loginBroadcast } from "@/utils/broadcast";
+import payCom from "@/myCom/payCom/index.vue";
 
 const Router = useRouter();
 
@@ -226,12 +230,8 @@ onMounted(() => {
   height: 100%;
   background: url("@/assets/img/login.webp") no-repeat center;
   background-size: 100% 100%;
-  display: grid;
-  place-content: center;
   overflow: hidden;
-  #canvasID {
-    position: relative;
-  }
+  position: relative;
   .mask {
     width: 500px;
     height: 100px;
@@ -241,6 +241,7 @@ onMounted(() => {
     justify-content: center;
     position: absolute;
     inset: 0;
+    z-index: 2;
     margin: auto;
     backdrop-filter: blur(10px);
 
@@ -286,6 +287,11 @@ onMounted(() => {
         background-position: 1000px 0;
       }
     }
+  }
+  .left-box {
+    position: absolute;
+    inset: 0;
+    zoom: 0.3;
   }
 }
 </style>
