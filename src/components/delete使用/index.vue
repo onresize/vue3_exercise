@@ -18,7 +18,7 @@ console.log("修改后的List.json:", List.data);
 
 <style scoped lang="less">
 .delete-box {
-  height: 100vh;
+  height: calc(100vh - 70px);
   overflow-y: scroll;
   pre {
     font-size: 20px;

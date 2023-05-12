@@ -17,12 +17,13 @@
   <h4>img属性: srcset、sizes</h4>
   <section>
     <h4>图片加超链接</h4>
-    <a href="https://www.bilibili.com">
+    <a href="https://www.bilibili.com" target="_bank">
       <img
         srcset="assets/img/wx.jpg 600w, assets/img/zfb.jpg 800w"
         alt="#"
         decoding="async"
         loading="eager"
+        width="150"
       />
       <!-- sizes="(max-width: 320px) 300w, 1000w" -->
     </a>
@@ -60,7 +61,5 @@ const img3 = ref(
   background-size: 100% 100%;
 }
 img {
-  max-width: 100%;
-  display: block;
 }
 </style>

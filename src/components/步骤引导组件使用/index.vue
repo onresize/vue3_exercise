@@ -1,20 +1,23 @@
 <template>
-  <h2></h2>
-  <mark>方式一：</mark>
   <div>
-    <h2>步骤引导组件使用: npm i vue3-intro-step --save</h2>
-    <h2>搭配npm i animate.css --save 动画更顺畅</h2>
-    <el-link herf="https://www.npmjs.com/package/vue3-intro-step" target="_bank"
-      >npm参考</el-link
-    >
-  </div>
+    <mark>方式一：</mark>
+    <div>
+      <h2>步骤引导组件使用: npm i vue3-intro-step --save</h2>
+      <h2>搭配npm i animate.css --save 动画更顺畅</h2>
+      <el-link
+        herf="https://www.npmjs.com/package/vue3-intro-step"
+        target="_bank"
+        >npm参考</el-link
+      >
+    </div>
 
-  <h2></h2>
-  <mark>方式二：</mark>
-  <div id="intro-box">
-    <h2 class="intro-name">driver.js</h2>
-    <el-button id="intro-button">展示图片</el-button>
-    <div id="intro-bottom">测试非可视区域</div>
+    <h2></h2>
+    <mark>方式二：</mark>
+    <div id="intro-box">
+      <h2 class="intro-name">driver.js</h2>
+      <el-button id="intro-button">展示图片</el-button>
+      <div id="intro-bottom">测试非可视区域</div>
+    </div>
   </div>
 </template>
 
