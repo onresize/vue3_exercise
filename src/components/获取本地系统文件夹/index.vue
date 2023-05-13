@@ -10,50 +10,53 @@
   <strong>
     <pre>background: url(https://xxx.png) no-repeat right 20px center;</pre>
   </strong>
+  <strong>
+    <pre>
+let { x, y, left, top } = document.querySelector(".pic").getBoundingClientRect(); // 获取元素位置</pre
+    >
+  </strong>
   <div class="pic"></div>
 
   <br />
   <hr />
+  <!--参考：img属性: srcset、sizes不生效原因： https://blog.csdn.net/z1844306480/article/details/114154889 -->
   <h4>img属性: srcset、sizes</h4>
   <section>
-    <h4>图片加超链接</h4>
+    <h4>响应式图片加超链接</h4>
     <a href="https://www.bilibili.com" target="_bank">
-      <img
-        srcset="
-          @/assets/img/404.webp 200w,
-          @/assets/img/2.webp 300w,
-          @/assets/img/3.webp 500w,
-          @/assets/img/4.webp 600w,
-          @/assets/img/5.webp 800w
-        "
-        alt="#"
-        decoding="async"
-        loading="eager"
-        width="150"
-        height="150"
-      />
-      <!-- sizes="(max-width: 320px) 300w, 1000w" -->
+      <picture>
+        <source media="(max-width: 500px)" srcset="@/assets/img/1.webp" />
+        <source media="(max-width: 700px)" srcset="@/assets/img/2.webp" />
+        <source media="(max-width: 900px)" srcset="@/assets/img/3.webp" />
+        <source media="(max-width: 1000px)" srcset="@/assets/img/4.webp" />
+
+        <img
+          srcset="@/assets/img/5.webp"
+          alt="#"
+          decoding="async"
+          loading="eager"
+          width="150"
+          height="150"
+        />
+      </picture>
     </a>
   </section>
 </template>
 
 <script setup>
-import { ref, reactive } from "vue";
+import { ref, reactive, onMounted } from "vue";
 
 const pickDirectory = async () => {
   const directoryHandle = await window.showDirectoryPicker();
   console.log("获取本地文件夹：", directoryHandle);
 };
 
-const img1 = ref(
-  "https://img0.baidu.com/it/u=1217304799,3113310756&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1683997200&t=99e50a2df4007441cda22e8e59171b22"
-);
-const img2 = ref(
-  "https://img0.baidu.com/it/u=253042110,3732757332&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1683997200&t=bca4a7c497aff15c443483bbe451dd6d"
-);
-const img3 = ref(
-  "https://img1.baidu.com/it/u=3929149648,3341190107&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"
-);
+onMounted(() => {
+  let { x, y, left, top } = document
+    .querySelector(".pic")
+    .getBoundingClientRect();
+  console.log("x:", x, "y:", y, "left:", left, "top:", top);
+});
 </script>
 
 <style scoped lang='less'>

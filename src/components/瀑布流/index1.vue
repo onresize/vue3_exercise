@@ -3,7 +3,12 @@
     <h2>css布局方式实现瀑布流</h2>
     <div class="content">
       <div class="box">
-        <el-card class="item" v-for="(item, i) in imgList" :key="i">
+        <el-card
+          class="item"
+          v-for="(item, idx) in imgList"
+          :key="idx"
+          :data-num="idx"
+        >
           <img :src="item.src" :alt="item.title" />
           <h3>{{ item.title }}</h3>
         </el-card>
@@ -68,6 +73,8 @@ const imgList = ref([
 </script>
 
 <style scoped lang="less">
+@import "@/styles/mixin.less";
+
 .content {
   width: 600px;
   height: 600px;
@@ -81,6 +88,8 @@ const imgList = ref([
 }
 .item {
   margin-bottom: 10px;
+  position: relative;
+  .BBA(); // 这是less的mixin用法
   h3 {
     width: 100%;
     text-align: center;

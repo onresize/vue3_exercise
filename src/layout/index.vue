@@ -270,7 +270,10 @@ onMounted(() => {
 </script>
 
 <style scoped lang="less">
+@import "@/styles/mixin.less";
+
 .fixed_div {
+  .clearfix();
   position: fixed;
   top: 0;
   right: 0;

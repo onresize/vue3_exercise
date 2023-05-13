@@ -1,0 +1,26 @@
+.BBA() {
+  &::after {
+    // content: counter(item-counter); // 这种写法要多个dom结构、不能用v-for遍历
+    content: attr(data-num);
+    position: absolute;
+    z-index: 33;
+    display: block;
+    top: 20px;
+    left: 20px;
+    width: 24px;
+    height: 24px;
+    border: 2px solid #fff;
+    line-height: 24px;
+    text-align: center;
+    background: #000;
+    color: #fff;
+  }
+}
+
+// 清浮动： https://blog.csdn.net/weixin_46021847/article/details/121364197
+.clearfix() {
+  &::after {
+    content: "";
+    clear: both;
+  }
+}

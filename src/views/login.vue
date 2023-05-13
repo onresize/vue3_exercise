@@ -8,6 +8,9 @@
     <div class="left-box">
       <payCom style="payBox"></payCom>
     </div>
+    <div class="left-bottom-box">
+      <colaCom></colaCom>
+    </div>
     <div class="right-box">
       <a href="https://gitee.com/Embrance-T/vue3_exercise"
         ><img
@@ -24,6 +27,7 @@ import { onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { loginBroadcast } from "@/utils/broadcast";
 import payCom from "@/myCom/payCom/index.vue";
+import colaCom from "@/myCom/colaCom/index.vue";
 
 const Router = useRouter();
 
@@ -300,6 +304,14 @@ onMounted(() => {
     position: absolute;
     inset: 0;
     zoom: 0.3;
+  }
+  .left-bottom-box {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 200px;
+    height: 200px;
+    border: 3px solid #fff;
   }
   .right-box {
     position: absolute;
