@@ -19,11 +19,18 @@
     <h4>图片加超链接</h4>
     <a href="https://www.bilibili.com" target="_bank">
       <img
-        srcset="assets/img/wx.jpg 600w, assets/img/zfb.jpg 800w"
+        srcset="
+          @/assets/img/404.webp 200w,
+          @/assets/img/2.webp 300w,
+          @/assets/img/3.webp 500w,
+          @/assets/img/4.webp 600w,
+          @/assets/img/5.webp 800w
+        "
         alt="#"
         decoding="async"
         loading="eager"
         width="150"
+        height="150"
       />
       <!-- sizes="(max-width: 320px) 300w, 1000w" -->
     </a>

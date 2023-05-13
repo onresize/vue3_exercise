@@ -8,18 +8,18 @@
     </div>
 
     <div class="a_box">
-      <a href="#one">1</a>
-      <a href="#two">2</a>
-      <a href="#three">3</a>
-      <a href="#four">4</a>
+      <a target="_self" href="#one">1</a>
+      <a target="_self" href="#two">2</a>
+      <a target="_self" href="#three">3</a>
+      <a target="_self" href="#four">4</a>
     </div>
   </div>
 </template>
- 
+
 <script setup>
 import { ref, reactive } from 'vue'
 </script>
- 
+
 <style scoped lang="less">
 .demo {
   margin-top: 36px;

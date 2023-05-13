@@ -8,8 +8,16 @@
     <div class="left-box">
       <payCom style="payBox"></payCom>
     </div>
+    <div class="right-box">
+      <a href="https://gitee.com/Embrance-T/vue3_exercise"
+        ><img
+          src="https://gitee.com/Embrance-T/vue3_exercise/widgets/widget_1.svg"
+          alt="Fork me on Gitee"
+      /></a>
+    </div>
   </div>
 </template>
+
 
 <script setup>
 import { onMounted } from "vue";
@@ -292,6 +300,13 @@ onMounted(() => {
     position: absolute;
     inset: 0;
     zoom: 0.3;
+  }
+  .right-box {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 110px;
+    height: 110px;
   }
 }
 </style>
