@@ -15,21 +15,24 @@ router.beforeEach((to, from, next) => {
 
   NProgress.start();
   if (["/", "/login"].indexOf(to.path) !== -1) {
+    console.log('111111111111111111111111111111111');
     next();
   } else {
     if (PiniaStore.registerRouteFresh) {
-      router.removeRoute("NotFound");
+      console.log('222222222222222222222222222222222');
+      // router.removeRoute("NotFound");
       PiniaStore.PromiseRoutes().then(() => {
         PiniaStore.changeState(false);
         next({ path: to.path });
       });
     } else {
-      router.addRoute("layoutPage", {
-        path: "/:pathMatch(.*)",
-        name: "NotFound",
-        meta: { title: "404" },
-        component: () => import("@views/404.vue"),
-      });
+      console.log('333333333333333333333333333333333');
+      // router.addRoute({
+      //   path: "/:pathMatch(.*)",
+      //   name: "NotFound",
+      //   meta: { title: "404" },
+      //   component: () => import("@views/404.vue"),
+      // });
       next();
     }
   }

@@ -7,6 +7,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name=referrer content=no-referrer>
   <title>vue3</title>
+  <script>
+    // // 判断设备是否PC
+    // function IsPC() {
+    //   var userAgentInfo = navigator.userAgent;
+    //   var Agents = ["Android", "iPhone",
+    //     "SymbianOS", "Windows Phone",
+    //     "iPad", "iPod"];
+    //   var flag = true;
+    //   for (var v = 0; v < Agents.length; v++) {
+    //     if (userAgentInfo.indexOf(Agents[v]) > 0) {
+    //       flag = false;
+    //       break;
+    //     }
+    //   }
+    //   return flag;
+    // }
+    // if (!IsPC()) {
+      // console.log('是否pc', IsPC())
+      // 解决window.open自动跳转被谷歌浏览器拦截
+      // const a = document.createElement('a')
+      // document.body.appendChild(a)
+      // a.href = 'usePc.html'
+      // a.target = '_self'
+      // a.click()
+      // document.body.removeChild(a)
+    // }
+  </script>
   <!-- 所有超链接默认用新建标签页打开 -->
   <base target="_blank">
   <!--
@@ -25,45 +52,15 @@
     XXX5.target="_parent"
     在父窗体中打开链接，在窗口与顶级框架中，等同于_self
   -->
-
-  <script>
-    // window.onload = function () {
-    //   let r = new Date().getTime() - performance.timing.navigationStart;
-    //   console.log("白屏时间", r);
-    // };
-
-    // 反爬虫 | 反调试
-    // setInterval(function () {
-    //   check()
-    // }, 1000);
-    // var check = function () {
-    //   function doCheck(a) {
-    //     if (("" + a / a)["length"] !== 1 || a % 20 === 0) {
-    //       (function () { }
-    //       ["constructor"]("debugger")())
-    //     } else {
-    //       (function () { }
-    //       ["constructor"]("debugger")())
-    //     }
-    //     doCheck(++a)
-    //   }
-    //   try {
-    //     doCheck(0)
-    //   } catch (err) { }
-    // };
-    // check();
-
-    // 阻断地址栏修改时重定向到欢迎页
-    let storageUser = window.localStorage.getItem("user") || null;
-    if (storageUser) {
-      if (['/', '/login'].includes(window.location.pathname)) {
-        // alert('即将跳转登录页面')
-        window.location.pathname = '/welcome'
-      }
-    } else if (!['/', '/login'].includes(window.location.pathname)) {
-      window.location.pathname = '/login'
+  <style>
+    .conSmallVideo {
+      position: fixed;
+      bottom: 30px;
+      right: 56px;
+      width: 400px;
+      height: 270px;
     }
-  </script>
+  </style>
 </head>
 
 <body>
@@ -74,17 +71,80 @@
   <!-- 传送门loading效果 -->
   <div class="mode"></div>
   <script type="module" src="/src/main.ts"></script>
+
+  <!-- 客服机器人 -->
   <script src="https://yzf.jrv9.com/assets/layer/ai_service_diy_41.js?v=1683509052" charset="UTF-8"> </script>
+
+  <% if (ENABLE_ERUDA=="true" ) { %>
+    <!-- eruda移动端调试面板 -->
+    <script src="//cdn.jsdelivr.net/npm/eruda"></script>
+    <script>
+      eruda.init();
+    </script>
+    <% } %>
+
+      <script>
+        window.onload = function () {
+          let r = new Date().getTime() - performance.timing.navigationStart;
+          console.log("白屏时间", r);
+        };
+
+
+        // 反爬虫 | 反调试
+        // setInterval(function () {
+        //   check()
+        // }, 1000);
+        // var check = function () {
+        //   function doCheck(a) {
+        //     if (("" + a / a)["length"] !== 1 || a % 20 === 0) {
+        //       (function () { }
+        //       ["constructor"]("debugger")())
+        //     } else {
+        //       (function () { }
+        //       ["constructor"]("debugger")())
+        //     }
+        //     doCheck(++a)
+        //   }
+        //   try {
+        //     doCheck(0)
+        //   } catch (err) { }
+        // };
+        // check();
+
+
+        // 阻断地址栏修改时重定向到欢迎页
+        let storageUser = window.localStorage.getItem("user") || null;
+        if (storageUser) {
+          if (['/', '/login'].includes(window.location.pathname)) {
+            // alert('即将跳转登录页面')
+            window.location.pathname = '/welcome'
+          }
+        } else if (!['/', '/login'].includes(window.location.pathname)) {
+          window.location.pathname = '/login'
+        }
+
+      </script>
 </body>
 
-</html>
-
-<style>
-  .conSmallVideo {
-    position: fixed;
-    bottom: 30px;
-    right: 56px;
-    width: 400px;
-    height: 270px;
+<script>
+  window.oncontextmenu = function (e) {
+    e.stopPropagation(); // 阻止事件冒泡、向上
+    e.preventDefault(); // 阻止默认行为、事件代理、向下
+    return false;
   }
-</style>
+  //禁止任何键盘敲击事件（防止F12和shift+ctrl+i调起开发者工具）
+  window.onkeydown = window.onkeyup = window.onkeypress = function () {
+    window.event.returnValue = false;
+    return false;
+  }
+  //如果用户在工具栏调起开发者工具，那么判断浏览器的可视高度和可视宽度是否有改变，如有改变则关闭本页面
+  var h = window.innerHeight, w = window.innerWidth;
+  window.onresize = function () {
+    if (h != window.innerHeight || w != window.innerWidth) {
+      window.close();
+      window.location = "about:blank";
+    }
+  }
+</script>
+
+</html>

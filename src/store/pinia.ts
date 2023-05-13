@@ -12,9 +12,9 @@ export const useMainStore = defineStore("piniaStore", {
     ActiveBread: [{ path: "/welcome", title: "欢迎页" }], // 顶部激活页面
     crossText: "",
     iconList: [], // 缓存所有svg
-    fatherColor: 'transparent',
-    childColor: 'transparent',
-    grandchildColor: 'transparent',
+    fatherColor: "transparent",
+    childColor: "transparent",
+    grandchildColor: "transparent",
   }),
   // 声明getters
   getters: {
@@ -55,8 +55,10 @@ export const useMainStore = defineStore("piniaStore", {
       this.shoesCount += num;
       // }, 2000);
     },
-    PromiseRoutes() {
-      let user = window.localStorage.getItem("user") || null;
+    async PromiseRoutes() {
+      let user = await Promise.resolve(
+        window.localStorage.getItem("user") || null
+      );
       return new Promise((resolve) => {
         if (!this.AuthRoutes.length) {
           if (user == "Admin") {

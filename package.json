@@ -7,7 +7,8 @@
   "private": true,
   "scripts": {
     "dev": "vite --host",
-    "build": "vite build --mode production",
+    "dev1": "vite --host --open",
+    "build:prod": "vite build --mode production",
     "build:pro": "vue-tsc --noEmit && vite build --mode production",
     "preview": "vite preview",
     "lint": "eslint src --fix --ext .js,.ts",
@@ -31,6 +32,7 @@
     "terser": "^5.16.9",
     "three": "^0.151.3",
     "v-scale-screen": "^2.0.12",
+    "vite-plugin-html": "^3.2.0",
     "vue": "^3.2.6",
     "vue-content-loader": "^2.0.1",
     "vue-fit-next": "^0.3.2",

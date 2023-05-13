@@ -6,6 +6,7 @@ import banner from "vite-plugin-banner";
 import viteCompression from "vite-plugin-compression";
 import AutoImport from "unplugin-auto-import/vite";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
+import { createHtmlPlugin } from "vite-plugin-html";
 import VueSetupExtend from "vite-plugin-vue-setup-extend";
 import pkg from "./package.json";
 //安装jsx插件 npm install @vitejs/plugin-vue-jsx -D
@@ -31,7 +32,7 @@ export default defineConfig(({ mode }) => {
           rewrite: (path) => path.replace(/^\/BaseApi/, ""),
         },
       },
-    }, 
+    },
     resolve: {
       alias: {
         // 兼容webpack的习惯
@@ -95,6 +96,14 @@ export default defineConfig(({ mode }) => {
         include: [resolve(__dirname, "./src/locales/**")],
       }),
       VueSetupExtend(), // * name 可以写在 script 标签上
+      // 注入html模板数据
+      createHtmlPlugin({
+        inject: {
+          data: {
+            ENABLE_ERUDA: env.VITE_ENABLE_ERUDA || "false",
+          },
+        },
+      }),
       // 自动引入element
       AutoImport({
         resolvers: [ElementPlusResolver()],
