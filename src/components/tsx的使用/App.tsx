@@ -11,7 +11,7 @@ const renderDom = (props, emits) => {
     <div>
       <div>
         {/* tsx中dom结构上写v-model绑定ref响应值、不会自动解包、需要用 .value */}
-        <el-input v-model={v.value}></el-input>
+        <el-input v-model={v.value} clearable></el-input>
         <span>{v.value}</span>
         <div>
           <br />
