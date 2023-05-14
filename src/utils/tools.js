@@ -5,88 +5,92 @@ import { isArray } from "@/utils/is";
  * @param {String} key Storage名称
  * @returns {String}
  */
-export function localGet(key: string) {
+ export function localGet(key) {
   const value = window.localStorage.getItem(key);
   try {
-    return JSON.parse(window.localStorage.getItem(key) as string);
-  } catch (error) {
-    return value;
+      return JSON.parse(window.localStorage.getItem(key));
+  }
+  catch (error) {
+      return value;
   }
 }
-
 /**
- * @description 存储localStorage
- * @param {String} key Storage名称
- * @param {*} value Storage值
- * @returns {void}
- */
-export function localSet(key: string, value: any) {
+* @description 存储localStorage
+* @param {String} key Storage名称
+* @param {*} value Storage值
+* @returns {void}
+*/
+export function localSet(key, value) {
   window.localStorage.setItem(key, JSON.stringify(value));
 }
-
 /**
- * @description 清除localStorage
- * @param {String} key Storage名称
- * @returns {void}
- */
-export function localRemove(key: string) {
+* @description 清除localStorage
+* @param {String} key Storage名称
+* @returns {void}
+*/
+export function localRemove(key) {
   window.localStorage.removeItem(key);
 }
-
 /**
- * @description 清除所有localStorage
- * @returns {void}
- */
+* @description 清除所有localStorage
+* @returns {void}
+*/
 export function localClear() {
   window.localStorage.clear();
 }
-
 /**
- * @description 判断数据类型
- * @param {*} val 需要判断类型的数据
- * @returns {String}
- */
-export function isType(val: any) {
-  if (val === null) return "null";
-  if (typeof val !== "object") return typeof val;
-  else return Object.prototype.toString.call(val).slice(8, -1).toLocaleLowerCase();
+* @description 判断数据类型
+* @param {*} val 需要判断类型的数据
+* @returns {String}
+*/
+export function isType(val) {
+  if (val === null)
+      return "null";
+  if (typeof val !== "object")
+      return typeof val;
+  else
+      return Object.prototype.toString.call(val).slice(8, -1).toLocaleLowerCase();
 }
-
 /**
- * @description 生成唯一 uuid
- * @returns {String}
- */
+* @description 生成唯一 uuid
+* @returns {String}
+*/
 export function generateUUID() {
   let uuid = "";
   for (let i = 0; i < 32; i++) {
-    let random = (Math.random() * 16) | 0;
-    if (i === 8 || i === 12 || i === 16 || i === 20) uuid += "-";
-    uuid += (i === 12 ? 4 : i === 16 ? (random & 3) | 8 : random).toString(16);
+      let random = (Math.random() * 16) | 0;
+      if (i === 8 || i === 12 || i === 16 || i === 20)
+          uuid += "-";
+      uuid += (i === 12 ? 4 : i === 16 ? (random & 3) | 8 : random).toString(16);
   }
   return uuid;
 }
-
 /**
- * 判断两个对象是否相同
- * @param {Object} a 要比较的对象一
- * @param {Object} b 要比较的对象二
- * @returns {Boolean} 相同返回 true，反之 false
- */
-export function isObjectValueEqual(a: { [key: string]: any }, b: { [key: string]: any }) {
-  if (!a || !b) return false;
+* 判断两个对象是否相同
+* @param {Object} a 要比较的对象一
+* @param {Object} b 要比较的对象二
+* @returns {Boolean} 相同返回 true，反之 false
+*/
+export function isObjectValueEqual(a, b) {
+  if (!a || !b)
+      return false;
   let aProps = Object.getOwnPropertyNames(a);
   let bProps = Object.getOwnPropertyNames(b);
-  if (aProps.length != bProps.length) return false;
-  for (let i = 0; i < aProps.length; i++) {
-    let propName = aProps[i];
-    let propA = a[propName];
-    let propB = b[propName];
-    if (!b.hasOwnProperty(propName)) return false;
-    if (propA instanceof Object) {
-      if (!isObjectValueEqual(propA, propB)) return false;
-    } else if (propA !== propB) {
+  if (aProps.length != bProps.length)
       return false;
-    }
+  for (let i = 0; i < aProps.length; i++) {
+      let propName = aProps[i];
+      let propA = a[propName];
+      let propB = b[propName];
+      if (!b.hasOwnProperty(propName))
+          return false;
+      if (propA instanceof Object) {
+          if (!isObjectValueEqual(propA, propB))
+              return false;
+      }
+      else if (propA !== propB) {
+          return false;
+      }
   }
   return true;
 }
@@ -97,7 +101,7 @@ export function isObjectValueEqual(a: { [key: string]: any }, b: { [key: string]
  * @param {Number} max 最大值
  * @returns {Number}
  */
-export function randomNum(min: number, max: number): number {
+export function randomNum(min, max) {
   let num = Math.floor(Math.random() * (min - max) + max);
   return num;
 }
@@ -136,8 +140,8 @@ export function getBrowserLang() {
  * @param {Array} menuList 菜单列表
  * @returns {Array}
  */
-export function getFlatMenuList(menuList: Menu.MenuOptions[]): Menu.MenuOptions[] {
-  let newMenuList: Menu.MenuOptions[] = JSON.parse(JSON.stringify(menuList));
+export function getFlatMenuList(menuList) {
+  let newMenuList = JSON.parse(JSON.stringify(menuList));
   return newMenuList.flatMap(item => [item, ...(item.children ? getFlatMenuList(item.children) : [])]);
 }
 
@@ -146,8 +150,8 @@ export function getFlatMenuList(menuList: Menu.MenuOptions[]): Menu.MenuOptions[
  * @param {Array} menuList 菜单列表
  * @returns {Array}
  * */
-export function getShowMenuList(menuList: Menu.MenuOptions[]) {
-  let newMenuList: Menu.MenuOptions[] = JSON.parse(JSON.stringify(menuList));
+export function getShowMenuList(menuList) {
+  let newMenuList = JSON.parse(JSON.stringify(menuList));
   return newMenuList.filter(item => {
     item.children?.length && (item.children = getShowMenuList(item.children));
     return !item.meta?.isHide;
@@ -161,7 +165,7 @@ export function getShowMenuList(menuList: Menu.MenuOptions[]) {
  * @param {Object} result 处理后的结果
  * @returns {Object}
  */
-export const getAllBreadcrumbList = (menuList: Menu.MenuOptions[], parent = [], result: { [key: string]: any } = {}) => {
+export const getAllBreadcrumbList = (menuList, parent = [], result: { [key] } = {}) => {
   for (const item of menuList) {
     result[item.path] = [...parent, item];
     if (item.children) getAllBreadcrumbList(item.children, result[item.path], result);
@@ -175,7 +179,7 @@ export const getAllBreadcrumbList = (menuList: Menu.MenuOptions[], parent = [], 
  * @param {Array} menuPathArr 菜单地址的一维数组 ['**','**']
  * @returns {Array}
  */
-export function getMenuListPath(menuList: Menu.MenuOptions[], menuPathArr: string[] = []): string[] {
+export function getMenuListPath(menuList, menuPathArr = []) {
   for (const item of menuList) {
     if (typeof item === "object" && item.path) menuPathArr.push(item.path);
     if (item.children?.length) getMenuListPath(item.children, menuPathArr);
@@ -189,7 +193,7 @@ export function getMenuListPath(menuList: Menu.MenuOptions[], menuPathArr: strin
  * @param {String} path 当前访问地址
  * @returns {Object | null}
  */
-export function findMenuByPath(menuList: Menu.MenuOptions[], path: string): Menu.MenuOptions | null {
+export function findMenuByPath(menuList, path) | null {
   for (const item of menuList) {
     if (item.path === path) return item;
     if (item.children) {
@@ -206,7 +210,7 @@ export function findMenuByPath(menuList: Menu.MenuOptions[], path: string): Menu
  * @param {Array} keepAliveNameArr 缓存的菜单 name ['**','**']
  * @returns {Array}
  * */
-export function getKeepAliveRouterName(menuList: Menu.MenuOptions[], keepAliveNameArr: string[] = []) {
+export function getKeepAliveRouterName(menuList, keepAliveNameArr = []) {
   menuList.forEach(item => {
     item.meta.isKeepAlive && item.name && keepAliveNameArr.push(item.name);
     item.children?.length && getKeepAliveRouterName(item.children, keepAliveNameArr);
@@ -221,7 +225,7 @@ export function getKeepAliveRouterName(menuList: Menu.MenuOptions[], keepAliveNa
  * @param {*} callValue 当前单元格值
  * @returns {String}
  * */
-export function formatTableColumn(row: number, col: number, callValue: any) {
+export function formatTableColumn(row, col, callValue) {
   // 如果当前值为数组，使用 / 拼接（根据需求自定义）
   if (isArray(callValue)) return callValue.length ? callValue.join(" / ") : "--";
   return callValue ?? "--";
@@ -232,7 +236,7 @@ export function formatTableColumn(row: number, col: number, callValue: any) {
  * @param {*} callValue 需要处理的值
  * @returns {String}
  * */
-export function formatValue(callValue: any) {
+export function formatValue(callValue) {
   // 如果当前值为数组，使用 / 拼接（根据需求自定义）
   if (isArray(callValue)) return callValue.length ? callValue.join(" / ") : "--";
   return callValue ?? "--";
@@ -244,7 +248,7 @@ export function formatValue(callValue: any) {
  * @param {String} prop 当前 prop
  * @returns {*}
  * */
-export function handleRowAccordingToProp(row: { [key: string]: any }, prop: string) {
+export function handleRowAccordingToProp(row: { [key] }, prop) {
   if (!prop.includes(".")) return row[prop] ?? "--";
   prop.split(".").forEach(item => (row = row[item] ?? "--"));
   return row;
@@ -255,7 +259,7 @@ export function handleRowAccordingToProp(row: { [key: string]: any }, prop: stri
  * @param {String} prop 当前 prop
  * @returns {String}
  * */
-export function handleProp(prop: string) {
+export function handleProp(prop) {
   const propArr = prop.split(".");
   if (propArr.length == 1) return prop;
   return propArr[propArr.length - 1];
@@ -269,7 +273,7 @@ export function handleProp(prop: string) {
  * @param {String} type 过滤类型（目前只有 tag）
  * @returns {String}
  * */
-export function filterEnum(callValue: any, enumData?: any, fieldNames?: any, type?: "tag") {
+export function filterEnum(callValue, enumData, fieldNames, type = "tag") {
   const value = fieldNames?.value ?? "value";
   const label = fieldNames?.label ?? "label";
   const children = fieldNames?.children ?? "children";
@@ -287,8 +291,8 @@ export function filterEnum(callValue: any, enumData?: any, fieldNames?: any, typ
 /**
  * @description 递归查找 callValue 对应的 enum 值
  * */
-export function findItemNested(enumData: any, callValue: any, value: string, children: string) {
-  return enumData.reduce((accumulator: any, current: any) => {
+export function findItemNested(enumData, callValue, value, children) {
+  return enumData.reduce((accumulator, current) => {
     if (accumulator) return accumulator;
     if (current[value] === callValue) return current;
     if (current[children]) return findItemNested(current[children], callValue, value, children);

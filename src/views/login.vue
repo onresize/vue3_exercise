@@ -26,7 +26,7 @@
 import { onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { loginBroadcast } from "@/utils/broadcast";
-import { getTimeState } from "@/utils/tools.ts";
+import { getTimeState } from "@/utils/tools.js";
 import payCom from "@/myCom/payCom/index.vue";
 import colaCom from "@/myCom/colaCom/index.vue";
 
