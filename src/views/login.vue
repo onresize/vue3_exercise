@@ -26,6 +26,7 @@
 import { onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { loginBroadcast } from "@/utils/broadcast";
+import { getTimeState } from "@/utils/tools.ts";
 import payCom from "@/myCom/payCom/index.vue";
 import colaCom from "@/myCom/colaCom/index.vue";
 
@@ -41,6 +42,12 @@ const toPage = (name) => {
     window.localStorage.setItem("user", "Origin");
   }
   Router.push({ path: "/welcome" });
+  ElNotification({
+    title: getTimeState(),
+    message: "欢迎登录 vue3_exercise",
+    type: "success",
+    duration: 3000,
+  });
   loginBroadcast.postMessage("true");
 };
 
