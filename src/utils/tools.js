@@ -165,7 +165,7 @@ export function getShowMenuList(menuList) {
  * @param {Object} result 处理后的结果
  * @returns {Object}
  */
-export const getAllBreadcrumbList = (menuList, parent = [], result: { [key] } = {}) => {
+export const getAllBreadcrumbList = (menuList, parent = [], result) => {
   for (const item of menuList) {
     result[item.path] = [...parent, item];
     if (item.children) getAllBreadcrumbList(item.children, result[item.path], result);
@@ -193,7 +193,7 @@ export function getMenuListPath(menuList, menuPathArr = []) {
  * @param {String} path 当前访问地址
  * @returns {Object | null}
  */
-export function findMenuByPath(menuList, path) | null {
+export function findMenuByPath(menuList, path) {
   for (const item of menuList) {
     if (item.path === path) return item;
     if (item.children) {
@@ -248,7 +248,7 @@ export function formatValue(callValue) {
  * @param {String} prop 当前 prop
  * @returns {*}
  * */
-export function handleRowAccordingToProp(row: { [key] }, prop) {
+export function handleRowAccordingToProp(row, prop) {
   if (!prop.includes(".")) return row[prop] ?? "--";
   prop.split(".").forEach(item => (row = row[item] ?? "--"));
   return row;
@@ -277,7 +277,7 @@ export function filterEnum(callValue, enumData, fieldNames, type = "tag") {
   const value = fieldNames?.value ?? "value";
   const label = fieldNames?.label ?? "label";
   const children = fieldNames?.children ?? "children";
-  let filterData: { [key: string]: any } = {};
+  let filterData = {};
   // 判断 enumData 是否为数组
   if (Array.isArray(enumData)) filterData = findItemNested(enumData, callValue, value, children);
   // 判断是否输出的结果为 tag 类型
