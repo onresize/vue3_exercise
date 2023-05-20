@@ -18,8 +18,8 @@
 <script setup>
 import { ref } from "vue";
 
-const val1 = ref(123456789);
-const val2 = ref(987654321);
+const val1 = ref(1234567890);
+const val2 = ref(9876543210);
 const resNum = ref("");
 const isLoading = ref(false);
 

@@ -1,4 +1,4 @@
-onmessage = function (e) {
+onmessage = (e) => {
   console.log('接收到主线程消息：', e)
   const { type, data } = e.data
   if (type === 'Multiplication') {
