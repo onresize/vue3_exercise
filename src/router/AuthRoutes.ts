@@ -222,6 +222,11 @@ export const AdminRoutes = [
     component: () => import("@cp/获取本地系统文件夹/index.vue"),
   },
   {
+    path: "/webWorker",
+    name: "webWorker",
+    component: () => import("@cp/webWorker/index.vue"),
+  },
+  {
     path: "/animation3",
     component: () => import("@cp/动画/index3.vue"),
     children: [

@@ -10,10 +10,11 @@ const getWallpaper = () => {
   );
 };
 
+// TEST
 const getWallpaper1 = () => {
   return awaitTo(
     server({
-      url: "/api/bing",
+      url: "",
       method: "GET",
     })
   );
