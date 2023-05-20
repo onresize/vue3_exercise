@@ -5,13 +5,13 @@ import { isArray } from "@/utils/is";
  * @param {String} key Storage名称
  * @returns {String}
  */
- export function localGet(key) {
+export function localGet(key) {
   const value = window.localStorage.getItem(key);
   try {
-      return JSON.parse(window.localStorage.getItem(key));
+    return JSON.parse(window.localStorage.getItem(key));
   }
   catch (error) {
-      return value;
+    return value;
   }
 }
 /**
@@ -45,11 +45,11 @@ export function localClear() {
 */
 export function isType(val) {
   if (val === null)
-      return "null";
+    return "null";
   if (typeof val !== "object")
-      return typeof val;
+    return typeof val;
   else
-      return Object.prototype.toString.call(val).slice(8, -1).toLocaleLowerCase();
+    return Object.prototype.toString.call(val).slice(8, -1).toLocaleLowerCase();
 }
 /**
 * @description 生成唯一 uuid
@@ -58,10 +58,10 @@ export function isType(val) {
 export function generateUUID() {
   let uuid = "";
   for (let i = 0; i < 32; i++) {
-      let random = (Math.random() * 16) | 0;
-      if (i === 8 || i === 12 || i === 16 || i === 20)
-          uuid += "-";
-      uuid += (i === 12 ? 4 : i === 16 ? (random & 3) | 8 : random).toString(16);
+    let random = (Math.random() * 16) | 0;
+    if (i === 8 || i === 12 || i === 16 || i === 20)
+      uuid += "-";
+    uuid += (i === 12 ? 4 : i === 16 ? (random & 3) | 8 : random).toString(16);
   }
   return uuid;
 }
@@ -73,24 +73,24 @@ export function generateUUID() {
 */
 export function isObjectValueEqual(a, b) {
   if (!a || !b)
-      return false;
+    return false;
   let aProps = Object.getOwnPropertyNames(a);
   let bProps = Object.getOwnPropertyNames(b);
   if (aProps.length != bProps.length)
-      return false;
+    return false;
   for (let i = 0; i < aProps.length; i++) {
-      let propName = aProps[i];
-      let propA = a[propName];
-      let propB = b[propName];
-      if (!b.hasOwnProperty(propName))
-          return false;
-      if (propA instanceof Object) {
-          if (!isObjectValueEqual(propA, propB))
-              return false;
-      }
-      else if (propA !== propB) {
-          return false;
-      }
+    let propName = aProps[i];
+    let propA = a[propName];
+    let propB = b[propName];
+    if (!b.hasOwnProperty(propName))
+      return false;
+    if (propA instanceof Object) {
+      if (!isObjectValueEqual(propA, propB))
+        return false;
+    }
+    else if (propA !== propB) {
+      return false;
+    }
   }
   return true;
 }
