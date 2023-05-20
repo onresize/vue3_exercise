@@ -9,86 +9,77 @@ export function localGet(key) {
   const value = window.localStorage.getItem(key);
   try {
     return JSON.parse(window.localStorage.getItem(key));
-  }
-  catch (error) {
+  } catch (error) {
     return value;
   }
 }
 /**
-* @description 存储localStorage
-* @param {String} key Storage名称
-* @param {*} value Storage值
-* @returns {void}
-*/
+ * @description 存储localStorage
+ * @param {String} key Storage名称
+ * @param {*} value Storage值
+ * @returns {void}
+ */
 export function localSet(key, value) {
   window.localStorage.setItem(key, JSON.stringify(value));
 }
 /**
-* @description 清除localStorage
-* @param {String} key Storage名称
-* @returns {void}
-*/
+ * @description 清除localStorage
+ * @param {String} key Storage名称
+ * @returns {void}
+ */
 export function localRemove(key) {
   window.localStorage.removeItem(key);
 }
 /**
-* @description 清除所有localStorage
-* @returns {void}
-*/
+ * @description 清除所有localStorage
+ * @returns {void}
+ */
 export function localClear() {
   window.localStorage.clear();
 }
 /**
-* @description 判断数据类型
-* @param {*} val 需要判断类型的数据
-* @returns {String}
-*/
+ * @description 判断数据类型
+ * @param {*} val 需要判断类型的数据
+ * @returns {String}
+ */
 export function isType(val) {
-  if (val === null)
-    return "null";
-  if (typeof val !== "object")
-    return typeof val;
+  if (val === null) return "null";
+  if (typeof val !== "object") return typeof val;
   else
     return Object.prototype.toString.call(val).slice(8, -1).toLocaleLowerCase();
 }
 /**
-* @description 生成唯一 uuid
-* @returns {String}
-*/
+ * @description 生成唯一 uuid
+ * @returns {String}
+ */
 export function generateUUID() {
   let uuid = "";
   for (let i = 0; i < 32; i++) {
     let random = (Math.random() * 16) | 0;
-    if (i === 8 || i === 12 || i === 16 || i === 20)
-      uuid += "-";
+    if (i === 8 || i === 12 || i === 16 || i === 20) uuid += "-";
     uuid += (i === 12 ? 4 : i === 16 ? (random & 3) | 8 : random).toString(16);
   }
   return uuid;
 }
 /**
-* 判断两个对象是否相同
-* @param {Object} a 要比较的对象一
-* @param {Object} b 要比较的对象二
-* @returns {Boolean} 相同返回 true，反之 false
-*/
+ * 判断两个对象是否相同
+ * @param {Object} a 要比较的对象一
+ * @param {Object} b 要比较的对象二
+ * @returns {Boolean} 相同返回 true，反之 false
+ */
 export function isObjectValueEqual(a, b) {
-  if (!a || !b)
-    return false;
+  if (!a || !b) return false;
   let aProps = Object.getOwnPropertyNames(a);
   let bProps = Object.getOwnPropertyNames(b);
-  if (aProps.length != bProps.length)
-    return false;
+  if (aProps.length != bProps.length) return false;
   for (let i = 0; i < aProps.length; i++) {
     let propName = aProps[i];
     let propA = a[propName];
     let propB = b[propName];
-    if (!b.hasOwnProperty(propName))
-      return false;
+    if (!b?.hasOwnProperty(propName)) return false;
     if (propA instanceof Object) {
-      if (!isObjectValueEqual(propA, propB))
-        return false;
-    }
-    else if (propA !== propB) {
+      if (!isObjectValueEqual(propA, propB)) return false;
+    } else if (propA !== propB) {
       return false;
     }
   }
@@ -125,7 +116,9 @@ export function getTimeState() {
  * @returns {String}
  */
 export function getBrowserLang() {
-  let browserLang = navigator.language ? navigator.language : navigator.browserLanguage;
+  let browserLang = navigator.language
+    ? navigator.language
+    : navigator.browserLanguage;
   let defaultBrowserLang = "";
   if (["cn", "zh", "zh-cn"].includes(browserLang.toLowerCase())) {
     defaultBrowserLang = "zh";
@@ -142,7 +135,10 @@ export function getBrowserLang() {
  */
 export function getFlatMenuList(menuList) {
   let newMenuList = JSON.parse(JSON.stringify(menuList));
-  return newMenuList.flatMap(item => [item, ...(item.children ? getFlatMenuList(item.children) : [])]);
+  return newMenuList.flatMap((item) => [
+    item,
+    ...(item.children ? getFlatMenuList(item.children) : []),
+  ]);
 }
 
 /**
@@ -152,7 +148,7 @@ export function getFlatMenuList(menuList) {
  * */
 export function getShowMenuList(menuList) {
   let newMenuList = JSON.parse(JSON.stringify(menuList));
-  return newMenuList.filter(item => {
+  return newMenuList.filter((item) => {
     item.children?.length && (item.children = getShowMenuList(item.children));
     return !item.meta?.isHide;
   });
@@ -168,7 +164,8 @@ export function getShowMenuList(menuList) {
 export const getAllBreadcrumbList = (menuList, parent = [], result) => {
   for (const item of menuList) {
     result[item.path] = [...parent, item];
-    if (item.children) getAllBreadcrumbList(item.children, result[item.path], result);
+    if (item.children)
+      getAllBreadcrumbList(item.children, result[item.path], result);
   }
   return result;
 };
@@ -211,9 +208,10 @@ export function findMenuByPath(menuList, path) {
  * @returns {Array}
  * */
 export function getKeepAliveRouterName(menuList, keepAliveNameArr = []) {
-  menuList.forEach(item => {
+  menuList.forEach((item) => {
     item.meta.isKeepAlive && item.name && keepAliveNameArr.push(item.name);
-    item.children?.length && getKeepAliveRouterName(item.children, keepAliveNameArr);
+    item.children?.length &&
+      getKeepAliveRouterName(item.children, keepAliveNameArr);
   });
   return keepAliveNameArr;
 }
@@ -227,7 +225,8 @@ export function getKeepAliveRouterName(menuList, keepAliveNameArr = []) {
  * */
 export function formatTableColumn(row, col, callValue) {
   // 如果当前值为数组，使用 / 拼接（根据需求自定义）
-  if (isArray(callValue)) return callValue.length ? callValue.join(" / ") : "--";
+  if (isArray(callValue))
+    return callValue.length ? callValue.join(" / ") : "--";
   return callValue ?? "--";
 }
 
@@ -238,7 +237,8 @@ export function formatTableColumn(row, col, callValue) {
  * */
 export function formatValue(callValue) {
   // 如果当前值为数组，使用 / 拼接（根据需求自定义）
-  if (isArray(callValue)) return callValue.length ? callValue.join(" / ") : "--";
+  if (isArray(callValue))
+    return callValue.length ? callValue.join(" / ") : "--";
   return callValue ?? "--";
 }
 
@@ -250,7 +250,7 @@ export function formatValue(callValue) {
  * */
 export function handleRowAccordingToProp(row, prop) {
   if (!prop.includes(".")) return row[prop] ?? "--";
-  prop.split(".").forEach(item => (row = row[item] ?? "--"));
+  prop.split(".").forEach((item) => (row = row[item] ?? "--"));
   return row;
 }
 
@@ -279,7 +279,8 @@ export function filterEnum(callValue, enumData, fieldNames, type = "tag") {
   const children = fieldNames?.children ?? "children";
   let filterData = {};
   // 判断 enumData 是否为数组
-  if (Array.isArray(enumData)) filterData = findItemNested(enumData, callValue, value, children);
+  if (Array.isArray(enumData))
+    filterData = findItemNested(enumData, callValue, value, children);
   // 判断是否输出的结果为 tag 类型
   if (type == "tag") {
     return filterData?.tagType ? filterData.tagType : "";
@@ -295,6 +296,7 @@ export function findItemNested(enumData, callValue, value, children) {
   return enumData.reduce((accumulator, current) => {
     if (accumulator) return accumulator;
     if (current[value] === callValue) return current;
-    if (current[children]) return findItemNested(current[children], callValue, value, children);
+    if (current[children])
+      return findItemNested(current[children], callValue, value, children);
   }, null);
 }

@@ -65,8 +65,8 @@ app.use(
 );
 
 // 瀑布流插件
-import {VueMasonryPlugin} from 'vue-masonry';
-app.use(VueMasonryPlugin)
+import { VueMasonryPlugin } from "vue-masonry";
+app.use(VueMasonryPlugin);
 
 // 使用vueX
 import store from "@/store/index";
@@ -75,7 +75,7 @@ app.use(store);
 import pinia from "@/store/store";
 
 // 应用层provide
-app.provide('provideKey', '则是一个main.ts定义的一个字符串')
+app.provide("provideKey", "则是一个main.ts定义的一个字符串");
 
 // 全局注册图标
 import * as Icons from "@element-plus/icons-vue";
@@ -124,9 +124,8 @@ console.log("版本号：", version);
 // }
 
 // 引入全局工具函数
-import utilsFunc from '@/utils/index'
-app.use(utilsFunc)
-
+import utilsFunc from "@/utils/index";
+app.use(utilsFunc);
 
 // 全局捕获错误
 import errorHandler from "@/utils/errorHandler.js";

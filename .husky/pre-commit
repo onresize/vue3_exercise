@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+#npm run xxx 提交前做一些操作、例：代码统一格式化
+# npm run lint

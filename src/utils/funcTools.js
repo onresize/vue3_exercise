@@ -23,26 +23,24 @@ export const getStorage = (key) => {
   return JSON.parse(localStorage.getItem(key));
 };
 
-
 // 防抖
-let timeout = null
+let timeout = null;
 export function Debounce(func, delay, event = {}, immediate = false) {
-  if (timeout !== null) clearTimeout(timeout)
+  if (timeout !== null) clearTimeout(timeout);
   // 立即执行，此类情况一般用不到
   if (immediate) {
-    const callNow = !timeout
+    const callNow = !timeout;
     timeout = setTimeout(() => {
-      timeout = null
-    }, delay)
-    if (callNow) typeof func === 'function' && func(event)
+      timeout = null;
+    }, delay);
+    if (callNow) typeof func === "function" && func(event);
   } else {
     // 设置定时器，当最后一次操作后，timeout不会再被清除，所以在延时delay毫秒后执行func回调方法
     timeout = setTimeout(() => {
-      typeof func === 'function' && func(event)
-    }, delay)
+      typeof func === "function" && func(event);
+    }, delay);
   }
 }
-
 
 /**
  * 节流原理：在一定时间内，只能触发一次
@@ -51,27 +49,25 @@ export function Debounce(func, delay, event = {}, immediate = false) {
  * @param {Boolean} immediate 是否立即执行
  * @return null
  */
-let timer
-let flag
+let timer;
+let flag;
 
 export function Throttle(func, wait = 500, event = {}, immediate = true) {
   if (immediate) {
     if (!flag) {
-      flag = true
+      flag = true;
       // 如果是立即执行，则在wait毫秒内开始时执行
-      typeof func === 'function' && func(event)
+      typeof func === "function" && func(event);
       timer = setTimeout(() => {
-        flag = false
-      }, wait)
+        flag = false;
+      }, wait);
     }
   } else if (!flag) {
-    flag = true
+    flag = true;
     // 如果是非立即执行，则在wait毫秒内的结束处执行
     timer = setTimeout(() => {
-      flag = false
-      typeof func === 'function' && func(event)
-    }, wait)
+      flag = false;
+      typeof func === "function" && func(event);
+    }, wait);
   }
 }
-
-

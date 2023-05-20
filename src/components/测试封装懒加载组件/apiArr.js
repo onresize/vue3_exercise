@@ -1,6 +1,6 @@
 export function findNew(pageNum) {
   return new Promise((res, rej) => {
-    console.log('当前请求页数：', pageNum)
+    console.log("当前请求页数：", pageNum);
     if (pageNum == 1) {
       res({
         result: [
@@ -20,8 +20,8 @@ export function findNew(pageNum) {
             title: "img11",
             src: new URL("@/assets/lazyPic/12.jpg", import.meta.url).href,
           },
-        ]
-      })
+        ],
+      });
     }
     if (pageNum == 2) {
       res({
@@ -42,8 +42,8 @@ export function findNew(pageNum) {
             title: "img15",
             src: new URL("@/assets/lazyPic/16.jpg", import.meta.url).href,
           },
-        ]
-      })
+        ],
+      });
     }
     if (pageNum == 3) {
       res({
@@ -64,8 +64,8 @@ export function findNew(pageNum) {
             title: "img19",
             src: new URL("@/assets/lazyPic/20.jpg", import.meta.url).href,
           },
-        ]
-      })
+        ],
+      });
     }
     if (pageNum == 4) {
       res({
@@ -93,9 +93,9 @@ export function findNew(pageNum) {
           {
             title: "img25",
             src: new URL("@/assets/lazyPic/26.jpg", import.meta.url).href,
-          }
-        ]
-      })
+          },
+        ],
+      });
     }
-  })
+  });
 }

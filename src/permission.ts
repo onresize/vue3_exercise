@@ -15,18 +15,18 @@ router.beforeEach((to, from, next) => {
 
   NProgress.start();
   if (["/", "/login"].indexOf(to.path) !== -1) {
-    console.log('111111111111111111111111111111111');
+    console.log("111111111111111111111111111111111");
     next();
   } else {
     if (PiniaStore.registerRouteFresh) {
-      console.log('222222222222222222222222222222222');
+      console.log("222222222222222222222222222222222");
       // router.removeRoute("NotFound");
       PiniaStore.PromiseRoutes().then(() => {
         PiniaStore.changeState(false);
         next({ path: to.path });
       });
     } else {
-      console.log('333333333333333333333333333333333');
+      console.log("333333333333333333333333333333333");
       // router.addRoute({
       //   path: "/:pathMatch(.*)",
       //   name: "NotFound",
