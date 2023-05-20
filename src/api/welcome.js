@@ -1,7 +1,7 @@
 import { awaitTo } from "@/utils/awaitTo.js";
 import { server } from "@/utils/request.js";
 
-export const getWallpaper = () => {
+const getWallpaper = () => {
   return awaitTo(
     server({
       url: "/api/bing",
@@ -9,3 +9,15 @@ export const getWallpaper = () => {
     })
   );
 };
+
+const getWallpaper1 = () => {
+  return awaitTo(
+    server({
+      url: "/api/bing",
+      method: "GET",
+    })
+  );
+};
+
+// export { getWallpaper, getWallpaper1 }
+export default { getWallpaper, getWallpaper1 }

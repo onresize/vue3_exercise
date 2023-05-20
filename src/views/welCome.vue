@@ -45,8 +45,10 @@
 <script setup>
 import { ref, reactive, onMounted } from "vue";
 import { dependencies, devDependencies } from "../../package.json";
-import { getWallpaper } from "@/api/welcome.js";
+// import { getWallpaper } from "@/api/welcome.js";
+import * as objApi from "@/api/welcome.js";
 
+const { getWallpaper } = objApi.default;
 let dataImg = ref("");
 const videoBoxRef = ref(null);
 const showBtn = ref("block");
@@ -72,7 +74,7 @@ const Wallpaper = async () => {
     // dataImg.value = `https://img.alicdn.com/imgextra/i4/O1CN01tc92ri1YHA4hoBZu5_!!6000000003033-2-tps-1920-1300.png`;
   }
 };
-// Wallpaper();
+Wallpaper();
 
 onMounted(() => {
   setTimeout(() => {
