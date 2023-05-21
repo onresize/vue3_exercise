@@ -18,7 +18,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onUnmounted } from "vue";
 
 const val1 = ref(1234567890);
 const val2 = ref(9876543210);
@@ -46,6 +46,10 @@ worker.addEventListener("message", (e) => {
     isLoading.value = false;
     resNum.value = data;
   }
+});
+
+onUnmounted(() => {
+  worker.terminate(); // 关闭线程
 });
 </script>
 

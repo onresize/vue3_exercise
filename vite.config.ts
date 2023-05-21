@@ -23,6 +23,7 @@ export default defineConfig(({ mode }) => {
   console.log("当前环境：", env);
   return {
     base: "/",
+    publicDir: "public",
     server: {
       port: 3010,
       proxy: {

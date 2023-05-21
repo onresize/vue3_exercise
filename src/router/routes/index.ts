@@ -17,12 +17,12 @@ const routes: RouteRecordRaw[] = [
     ],
   },
   //XXX 匹配不到页面跳404、这种写法地址栏会不会显示/404
-  {
-    path: "/:pathMatch(.*)",
-    name: "NotFound",
-    meta: { title: "404" },
-    component: () => import("@views/404.vue"),
-  },
+  // {
+  //   path: "/:pathMatch(.*)",
+  //   name: "NotFound",
+  //   meta: { title: "404" },
+  //   component: () => import("@views/404.vue"),
+  // },
   //XXX 匹配不到页面跳404、这种写法每次没有匹配到会地址栏会变成/404
   // { path: "/:pathMatch(.*)", redirect: { name: "NotFound" } },
   // {

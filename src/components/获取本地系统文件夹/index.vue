@@ -12,8 +12,7 @@
   </strong>
   <strong>
     <pre>
-let { x, y, left, top } = document.querySelector(".pic").getBoundingClientRect(); // 获取元素位置</pre
-    >
+let { x, y, left, top } = document.querySelector(".pic").getBoundingClientRect(); // 获取元素位置</pre>
   </strong>
   <div class="pic"></div>
 
@@ -30,14 +29,7 @@ let { x, y, left, top } = document.querySelector(".pic").getBoundingClientRect()
         <source media="(max-width: 900px)" srcset="@/assets/img/3.webp" />
         <source media="(max-width: 1000px)" srcset="@/assets/img/4.webp" />
 
-        <img
-          srcset="@/assets/img/5.webp"
-          alt="#"
-          decoding="async"
-          loading="eager"
-          width="150"
-          height="150"
-        />
+        <img srcset="@/assets/img/5.webp" alt="#" decoding="async" loading="eager" width="150" height="150" />
       </picture>
     </a>
   </section>
@@ -66,10 +58,9 @@ onMounted(() => {
   border: 3px solid red;
   box-sizing: border-box;
   // 设置背景边距20px、默认是left、（top、right、bottom）
-  background: url("https://img0.baidu.com/it/u=1217304799,3113310756&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1683997200&t=99e50a2df4007441cda22e8e59171b22")
-    no-repeat top 20px center;
+  background: url("https://img0.baidu.com/it/u=1217304799,3113310756&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1683997200&t=99e50a2df4007441cda22e8e59171b22") no-repeat top 20px center;
   background-size: 100% 100%;
 }
-img {
-}
+
+img {}
 </style>
