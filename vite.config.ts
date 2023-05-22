@@ -22,8 +22,9 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd());
   console.log("当前环境：", env);
   return {
+    root: resolve("./"),
     base: "/",
-    // publicDir: "public",
+    publicDir: "public",
     server: {
       port: 3010,
       proxy: {
@@ -87,24 +88,22 @@ export default defineConfig(({ mode }) => {
       },
     },
     plugins: [
-      vue({
-        refTransform: true, // 开启ref转换、使用$ref响应式定义、不需要.value
-      }),
-      svgBuilder("./src/assets/icons/svg/"), // 导入所有svg
+      vue(),
       vueJsx(),
+      svgBuilder("./src/assets/icons/svg/"), // 导入所有svg
       // https://github.com/intlify/vite-plugin-vue-i18n
       VueI18n({
         include: [resolve(__dirname, "./src/locales/**")],
       }),
       VueSetupExtend(), // * name 可以写在 script 标签上
-      // 注入html模板数据
-      createHtmlPlugin({
-        inject: {
-          data: {
-            ENABLE_ERUDA: env.VITE_ENABLE_ERUDA || "false",
-          },
-        },
-      }),
+      // 这里使用注入变量到html文件、会导致其他的html静态页面地址栏访问跳转404路由、暂未找到两者并行的解决办法、（注释能正常访问其他html）
+      // createHtmlPlugin({
+      //   inject: {
+      //     data: {
+      //       ENABLE_ERUDA: env.VITE_ENABLE_ERUDA || "false",
+      //     },
+      //   },
+      // }),
       // 自动引入element
       AutoImport({
         resolvers: [ElementPlusResolver()],

@@ -9,6 +9,8 @@ import config from "@/config";
 // 🍒参考：https://blog.csdn.net/u012533474/article/details/129263196
 const PiniaStore = useMainStore(pinia);
 
+NProgress.configure({ showSpinner: false });
+
 // router4.0版本、next参数可选、vue2不支持router4.0
 router.beforeEach((to, from, next) => {
   // console.log("mainJS进入了路由:", to, from);
