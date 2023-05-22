@@ -83,5 +83,10 @@
       "prettier --write",
       "eslint --fix"
     ]
+  },
+  "engines": {
+    "node": "16.x",
+    "npm": ">=7.20.3",
+    "yarn": "1.x"
   }
 }

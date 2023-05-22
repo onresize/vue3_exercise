@@ -227,6 +227,11 @@ export const AdminRoutes = [
     component: () => import("@cp/webWorker/index.vue"),
   },
   {
+    path: "/storageBeOverDu",
+    name: "storageBeOverDu",
+    component: () => import("@cp/storageBeOverDu/index.vue"),
+  },
+  {
     path: "/animation3",
     component: () => import("@cp/动画/index3.vue"),
     children: [

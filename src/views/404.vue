@@ -110,7 +110,7 @@ onMounted(() => {
 <style lang="less" scoped>
 .box-404 {
   background: #000;
-  border-radius: 10px;
+  // border-radius: 10px;
   height: calc(100vh - 162px);
   overflow: hidden;
   display: flex;
