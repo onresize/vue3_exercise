@@ -22,7 +22,6 @@
 </template>
 
 <script setup lang="ts">
-// defineProps defineEmits defineExpose withDefaults onMounted onUnmounted
 import login from "@/assets/img/logo.png";
 import {
   ref,

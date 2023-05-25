@@ -7,7 +7,6 @@
 </template>
 
 <script setup>
-// defineProps defineEmits defineExpose withDefaults onMounted onUnmounted
 import {
   ref,
   reactive,

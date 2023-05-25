@@ -4,7 +4,6 @@
 </template>
 
 <script setup lang="ts">
-// defineProps defineEmits defineExpose withDefaults onMounted onUnmounted
 import { useRoute } from "vue-router";
 const route = useRoute();
 import {

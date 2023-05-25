@@ -27,6 +27,9 @@ export default defineConfig(({ mode }) => {
     publicDir: "public",
     server: {
       port: 3010,
+      hmr: {
+        overlay: true, // 服务器错误显示在页面上
+      },
       proxy: {
         "/BaseApi": {
           target: env.VITE_APP_BASE_API,

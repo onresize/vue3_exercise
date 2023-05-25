@@ -8,7 +8,6 @@
 </template>
 
 <script setup lang="ts">
-// defineProps defineEmits defineExpose withDefaults onMounted onUnmounted
 import { ref, reactive, computed, watch, watchEffect } from "vue";
 let value1 = ref<string>("小米");
 let value2 = ref<string>("苹果");

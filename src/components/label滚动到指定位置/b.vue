@@ -14,12 +14,11 @@
     </div>
   </div>
 </template>
- 
+
 <script setup>
-// defineProps defineEmits defineExpose withDefaults
 import { ref, reactive } from "vue";
 </script>
- 
+
 <style scoped>
 .demo {
   padding-top: 20px;

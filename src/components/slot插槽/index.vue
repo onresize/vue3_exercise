@@ -26,7 +26,6 @@
 </template>
 
 <script setup lang="ts">
-// defineProps defineEmits defineExpose withDefaults onMounted onUnmounted
 import { ref, reactive, computed, watch, watchEffect } from "vue";
 import children from "./children.vue";
 let slotName = ref("footer");
