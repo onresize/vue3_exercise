@@ -15,6 +15,7 @@ export const useMainStore = defineStore("piniaStore", {
     fatherColor: "transparent",
     childColor: "transparent",
     grandchildColor: "transparent",
+    isShowRightChart: true,
   }),
   // 声明getters
   getters: {
@@ -31,6 +32,10 @@ export const useMainStore = defineStore("piniaStore", {
     addCount(num) {
       // console.log("pinia方法addCount");
       this.shoesCount += num;
+    },
+    changeRightChartShow(state) {
+      // console.log("pinia改变状态：", state);
+      this.isShowRightChart = state;
     },
     changeSvgList(list) {
       this.iconList = list;

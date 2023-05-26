@@ -237,6 +237,11 @@ export const AdminRoutes = [
     component: () => import("@cp/props验证/index.vue"),
   },
   {
+    path: "/RecurrenceBug",
+    name: "RecurrenceBug",
+    component: () => import("@cp/RecurrenceBug/index.vue"),
+  },
+  {
     path: "/animation3",
     component: () => import("@cp/动画/index3.vue"),
     children: [
