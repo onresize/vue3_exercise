@@ -29,7 +29,6 @@ import {
 } from "vue";
 import { useMainStore } from "@/store/pinia.ts";
 import * as echarts from "echarts";
-import "echarts-gl";
 
 const PiniaStore = useMainStore();
 const { appContext, proxy } = getCurrentInstance();
