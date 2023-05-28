@@ -26,15 +26,29 @@ export default defineConfig(({ mode }) => {
     base: "/",
     publicDir: "public",
     server: {
-      port: 3010,
+      port: 3077,
       hmr: {
         overlay: true, // 服务器错误显示在页面上
       },
       proxy: {
         "/BaseApi": {
-          target: env.VITE_APP_BASE_API,
+          // 如果接口掉不通会默认返回对应域名地址
+          // target: "http://upload.qiniup.com",
+          // target: "http://up-cn-east-2.qiniup.com",
+          target: "http://up-z0.qiniup.com",
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/BaseApi/, ""),
+        },
+        "/api": {
+          target: env.VITE_APP_BASE_API,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api/, "/api"),
+        },
+        // 七牛云接口
+        "/qny": {
+          target: "http://localhost:5000", // node地址
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/qny/, ""),
         },
       },
     },

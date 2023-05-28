@@ -38,6 +38,8 @@ b站视频学习: [(小满zs)](https://www.bilibili.com/video/BV1dS4y1y7vd)
    yarn release     更新版本、自动打tag
 
    yarn prepare     commit时校验信息是否符合规范、执行自定义hook钩子
+
+   node_server文件夹： 部分node上传接口
    ```
 
 
