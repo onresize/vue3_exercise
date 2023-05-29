@@ -1,18 +1,23 @@
 import { ref, onMounted, onUnmounted } from "vue";
 
-export function useMouse() {
-  var x = ref(0);
-  var y = ref(0);
-  const setPoint = (e) => {
-    x.value = e.pageX;
-    y.value = e.pageY;
+export const useMouse = () => {
+  const x = ref(0);
+  const y = ref(0);
+
+  const useEventListener = (evt, callback) => {
+    onMounted(() => {
+      document.addEventListener(evt, callback, false);
+    });
+    onUnmounted(() => {
+      document.removeEventListener(evt, callback, false);
+    });
   };
 
-  onMounted(() => {
-    document.addEventListener("mousemove", setPoint);
-  });
-  onUnmounted(() => {
-    document.removeEventListener("mousemove", setPoint);
+  useEventListener("mousemove", (e) => {
+    x.value = e.pageX;
+    y.value = e.pageY;
+    console.log(x.value, y.value);
   });
   return { x, y };
-}
+  // return { x, y }
+};

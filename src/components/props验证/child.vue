@@ -35,12 +35,17 @@
       <h4>树组件</h4>
       <treeComponent :data="pData"></treeComponent>
     </el-card>
+    <el-card>
+      <h3>{{ x + "-----" + y }}</h3>
+    </el-card>
   </div>
 </template>
 
 <script setup>
 import { ref, h } from "vue";
 import { useMouse } from "@/hooks/useMouse";
+// hooks监听鼠标
+const { x, y } = useMouse();
 
 const props = defineProps({
   str: {
@@ -123,8 +128,15 @@ const treeComponent = (props) => {
   }
 };
 
-// hooks监听鼠标
-const [x, y] = useMouse();
+// console.log(x.value, y.value);
+
+//   window.addEventListener(
+//     "mousemove",
+//     (e) => {
+//       console.log(e);
+//     },
+//     false
+//   );
 </script>
 
 <style lang="less">
