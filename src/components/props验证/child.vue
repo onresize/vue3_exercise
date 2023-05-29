@@ -127,16 +127,8 @@ const treeComponent = (props) => {
 };
 
 // hooks监听鼠标
-const { x, y } = useMouse();
-console.log(x.value, y.value);
+const [x, y] = useMouse();
 
-//   window.addEventListener(
-//     "mousemove",
-//     (e) => {
-//       console.log(e);
-//     },
-//     false
-//   );
 </script>
 
 <style lang="less">
