@@ -6,7 +6,6 @@ export function useMouse() {
   const setPoint = (e) => {
     x.value = e.pageX;
     y.value = e.pageY;
-    console.log(x.value, y.value);
   };
 
   onMounted(() => {
