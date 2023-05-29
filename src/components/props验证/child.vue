@@ -35,6 +35,9 @@
       <h4>树组件</h4>
       <treeComponent :data="pData"></treeComponent>
     </el-card>
+    <el-card>
+      <h3>{{ x + "-----" + y }}</h3>
+    </el-card>
   </div>
 </template>
 
@@ -124,10 +127,9 @@ const treeComponent = (props) => {
 };
 
 // hooks监听鼠标
-const [x, y] = useMouse();
-console.log(x, y);
+const { x, y } = useMouse();
+console.log(x.value, y.value);
 
-// onMounted(() => {
 //   window.addEventListener(
 //     "mousemove",
 //     (e) => {
@@ -135,7 +137,6 @@ console.log(x, y);
 //     },
 //     false
 //   );
-// });
 </script>
 
 <style lang="less">

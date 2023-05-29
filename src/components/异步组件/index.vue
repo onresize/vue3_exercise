@@ -19,6 +19,7 @@
 
 <script setup>
 import { defineAsyncComponent } from "vue";
+// defineAsyncComponent异步加载组件、相当于vue2中的组件按需加载
 const A = defineAsyncComponent(() => import("./A.vue"));
 </script>
 
