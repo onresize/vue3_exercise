@@ -10,15 +10,15 @@ const getWallpaper = () => {
   );
 };
 
-// TEST
-const getWallpaper1 = () => {
+// 获取七牛云token
+const getQNYToken = () => {
   return awaitTo(
     server({
-      url: "",
-      method: "GET",
+      url: "/qny/token",
+      method: "POST",
     })
   );
-};
+}
 
-// export { getWallpaper, getWallpaper1 }
-export default { getWallpaper, getWallpaper1 }
+// export { getWallpaper }
+export default { getWallpaper, getQNYToken }

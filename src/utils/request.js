@@ -7,14 +7,15 @@ export const server = (obj) => {
   axios.defaults.headers["Content-Type"] = "application/json;charset=utf-8";
   return new Promise((resolve, reject) => {
     const request = axios.create({
-      baseURL: import.meta.env.VITE_BASE,
+      // baseURL: import.meta.env.VITE_BASE,
       timeout: 10000,
       withCredentials: true, // 跨域时候是否允许携带凭证
     });
 
     request.interceptors.request.use(
       (config) => {
-        // config.headers["a"] = "aaa";
+        // config.headers["Content-Type"] = "multipart/form-data";
+        // console.log('请求拦截：', config)
         return config;
       },
       (err) => reject(err)

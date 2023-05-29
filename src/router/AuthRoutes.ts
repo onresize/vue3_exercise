@@ -6,6 +6,11 @@ export const AdminRoutes = [
     component: () => import("@cp/百度Map/map.vue"),
   },
   {
+    path: "/uploadFile",
+    meta: { title: "uploadFile" },
+    component: () => import("@cp/上传文件本地和七牛云/index.vue"),
+  },
+  {
     path: "/postMeaasge",
     meta: { title: "postMeaasge" },
     component: () => import("@cp/postMeaasge/index.vue"),
@@ -235,6 +240,11 @@ export const AdminRoutes = [
     path: "/propsValidator",
     name: "propsValidator",
     component: () => import("@cp/props验证/index.vue"),
+  },
+  {
+    path: "/RecurrenceBug",
+    name: "RecurrenceBug",
+    component: () => import("@cp/RecurrenceBug/index.vue"),
   },
   {
     path: "/animation3",

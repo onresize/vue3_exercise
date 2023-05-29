@@ -4,12 +4,14 @@
   </div>
 </template>
 
+
 <script setup lang="ts">
 import { computed, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import router from "@/router";
 import pinia from "@/store/store";
 import { useMainStore } from "@/store/pinia";
+
 
 const PiniaStore = useMainStore(pinia);
 
