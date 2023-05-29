@@ -18,31 +18,30 @@ const draggable: Directive = {
   mounted: function (el: ElType) {
     el.style.cursor = "move";
     el.style.position = "absolute";
-    el.onmousedown = function (e) {
-      console.log("拖拽指令：", e);
-      let disX = e.pageX - el.offsetLeft;
-      let disY = e.pageY - el.offsetTop;
-      document.onmousemove = function (e) {
-        let x = e.pageX - disX;
-        let y = e.pageY - disY;
-        let maxX = el.parentNode.offsetWidth - el.offsetWidth + 290;
-        let maxY = el.parentNode.offsetHeight - el.offsetHeight;
-        if (x < 0) {
-          x = 0;
-        } else if (x > maxX) {
-          x = maxX;
-        }
+    el.onmousedown = function (ev) {
+      console.log("拖拽指令：", ev);
+      // 鼠标按下的位置
+      const mouseXStart = ev.clientX;
+      const mouseYStart = ev.clientY;
+      console.log("按下开始", mouseXStart, mouseYStart);
+      // 当前滑块位置
+      const rectLeft = el.offsetLeft;
+      const rectTop = el.offsetTop;
+      document.onmousemove = (e) => {
+        // 鼠标移动的位置
+        const mouseXEnd = e.clientX;
+        const mouseYEnd = e.clientY;
+        const moveX = mouseXEnd - mouseXStart + rectLeft;
+        const moveY = mouseYEnd - mouseYStart + rectTop;
+        console.log(rectLeft, rectTop);
 
-        if (y < 0) {
-          y = 0;
-        } else if (y > maxY) {
-          y = maxY;
-        }
-        el.style.left = x + "px";
-        el.style.top = y + "px";
+        el.style["top"] = moveY + "px";
+        el.style["left"] = moveX + "px";
       };
-      document.onmouseup = function () {
-        document.onmousemove = document.onmouseup = null;
+      document.onmouseup = () => {
+        console.log("鼠标抬起");
+        // 取消事件
+        document.onmousemove = null;
       };
     };
   },
