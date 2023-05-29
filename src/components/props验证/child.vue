@@ -40,7 +40,7 @@
 
 <script setup>
 import { ref, h } from "vue";
-import useMouse from "@/hooks/useMouse";
+import { useMouse } from "@/hooks/useMouse";
 
 const props = defineProps({
   str: {
@@ -125,17 +125,6 @@ const treeComponent = (props) => {
 
 // hooks监听鼠标
 const [x, y] = useMouse();
-console.log(x, y);
-
-// onMounted(() => {
-//   window.addEventListener(
-//     "mousemove",
-//     (e) => {
-//       console.log(e);
-//     },
-//     false
-//   );
-// });
 </script>
 
 <style lang="less">
