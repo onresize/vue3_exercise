@@ -48,8 +48,8 @@ app.get("/", function (req, res) {
   res.end('hello server!')
 })
 
-//新增商品
-app.post('/uploadFWQ', (req, res) => {
+// 上传到服务器文件夹
+app.post('/fwqBd/uploadFWQ', (req, res) => {
   try {
     let imgUrl;
     // 数据处理部分

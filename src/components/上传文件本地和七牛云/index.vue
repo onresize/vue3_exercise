@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <el-card>
-      <el-tag color="#ffcc99">上传到七牛云</el-tag>
+  <div class="content">
+    <el-card class="card_box">
+      <el-tag color="#ffcc99" style="color: #000;">上传到七牛云</el-tag>
       <el-upload class="avatar-uploader" :action="state.domain" :http-request="upLoadQny" :show-file-list="false"
         :before-upload="beforeUpload">
         <div class="center_box">
@@ -27,6 +27,34 @@
         </div>
       </el-upload>
     </el-card>
+
+    <el-card class="card_box">
+      <el-tag color="#ffcc99" style="color: #000;">上传到本地服务器</el-tag>
+      <el-upload class="avatar-uploader" :action="state.domain_bd" :http-request="upLoadQny_bd" :show-file-list="false"
+        :before-upload="beforeUpload">
+        <div class="center_box">
+          <div v-if="state.imageUrl_bd" class="avatar_box">
+            <img :src="state.imageUrl_bd" class="headerPic" />
+            <div class="mask" @click.stop.prevent>
+              <el-icon class="ico" :size="20" @click.stop.prevent="preview_bd">
+                <svg-icon name="zoom"></svg-icon>
+              </el-icon>
+              <el-icon class="ico" :size="20" @click.stop.prevent="Download_bd">
+                <svg-icon name="download"></svg-icon>
+              </el-icon>
+              <el-icon class="ico" :size="20" @click.stop.prevent="Delete_bd">
+                <svg-icon name="del"></svg-icon>
+              </el-icon>
+            </div>
+          </div>
+          <el-icon v-else-if="!state.imageUrl_bd && !state.percentValue_bd" class="box" :size="20">
+            <Plus />
+          </el-icon>
+          <el-progress v-else type="circle" class="box" :percentage="state.percentValue_bd" :color="state.colors"
+            :show-text="true" />
+        </div>
+      </el-upload>
+    </el-card>
   </div>
 </template>
 
@@ -39,9 +67,12 @@ import * as objApi from "@/api/welcome.js";
 const { getQNYToken } = objApi.default;
 const state = reactive({
   domain: "http://upload.qiniup.com",
+  domain_bd: "http://localhost:5000",
   // imageUrl: 'http://rvcvwrkd1.hd-bkt.clouddn.com/FmHvLBkJ69HjQ8vQtoJhSUvZhZkG',
   imageUrl: '',
+  imageUrl_bd: '',
   percentValue: 0,
+  percentValue_bd: 0,
   colors: [
     { color: '#f56c6c', percentage: 20 },
     { color: '#e6a23c', percentage: 40 },
@@ -72,7 +103,7 @@ const beforeUpload = (file) => {
   return isJPG && isLt5M;
 };
 
-// 上传七牛云文件
+// 上传七牛云文件API
 const postQNYFile = (data) => {
   return awaitTo(
     server({
@@ -146,9 +177,55 @@ const Delete = () => {
   state.imageUrl = ''
   state.imgType = ''
 }
+
+
+// 上传本地文件API
+const postBDFile = () => {
+  return awaitTo(
+    server({
+      url: "/qny/uploadFWQ",
+      method: "POST",
+      data,
+      headers: { "Content-Type": "multipart/form-data" },
+      onUploadProgress: (ProgressEvent) => {
+        // progressEvent.loaded:已上传文件大小
+        // progressEvent.total:被上传文件的总大小
+        // 这里因为在点击上传按钮之前图片就已经自动上传了，所以 loaded 和 total 是一样大小
+        state.percentValue_bd = ~~(ProgressEvent.loaded / ProgressEvent.total * 100)
+        console.log(state.percentValue_bd)
+      }
+    })
+  );
+}
+
+const upLoadQny_bd = async ({ file }) => {
+  const formData = new FormData()
+  formData.append('file', file)
+  formData.append('token', token)
+  console.log("获取七牛云上传token:", token, file);
+
+  const [error, res] = await postBDFile(formData)
+}
+
+const preview_bd = () => { }
+const Download_bd = () => { }
+const Delete_bd = () => { }
+
 </script>
 
 <style scoped lang="less">
+.content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+
+  .card_box {
+    width: 250px;
+    height: 290px;
+    margin: 5px;
+  }
+}
+
 .el-tag {
   margin: 0 0 10px 0;
 }

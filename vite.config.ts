@@ -39,6 +39,11 @@ export default defineConfig(({ mode }) => {
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/BaseApi/, ""),
         },
+        "/fwqBd": {
+          target: "http://up-z0.qiniup.com",
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/BaseApi/, ""),
+        },
         "/api": {
           target: env.VITE_APP_BASE_API,
           changeOrigin: true,
