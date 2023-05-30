@@ -247,6 +247,11 @@ export const AdminRoutes = [
     component: () => import("@cp/RecurrenceBug/index.vue"),
   },
   {
+    path: "/dragModal",
+    name: "dragModal",
+    component: () => import("@cp/演示多个拖拽弹窗/index.vue"),
+  },
+  {
     path: "/animation3",
     component: () => import("@cp/动画/index3.vue"),
     children: [

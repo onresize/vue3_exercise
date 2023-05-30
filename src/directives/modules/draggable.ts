@@ -14,6 +14,15 @@ import type { Directive } from "vue";
 interface ElType extends HTMLElement {
   parentNode: any;
 }
+// 获取原有属性 ie dom元素.currentStyle 火狐谷歌 window.getComputedStyle(dom元素, null);
+const getStyle = (function () {
+  if (window.document.currentStyle) {
+    return (dom, attr) => dom.currentStyle[attr];
+  } else {
+    return (dom, attr) => getComputedStyle(dom, false)[attr];
+  }
+})();
+
 const draggable: Directive = {
   mounted: function (el: ElType) {
     el.style.cursor = "move";
