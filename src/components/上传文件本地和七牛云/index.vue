@@ -180,7 +180,7 @@ const Delete = () => {
 
 
 // 上传本地文件API
-const postBDFile = () => {
+const postBDFile = (data) => {
   return awaitTo(
     server({
       url: "/qny/uploadFWQ",
@@ -201,8 +201,7 @@ const postBDFile = () => {
 const upLoadQny_bd = async ({ file }) => {
   const formData = new FormData()
   formData.append('file', file)
-  formData.append('token', token)
-  console.log("获取七牛云上传token:", token, file);
+  console.log("获取七牛云上传token:", file);
 
   const [error, res] = await postBDFile(formData)
 }

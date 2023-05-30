@@ -12,9 +12,6 @@ const httpStr = 'http://'
 // 青牛云上传
 const qiniu = require('./qiniu.js')
 
-// 声明一个变量，保存所有数据（其实数据是保存到内存里）
-var allGood = []
-
 // 获取提交参数
 const bodyParser = require("body-parser");
 // 解析以 application/json 和 application/x-www-form-urlencoded 提交的数据
@@ -36,10 +33,10 @@ app.all("*", function (req, res, next) {
 });
 
 // 静态服务器
-// app.use(express.static(__dirname + '/public')); // 这一句好像没生效，不知为什么
-// app.use(express.static('public'));
-// 视频流
+app.use(express.static(__dirname + '/public')); // 这一句好像没生效，不知为什么
+app.use(express.static('public'));
 
+// 视频流
 // const {stat} = require('fs').promises
 // 原文链接：https://blog.csdn.net/qq_43505774/article/details/118971681
 
@@ -49,52 +46,56 @@ app.get("/", function (req, res) {
 })
 
 // 上传到服务器文件夹
-app.post('/fwqBd/uploadFWQ', (req, res) => {
-  try {
-    let imgUrl;
-    // 数据处理部分
-    let form = new formidable.IncomingForm();
-    //设置文件上传后保存的路径
-    let imgPath = 'public'
-    form.uploadDir = path.join(__dirname, imgPath);
-    let uploadDir = path.join(__dirname, imgPath);
-    //保留原始文件的扩展名
-    form.keepExtensions = true;
-    form.parse(req, async function (err, fields, files) {
-      console.log('err, fields, files:', err, fields, files)
-      // 为上传的文件重命名：其中files.file.path可以获取文件的上传路径
-      if (files.hasOwnProperty('file')) {
-        let oldPath = files.file.path
-        let filename = new Date().toLocaleTimeString() + files.file.name
-        let newPath = path.join(uploadDir, filename)
-        // 更新图片地址 /public
-        imgUrl = path.join(serverUrl, imgPath, filename)
-        fields.goodImg = httpStr + imgUrl;
-        // 将文件保存到服务器的某个目录
-        fs.renameSync(oldPath, newPath)
-      }
-
-      // 此处将数据保存到数据库
-      let backRel = fields;
-      backRel._id = Date.now();
-      // 保存最新数据
-      allGood.push(backRel);
-      console.log('-update-good123:', backRel);
-      let data = {
-        error: 0,
-        msg: '新增商品成功',
-        data: JSON.parse(backRel)
-      }
-      res.end(JSON.stringify(data))
-    })
-  } catch (error) {
-    let data = {
-      error: 1,
-      msg: '新增商品出错！'
-    }
-    res.end(JSON.stringify(data))
+app.post('/uploadFWQ', (req, res) => {
+  let cacheFolder = 'public'
+  if (!fs.existsSync(cacheFolder)) {
+    fs.mkdirSync(cacheFolder)
   }
 
+  let form = new formidable.IncomingForm();
+  form.encoding = 'utf-8'; //设置编辑
+  form.uploadDir = cacheFolder; //设置上传目录
+  form.keepExtensions = true; //保留后缀
+  form.maxFieldsSize = 2 * 1024 * 1024; //文件大小
+  form.type = true;
+  let displayUrl;
+  form.parse(req, function (err, fields, files) {
+    if (err) {
+      res.send(err);
+      return;
+    }
+    let extName = ''
+    switch (files?.file?.type) {
+      case 'image/jpeg':
+        extName = 'jpg';
+        break;
+      case 'image/jpg':
+        extName = 'jpg';
+        break;
+      case 'image/png':
+        extName = 'png';
+        break;
+    }
+    if (extName.length === 0) {
+      res.send({
+        code: 202,
+        msg: '只支持png和jpg格式图片'
+      })
+      return
+    } else {
+      if (files.file.path.length) {
+        let picName = files.file.path.substr(7)
+        let newPath = form.uploadDir + '/' + picName;
+        displayUrl = `http://localhost:5000/public/${picName}`
+
+        fs.renameSync(files.file.path, newPath);
+        res.send({
+          code: 200,
+          path: displayUrl
+        })
+      }
+    }
+  })
 })
 
 // 青牛云上传token
