@@ -11,6 +11,11 @@ export const AdminRoutes = [
     component: () => import("@cp/上传文件本地和七牛云/index.vue"),
   },
   {
+    path: "/websocketTest",
+    meta: { title: "websocketTest" },
+    component: () => import("@cp/websocketTest/index.vue"),
+  },
+  {
     path: "/postMeaasge",
     meta: { title: "postMeaasge" },
     component: () => import("@cp/postMeaasge/index.vue"),
