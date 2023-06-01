@@ -16,6 +16,7 @@ export const useMainStore = defineStore("piniaStore", {
     childColor: "transparent",
     grandchildColor: "transparent",
     isShowRightChart: true,
+    MessageList: [], // socket消息数组
   }),
   // 声明getters
   getters: {
@@ -36,6 +37,10 @@ export const useMainStore = defineStore("piniaStore", {
     changeRightChartShow(state) {
       // console.log("pinia改变状态：", state);
       this.isShowRightChart = state;
+    },
+    changeMessageList(state) {
+      this.MessageList.push(state);
+      // console.log("pinia存储socket消息：", this.MessageList);
     },
     changeSvgList(list) {
       this.iconList = list;
