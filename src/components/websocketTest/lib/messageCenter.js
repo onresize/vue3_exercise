@@ -1,12 +1,3 @@
-/*
- * @Author: Hunter
- * @Date: 2022-04-14 15:32:29
- * @LastEditTime: 2022-09-15 11:28:03
- * @LastEditors: Hunter
- * @Description:
- * @FilePath: \website\lib\messagecenter.js
- * 可以输入预定的版权声明、个性签名、空行等
- */
 export class MessageCenter {
   events = {};
   /**

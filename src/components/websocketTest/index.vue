@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>websocket连接测试</h3>
+    <h3>websocket连接测试(每隔10秒心跳响应)</h3>
     <el-card>
       <el-button
         :disabled="state.connectDisabled"
