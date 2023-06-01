@@ -16,6 +16,7 @@ const useMouse = () => {
   const x = ref(0)
   const y = ref(0)
 
+  // js拿全局定义的值
   const { proxy, appContext } = getCurrentInstance();
   // console.log(proxy)
   // console.log(appContext)

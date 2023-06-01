@@ -32,9 +32,12 @@ app.all("*", function (req, res, next) {
   next();
 });
 
-// 静态服务器
-app.use(express.static(__dirname + '/public')); // 这一句好像没生效，不知为什么
-app.use(express.static('public'));
+// XXX设置访问服务器静态文件、static下的静态图片不需要加上static直接'/xxx.jpg'
+// 参考： https://www.cnblogs.com/kebaoye/p/16113975.html
+// app.use(express.static(path.join(__dirname, 'static')));
+app.use(express.static('static'));
+
+
 
 // 视频流
 // const {stat} = require('fs').promises
@@ -47,7 +50,7 @@ app.get("/", function (req, res) {
 
 // 上传到服务器文件夹
 app.post('/uploadFWQ', (req, res) => {
-  let cacheFolder = 'public'
+  let cacheFolder = 'static'
   if (!fs.existsSync(cacheFolder)) {
     fs.mkdirSync(cacheFolder)
   }
@@ -86,7 +89,7 @@ app.post('/uploadFWQ', (req, res) => {
       if (files.file.path.length) {
         let picName = files.file.path.substr(7)
         let newPath = form.uploadDir + '/' + picName;
-        displayUrl = `http://localhost:5000/public/${picName}`
+        displayUrl = `http://localhost:5000/${picName}`
 
         fs.renameSync(files.file.path, newPath);
         res.send({

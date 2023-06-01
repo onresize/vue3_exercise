@@ -123,8 +123,12 @@ console.log("版本号：", version);
 //   }
 // }
 
+// 引入全局图片预览组件
+import MyImageViewer from "@/myCom/MyImageViewer/index.js";
+app.use(MyImageViewer);
+
 // 引入全局工具函数
-import utilsFunc from "@/utils/index";
+import utilsFunc from "@/utils/index.js";
 app.use(utilsFunc);
 
 // 全局捕获错误
