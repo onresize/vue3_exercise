@@ -42,8 +42,7 @@
     "vue-masonry": "^0.16.0",
     "vue-router": "^4.1.4",
     "vue3-intro-step": "^1.0.5",
-    "vuex": "^4.0.2",
-    "xgplayer": "^2.31.4"
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.6.3",
@@ -76,6 +75,8 @@
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-vue-setup-extend": "^0.4.0",
     "vue-tsc": "^0.3.0",
+    "xgplayer": "^3.0.4",
+    "xgplayer-flv.js": "^2.3.0",
     "yorkie": "^2.0.0"
   },
   "gitHooks": {

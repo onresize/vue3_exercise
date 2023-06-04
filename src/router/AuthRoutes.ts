@@ -6,6 +6,11 @@ export const AdminRoutes = [
     component: () => import("@cp/百度Map/map.vue"),
   },
   {
+    path: "/flv",
+    meta: { title: "flv" },
+    component: () => import("@cp/流播放/flv.vue"),
+  },
+  {
     path: "/uploadFile",
     meta: { title: "uploadFile" },
     component: () => import("@cp/上传文件本地和七牛云/index.vue"),

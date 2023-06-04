@@ -1556,7 +1556,7 @@ caniuse-lite@^1.0.30001489:
   resolved "https://registry.npmmirror.com/caniuse-lite/-/caniuse-lite-1.0.30001492.tgz#4a06861788a52b4c81fd3344573b68cc87fe062b"
   integrity sha512-2efF8SAZwgAX1FJr87KWhvuJxnGJKOnctQa8xLOskAXNXq8oiuqgl6u1kk3fFpsp3GgvzlRjiK1sl63hNtFADw==
 
-chalk@^2.0.0, chalk@^2.3.2, chalk@^2.4.1, chalk@^2.4.2:
+chalk@^2.0.0, chalk@^2.4.1, chalk@^2.4.2:
   version "2.4.2"
   resolved "https://registry.npmmirror.com/chalk/-/chalk-2.4.2.tgz#cd42541677a54333cf541a49108c1432b44c9424"
   integrity sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ==
@@ -1702,7 +1702,7 @@ colorette@^2.0.16:
   resolved "https://registry.npmmirror.com/colorette/-/colorette-2.0.20.tgz#9eb793e6833067f7235902fcd3b09917a000a95a"
   integrity sha512-IfEDxwoWIjkeXL1eXcDiow4UbKjhLdq6/EuSVR9GMN7KVH3r9gQ83e73hsz1Nd1T3ijd5xv1wcWRYO+D6kCI2w==
 
-commander@^2.15.1, commander@^2.20.0:
+commander@^2.20.0:
   version "2.20.3"
   resolved "https://registry.npmmirror.com/commander/-/commander-2.20.3.tgz#fd485e84c03eb4881c20722ba48035e8531aeb33"
   integrity sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==
@@ -2086,7 +2086,7 @@ d@1, d@^1.0.1:
     es5-ext "^0.10.50"
     type "^1.0.1"
 
-danmu.js@^1.1.2:
+danmu.js@>=1.1.6:
   version "1.1.8"
   resolved "https://registry.npmmirror.com/danmu.js/-/danmu.js-1.1.8.tgz#70390c1fe6aad9aff37d8b2246eede29ff4d7ec2"
   integrity sha512-GIFSHqJ+HFTGLLaL2BHMPBaOuPY1bWPwC0Pvi/V06uMIoxNTyEGxMuoO2SzNHsDvKC/r252zR9T/Gwx93AaKfw==
@@ -2158,6 +2158,11 @@ defaults@^1.0.3:
   integrity sha512-eFuaLoy/Rxalv2kr+lqMlUnrDWV+3j4pljOIJgLIhI058IQfWJ7vXhyEIHu+HtC738klGALYxOKDO0bQP3tg8A==
   dependencies:
     clone "^1.0.2"
+
+delegate@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.npmmirror.com/delegate/-/delegate-3.2.0.tgz#b66b71c3158522e8ab5744f720d8ca0c2af59166"
+  integrity sha512-IofjkYBZaZivn0V8nnsMJGBr4jVLxHDheKSW88PyxS5QC4Vo9ZbZVvhzlSxY87fVq3STR6r+4cGepyHkcWOQSw==
 
 desandro-matches-selector@^2.0.0:
   version "2.0.2"
@@ -2270,14 +2275,6 @@ downloadjs@1.4.7:
   version "1.4.7"
   resolved "https://registry.npmmirror.com/downloadjs/-/downloadjs-1.4.7.tgz#f69f96f940e0d0553dac291139865a3cd0101e3c"
   integrity sha512-LN1gO7+u9xjU5oEScGFKvXhYf7Y/empUIIEAGBs1LzUq/rg5duiDrkuH5A2lQGd5jfMOb9X9usDa2oVXwJ0U/Q==
-
-draggabilly@^2.2.0:
-  version "2.4.1"
-  resolved "https://registry.npmmirror.com/draggabilly/-/draggabilly-2.4.1.tgz#df02b9e2c3a837d42591af807a0d250b3816887f"
-  integrity sha512-HHHLPEPZqRXIDQDFRFdK7RONZausNlJ4WkA73ST7Z6O2HPWttxFHVwHo8nccuDLzXWwiVKRVuc6fTkW+CQA++A==
-  dependencies:
-    get-size "^2.0.2"
-    unidragger "^2.4.0"
 
 driver.js@^0.9.8:
   version "0.9.8"
@@ -2405,6 +2402,11 @@ es6-iterator@^2.0.3:
     d "1"
     es5-ext "^0.10.35"
     es6-symbol "^3.1.1"
+
+es6-promise@^4.2.4:
+  version "4.2.8"
+  resolved "https://registry.npmmirror.com/es6-promise/-/es6-promise-4.2.8.tgz#4eb21594c972bc40553d276e510539143db53e0a"
+  integrity sha512-HJDGx5daxeIvxdBxvG2cb9g4tEvwIk3i8+nhX0yGrYmZUzbkdg8QbDevheDB8gd0//uPj4c1EQua8Q+MViT0/w==
 
 es6-symbol@^3.1.1, es6-symbol@^3.1.3:
   version "3.1.3"
@@ -2633,7 +2635,7 @@ esutils@^2.0.2:
   resolved "https://registry.npmmirror.com/esutils/-/esutils-2.0.3.tgz#74d2eb4de0b8da1293711910d50775b9b710ef64"
   integrity sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==
 
-ev-emitter@^1.0.0, ev-emitter@^1.0.1:
+ev-emitter@^1.0.0:
   version "1.1.1"
   resolved "https://registry.npmmirror.com/ev-emitter/-/ev-emitter-1.1.1.tgz#8f18b0ce5c76a5d18017f71c0a795c65b9138f2a"
   integrity sha512-ipiDYhdQSCZ4hSbX4rMW+XzNKMD1prg/sTvoVmSLkuQ1MVlwjJQQA+sW8tMYR3BLUr9KjodFV4pvzunvRhd33Q==
@@ -2874,15 +2876,6 @@ fs-extra@^11.0.0:
     jsonfile "^6.0.1"
     universalify "^2.0.0"
 
-fs-extra@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.npmmirror.com/fs-extra/-/fs-extra-5.0.0.tgz#414d0110cdd06705734d055652c5411260c31abd"
-  integrity sha512-66Pm4RYbjzdyeuqudYqhFiNBbCIuI9kgRqLPSHIlXHidW8NIQtVdkM1yeZ4lXwuhbTETv3EUGMNHAAw6hiundQ==
-  dependencies:
-    graceful-fs "^4.1.2"
-    jsonfile "^4.0.0"
-    universalify "^0.1.0"
-
 fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmmirror.com/fs.realpath/-/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
@@ -2991,7 +2984,7 @@ glob-parent@^6.0.2:
   dependencies:
     is-glob "^4.0.3"
 
-glob@7.2.3, glob@^7.1.3:
+glob@7.2.3, glob@^7.1.2, glob@^7.1.3:
   version "7.2.3"
   resolved "https://registry.npmmirror.com/glob/-/glob-7.2.3.tgz#b8df0fb802bbfa8e89bd1d938b4e16578ed44f2b"
   integrity sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==
@@ -3523,13 +3516,6 @@ jsonc-parser@^3.0.0, jsonc-parser@^3.2.0:
   version "3.2.0"
   resolved "https://registry.npmmirror.com/jsonc-parser/-/jsonc-parser-3.2.0.tgz#31ff3f4c2b9793f89c67212627c51c6394f88e76"
   integrity sha512-gfFQZrcTc8CnKXp6Y4/CBT3fTc0OVuDofpre4aEeEpSBPV5X5v4+Vmx+8snU7RLPrNHPKSgLxGo9YuQzz20o+w==
-
-jsonfile@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.npmmirror.com/jsonfile/-/jsonfile-4.0.0.tgz#8771aae0799b64076b76640fca058f9c10e33ecb"
-  integrity sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==
-  optionalDependencies:
-    graceful-fs "^4.1.6"
 
 jsonfile@^6.0.1:
   version "6.1.0"
@@ -5376,13 +5362,6 @@ undefsafe@^2.0.5:
   resolved "https://registry.npmmirror.com/undefsafe/-/undefsafe-2.0.5.tgz#38733b9327bdcd226db889fb723a6efd162e6e2c"
   integrity sha512-WxONCrssBM8TSPRqN5EmsjVrsv4A8X12J4ArBiiayv3DyyG3ZlIg6yysuuSYdZsVz3TKcTg2fd//Ujd4CHV1iA==
 
-unidragger@^2.4.0:
-  version "2.4.0"
-  resolved "https://registry.npmmirror.com/unidragger/-/unidragger-2.4.0.tgz#4cd7e564317af0ef42632d5984a82d4ae6314d8d"
-  integrity sha512-MueZK2oXuGE6OAlGKIrSXK2zCq+8yb1QUZgqyTDCSJzvwYL0g2Llrad+TtoQTYxtFnNyxxSw0IMnKNIgEMia1w==
-  dependencies:
-    unipointer "^2.4.0"
-
 unimport@^3.0.6:
   version "3.0.7"
   resolved "https://registry.npmmirror.com/unimport/-/unimport-3.0.7.tgz#9453fc2a0b816240490d2829279547754c7ea147"
@@ -5399,18 +5378,6 @@ unimport@^3.0.6:
     scule "^1.0.0"
     strip-literal "^1.0.1"
     unplugin "^1.3.1"
-
-unipointer@^2.4.0:
-  version "2.4.0"
-  resolved "https://registry.npmmirror.com/unipointer/-/unipointer-2.4.0.tgz#ac7316aff6170ff87a4b008e55e842fb4bf13181"
-  integrity sha512-VjzDLPjGK7aYpQKH7bnDZS8X4axF5AFU/LQi+NQe1oyEHfaz6lWKhaQ7n4o7vJ1iJ4i2T0quCIfrQM139p05Sw==
-  dependencies:
-    ev-emitter "^1.0.1"
-
-universalify@^0.1.0:
-  version "0.1.2"
-  resolved "https://registry.npmmirror.com/universalify/-/universalify-0.1.2.tgz#b646f69be3942dabcecc9d6639c80dc105efaa66"
-  integrity sha512-rBJeI5CXAlmy1pV+617WB9J63U6XcazHHF2f2dbJix4XzpUF0RS3Zbj0FGIOCAva5P/d/GBOYaACQ1w+0azUkg==
 
 universalify@^2.0.0:
   version "2.0.0"
@@ -5808,6 +5775,11 @@ webpack-virtual-modules@^0.5.0:
   resolved "https://registry.npmmirror.com/webpack-virtual-modules/-/webpack-virtual-modules-0.5.0.tgz#362f14738a56dae107937ab98ea7062e8bdd3b6c"
   integrity sha512-kyDivFZ7ZM0BVOUteVbDFhlRt7Ah/CSPwJdi8hBpkK7QLumUqdLtVfm/PX/hkcnrvr0i77fO5+TjZ94Pe+C9iw==
 
+webworkify@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.npmmirror.com/webworkify/-/webworkify-1.5.0.tgz#734ad87a774de6ebdd546e1d3e027da5b8f4a42c"
+  integrity sha512-AMcUeyXAhbACL8S2hqqdqOLqvJ8ylmIbNwUIqQujRSouf4+eUFaXbG6F1Rbu+srlJMmxQWsiU7mOJi0nMBfM1g==
+
 which@^1.2.14, which@^1.2.9:
   version "1.3.1"
   resolved "https://registry.npmmirror.com/which/-/which-1.3.1.tgz#a45043d54f5805316da8d62f9f50918d3da70b0a"
@@ -5870,26 +5842,32 @@ ws@~8.11.0:
   resolved "https://registry.npmmirror.com/ws/-/ws-8.11.0.tgz#6a0d36b8edfd9f96d8b25683db2f8d7de6e8e143"
   integrity sha512-HPG3wQd9sNQoT9xHyNCXoDUa+Xw/VevmY9FoHyQ+g+rrMn4j6FB4np7Z0OhdTgjx6MgQLK7jwSy1YecU1+4Asg==
 
-xgplayer-subtitles@^1.0.19:
-  version "1.1.1"
-  resolved "https://registry.npmmirror.com/xgplayer-subtitles/-/xgplayer-subtitles-1.1.1.tgz#060814c654d82f90aaec2aa98f84ed73c8dde8da"
-  integrity sha512-GYzrK/e4ydAATP3Xg06sXYliiSCcyNIqqQSwnWbs7pw+cc5NwyrYXuLfa3Bp9skIxT6pT+A7qTicUps58N3eEQ==
+xgplayer-flv.js@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.npmmirror.com/xgplayer-flv.js/-/xgplayer-flv.js-2.3.0.tgz#7f3b0f319c091b613141163913e3b5c281c50c3e"
+  integrity sha512-5ZC1J3EJSnQgSxYqJUc+DtjHysFQCfC5iN93KCUGg4w2laK8Hm6AcHzkuwUULc97hV/E1D0s3q+y/TPe5fxUaQ==
+  dependencies:
+    es6-promise "^4.2.4"
+    glob "^7.1.2"
+    webworkify "^1.5.0"
+
+xgplayer-subtitles@3.0.4:
+  version "3.0.4"
+  resolved "https://registry.npmmirror.com/xgplayer-subtitles/-/xgplayer-subtitles-3.0.4.tgz#8ffceaba6d7980d94b6fa92abc6162b4db76ec79"
+  integrity sha512-KuoLpSzlM9qlIEA8VKBZLTxwkhZB5LH8LsZ59ntueccJ7LAIbsDvMSmmo1kDabInEh+koeZYzhACChT2UrFjTQ==
   dependencies:
     eventemitter3 "^4.0.7"
 
-xgplayer@^2.31.4:
-  version "2.32.2"
-  resolved "https://registry.npmmirror.com/xgplayer/-/xgplayer-2.32.2.tgz#5eb3512c1f4b9e20f84f13e971cc27b03fc10c32"
-  integrity sha512-VWK8Hp5K3Fs5YoHadpyCw2zwuiOimRjkPo2PSJZPYKj59VNnL9oLruZp6cy86LHoAgWELRIQj6Nmw5SkQNByWQ==
+xgplayer@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.npmmirror.com/xgplayer/-/xgplayer-3.0.4.tgz#1dc11b637c364170fa237132579da07d4354ed04"
+  integrity sha512-7BFsSIDpUkvx4XmS8+4u9ryEHm/UZ4E0mzQCI+JhJvGeGVkcx1+Xlrn4GHQOjuSnPN+l+LKs3biQTYedPhtO6w==
   dependencies:
-    chalk "^2.3.2"
-    commander "^2.15.1"
-    danmu.js "^1.1.2"
+    danmu.js ">=1.1.6"
+    delegate "^3.2.0"
     downloadjs "1.4.7"
-    draggabilly "^2.2.0"
-    event-emitter "^0.3.5"
-    fs-extra "^5.0.0"
-    xgplayer-subtitles "^1.0.19"
+    eventemitter3 "^4.0.7"
+    xgplayer-subtitles "3.0.4"
 
 xtend@~4.0.1:
   version "4.0.2"
