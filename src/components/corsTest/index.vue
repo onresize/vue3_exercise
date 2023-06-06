@@ -1,8 +1,41 @@
 <template>
   <el-card>
     <h3>跨域请求如何携带cookie</h3>
-    <el-button type="primary" @click="homoFetch">发送同源请求</el-button>
-    <el-button type="primary" @click="corseFetch">发送跨域请求</el-button>
+    <div style="margin-bottom: 10px">
+      <el-button type="primary" @click="homoFetch">发送同源请求</el-button>
+      <el-button type="primary" @click="corseFetch">发送跨域请求</el-button>
+    </div>
+
+    <el-collapse v-model="activeNames">
+      <el-collapse-item title="跨域问题" name="2">
+        <el-card>
+          <el-link
+            href="https://blog.csdn.net/weixin_46684391/article/details/130821540"
+            style="color: #409eff"
+          >
+            CSDN参考
+          </el-link>
+          <h3>
+            同源策略：客户端基本安全要求，需要同时满足：协议、域名、端口都得相同
+          </h3>
+          <span>
+            注：http://127.0.0.1:7001 与 http://localhost:7001 域名不同，跨域了
+          </span>
+          <h3>受同源限制：动态数据</h3>
+          <span>1. Ajax（客户端发起请求）</span>
+          <span>2. Cookie（存储在客户端）</span>
+          <span>3. localStorage：永久性客</span>
+          <span>4. sessionStorage：客户端数据缓存</span>
+          <span>5. indexDB：客户端数据库</span>
+          <h3>不受同源限制：静态资源</h3>
+          <span>1. Session（存储在服务器端）</span>
+          <span>2. script：src属性可以指定外部的js文件</span>
+          <span>3. img：src属性可以指定外部的图片文件</span>
+          <span>4. link：href属性可以指定外部的css文件</span>
+          <span>5. iframe/audio/radio：src属性可以引入外部文件</span>
+        </el-card>
+      </el-collapse-item>
+    </el-collapse>
   </el-card>
 </template>
 
@@ -10,8 +43,13 @@
 import { ref, reactive } from "vue";
 import axios from "axios";
 
+const activeNames = ref(["1"]);
+
 const Login = async () => {
-  const res = await axios({ url: `http://localhost:5000/login?${Date.now()}`, params: {} });
+  const res = await axios({
+    url: `http://localhost:5000/login?${Date.now()}`,
+    params: {},
+  });
   console.log("/login:", res.data);
   ElMessage({
     message: res?.data?.message,
@@ -35,4 +73,7 @@ const corseFetch = async () => {
 </script>
 
 <style scoped lang='less'>
+span {
+  display: block;
+}
 </style>

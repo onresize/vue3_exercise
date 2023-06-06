@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 
+// 掘金参考： https://juejin.cn/post/7066420545327218725
 // 解决非同源3077端口跨域
 app.all("*", (req, res, next) => {
   res.header("Access-Control-Allow-Origin", "http://localhost:3077");
