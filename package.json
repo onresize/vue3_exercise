@@ -6,7 +6,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"nodemon ./node_server/app.js\" \"vite --host\"",
+    "dev": "concurrently \"nodemon ./node_server/app.js\" \"nodemon ./node_server/app1.js\" \"vite --host\"",
     "dev1": "vite --host --open",
     "build:prod": "vite build --mode production",
     "build:pro": "vue-tsc --noEmit && vite build --mode production",

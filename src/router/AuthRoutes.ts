@@ -262,6 +262,21 @@ export const AdminRoutes = [
     component: () => import("@cp/演示多个拖拽弹窗/index.vue"),
   },
   {
+    path: "/grid",
+    name: "grid",
+    component: () => import("@cp/grid样式/index.vue"),
+  },
+  {
+    path: "/httpCode",
+    name: "httpCode",
+    component: () => import("@cp/httpCode/index.vue"),
+  },
+  {
+    path: "/corsTest",
+    name: "corsTest",
+    component: () => import("@cp/corsTest/index.vue"),
+  },
+  {
     path: "/animation3",
     component: () => import("@cp/动画/index3.vue"),
     children: [

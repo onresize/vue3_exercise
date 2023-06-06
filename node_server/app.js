@@ -115,8 +115,20 @@ app.post('/token', (req, res) => {
 })
 
 
+// 测试同源请求携带cookie
+app.get("/login", (req, res) => {
+  res.cookie("user", "jay", { maxAge: 2000000, httpOnly: true });
+  res.json({ code: 0, message: "登录成功" });
+});
+app.get("/user", (req, res) => {
+  console.log('/user==>', req.headers.cookie)
+  const user = req.headers.cookie?.split("=")[1];
+  res.json({ code: 0, user });
+});
+
+
 app.listen(port, () => {
-  console.log(`http服务开启: http://${host}:${port}`);
+  console.log(`http服务开启1: http://${host}:${port}`);
 });
 
 
