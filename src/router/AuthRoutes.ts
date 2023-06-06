@@ -66,10 +66,6 @@ export const AdminRoutes = [
     component: () => import("@cp/slot插槽/index.vue"),
   },
   {
-    path: "/actionComP",
-    component: () => import("@cp/异步组件/index.vue"),
-  },
-  {
     path: "/teleport",
     component: () => import("@cp/teleport传送组件/index.vue"),
   },
@@ -96,6 +92,10 @@ export const AdminRoutes = [
   {
     path: "/costomRef",
     component: () => import("@cp/costomRef实现敏感词替换/index.vue"),
+  },
+  {
+    path: "/actionComP",
+    component: () => import("@cp/异步组件/index.vue"),
   },
   {
     path: "/suspense",

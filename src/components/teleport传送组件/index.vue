@@ -5,7 +5,7 @@
     <div
       style="width: 300px; height: 200px; background: pink; position: relative"
     >
-      <!-- 演示传送组件、在index.html中定义了一个类名mode的标签、将loading传送到改标签下、 不受v-show影响-->
+      <!-- 演示传送组件、在index.html中定义了一个类名mode的标签、将loading传送到该标签下、 不受v-show影响-->
       <teleport to=".mode">
         <div class="teleport_loading">Loading..........</div>
       </teleport>
@@ -13,15 +13,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import {
-  ref,
-  reactive,
-  computed,
-  watch,
-  watchEffect,
-  defineAsyncComponent,
-} from "vue";
+<script setup>
 </script>
 
 <style scoped>

@@ -23,20 +23,26 @@
     </el-card>
 
     <el-card class="itemBoxCard" v-if="PiniaStore.MessageList.length">
-      <el-input
-        class="ipt"
-        v-for="(item, idx) in PiniaStore.MessageList"
-        :key="idx"
-        :value="idx + ': ' + item"
-        placeholder=""
-        disabled
-      ></el-input>
+      <el-collapse v-model="activeNames" @change="handleChange">
+        <el-collapse-item :title="`当前消息: ${PiniaStore.MessageList.length}条`" name="1">
+          <el-card class="p_Card">
+            <el-input
+              class="ipt"
+              v-for="(item, idx) in PiniaStore.MessageList"
+              :key="idx"
+              :value="idx + ': ' + item"
+              placeholder=""
+              disabled
+            ></el-input>
+          </el-card>
+        </el-collapse-item>
+      </el-collapse>
     </el-card>
   </div>
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from "vue";
+import { ref, reactive, onUnmounted } from "vue";
 import { useMainStore } from "@/store/pinia.ts";
 import { messageCenter } from "./lib/messageCenter.js";
 import MyWebSocket from "./lib/webSocket.js";
@@ -83,7 +89,7 @@ function reconnectWebSocket() {
 }
 // 终止连接
 function clear(myWebSocket) {
-  myWebSocket.clear();
+  myWebSocket?.clear();
   myWebSocket = null;
 }
 function connectWebSocket() {
@@ -120,7 +126,16 @@ function setButtonState(val) {
   }
 }
 
-onMounted(() => {});
+const activeNames = ref(["1"]);
+const handleChange = (val) => {
+  console.log(val);
+};
+
+onUnmounted(() => {
+  // 销毁关闭socket
+  destroyClick();
+  PiniaStore.changeMessageListNUll([]);
+});
 </script>
 
 <style scoped lang='less'>
@@ -128,8 +143,12 @@ onMounted(() => {});
   margin-top: 10px;
   width: 100%;
   height: 500px;
-  overflow-y: auto;
-  overflow-x: hidden;
+  .p_Card {
+    width: 100%;
+    height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
   .ipt {
     margin: 5px;
   }

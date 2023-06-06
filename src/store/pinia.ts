@@ -42,6 +42,9 @@ export const useMainStore = defineStore("piniaStore", {
       this.MessageList.push(state);
       // console.log("pinia存储socket消息：", this.MessageList);
     },
+    changeMessageListNUll(state) {
+      this.MessageList = state;
+    },
     changeSvgList(list) {
       this.iconList = list;
     },
