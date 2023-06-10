@@ -1,12 +1,4 @@
-import {
-  CANVAS_WIDTH,
-  CANVAS_HEIGHT,
-  defalutFlyHeight,
-  defalutFlyTime,
-  p0,
-  p1,
-  p2,
-} from "./config";
+import { CANVAS_WIDTH, CANVAS_HEIGHT, defalutFlyHeight, defalutFlyTime, p0, p1, p2 } from "./config";
 import { loadData } from "./preload";
 import Rocket from "./rocket";
 
@@ -72,18 +64,7 @@ export function drawFlyHeightText(ctx, flyHeight, color = "#fff") {
   });
 }
 
-export function drawText(
-  ctx,
-  {
-    text,
-    x,
-    y,
-    color = "#fff",
-    fontSize = 32,
-    textAlign = "center",
-    bold = false,
-  }
-) {
+export function drawText(ctx, { text, x, y, color = "#fff", fontSize = 32, textAlign = "center", bold = false }) {
   ctx.save();
   ctx.translate(x, y);
   ctx.fillStyle = color;
@@ -196,14 +177,8 @@ export function calSC(t) {
 
 export function calB(t) {
   return {
-    x:
-      Math.pow(1 - t, 2) * p0.x +
-      2 * t * (1 - t) * p1.x +
-      Math.pow(t, 2) * p2.x,
-    y:
-      Math.pow(1 - t, 2) * p0.y +
-      2 * t * (1 - t) * p1.y +
-      Math.pow(t, 2) * p2.y,
+    x: Math.pow(1 - t, 2) * p0.x + 2 * t * (1 - t) * p1.x + Math.pow(t, 2) * p2.x,
+    y: Math.pow(1 - t, 2) * p0.y + 2 * t * (1 - t) * p1.y + Math.pow(t, 2) * p2.y,
   };
 }
 

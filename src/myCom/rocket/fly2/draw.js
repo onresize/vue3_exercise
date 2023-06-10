@@ -1,16 +1,4 @@
-import {
-  CANVAS_WIDTH,
-  CANVAS_HEIGHT,
-  backgroundColor,
-  defalutAxisData,
-  origin,
-  lineColor,
-  defaultHeight,
-  defalutMaxHeight,
-  defalutMaxTime,
-  xWidth,
-  yHeight,
-} from "./config";
+import { CANVAS_WIDTH, CANVAS_HEIGHT, backgroundColor, defalutAxisData, origin, lineColor, defaultHeight, defalutMaxHeight, defalutMaxTime, xWidth, yHeight } from "./config";
 
 export function drawRect(ctx, { x, y, width = 5, height = 5, color = "#fff" }) {
   ctx.save();
@@ -20,18 +8,7 @@ export function drawRect(ctx, { x, y, width = 5, height = 5, color = "#fff" }) {
   ctx.restore();
 }
 
-export function drawText(
-  ctx,
-  {
-    text,
-    x,
-    y,
-    color = "#fff",
-    fontSize = 32,
-    textAlign = "center",
-    bold = false,
-  }
-) {
+export function drawText(ctx, { text, x, y, color = "#fff", fontSize = 32, textAlign = "center", bold = false }) {
   ctx.save();
   ctx.translate(x, y);
   ctx.fillStyle = color;
@@ -123,10 +100,7 @@ export function drawAxis(game, option = defalutAxisData) {
 
   for (let i = 0; i < yAxis.len + 1; i++) {
     drawText(ctx, {
-      text: `${(
-        (i * (game.maxH - defaultHeight)) / yAxis.len +
-        defaultHeight
-      ).toFixed(1)}${yAxis.unit}`,
+      text: `${((i * (game.maxH - defaultHeight)) / yAxis.len + defaultHeight).toFixed(1)}${yAxis.unit}`,
       x: -12,
       y: (-i * yHeight) / yAxis.len,
       color: yAxis.color,
@@ -196,14 +170,7 @@ export function drawSmoothLines(ctx, points) {
       dx2 = 0;
       dy2 = 0;
     }
-    ctx.bezierCurveTo(
-      prePoint.x - dx1,
-      prePoint.y - dy1,
-      curPoint.x + dx2,
-      curPoint.y + dy2,
-      curPoint.x,
-      curPoint.y
-    );
+    ctx.bezierCurveTo(prePoint.x - dx1, prePoint.y - dy1, curPoint.x + dx2, curPoint.y + dy2, curPoint.x, curPoint.y);
     dx1 = dx2;
     dy1 = dy2;
     prePoint = curPoint;

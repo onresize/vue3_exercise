@@ -1,11 +1,4 @@
-import {
-  CANVAS_HEIGHT,
-  origin,
-  defaultHeight,
-  xWidth,
-  yHeight,
-  defalutMaxHeight,
-} from "./config";
+import { CANVAS_HEIGHT, origin, defaultHeight, xWidth, yHeight, defalutMaxHeight } from "./config";
 
 export function data2Point(data) {
   const { multipler, timestamp } = data;
@@ -20,8 +13,7 @@ export function data2Point(data) {
 
   let t = (nowTime - this.startTime) / 1000;
   let x = origin.x + (t / maxT) * xWidth;
-  let y =
-    origin.y - ((multipler - defaultHeight) / (maxH - defaultHeight)) * yHeight;
+  let y = origin.y - ((multipler - defaultHeight) / (maxH - defaultHeight)) * yHeight;
 
   return {
     x,

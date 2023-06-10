@@ -34,17 +34,7 @@ export default class Rocket {
     ctx.translate(this.x, this.y);
     ctx.scale(1.8, 1.8);
     ctx.rotate(this.angle);
-    ctx.drawImage(
-      this.fly,
-      (w / 6) * this.animationPath[this.frameIndex],
-      0,
-      w / 6,
-      h / 2,
-      -w / 6 / 2,
-      -h / 2 / 2,
-      w / 6,
-      h / 2
-    );
+    ctx.drawImage(this.fly, (w / 6) * this.animationPath[this.frameIndex], 0, w / 6, h / 2, -w / 6 / 2, -h / 2 / 2, w / 6, h / 2);
     ctx.restore();
   }
   setOption(x = 0, y = 0, angle) {

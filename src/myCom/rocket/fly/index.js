@@ -1,16 +1,6 @@
 import { CANVAS_WIDTH, CANVAS_HEIGHT, p1, o1 } from "./config";
 import { preload } from "./preload";
-import {
-  drawBackgroundColor,
-  drawBackgroundImage,
-  drawFlyHeightText,
-  drawHorizontalLine,
-  drawLine,
-  drawPaySign,
-  drawVerticalLine,
-  drawWaitView,
-  calB,
-} from "./create";
+import { drawBackgroundColor, drawBackgroundImage, drawFlyHeightText, drawHorizontalLine, drawLine, drawPaySign, drawVerticalLine, drawWaitView, calB } from "./create";
 import Parachute from "./parachute";
 import Boom from "./boom";
 import Rocket from "./rocket";
@@ -88,11 +78,7 @@ export default class FlyGame {
     } else {
       this.flyHeight += 0.00175;
     }
-    drawFlyHeightText(
-      ctx,
-      this.flyHeight,
-      this.isEnd ? "rgb(198,27,34)" : "#fff"
-    );
+    drawFlyHeightText(ctx, this.flyHeight, this.isEnd ? "rgb(198,27,34)" : "#fff");
   }
   play() {
     if (!this.isPlay) {

@@ -18,7 +18,7 @@ const getQNYToken = () => {
       method: "POST",
     })
   );
-}
+};
 
 // export { getWallpaper }
-export default { getWallpaper, getQNYToken }
+export default { getWallpaper, getQNYToken };

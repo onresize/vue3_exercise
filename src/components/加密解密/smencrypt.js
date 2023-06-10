@@ -1,8 +1,6 @@
 import { sm2, sm3, sm4 } from "sm-crypto";
 
-let keypair = sm2.generateKeyPairHex(
-  "daac25c1512fe50f79b0e4526b93f5c0e1460cef40b6dd44af13caec62e8c60e0d885f3c6d6fb51e530889e6fd4ac743a6d332e68a0f2a3923f42585dceb93e9"
-);
+let keypair = sm2.generateKeyPairHex("daac25c1512fe50f79b0e4526b93f5c0e1460cef40b6dd44af13caec62e8c60e0d885f3c6d6fb51e530889e6fd4ac743a6d332e68a0f2a3923f42585dceb93e9");
 const publicKey = keypair.publicKey;
 const privateKey = keypair.privateKey;
 const key = "0123456789abcdeffedcba9876543210";

@@ -179,21 +179,21 @@ export default {
                 show: true,
               },
             },
-            data: yData
-          }
-        ]
-      }
-      return option
+            data: yData,
+          },
+        ],
+      };
+      return option;
     },
     sleepFunc(delay) {
-      return new Promise((res) => setTimeout(() => res(), delay))
+      return new Promise((res) => setTimeout(() => res(), delay));
     },
     awaitPromise(resData) {
       return new Promise((res) => {
         setTimeout(() => {
-          res(resData)
-        }, 0)
-      })
-    }
+          res(resData);
+        }, 0);
+      });
+    },
   },
-}
+};

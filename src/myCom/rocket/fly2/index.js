@@ -1,22 +1,7 @@
-import {
-  CANVAS_WIDTH,
-  CANVAS_HEIGHT,
-  defaultHeight,
-  origin,
-  defalutMaxHeight,
-  defalutMaxTime,
-} from "./config";
+import { CANVAS_WIDTH, CANVAS_HEIGHT, defaultHeight, origin, defalutMaxHeight, defalutMaxTime } from "./config";
 import { preload } from "./preload";
 import { data2Point } from "./utils";
-import {
-  drawBackgroundColor,
-  drawAxis,
-  drawFlyText,
-  drawBall,
-  drawSmoothLines,
-  drawLines,
-  drawLine,
-} from "./draw";
+import { drawBackgroundColor, drawAxis, drawFlyText, drawBall, drawSmoothLines, drawLines, drawLine } from "./draw";
 
 export default class FlyGame {
   constructor({ canvas }) {

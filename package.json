@@ -15,11 +15,13 @@
     "format": "prettier --write src",
     "commit": "git add . && git cz && git push",
     "release": "standard-version",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "format-code": "bash .husky/format-code.sh",
+    "check-conflict": "bash .husky/check-conflict.sh",
+    "check-keyword": "bash .husky/check-keyword.sh"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.6",
-    "@vueuse/core": "^8.2.3",
     "animate.css": "^4.1.1",
     "axios": "^0.26.1",
     "driver.js": "^0.9.8",
@@ -52,6 +54,7 @@
     "@typescript-eslint/parser": "^5.6.0",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vitejs/plugin-vue-jsx": "^3.0.1",
+    "@vueuse/core": "^10.1.2",
     "commitizen": "^4.3.0",
     "concurrently": "^8.1.0",
     "cz-conventional-changelog": "^3.3.0",
@@ -61,6 +64,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^8.2.0",
     "husky": "^8.0.3",
+    "js-yaml": "^4.1.0",
     "less": "^4.1.1",
     "lint-staged": "^12.1.2",
     "nodemon": "^2.0.22",
@@ -78,12 +82,11 @@
     "yorkie": "^2.0.0"
   },
   "gitHooks": {
-    "pre-commit": "lint-staged --concurrent false"
+    "pre-commit": "yorkie pre-commit"
   },
   "lint-staged": {
-    "*.{js,jsx,vue,ts,tsx}": [
-      "prettier --write",
-      "eslint --fix"
+    "*.{js,ts,jsx,vue,tsx}": [
+      "prettier --write"
     ]
   },
   "engines": {

@@ -69,9 +69,7 @@ export const useMainStore = defineStore("piniaStore", {
       // }, 2000);
     },
     async PromiseRoutes() {
-      let user = await Promise.resolve(
-        window.localStorage.getItem("user") || null
-      );
+      let user = await Promise.resolve(window.localStorage.getItem("user") || null);
       return new Promise((resolve) => {
         if (!this.AuthRoutes.length) {
           if (user == "Admin") {

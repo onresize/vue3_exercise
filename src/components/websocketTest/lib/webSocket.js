@@ -36,9 +36,7 @@ export default class MyWebSocket extends WebSocket {
   openHandler() {
     messageCenter.emit("changeBtnState", "open"); //触发事件改变按钮样式
     this.webSocketState = true; //socket状态设置为连接，做为后面的断线重连的拦截器
-    !!this.heartBeat &&
-      !!this.heartBeat.time &&
-      this.startHeartBeat(this.heartBeat.time); //是否启动心跳机制
+    !!this.heartBeat && !!this.heartBeat.time && this.startHeartBeat(this.heartBeat.time); //是否启动心跳机制
     console.log("连接成功");
   }
 
@@ -47,12 +45,12 @@ export default class MyWebSocket extends WebSocket {
     switch (data.ModeCode) {
       case ModeCode.MSG: //普通消息
         console.log("收到服务端发送的消息👉：" + data.msg);
-        PiniaStore.changeMessageList(data.msg)
+        PiniaStore.changeMessageList(data.msg);
         break;
       case ModeCode.HEART_BEAT: //心跳
         this.webSocketState = true;
         console.log("收到服务端发心跳响应❤：" + data.msg);
-        PiniaStore.changeMessageList(data.msg)
+        PiniaStore.changeMessageList(data.msg);
         break;
     }
   }
@@ -109,7 +107,7 @@ export default class MyWebSocket extends WebSocket {
     if (!this.isReconnect) return;
     return setTimeout(() => {
       messageCenter.emit("reconnect");
-      console.log('重连')
+      console.log("重连");
     }, this.heartBeat.reconnect);
   }
   // 清除所有定时器

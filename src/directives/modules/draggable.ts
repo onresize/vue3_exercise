@@ -28,7 +28,7 @@ const getStyle = (function () {
 
 const draggable: Directive = {
   mounted: function (el: ElType) {
-    console.log(el.children)
+    console.log(el.children);
     // el.style.cursor = "move";
     el.children[0].style.cursor = "move";
     el.style.position = "absolute";

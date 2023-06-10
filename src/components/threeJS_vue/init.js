@@ -12,12 +12,7 @@ export class ThreeEngine {
     renderer.setSize(dom.offsetWidth, dom.offsetHeight, true);
     let scene = new Scene(); // 实例化场景
     // 实例化相机
-    let camera = new PerspectiveCamera(
-      45,
-      dom.offsetWidth / dom.offsetHeight,
-      1,
-      1000
-    );
+    let camera = new PerspectiveCamera(45, dom.offsetWidth / dom.offsetHeight, 1, 1000);
     camera.position.set(50, 50, 50); // 设置相机位置
     camera.lookAt(new Vector3(0, 0, 0)); // 设置相机看先中心点
     camera.up = new Vector3(0, 1, 0); // 设置相机自身方向

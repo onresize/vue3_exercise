@@ -45,8 +45,7 @@ export function localClear() {
 export function isType(val) {
   if (val === null) return "null";
   if (typeof val !== "object") return typeof val;
-  else
-    return Object.prototype.toString.call(val).slice(8, -1).toLocaleLowerCase();
+  else return Object.prototype.toString.call(val).slice(8, -1).toLocaleLowerCase();
 }
 /**
  * @description 生成唯一 uuid
@@ -116,9 +115,7 @@ export function getTimeState() {
  * @returns {String}
  */
 export function getBrowserLang() {
-  let browserLang = navigator.language
-    ? navigator.language
-    : navigator.browserLanguage;
+  let browserLang = navigator.language ? navigator.language : navigator.browserLanguage;
   let defaultBrowserLang = "";
   if (["cn", "zh", "zh-cn"].includes(browserLang.toLowerCase())) {
     defaultBrowserLang = "zh";
@@ -135,10 +132,7 @@ export function getBrowserLang() {
  */
 export function getFlatMenuList(menuList) {
   let newMenuList = JSON.parse(JSON.stringify(menuList));
-  return newMenuList.flatMap((item) => [
-    item,
-    ...(item.children ? getFlatMenuList(item.children) : []),
-  ]);
+  return newMenuList.flatMap((item) => [item, ...(item.children ? getFlatMenuList(item.children) : [])]);
 }
 
 /**
@@ -164,8 +158,7 @@ export function getShowMenuList(menuList) {
 export const getAllBreadcrumbList = (menuList, parent = [], result) => {
   for (const item of menuList) {
     result[item.path] = [...parent, item];
-    if (item.children)
-      getAllBreadcrumbList(item.children, result[item.path], result);
+    if (item.children) getAllBreadcrumbList(item.children, result[item.path], result);
   }
   return result;
 };
@@ -210,8 +203,7 @@ export function findMenuByPath(menuList, path) {
 export function getKeepAliveRouterName(menuList, keepAliveNameArr = []) {
   menuList.forEach((item) => {
     item.meta.isKeepAlive && item.name && keepAliveNameArr.push(item.name);
-    item.children?.length &&
-      getKeepAliveRouterName(item.children, keepAliveNameArr);
+    item.children?.length && getKeepAliveRouterName(item.children, keepAliveNameArr);
   });
   return keepAliveNameArr;
 }
@@ -225,8 +217,7 @@ export function getKeepAliveRouterName(menuList, keepAliveNameArr = []) {
  * */
 export function formatTableColumn(row, col, callValue) {
   // 如果当前值为数组，使用 / 拼接（根据需求自定义）
-  if (isArray(callValue))
-    return callValue.length ? callValue.join(" / ") : "--";
+  if (isArray(callValue)) return callValue.length ? callValue.join(" / ") : "--";
   return callValue ?? "--";
 }
 
@@ -237,8 +228,7 @@ export function formatTableColumn(row, col, callValue) {
  * */
 export function formatValue(callValue) {
   // 如果当前值为数组，使用 / 拼接（根据需求自定义）
-  if (isArray(callValue))
-    return callValue.length ? callValue.join(" / ") : "--";
+  if (isArray(callValue)) return callValue.length ? callValue.join(" / ") : "--";
   return callValue ?? "--";
 }
 
@@ -279,8 +269,7 @@ export function filterEnum(callValue, enumData, fieldNames, type = "tag") {
   const children = fieldNames?.children ?? "children";
   let filterData = {};
   // 判断 enumData 是否为数组
-  if (Array.isArray(enumData))
-    filterData = findItemNested(enumData, callValue, value, children);
+  if (Array.isArray(enumData)) filterData = findItemNested(enumData, callValue, value, children);
   // 判断是否输出的结果为 tag 类型
   if (type == "tag") {
     return filterData?.tagType ? filterData.tagType : "";
@@ -296,7 +285,6 @@ export function findItemNested(enumData, callValue, value, children) {
   return enumData.reduce((accumulator, current) => {
     if (accumulator) return accumulator;
     if (current[value] === callValue) return current;
-    if (current[children])
-      return findItemNested(current[children], callValue, value, children);
+    if (current[children]) return findItemNested(current[children], callValue, value, children);
   }, null);
 }

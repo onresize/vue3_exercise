@@ -8,9 +8,9 @@ b站视频学习: [(小满zs)](https://www.bilibili.com/video/BV1dS4y1y7vd)
 
 ## 工程启动指南
 
-1. npm install
+1. yarn 
 
-2. npm run dev
+2. yarn dev
 
   ```js
   // 包环境运行版本
@@ -19,7 +19,7 @@ b站视频学习: [(小满zs)](https://www.bilibili.com/video/BV1dS4y1y7vd)
   cnpm -v 7.1.0
   pnpm -v 7.9.0
 
-  node 16.x.x版本以上
+  node 16.x.x版本
   ```
 ## 脚本命令
    ```js
@@ -29,7 +29,7 @@ b站视频学习: [(小满zs)](https://www.bilibili.com/video/BV1dS4y1y7vd)
 
    yarn preview     本地预览dist包
 
-   yarn lint | lint:lint-staged       检查代码格式化
+   yarn lint    检查代码语法并修复
 
    yarn format      统一重置代码格式
 
@@ -39,61 +39,14 @@ b站视频学习: [(小满zs)](https://www.bilibili.com/video/BV1dS4y1y7vd)
 
    yarn prepare     commit时校验信息是否符合规范、执行自定义hook钩子
 
-   node_server文件夹： 部分node上传接口
+   yarn format-code  格式化暂存区代码风格
+
+   yarn check-conflict  暂存区代码冲突检测
+
+   yarn check-keyword  暂存区代码检测debugger
+
+   node_server文件夹： 部分node接口(上传、websocket)
    ```
-
-
-## git commit 指南
-
-  ```bash
-  <类型>[可选 范围]: <描述>
-  ```
-
-### commit 类型
-
-- feat: 新增特性或功能
-
-- fix: 修复问题
-
-- docs: 修改文档
-
-- style: 修改代码格式
-
-- perf: 性能优化
-
-- chore: 构建过程或者辅助工具的变动
-
-- merge: 代码合并
-
-- refactor: 代码重构，不引入新功能和修复问
-
-- test: 新增、修改测试用例
-
-- revert: 回滚某个更早之前的提交
-
-- sync: 同步主线或分支的 Bug
-
-- ci: 与 CI(持续集成服务)有关的改动
-
-- build: 主要目的是修改项目构建系统(例如 glup，webpack，rollup 的配置等)的提交
-
-### commit 图标
-
-- 初次提交:tada:
-
-- 新增特性:new:
-
-- bug修复:beetle:
-
-- css更新:lipstick:
-
-- 文档更新:memo:
-
-- 改动重构:hammer:
-
-- 废弃删除:wastebasket:
-
-- 提升性能:zap:
 
 ## commitizen 使用
 

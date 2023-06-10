@@ -1,7 +1,8 @@
 module.exports = {
   root: true,
   env: {
-    node: true,
+    es6: true, // 启用 ES6 语法支持以及新的 ES6 全局变量或类型
+    node: true, // Node.js 全局变量和 Node.js 作用域
     browser: true,
   },
   extends: ["plugin:vue/vue3-essential", "eslint:recommended", "prettier"],
@@ -10,9 +11,9 @@ module.exports = {
     parser: "@typescript-eslint/parser",
     ecmaVersion: 2020,
     sourceType: "module",
-    "ecmaFeatures": {
-      "jsx": true
-    }
+    ecmaFeatures: {
+      jsx: true,
+    },
   },
   plugins: ["@typescript-eslint", "prettier"],
   rules: {

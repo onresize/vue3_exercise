@@ -103,9 +103,7 @@ export class MessageCenter {
       throw new ReferenceError("type or handler is not defined");
     }
     if (typeof handler !== "function" || typeof type !== "string") {
-      throw new TypeError(
-        `${handler} is not a function or ${type} is not a string`
-      );
+      throw new TypeError(`${handler} is not a function or ${type} is not a string`);
     }
   }
   //返回当前类的实例的单例
