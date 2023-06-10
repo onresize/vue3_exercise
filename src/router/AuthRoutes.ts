@@ -1,6 +1,11 @@
 // admin路由
 export const AdminRoutes = [
   {
+    path: "/home",
+    meta: { title: "home" },
+    component: () => import("@/views/home.vue"),
+  },
+  {
     path: "/baiduMap",
     meta: { title: "baiduMap" },
     component: () => import("@cp/百度Map/map.vue"),
@@ -240,6 +245,11 @@ export const AdminRoutes = [
     path: "/webWorker",
     name: "webWorker",
     component: () => import("@cp/webWorker/index.vue"),
+  },
+  {
+    path: "/serviceWorker",
+    name: "serviceWorker",
+    component: () => import("@cp/serviceWorker/index.vue"),
   },
   {
     path: "/storageBeOverDu",
