@@ -33,6 +33,13 @@
           <span>3. img：src属性可以指定外部的图片文件</span>
           <span>4. link：href属性可以指定外部的css文件</span>
           <span>5. iframe/audio/radio：src属性可以引入外部文件</span>
+          <span style="color: red">
+            关于谷歌浏览器关闭跨域模式.bat文件代码：桌面新建.txt文件、cd后面是chrome.exe的C盘安装路径、添加代码后把txt后缀改成bat
+          </span>
+          <pre>
+            cd C:\Program Files\Google\Chrome\Application\
+            chrome.exe --disable-web-security --user-data-dir=C:\MyChromeDevUserData
+          </pre>
         </el-card>
       </el-collapse-item>
     </el-collapse>
@@ -75,5 +82,19 @@ const corseFetch = async () => {
 <style scoped lang='less'>
 span {
   display: block;
+}
+pre {
+  box-sizing: border-box;
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.12);
+  border: 1px solid #e4e7ed;
+  border-radius: 10px;
+  background-color: #ffffff;
+  overflow: hidden;
+  color: #303133;
+  padding-top: 25px;
+  &::selection {
+    background: rgb(255, 145, 0);
+    color: #fff;
+  }
 }
 </style>
