@@ -11,6 +11,7 @@ export const useMainStore = defineStore("piniaStore", {
     shoesCount: 18,
     ActiveBread: [{ path: "/welcome", title: "欢迎页" }], // 顶部激活页面
     crossText: "",
+    JsonKey: "",
     iconList: [], // 缓存所有svg
     fatherColor: "transparent",
     childColor: "transparent",
@@ -61,6 +62,10 @@ export const useMainStore = defineStore("piniaStore", {
     },
     changeCrossText(res) {
       this.crossText = res;
+    },
+    changeJsonKey(res) {
+      console.log("改变JsonKey");
+      this.JsonKey = res;
     },
     //异步
     addDelayCount(num) {

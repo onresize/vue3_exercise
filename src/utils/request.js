@@ -5,11 +5,12 @@ import { useMainStore } from "@/store/pinia.ts";
 // const PiniaStore = useMainStore(pinia);
 export const server = (obj) => {
   axios.defaults.headers["Content-Type"] = "application/json;charset=utf-8";
+  // axios.defaults.withCredentials = true
   return new Promise((resolve, reject) => {
     const request = axios.create({
       // baseURL: import.meta.env.VITE_BASE,
       timeout: 10000,
-      withCredentials: true, // 跨域时候是否允许携带凭证
+      withCredentials: true, // 跨域时候是否允许携带凭证、默认false
     });
 
     request.interceptors.request.use(
