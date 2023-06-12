@@ -8,35 +8,43 @@
       &nbsp;&nbsp;
       <el-button @click="toMessage">测试消息通知API</el-button>
     </h3>
-    <pre class="txt_pre">
-      基于web-push测试网址(需要开启科学上网、将下面显示的pushSubscription粘贴到Subscription to Send To下
-      设置好Text to Send点击下面按钮就能发送了)： https://web-push-codelab.glitch.me (如下嵌套页面)
-      <span style="color: red;">注意：测试需要开启vpn</span>
-      <span>操作步骤：</span>
-      <span>
-        1.点击测试消息订阅按钮、复制下面出现的json字符串、粘贴到Subscription to Send To下、发送之后注意右下角windows通知
-      </span>
-      <span>
-        2.如果出错了下方Public Key刷新了、复制这个key值、在项目utils文件夹下找到subscribeUser.js将vapidPublicKey变量进行替换后重试
-      </span>
-    </pre>
+    <el-collapse v-model="activeNames">
+      <el-collapse-item name="2">
+        <template #title>
+          <el-icon class="header-icon"> <info-filled /> </el-icon><span style="color: #37474f; font-size: 15px; font-weight: bold"> &nbsp;实践说明：</span>
+        </template>
+        <div class="txt_div">
+          <span>
+            基于web-push测试网址(将下面显示的pushSubscription粘贴到Subscription to Send To下 设置好Text to Send点击下面按钮就能发送了)： https://web-push-codelab.glitch.me
+            (如下嵌套页面)
+          </span>
+          <div style="color: red; margin-top: 10px">注意：测试需要开启vpn</div>
+          <div style="margin-top: 10px">操作步骤：</div>
+          <span> 1.点击测试消息订阅按钮、复制下面出现的json字符串、粘贴到Subscription to Send To下、发送之后注意右下角windows通知 </span>
+          <span> 2.如果出错了下方Public Key刷新了、复制这个key值、在项目utils文件夹下找到subscribeUser.js将vapidPublicKey变量进行替换后重试 </span>
+        </div>
+      </el-collapse-item>
+    </el-collapse>
     <el-button @click="toStartMessage" class="msg_btn">测试消息订阅</el-button>
-    <code class="json_pre">
+    <code class="json_code">
       {{ state.pushSubscription }}
       <el-button class="copy_btn" icon="DocumentCopy" circle title="copy" v-copy="state.pushSubscription"></el-button>
     </code>
-    <iframe class="frame_box" src="https://web-push-codelab.glitch.me/" frameborder="0"></iframe>
+    <el-card>
+      <iframe class="frame_box" src="https://web-push-codelab.glitch.me/" frameborder="0"></iframe>
+    </el-card>
   </div>
 </template>
 
 <script setup>
-import { reactive, nextTick } from "vue";
+import { ref, reactive, nextTick } from "vue";
 import { useMainStore } from "@/store/pinia.ts";
 import { subscribeUser } from "@/utils/subscribeUser.js";
 import myIcon from "@/assets/img/1.webp";
 
 const PiniaStore = useMainStore();
 
+const activeNames = ref(["1"]);
 const state = reactive({
   pushSubscription: "",
 });
@@ -77,15 +85,18 @@ const toStartMessage = async () => {
 </script>
 
 <style scoped lang="less">
-.txt_pre {
+.txt_div {
   font-size: 15px;
   font-weight: bold;
   font-family: "微软雅黑";
   background: gold;
-  padding: 15px 0 0 0;
+  padding: 15px;
   border-radius: 10px;
+  span {
+    display: inline-block;
+  }
 }
-.json_pre {
+.json_code {
   min-height: 50px;
   display: block;
   margin-bottom: 10px;
@@ -112,6 +123,6 @@ const toStartMessage = async () => {
 }
 .frame_box {
   width: calc(100vw - 330px);
-  height: calc(100vh - 300px);
+  height: calc(100vh - 400px);
 }
 </style>
