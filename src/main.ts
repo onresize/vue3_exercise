@@ -53,6 +53,23 @@ app.use(directive, app);
 // custom directives
 import directives from "@/directives/index";
 
+// 引入音频文件
+import BtnAudio from "@/assets/audio/3761.mp3";
+
+// 注册播放音频事件到Vue实例上
+app.config.globalProperties.$playAudio = (name) => {
+  console.log("全局打印播放sound:", name);
+  let buttonAudio = document.getElementById("eventAudio");
+  buttonAudio.setAttribute("src", () => import(`@/assets/audio/${name}.mp3`));
+  buttonAudio.play();
+};
+// 注册暂停音频事件到Vue实例上
+app.config.globalProperties.$stopAudio = () => {
+  let buttonAudio = document.getElementById("eventAudio");
+  buttonAudio.setAttribute("src", "");
+  buttonAudio.pause();
+};
+
 // 大屏适配
 import Fit from "vue-fit-next";
 app.use(

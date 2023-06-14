@@ -55,6 +55,8 @@
         拖拽指令
       </div> -->
     </div>
+
+    <el-button v-sound="'3761'">测试音效</el-button>
   </div>
 </template>
 

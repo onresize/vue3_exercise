@@ -8,6 +8,7 @@ import throttle from "./modules/throttle";
 import longpress from "./modules/longpress";
 import permission from "./modules/permission";
 import lazy from "./modules/lazy";
+import sound from "./modules/sound";
 
 const directivesList: any = {
   // Custom directives
@@ -20,6 +21,7 @@ const directivesList: any = {
   longpress,
   permission,
   lazy,
+  sound,
 };
 
 const directives = {
