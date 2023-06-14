@@ -3,12 +3,10 @@
     <bgGeoMap class="bdMap" :JsonData="JsonData"></bgGeoMap>
   </div>
 </template>
- 
+
 <script setup>
 import bgGeoMap from "./bgGeoMap.vue";
-import {
-  onMounted
-} from "vue";
+import { onMounted } from "vue";
 
 const JsonData = Object.freeze({
   type: "FeatureCollection",
@@ -1065,14 +1063,11 @@ const JsonData = Object.freeze({
   ],
 });
 onMounted(() => {
-  console.log('onMounted')
-  new Promise().then((res) => {
-    abc()
-  })
-}) 
+  console.log("onMounted");
+});
 </script>
- 
-<style scoped >
+
+<style scoped>
 .bdMap {
   user-select: none;
   box-sizing: border-box;

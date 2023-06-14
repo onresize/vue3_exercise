@@ -1,10 +1,10 @@
 import { ref } from "vue";
 let v = ref<string>("");
 let arr = [1, 3, 4, 5, 6];
-const renderDom = (props, emits) => {
-  const divClick = (v, emits) => {
+const renderDom = (props, Emits) => {
+  const divClick = (v) => {
     console.log("点击了", v);
-    emits.emit("myClick", v);
+    Emits.emit("myClick", v);
   };
 
   return (
@@ -23,9 +23,7 @@ const renderDom = (props, emits) => {
               // <el-button onClick={divClick.bind(this, v, emits)}>
               //   ${v}
               // </el-button>
-              <el-button onClick={() => divClick(v, emits)}>
-                ${v}
-              </el-button>
+              <el-button onClick={() => divClick(v)}>${v}</el-button>
             );
           })}
         </div>

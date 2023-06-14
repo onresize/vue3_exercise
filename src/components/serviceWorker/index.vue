@@ -14,10 +14,7 @@
           <el-icon class="header-icon"> <info-filled /> </el-icon><span style="color: #37474f; font-size: 15px; font-weight: bold"> &nbsp;实践说明：</span>
         </template>
         <div class="txt_div">
-          <span>
-            基于web-push测试网址(将下面显示的pushSubscription粘贴到Subscription to Send To下 设置好Text to Send点击下面按钮就能发送了)： https://web-push-codelab.glitch.me
-            (如下嵌套页面)
-          </span>
+          <span> 基于web-push测试网址： https://web-push-codelab.glitch.me (如下嵌套页面) </span>
           <div style="color: red; margin-top: 10px">注意：测试需要开启vpn</div>
           <div style="margin-top: 10px">操作步骤：</div>
           <span> 1.点击测试消息订阅按钮、复制下面出现的json字符串、粘贴到Subscription to Send To下、发送之后注意右下角windows通知 </span>

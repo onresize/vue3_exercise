@@ -1,11 +1,7 @@
 <template>
   <div>
     <h2>vue3中tsx的基本使用</h2>
-    <el-link
-      href="https://blog.csdn.net/qq1195566313/article/details/123172735"
-      target="_blank"
-      >博客参考:</el-link
-    >
+    <el-link href="https://blog.csdn.net/qq1195566313/article/details/123172735" target="_blank">博客参考:</el-link>
 
     <renderDom title="jsx通过props传参" @myClick="myClick"></renderDom>
     <br />
@@ -16,14 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import {
-  ref,
-  reactive,
-  computed,
-  watch,
-  watchEffect,
-  defineAsyncComponent,
-} from "vue";
+import { ref } from "vue";
 import renderDom from "./App.tsx";
 
 let allNum = ref<number>(0);

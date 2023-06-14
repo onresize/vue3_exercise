@@ -1,4 +1,5 @@
 import { defineConfig, loadEnv } from "vite";
+import { fileURLToPath, URL } from "url";
 import path from "path";
 import vue from "@vitejs/plugin-vue";
 import components from "unplugin-vue-components/vite";
@@ -60,8 +61,7 @@ export default defineConfig(({ mode }) => {
     },
     resolve: {
       alias: {
-        // 兼容webpack的习惯
-        "@": resolve("src"),
+        "@": fileURLToPath(new URL("./src", import.meta.url)),
         "@img": resolve("src/assets/img"),
         "@less": resolve("src/assets/less"),
         "@libs": resolve("src/libs"),
@@ -155,9 +155,7 @@ export default defineConfig(({ mode }) => {
        * 版权注释
        * @see https://github.com/chengpeiquan/vite-plugin-banner#advanced-usage
        */
-      banner(
-        `/**\n * name: ${pkg.name}\n * version: v${pkg.version}\n * description: v${pkg.description}\n * author: ${pkg.author}\n */`
-      ),
+      banner(`/**\n * name: ${pkg.name}\n * version: v${pkg.version}\n * description: v${pkg.description}\n * author: ${pkg.author}\n */`),
     ],
     build: {
       outDir: "dist",
