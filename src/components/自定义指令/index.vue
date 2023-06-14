@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-dom-bgc="bgcColor" style="height: 240px">
+    <div v-dom-bgc="bgcColor" style="height: 350px">
       <h3>vue3自定义指令、main.ts注册指令</h3>
       <a href="https://www.bilibili.com/video/BV1dW4y1a7f8/">b站视频</a>
       <hr />
@@ -56,7 +56,8 @@
       </div> -->
     </div>
 
-    <el-button v-sound="'3761'">测试音效</el-button>
+    <el-button v-sound soundStr="3777">测试音效2</el-button>
+    <el-button v-sound soundStr="3761">测试音效1</el-button>
   </div>
 </template>
 

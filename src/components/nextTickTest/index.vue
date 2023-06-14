@@ -38,7 +38,7 @@ export default {
       console.log("2");
       await methods.main();
       let r = await nextTick();
-      console.log("nextT ick()是否Promise:", isPromise(nextTick()));
+      console.log("nextTick()是否Promise:", isPromise(nextTick()));
       console.log("nextTick()返回值--是否Promise:", isPromise(r));
     });
     return { ...toRefs(state), ...toRefs(methods) };
