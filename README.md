@@ -1,19 +1,34 @@
-# vue3-ts-vite-pinia
-
-基于 Vite 的 Vue 3 项目，默认使用 TypeScript 作为开发语言。
+# vue3_exercise
 
 ## 为什么学习这个🤷‍♂️
 
 b站视频学习: [(小满zs)](https://www.bilibili.com/video/BV1dS4y1y7vd)
 
-## 工程启动指南
+### 项目集成案例 🔨
 
-1. yarn 
+- 使用 Vue3 + Ts + ElemPlus 开发，单文件组件、动态权限路由**＜ script setup ＞**
+- 采用 Vite4 作为项目开发、打包工具（配置 Gzip 打包、JSX、TSX 语法、跨域代理…）
+- 使用 Pinia 替代 Vuex，轻量、简单、易用，集成 Pinia 持久化插件
+- 对 Axios 整个二次封装（请求拦截、取消、常用请求封装…）
+- 支持i18n 国际化、SvgIcon组件封装、makedown文件预览
+- 使用 VueRouter 进行路由权限拦截、页面按钮权限配置、路由懒加载
+- 使用 KeepAlive 对页面进行缓存，支持多级嵌套页面缓存
+- 常用自定义指令开发（权限、复制、水印、拖拽、节流、防抖、长按、按钮音效、md文件高亮…）
+- 使用 husky、lint-staged、commitlint、yorkie、git-hooks 规范提交信息（提交预检测debugger、代码冲突、暂存区代码统一格式）
+- node接口（websocket、青牛云上传云存储、curd）
 
-2. yarn dev
+### 工程启动指南
+
+```bash
+yarn 
+```
+
+```bash
+yarn dev
+```
 
   ```js
-  // 包环境运行版本
+  // 包环境运行版本、建议使用yarn包管理器、依据yarn.lock安装依赖
   yarn -v 1.22.17
   npm -v 7.20.3
   cnpm -v 7.1.0
@@ -21,7 +36,7 @@ b站视频学习: [(小满zs)](https://www.bilibili.com/video/BV1dS4y1y7vd)
 
   node 16.x.x版本
   ```
-## 脚本命令
+### 脚本命令
    ```js
    yarn build       手动更新版本并打包
 
@@ -48,7 +63,7 @@ b站视频学习: [(小满zs)](https://www.bilibili.com/video/BV1dS4y1y7vd)
    node_server文件夹： 部分node接口(上传、websocket)
    ```
 
-## commitizen 使用
+### commitizen 使用
 
 [commitizen](https://github.com/commitizen/cz-cli) 是一个 cli 工具，用于规范化 git commit 信息，可以代替 git commit
 
@@ -155,7 +170,7 @@ npm run release -- --release-as prepatch # 1.0.0 to 1.0.1-0
 npm run release -- --release-as preminor # 1.0.1-0 to 1.1.0-0
 npm run release -- --release-as premajor # 1.1.0-0 to 2.0.0-0
 
-# 手动指定版本
+## 手动指定版本
 npm run release -- --release-as 2.1.3-alpha.1 # 2.0.0-0 to 2.1.3-alpha.1
 # ✔ bumping version in package.json from 2.0.0-0 to 2.1.3-alpha.1
 # ✔ bumping version in package-lock.json from 2.0.0-0 to 2.1.3-alpha.1
@@ -169,7 +184,7 @@ npm run release # 2.1.3-alpha.1 to 2.2.0
 
 
 
-## 项目集成约定式提交规范操作步骤
+### 项目集成约定式提交规范操作步骤
 
 ```js
 npm install commitizen cz-conventional-changelog -D  // 安装规范化提交插件
@@ -185,7 +200,7 @@ npm install husky --save-dev // 安装husky、commit前自定义hook执行自定
 
 测试 husky 钩子作用，添加 pre-commit 钩子
 npx husky add .husky/pre-commit "npm run 'xxx'"
-# 查看当前目录 .husky 目录是否有生成 pre-commit 文件
+## 查看当前目录 .husky 目录是否有生成 pre-commit 文件
 # 如果需要删除这个钩子，直接 删除 .husky/pre-commit 文件即可
 
 
@@ -209,7 +224,7 @@ npx --no-install commitlint --edit "$1"
 
 
 
-##### git commit提交代码时跳过 eslint校验
+### git commit提交代码时跳过 eslint校验
 
 ```js
 在使用命令 git commit -m '提交信息' 将本地代码提交到远程仓库时候， 如果项目安装了 per-commit，则会在Git键入提交信息前进行代码风格检查，如果代码不符合相应规则，则报错。
