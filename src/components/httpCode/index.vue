@@ -185,8 +185,14 @@ const handleNodeClick = (data) => {
 
 <style scoped lang="less">
 .cad {
-  overflow-y: auto;
+  overflow-y: auto !important;
   overflow-x: hidden;
+  height: calc(100vh - 100px);
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    display: block !important;
+  }
 
   .tag {
     font-weight: bold;

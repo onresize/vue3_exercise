@@ -16,9 +16,14 @@ import Rocket from "@/myCom/rocket/Game.vue";
 import Ball from "@/myCom/ball/Game.vue";
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .box {
-  overflow-y: scroll;
+  overflow-y: auto !important;
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    display: block !important;
+  }
 }
 .flex {
   display: flex;

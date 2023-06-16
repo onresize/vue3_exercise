@@ -20,11 +20,17 @@ console.log("修改后的List.json:", List.data);
 
 <style scoped lang="less">
 .delete-box {
-  height: calc(100vh - 70px);
-  overflow-y: scroll;
+  height: calc(100vh - 100px);
+  overflow-y: auto !important;
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    display: block !important;
+  }
   pre {
     font-size: 20px;
     height: 100%;
+    font-family: Source Code Pro, DejaVu Sans Mono, Ubuntu Mono, Anonymous Pro, Droid Sans Mono, Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, PingFang SC;
   }
 }
 </style>

@@ -5,7 +5,6 @@
 </template>
 
 <script type="module">
-import flvjs from 'https://cdn.jsdelivr.net/npm/flv.js@1.6.2/+esm'
 export default {
   name: "videoFlv",
 };
@@ -13,25 +12,26 @@ export default {
 
 <script setup>
 import { ref, reactive, computed, onMounted, onUnmounted } from "vue";
+import flvjs from "flv.js";
 
 const props = defineProps({
   taskInfo: {
     type: Object,
-    default: () => { },
+    default: () => {},
   },
 });
 
 const state = reactive({
-  flvPlayer: null
-})
+  flvPlayer: null,
+});
 
 const flvPlayerRef = ref(null);
 const taskInfo = computed(() => props.taskInfo);
 
 const createVideo = () => {
-  if (!taskInfo.value?.FlvUrl) return
+  if (!taskInfo.value?.FlvUrl) return;
   if (flvjs.isSupported()) {
-    console.log('flv组件拿到props', taskInfo.value)
+    console.log("flv组件拿到props", taskInfo.value);
     var videoElementDom = flvPlayerRef.value;
     let player = flvjs.createPlayer({
       type: "flv",
@@ -48,14 +48,14 @@ const createVideo = () => {
         player.play();
       }, 300);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-    state.flvPlayer = player
+    state.flvPlayer = player;
   }
 };
 
 const destroy = () => {
-  console.log('flv组件销毁----------')
+  console.log("flv组件销毁----------");
   state.flvPlayer?.pause(); //暂停播放数据流
   state.flvPlayer?.unload(); //取消数据流加载
   state.flvPlayer?.detachMediaElement(); //将播放实例从节点中取出
@@ -65,12 +65,12 @@ const destroy = () => {
 defineExpose({ destroy });
 
 onMounted(() => {
-  console.log('执行flv组件onMounted-------------')
+  console.log("执行flv组件onMounted-------------");
   createVideo();
 });
 onUnmounted(() => {
-  destroy()
-})
+  destroy();
+});
 </script>
 <style scoped>
 .videoBox {

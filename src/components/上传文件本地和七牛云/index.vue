@@ -1,94 +1,61 @@
 <template>
-  <h3>Network设置低速网络调试</h3>
-  <div class="content">
-    <el-card class="card_box">
-      <el-tag color="#ffcc99" style="color: #000">上传到七牛云</el-tag>
-      <el-upload
-        class="avatar-uploader"
-        :action="state.domain"
-        :http-request="upLoadQny"
-        :show-file-list="false"
-        :before-upload="beforeUpload"
-      >
-        <div class="center_box">
-          <div v-if="state.imageUrl" class="avatar_box">
-            <img :src="state.imageUrl" class="headerPic" />
-            <div class="mask" @click.stop.prevent>
-              <el-icon class="ico" :size="20" @click.stop.prevent="preview">
-                <svg-icon name="zoom"></svg-icon>
-              </el-icon>
-              <el-icon class="ico" :size="20" @click.stop.prevent="Download">
-                <svg-icon name="download"></svg-icon>
-              </el-icon>
-              <el-icon class="ico" :size="20" @click.stop.prevent="Delete">
-                <svg-icon name="del"></svg-icon>
-              </el-icon>
+  <div class="mixinHeight">
+    <h3>Network设置低速网络调试</h3>
+    <div class="content">
+      <el-card class="card_box">
+        <el-tag color="#ffcc99" style="color: #000">上传到七牛云</el-tag>
+        <el-upload class="avatar-uploader" :action="state.domain" :http-request="upLoadQny" :show-file-list="false" :before-upload="beforeUpload">
+          <div class="center_box">
+            <div v-if="state.imageUrl" class="avatar_box">
+              <img :src="state.imageUrl" class="headerPic" />
+              <div class="mask" @click.stop.prevent>
+                <el-icon class="ico" :size="20" @click.stop.prevent="preview">
+                  <svg-icon name="zoom"></svg-icon>
+                </el-icon>
+                <el-icon class="ico" :size="20" @click.stop.prevent="Download">
+                  <svg-icon name="download"></svg-icon>
+                </el-icon>
+                <el-icon class="ico" :size="20" @click.stop.prevent="Delete">
+                  <svg-icon name="del"></svg-icon>
+                </el-icon>
+              </div>
             </div>
+            <el-icon v-else-if="!state.imageUrl && !state.percentValue" class="box" :size="20">
+              <Plus />
+            </el-icon>
+            <el-progress v-else type="circle" class="box" :percentage="state.percentValue" :color="state.colors" :show-text="true" />
           </div>
-          <el-icon
-            v-else-if="!state.imageUrl && !state.percentValue"
-            class="box"
-            :size="20"
-          >
-            <Plus />
-          </el-icon>
-          <el-progress
-            v-else
-            type="circle"
-            class="box"
-            :percentage="state.percentValue"
-            :color="state.colors"
-            :show-text="true"
-          />
-        </div>
-      </el-upload>
-    </el-card>
+        </el-upload>
+      </el-card>
 
-    <el-card class="card_box">
-      <el-tag color="#ffcc99" style="color: #000">上传到本地服务器</el-tag>
-      <el-upload
-        class="avatar-uploader"
-        :action="state.domain_bd"
-        :http-request="upLoadQny_bd"
-        :show-file-list="false"
-        :before-upload="beforeUpload"
-      >
-        <div class="center_box">
-          <div v-if="state.imageUrl_bd" class="avatar_box">
-            <img :src="state.imageUrl_bd" class="headerPic" />
-            <div class="mask" @click.stop.prevent>
-              <el-icon class="ico" :size="20" @click.stop.prevent="preview_bd">
-                <svg-icon name="zoom"></svg-icon>
-              </el-icon>
-              <el-icon class="ico" :size="20" @click.stop.prevent="Download_bd">
-                <svg-icon name="download"></svg-icon>
-              </el-icon>
-              <el-icon class="ico" :size="20" @click.stop.prevent="Delete_bd">
-                <svg-icon name="del"></svg-icon>
-              </el-icon>
+      <el-card class="card_box">
+        <el-tag color="#ffcc99" style="color: #000">上传到本地服务器</el-tag>
+        <el-upload class="avatar-uploader" :action="state.domain_bd" :http-request="upLoadQny_bd" :show-file-list="false" :before-upload="beforeUpload">
+          <div class="center_box">
+            <div v-if="state.imageUrl_bd" class="avatar_box">
+              <img :src="state.imageUrl_bd" class="headerPic" />
+              <div class="mask" @click.stop.prevent>
+                <el-icon class="ico" :size="20" @click.stop.prevent="preview_bd">
+                  <svg-icon name="zoom"></svg-icon>
+                </el-icon>
+                <el-icon class="ico" :size="20" @click.stop.prevent="Download_bd">
+                  <svg-icon name="download"></svg-icon>
+                </el-icon>
+                <el-icon class="ico" :size="20" @click.stop.prevent="Delete_bd">
+                  <svg-icon name="del"></svg-icon>
+                </el-icon>
+              </div>
             </div>
+            <el-icon v-else-if="!state.imageUrl_bd && !state.percentValue_bd" class="box" :size="20">
+              <Plus />
+            </el-icon>
+            <el-progress v-else type="circle" class="box" :percentage="state.percentValue_bd" :color="state.colors" :show-text="true" />
           </div>
-          <el-icon
-            v-else-if="!state.imageUrl_bd && !state.percentValue_bd"
-            class="box"
-            :size="20"
-          >
-            <Plus />
-          </el-icon>
-          <el-progress
-            v-else
-            type="circle"
-            class="box"
-            :percentage="state.percentValue_bd"
-            :color="state.colors"
-            :show-text="true"
-          />
-        </div>
-      </el-upload>
-    </el-card>
+        </el-upload>
+      </el-card>
 
-    <!-- elemPlus默认图片预览源码组件、可以直接通过遍历操作控制图片显隐 -->
-    <!-- <el-image-viewer
+      <!-- elemPlus默认图片预览源码组件、可以直接通过遍历操作控制图片显隐 -->
+      <!-- <el-image-viewer
       hide-on-click-modal
       @close="
         () => {
@@ -98,6 +65,7 @@
       v-if="state.showViewer"
       :url-list="state.previewList"
     /> -->
+    </div>
   </div>
 </template>
 
@@ -174,10 +142,7 @@ const postQNYFile = (data) => {
         // progressEvent.loaded:已上传文件大小
         // progressEvent.total:被上传文件的总大小
         // 这里因为在点击上传按钮之前图片就已经自动上传了，所以 loaded 和 total 是一样大小
-        state.percentValue = ~~(
-          (ProgressEvent.loaded / ProgressEvent.total) *
-          100
-        );
+        state.percentValue = ~~((ProgressEvent.loaded / ProgressEvent.total) * 100);
         console.log(state.percentValue);
       },
     })
@@ -253,10 +218,7 @@ const postBDFile = (data) => {
         // progressEvent.loaded:已上传文件大小
         // progressEvent.total:被上传文件的总大小
         // 这里因为在点击上传按钮之前图片就已经自动上传了，所以 loaded 和 total 是一样大小
-        state.percentValue_bd = ~~(
-          (ProgressEvent.loaded / ProgressEvent.total) *
-          100
-        );
+        state.percentValue_bd = ~~((ProgressEvent.loaded / ProgressEvent.total) * 100);
         console.log(state.percentValue_bd);
       },
     })
@@ -305,7 +267,6 @@ const Delete_bd = () => {
 <style scoped lang="less">
 .content {
   width: 100%;
-  height: 100%;
   display: flex;
 
   .card_box {

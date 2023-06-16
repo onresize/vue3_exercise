@@ -1,5 +1,5 @@
 <template>
-  <el-card class="card">
+  <el-card class="mixinHeight">
     <table border style="width: 600px">
       <thead>
         <tr align="center">
@@ -35,28 +35,12 @@
     <h3>computed传参的值：{{ r }}</h3>
     <div style="display: flex">
       <div v-for="(item, i) in dataList" :key="i">
-        <el-button @click="myComputed(item.price)" class="el_btn">
-          computed传参的用法
-        </el-button>
+        <el-button @click="myComputed(item.price)" class="el_btn"> computed传参的用法 </el-button>
       </div>
     </div>
     <br />
-    <el-select
-      v-model="value"
-      multiple
-      filterable
-      allow-create
-      default-first-option
-      :reserve-keyword="false"
-      placeholder="展示闪动动画"
-      class="apply-shake"
-    >
-      <el-option
-        v-for="item in options"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value"
-      />
+    <el-select v-model="value" multiple filterable allow-create default-first-option :reserve-keyword="false" placeholder="展示闪动动画" class="apply-shake">
+      <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
     </el-select>
   </el-card>
 </template>
@@ -130,10 +114,6 @@ watch(
 </script>
 
 <style scoped>
-.card {
-  width: 99%;
-  height: 99%;
-}
 .el_btn {
   margin: 0 10px 0 0;
 }

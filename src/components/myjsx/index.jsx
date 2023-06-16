@@ -1,5 +1,5 @@
-import { ref, useCssModule } from "vue";
-import myStyle from "./index.css";
+import { ref } from "vue";
+import "./index.css";
 
 // 子组件
 const Child = (props, { emit }) => {

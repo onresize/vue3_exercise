@@ -9,6 +9,7 @@ import longpress from "./modules/longpress";
 import permission from "./modules/permission";
 import lazy from "./modules/lazy";
 import sound from "./modules/sound";
+import highLight from "./modules/highLight";
 
 const directivesList: any = {
   // Custom directives
@@ -22,6 +23,7 @@ const directivesList: any = {
   permission,
   lazy,
   sound,
+  highLight,
 };
 
 const directives = {

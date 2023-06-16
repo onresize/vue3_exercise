@@ -348,11 +348,11 @@ onMounted(() => {
 
 // 跨路由动画
 .child-view {
-  // position: absolute;
-  // z-index: -1;
+  overflow-x: hidden;
+  overflow-y: hidden;
   width: calc(100vw - 330px);
   height: 100%;
-  transition: all 0.7s cubic-bezier(0.58, 0.09, 0.33, 0.91);
+  transition: all 0.6s cubic-bezier(0.58, 0.09, 0.33, 0.91);
   // 掘金背景
   background-image: linear-gradient(90deg, rgba(60, 10, 30, 0.04) 3%, transparent 0), linear-gradient(1turn, rgba(60, 10, 30, 0.04) 3%, transparent 0);
   background-size: 20px 20px;
@@ -361,19 +361,18 @@ onMounted(() => {
 
 /* 进入 */
 .slide-fade-enter-from {
-  transform: translateX(-calc(100vw));
+  // transform: translateX(-100vw);
   opacity: 0;
 }
 
 /* 离开 */
 .slide-fade-leave-to {
-  transform: translateX(260px);
+  // transform: translateX(260px);
   opacity: 0;
 }
 
 // 设置隐藏滚动条且还能滚动
 .container {
-  overflow: hidden !important;
   display: flex;
 
   .left_card {
