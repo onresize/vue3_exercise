@@ -14,6 +14,12 @@ import pkg from "./package.json";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import VueI18n from "@intlify/vite-plugin-vue-i18n";
 
+// md文件预览
+import Markdown from "vite-plugin-vue-markdown";
+import prism from "markdown-it-prism";
+import Pages from "vite-plugin-pages";
+import Inspect from "vite-plugin-inspect";
+
 // SvgIcon插件
 import { svgBuilder } from "./src/plugins/svgBuilder";
 
@@ -112,8 +118,20 @@ export default defineConfig(({ mode }) => {
       },
     },
     plugins: [
-      vue(),
+      vue({
+        include: [/\.vue$/, /\.md$/],
+      }),
+      Markdown({
+        headEnabled: true,
+        markdownItUses: [prism],
+      }),
+      Pages({
+        pagesDir: "pages",
+        extensions: ["vue", "md"],
+      }),
+      Inspect(),
       vueJsx(),
+      // md预览
       svgBuilder("./src/assets/icons/svg/"), // 导入所有svg
       // https://github.com/intlify/vite-plugin-vue-i18n
       VueI18n({

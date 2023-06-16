@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mixinHeight">
     <h3>匿名插槽、具名插槽(动态插槽)、作用域插槽基本使用</h3>
     <children>
       <!-- <template v-slot>

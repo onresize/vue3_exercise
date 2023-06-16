@@ -6,6 +6,11 @@ export const AdminRoutes = [
     component: () => import("@/views/home.vue"),
   },
   {
+    path: "/web_Interview",
+    meta: { title: "web_Interview" },
+    component: () => import("@cp/web_Interview/index.vue"),
+  },
+  {
     path: "/baiduMap",
     meta: { title: "baiduMap" },
     component: () => import("@cp/百度Map/map.vue"),

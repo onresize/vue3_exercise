@@ -1,5 +1,5 @@
 <template>
-  <div class="reg_box">
+  <div class="mixinHeight">
     <h3>正则基本使用</h3>
     <div class="pre-div">
       <pre>
@@ -109,10 +109,6 @@ console.log("正则转化后的str2----------", code(str2));
 </script>
 
 <style scoped lang="less">
-.reg_box {
-  overflow-y: scroll;
-  margin-bottom: 15vh;
-}
 .noSelect {
   user-select: none; // 不可选中文本
 }

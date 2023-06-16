@@ -31,7 +31,7 @@ let data = reactive<names[]>([
 <style scoped lang="less">
 .container_box {
   width: 100%;
-  height: 100%;
+  // height: 100%;
   .header {
     width: 100%;
     height: 28vh;

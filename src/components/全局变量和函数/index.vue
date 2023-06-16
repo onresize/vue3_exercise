@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mixinHeight">
     <h2>{{ `全局变量app.config.globalProperties.$env -->  ${$env}` }}</h2>
     <h3>{{ $filters.format("vue3移除过滤器filters属性") }}</h3>
   </div>

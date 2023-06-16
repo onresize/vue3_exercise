@@ -1,5 +1,5 @@
 <template>
-  <el-card class="box">
+  <el-card class="box mixinHeight">
     <h2>演示各种GamesDemo</h2>
     <el-card class="flex">
       <Rocket />
@@ -10,13 +10,13 @@
     </el-card>
   </el-card>
 </template>
- 
+
 <script setup>
 import Rocket from "@/myCom/rocket/Game.vue";
 import Ball from "@/myCom/ball/Game.vue";
 </script>
- 
-<style scoped >
+
+<style scoped>
 .box {
   overflow-y: scroll;
 }

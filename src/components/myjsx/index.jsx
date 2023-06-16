@@ -38,7 +38,7 @@ const List = (props, emits) => {
     console.log("btn2拿到子组件参数：", childParams);
   };
   return (
-    <div>
+    <div class="mixinHeight">
       <h1>vue中写jsx、灵活的封装组件</h1>
       <h3>拿到子组件参数：{a.value}</h3>
       <Child getMsg={Father} abc={b.value} onMyClick={ToMyClick} />

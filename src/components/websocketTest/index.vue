@@ -1,39 +1,17 @@
 <template>
-  <div>
+  <div class="mixinHeight">
     <h3>websocket连接测试(每隔10秒心跳响应)</h3>
     <el-card>
-      <el-button
-        :disabled="state.connectDisabled"
-        id="connect"
-        @click="connectClick"
-        >连接</el-button
-      >
-      <el-button
-        :disabled="state.sendMessageDisabled"
-        id="sendMessage"
-        @click="sendMessageClick"
-        >发送</el-button
-      >
-      <el-button
-        :disabled="state.destroyDisabled"
-        id="destroy"
-        @click="destroyClick"
-        >关闭</el-button
-      >
+      <el-button :disabled="state.connectDisabled" id="connect" @click="connectClick">连接</el-button>
+      <el-button :disabled="state.sendMessageDisabled" id="sendMessage" @click="sendMessageClick">发送</el-button>
+      <el-button :disabled="state.destroyDisabled" id="destroy" @click="destroyClick">关闭</el-button>
     </el-card>
 
     <el-card class="itemBoxCard" v-if="PiniaStore.MessageList.length">
       <el-collapse v-model="activeNames" @change="handleChange">
         <el-collapse-item :title="`当前消息: ${PiniaStore.MessageList.length}条`" name="1">
           <el-card class="p_Card">
-            <el-input
-              class="ipt"
-              v-for="(item, idx) in PiniaStore.MessageList"
-              :key="idx"
-              :value="idx + ': ' + item"
-              placeholder=""
-              disabled
-            ></el-input>
+            <el-input class="ipt" v-for="(item, idx) in PiniaStore.MessageList" :key="idx" :value="idx + ': ' + item" placeholder="" disabled></el-input>
           </el-card>
         </el-collapse-item>
       </el-collapse>
@@ -138,7 +116,7 @@ onUnmounted(() => {
 });
 </script>
 
-<style scoped lang='less'>
+<style scoped lang="less">
 .itemBoxCard {
   margin-top: 10px;
   width: 100%;

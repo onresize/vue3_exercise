@@ -1,29 +1,9 @@
 <template>
-  <div class="box">
-    <el-tag
-      class="btn"
-      :effect="state.viable1 ? 'dark' : 'light'"
-      @click="changeState('viable1')"
-      >弹窗1</el-tag
-    >
-    <el-tag
-      class="btn"
-      :effect="state.viable2 ? 'dark' : 'light'"
-      @click="changeState('viable2')"
-      >弹窗2</el-tag
-    >
-    <el-tag
-      class="btn"
-      :effect="state.viable3 ? 'dark' : 'light'"
-      @click="changeState('viable3')"
-      >弹窗3</el-tag
-    >
-    <el-tag
-      class="btn"
-      :effect="state.viable4 ? 'dark' : 'light'"
-      @click="changeState('viable4')"
-      >弹窗4</el-tag
-    >
+  <div class="box mixinHeight">
+    <el-tag class="btn" :effect="state.viable1 ? 'dark' : 'light'" @click="changeState('viable1')">弹窗1</el-tag>
+    <el-tag class="btn" :effect="state.viable2 ? 'dark' : 'light'" @click="changeState('viable2')">弹窗2</el-tag>
+    <el-tag class="btn" :effect="state.viable3 ? 'dark' : 'light'" @click="changeState('viable3')">弹窗3</el-tag>
+    <el-tag class="btn" :effect="state.viable4 ? 'dark' : 'light'" @click="changeState('viable4')">弹窗4</el-tag>
 
     <div class="my_dialog bg1" v-draggable v-if="state.viable1">
       <div class="my_dialog_header"></div>
@@ -66,7 +46,7 @@ const closeState = (key) => {
 };
 </script>
 
-<style scoped lang='less'>
+<style scoped lang="less">
 .box {
   user-select: none;
   position: relative;

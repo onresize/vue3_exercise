@@ -1,15 +1,8 @@
 <template>
-  <div>
+  <div class="mixinHeight">
     <h2>测试实现移动端拍照、base64预览(上传图片转成base64)</h2>
     <!-- XXX1 -->
-    <input
-      type="file"
-      ref="fileIpRef"
-      accept="image/*"
-      capture="camera"
-      placeholder="移动端可调起相机"
-      @change="methods.photograph()"
-    />
+    <input type="file" ref="fileIpRef" accept="image/*" capture="camera" placeholder="移动端可调起相机" @change="methods.photograph()" />
     <p></p>
     <img :src="state.base64ImgData" alt />
     <p></p>
@@ -21,11 +14,7 @@
     <p></p>
 
     <!-- XXX3 -->
-    <input
-      type="input"
-      @input="methods.urlToBase64"
-      placeholder="输入图片外链地址"
-    />&nbsp;
+    <input type="input" @input="methods.urlToBase64" placeholder="输入图片外链地址" />&nbsp;
     <button @click="methods.toBase64">转换base64</button>
     <p></p>
     <img :src="state.base64ImgData2" alt />
@@ -55,9 +44,7 @@ const methods = reactive({
     let reader = new FileReader();
     // readAsDataURL 方法参考地址：https://developer.mozilla.org/zh-CN/docs/Web/API/FileReader/readAsDataURL
     reader.readAsDataURL(FileInfo);
-    return new Promise(
-      (resolve) => (reader.onload = () => resolve(reader.result))
-    );
+    return new Promise((resolve) => (reader.onload = () => resolve(reader.result)));
   },
   handleFile(e) {
     // console.log(e.target.files[0]);
@@ -114,11 +101,7 @@ const methods = reactive({
       // 使用 atob() 方法将数据解码
       let byteCharacters = atob(b64data);
       let byteArrays = [];
-      for (
-        let offset = 0;
-        offset < byteCharacters.length;
-        offset += sliceSize
-      ) {
+      for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
         let slice = byteCharacters.slice(offset, offset + sliceSize);
         let byteNumbers = [];
         for (let i = 0; i < slice.length; i++) {
@@ -142,12 +125,10 @@ const methods = reactive({
 });
 
 let base64 = `dasgkdgasjkdgaksgduiasgudgasudguo`.split(",")[1];
-methods
-  .base64ToBlob({ b64data: base64, contentType: "image/png" })
-  .then((res) => {
-    // 转后后的blob对象
-    console.log("blob", res);
-  });
+methods.base64ToBlob({ b64data: base64, contentType: "image/png" }).then((res) => {
+  // 转后后的blob对象
+  console.log("blob", res);
+});
 </script>
 
 <style scoped></style>

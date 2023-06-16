@@ -1,15 +1,10 @@
 <template>
-  <div>
+  <div class="mixinHeight">
     <h2>实现敏感词替换、输入sb被替换成**</h2>
     <div>
-      <el-link
-        href="https://staging-cn.vuejs.org/api/reactivity-advanced.html#customref"
-        target="_blank"
-      >
-        customRef组合响应式api
-      </el-link>
+      <el-link href="https://staging-cn.vuejs.org/api/reactivity-advanced.html#customref" target="_blank"> customRef组合响应式api </el-link>
     </div>
-  <input type="text" v-model="msg" />
+    <input type="text" v-model="msg" />
   </div>
 </template>
 

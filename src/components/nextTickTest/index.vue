@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mixinHeight">
     <h2>一：验证vue3中await nextTick()值是否promise 看console</h2>
     <div>
       <h2>二：await的两种用法：</h2>

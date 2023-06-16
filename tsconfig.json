@@ -27,5 +27,16 @@
     },
     "lib": ["esnext", "dom", "dom.iterable"]
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/components/大屏适配/package/index.ts", "src/utils/color.js", "src/utils/mittBus.js", "src/utils/eleValidate.js", "src/utils/tools.js"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "src/components/大屏适配/package/index.ts",
+    "src/utils/color.js",
+    "src/utils/mittBus.js",
+    "src/utils/eleValidate.js",
+    "src/utils/tools.js",
+    "src/md/*.md"
+  ]
 }

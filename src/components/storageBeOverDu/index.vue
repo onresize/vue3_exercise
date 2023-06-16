@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mixinHeight">
     <h2>localStore设置过期时间</h2>
     <el-card v-for="({ message }, idx) in list" :key="idx">
       <el-input :value="message" placeholder=""></el-input>
@@ -27,5 +27,4 @@ let tim = window.setInterval(() => {
 }, 500);
 </script>
 
-<style scoped lang='less'>
-</style>
+<style scoped lang="less"></style>

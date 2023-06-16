@@ -1,25 +1,14 @@
 <template>
-  <div>
+  <div class="mixinHeight">
     <h2>
       element-plus图标不渲染问题:
-      <el-link
-        href="https://blog.csdn.net/weixin_44775694/article/details/124894161"
-        target="_blank"
-        >参考:</el-link
-      >
+      <el-link href="https://blog.csdn.net/weixin_44775694/article/details/124894161" target="_blank">参考:</el-link>
     </h2>
     <h3>
-      <div class="ft-20 tag">
-        注意这里使用setup return方式必须写components当成组件一样注册图标、
-        而script标签上setup那种方式只需要引入就能直接使用、不需要再写components
-      </div>
+      <div class="ft-20 tag">注意这里使用setup return方式必须写components当成组件一样注册图标、 而script标签上setup那种方式只需要引入就能直接使用、不需要再写components</div>
     </h3>
     <div>
-      <h3 class="mg-l-20">
-        全局注册：<span class="bg-pink border-5 pg-5"
-          >npm install @element-plus/icons-vue</span
-        >
-      </h3>
+      <h3 class="mg-l-20">全局注册：<span class="bg-pink border-5 pg-5">npm install @element-plus/icons-vue</span></h3>
       <pre class="ft-20 ft-bold bg-pink border-10 pg-t-20">
       在main.ts中
       import * as icons from "@element-plus/icons-vue";

@@ -1,0 +1,2591 @@
+[js上](https://blog.csdn.net/qq_49002903/article/details/125221649?spm=1001.2014.3001.5502)
+
+[js下](https://blog.csdn.net/qq_49002903/article/details/125253729)
+
+[vue篇](https://blog.csdn.net/qq_49002903/article/details/125313404)
+
+[react篇](https://blog.csdn.net/qq_49002903/article/details/125428071)
+
+[http篇](https://blog.csdn.net/qq_49002903/article/details/125748986)
+
+[csdn面试汇总](https://phyger.blog.csdn.net/article/details/113410172)
+
+[掘金总结篇](https://juejin.cn/post/6844903461000069128)
+
+[掘金2年经验](https://juejin.cn/post/6989626582465789966)
+
+[公众号](https://mp.weixin.qq.com/s/65VtmTeJzqboutv54fFZ1w)
+
+[在线网站](https://www.runjs.cool/interview)
+
+```js
+new String('A') // {A} 是一个对象
+new Boolean('A') // {true}
+new Number(-1) // {-1}
+
+String('A') // 'A'
+Boolean('A') // true
+Number(-1) // -1
+
+
+Array.isArray(Array.prototype) // true
+
+
+var ary = Array(3);
+ary[0] = 2;
+ary.map(function(elem) {
+  return "1";
+});
+// ['1', 空属性 x 2]、map中的回调不会对空值执行
+```
+
+### screenfull 一个全屏的库
+
+```bash
+npm i screenfull
+```
+
+### css、less、scss语法
+
+```js
+// css
+https://blog.csdn.net/qq_32247819/article/details/123788346
+```
+
+```js
+// less
+https://less.bootcss.com/#%E6%A6%82%E8%A7%88
+```
+
+```js
+//  scss
+https://www.sasscss.com/guide
+```
+
+### find
+
+```js
+// 找到第一个符合条件的数据、返回它的数据项、区别filter（find 返回数组包裹符合条件的第一个数据项）
+// filter 找到所有符合情况的数据项、两者都不能对空数组进行检测
+
+let arr1 = [1,2,3,4]
+let arr2 = arr1.filter(item=>item===1)
+console.log(arr1, ‘arr1’) // [1,2,3,4] arr1
+console.log(arr2, ‘arr2’) // [1] arr2
+let arr3 = [{ id:1,name:‘aa’,desc: ‘aaaa’ },{id:2,name:‘bb’ },{id:3,name: ‘aa’ }]
+let arr4 = arr3.filter(item=>item.name === ‘aa’)
+console.log(arr4, ‘arr4’) // [{id:1,name:‘aa’, desc:‘aaaa’},{id:3,name:‘aa’}] arr4
+
+
+let arr5 = [1,2,1,3,4,5]
+let arr6 = arr5.find(item=>item===1)
+console.log(arr6, 'arr6')  // 1 arr6
+let arr7 = arr3.find(item=>item.name === 'aa')
+console.log(arr7, 'arr7') // {id:1,name:'aa',desc:'aaaa'} arr7
+```
+
+### some
+
+```js
+// 任意一个符合条件(只要一个符合条件、直接返回true)、返回boolean值、和every相反
+let someArr1 = [1,2,3,4]
+ let someArr2 = someArr1.some(item=>item === 1)
+ console.log(someArr2, 'someArr1') // true  someArr1
+ let someArr4 = [
+      {id:1,name:'bb' },
+      {id:4,name:'cc' },
+      {id:1,name:'dd' }
+ ]
+ let someArr3 = someArr4.find(info=>{ return arr3.some(item=>item.id === info.id) })
+ console.log(someArr3) // {id:1,name:'bb'}
+```
+
+### every
+
+```js
+// 每一个都符合条件(只要一个不符合条件、直接返回false)、返回boolean值
+let everyArr = [1,2,3,4]
+let everyArr2 = everyArr.every(item=>item===1)
+console.log(everyArr2, 'everyArr2') //false "everyArr2"
+
+// 应用场景：用来做校验
+const arr = [1,2,3]
+const everyRes = arr.every(v => {
+    if (v === 1) {
+        return false
+    }
+    return true
+})
+console.log(everyRes) // false
+```
+
+### map
+
+```js
+var newArray3 = numArr.map(item =>{
+    item = item + 1;
+    return item;
+});
+//newArray3 =  [2, 9, 79, 116, 11, 81]
+```
+
+### class类
+
+```js
+super(); 用于当子类继承父类时、在父类基础上增加其他参数、使用super()调用
+static; 静态方法、只能用类来调用、不能用实例调用
+set; 通过实例调用该属性修改操作
+get; 通过调用该属性获取值
+
+// 代码示例：
+ let input = document.querySelector('input'),
+    btn1 = document.querySelector('.btn1'),
+    btn2 = document.querySelector('.btn2'),
+    p = document.querySelector('.p');
+
+  class BullShift {
+    constructor(text, color) {
+      this.text = text;
+      this.color = color;
+    }
+    static welcome_tips() {
+      return '温馨提示'
+    }
+    // 静态方法要用类去调用、不是用this实例调用
+    static welcome() {
+      p.innerHTML = this.welcome_tips()
+    }
+    show() {
+      p.innerHTML = this.text + input.value
+      p.style.color = this.color
+      p.style.fontSize = '1rem'
+    }
+    set extra(value) {
+      this.value = value
+      p.innerHTML += this.value
+    }
+    get extra() {
+      return `这些都是废话：${this.text} ${this.value}`
+    }
+  }
+
+
+  btn1.addEventListener('click', () => {
+    let r = new BullShift('这是', 'red')
+    r.show()
+    r.extra = 'XXX'
+    console.log(r.extra)
+  })
+
+
+  class twoBullShift extends BullShift {
+    constructor(text, color, fontSize) {
+      super(text, color)
+      this.fontSize = fontSize
+    }
+    show() {
+      p.innerHTML = this.text + p.innerHTML
+      p.style.color = this.color
+      p.style.fontSize = this.fontSize
+    }
+  }
+
+
+  btn2.addEventListener('click', () => {
+    let r2 = new twoBullShift('二级', 'red', '2rem')
+    r2.show()
+  })
+
+  p.addEventListener('click', () => {
+    BullShift.welcome()
+  })
+```
+
+### 事件冒泡(下  ->  上)  &  事件捕获(上  ->  下)
+
+```js
+1.在Dom流中、先是走事件捕获(document -> html -> body ->  div)、再走事件冒泡(div -> body -> html -> document)
+2.addEventListener中第三个值默认为false、表示事件冒泡阶段响应事件、true表示事件捕获阶段响应事件
+3.基本的onclick也是事件冒泡
+```
+
+### a == 1  &&  a == 2  &&  a == 3
+
+```js
+let a = {
+    i: 1,
+    valueOf() {
+        return this.i++
+    }
+    // toString() {
+    //     return this.i++
+    // }
+}
+console.log(a == 1 && a == 2 && a == 3 && a == 4 && a == 5) // true
+```
+
+###  Proxy & Reflect   set( ) 、 get( ) 、apply( ) 、 construct( )  基本使用
+
+```js
+ 1. 实现arr[-1] 取数组倒数第一位的值、思路：使用Proxy拦截数组做代理
+  let arr = [3, 2, 1, 4, 5]
+  # Proxy 中 get()和set()用法
+  let handler = {
+    // target：拦截对象, key：键, proxy：proxy实例、可选
+    get(target, key, proxy) {
+      console.log('get：', target, key, proxy)
+      key = Number(key)
+      if (key < 0) {
+        key += target.length // 将key重写为正值索引
+        return Reflect.get(target, key, proxy) // 这一步相当于target[key]
+      } else {
+        return target.at(key)
+      }
+    },
+    // oldArr：原数组, key：键, keyVal：键值, proxy: proxy实例、可选
+    set(oldArr, key, keyVal, proxy) {
+      console.log('set：', oldArr, key, keyVal)
+      key = key - 0
+      return oldArr[key] = keyVal
+    }
+  }
+
+  let proxyArr = new Proxy(arr, handler)
+  // console.log(proxyArr[-3]) // 获取数组
+  // proxyArr[1] = 0 // 修改数组
+  // console.log(arr)
+  
+  
+  
+  2.实现add[100][22] + 1 = 123
+	let add = new Proxy({sum: 0}, {
+        get(target, key, proxy) {
+            if (key == Symbol.toPrimitive) {
+                const count = taget.sum
+                taget.sum = 0
+                return () => count
+            } else {
+                target.sum += key - 0
+                return proxy
+            }
+        }
+    })
+    console.log(add[100][22] + 1) // 123
+
+
+
+
+ # Proxy 中 apply的用法
+  var twice = {
+    // target：拦截的对象（sum）,ctx：被拦截对象的上下文（this）,args：目标对象参数组成的数组
+    apply(target, ctx, args) {
+      console.log('上下文指向：', ctx)
+      return target.apply(ctx, args) * 2;
+      // 相当于Reflect.apply(...arguments) * 2
+    }
+  };
+  function sum(x, y) {
+    return x + y;
+  };
+  var proxy = new Proxy(sum, twice);
+  // console.log(proxy(1, 2))  // 6
+  // console.log(proxy.call({ a: 2 }, 2, 3))  // 10
+  // console.log(proxy.apply({ b: 3 }, [3, 4]))  // 14
+  // console.log(Reflect.apply(proxy, null, [4, 5]))  // 18
+
+
+
+  # proxy 中 construct的用法、拦截 new命令、construct返回必须是一个对象、拦截的对象必须是构造函数
+  let CtorProxy = new Proxy(function () { }, {
+    // target：目标对象, args：构造函数参数组成的数组, newtTarget：实例对象
+    construct(target, args, newtTarget) {
+      return { value: args[0] }
+    }
+  })
+  console.log(new CtorProxy(1, 2).value) // 1
+```
+
+###  使用 Proxy 实现 js 链式调用
+
+```js
+ 1.js函数的链式调用
+  var pipe = function (value) {
+    let fnStack = []
+    let proxyObj = new Proxy(
+      {},
+      {
+        get(target, key, proxy) {
+          // console.log('get：', target, key, proxy)
+          if (key === 'do') {
+            return fnStack.reduce((pre, itemFn) => itemFn(pre), value)
+          } else {
+            fnStack.push(window[key])
+            return proxyObj // 这里相当于 return proxy
+          }
+        }
+      })
+    return proxyObj
+  }
+
+  var double = (n) => n * 2
+  var pow = (n) => Math.pow(n, n)
+
+  var res1 = pipe(2).double.pow.do // 4 ** 4
+  console.log(res1)
+```
+
+### 找到数组中出现最多的项
+
+```js
+let arr = ['赵', '钱', '孙', '孙', '李', '周', '李', '周', '周', '李'], obj = {};
+arr.map((i) => !obj[i] ? obj[i] = 1 : obj[i]++ )
+let res = Object.keys(obj).sort((a,b) => obj[b] - obj[a]).filter((item, i, ary) => obj[item] === obj[ary[0]])
+console.log(res) // ['周', '李']
+```
+
+### 数组找最大的值
+
+```js
+// 注意：Math.max()里面不能直接接收数组、可以用...解构出来
+let arr = [1,4,2,6,3]
+console.log(Math.max(...arr)) // 6
+
+
+// 方法2、forEach
+function toMax(arr) {
+    let res = -Infinity
+    arr.forEach((item) => {
+        if (item > res) {
+            res = item
+        }
+    })
+    return res
+}
+console.log(arr) // 6
+
+
+// sort排序
+let r = arr.sort((a, b) => a - b).pop()
+console.log(r[0]) // 6
+```
+
+### 排序
+
+```js
+// 针对对象中的某一个值进行排序
+  let arr = [
+    {
+      name: '1-3层',
+      text: {
+        a: 'a',
+        b: 'b',
+        c: 'c',
+      }
+    },
+    {
+      name: '11层',
+      text: {
+        a: 'a',
+        b: 'b',
+        c: 'c',
+      }
+    },
+    {
+      name: '10层',
+      text: {
+        a: 'a',
+        b: 'b',
+        c: 'c',
+      }
+    },
+    {
+      name: '6-7层',
+      text: {
+        a: 'a',
+        b: 'b',
+        c: 'c',
+      }
+    },
+  ]
+  
+    // 截取
+  function subStrText(text) {
+    if (text.includes('-')) {
+      // 多层
+      let n = text.lastIndexOf('-')
+      return text.substring(0, n) - 0
+    } else {
+      // 单层
+      let i = text.lastIndexOf('层')
+      return text.substring(0, i) - 0
+    }
+  }
+
+
+  function sortBy(property) {
+    return function (value1, value2) {
+      let a = subStrText(value1[property])
+      let b = subStrText(value2[property])
+      return a < b ? 1 : a > b ? -1 : 0
+    }
+  }
+
+
+  console.log(arr.sort(sortBy('name'))) // name高到低输出
+```
+
+### Number 和 parseInt的区别
+
+```js
+parseInt()可以直接转换带单位的数字字符串（只要字符第一个是数字字符就能被解析）、Number会直接输出NaN：parseInt('12px') // 12
+parseInt(a,b)第二个参数是一个基数、进制数、不写默认是10
+Number()能转换浮点数值、ParseInt不行
+```
+
+### 301 & 302 &  304
+
+```js
+1. 301是永久性重定向：
+比如一个网站域名过期了、想换个域名、就可以通过旧的域名返回一个301状态、搭配loaction的值为新的域名、这样就可以实现老的域名跳转到新的域名、浏览器会去记住新的域名、不会再访问老的域名
+
+2. 302是临时性重定向：
+比如百度搜索一个菜鸟教程、点击它不会立马跳转、而是先跳转百度设置的个临时地址、之后在跳转你点击的那个菜鸟教程真实地址
+
+3. 304跟重定向没关系、跳转网页
+```
+
+### http & https
+
+```js
+http是明文传输的、而https是加密传输的、相对更加安全
+https是需要证书的
+http默认端口是80、https默认端口是443
+```
+
+### 响应式 和 自适应布局区别
+
+```js
+1.响应式布局：多端不一样分辨率不同的布局（媒体查询）
+2.自适应布局：网页显示在不同设备屏幕上、布局自适应
+
+区别： 
+自适应布局通过检测视口分辨率来判断当前设备屏幕大小
+响应式布局是不同的分辨率争对不同的客户端做代码处理、来展示不同的布局和内容
+```
+
+### 盒模型
+
+```js
+1.标准盒模型：宽度和高度就是内容的宽高
+2.IE盒模型 ：宽高就是内容宽高 + border + padding 
+box-sizing修改盒模型
+content-box 标准盒模型
+border-box IE盒模型
+```
+
+### 浏览器从输入url页面加载完发生了什么？
+
+```js
+1.构建请求
+2.查找强缓存、如果不是强缓存、则查找协商缓存
+// （浏览器先找是否有缓存、如果有直接读取缓存的数据、并渲染页面、如果没有缓存、则发送请求、服务器返回数据和缓存标识、存入缓存、最后渲染页面）
+3.DNS域名解析成公网IP
+4.建立TCP连接、三次握手 (服务端1次和客户端2次、为了保证客户端和服务端各自可收发消息)
+5.发送http请求
+6.服务器处理返回前端数据
+7.下载js、css、动态的改变html Dom树、浏览器解析并渲染页面
+8.tcp四次挥手断开连接
+```
+
+### TCP & UDP
+
+```js
+// tcp和udp的区别：
+tcp是面向连接的、而udp发送数据前是不需要建立连接的、
+tcp他会保证数据不重复不丢失、而udp发送数据不会保证全部发送完、
+所以tcp发送大量数据更可靠、tcp是一对一的、而udp是还能一对多、多对多
+
+udp应用场景如：广播通信、视频音频通信
+tcp协议的通信、在传输数据前、必须用过三次握手来建立连接
+```
+
+### 媒体查询
+
+```js
+语法： @media <媒体类型> and (媒体属性) {  样式 }
+
+# 媒体类型：（常用）
+一般都是screen、指的电脑、手机、pad屏
+tv：电视
+all: 设备
+
+# 媒体属性：（常用）
+1.宽度 min-width max-width
+2.高度 min-height max-height
+
+// 媒体查询通过min/max来判断大小、而不是大于号小于号
+例：
+1.大于750px设备用100px的字体
+@media screen and (min-width: 750px) {
+    div {
+       font-size: 100px  
+    }
+}
+
+2.大于360px 小于750px的设备用50px字体
+@media screen and(min-width: 360px) and (max-width: 750px)  {
+    div {
+       font-size: 50px  
+    }
+}
+
+3. 和步骤二取反、表示宽度小于360px和大于750px的设备字体用50px
+@media not screen and(min-width: 360px) and (max-width: 750px)  {
+    div {
+       font-size: 50px  
+    }
+}
+
+参考： https://blog.csdn.net/qq309364574/article/details/119569105
+更多参考： https://blog.csdn.net/yexudengzhidao/article/details/103646013
+```
+
+### 重绘和回流
+
+```js
+回流：页面中改变某个元素的尺寸或某些属性发生改变时、浏览器重新渲染、这个就是回流
+重绘： 页面中修改某个元素的样式不会影响它在文档流中的位置、添加新样式、浏览器重绘到文档流中、这个过程就是重绘
+
+// 如何避免重绘和回流？
+1.复杂动画应用在使用绝对定位脱离文档流的的元素上
+2.避免使用table布局
+3.避免重复操作样式
+4.样式中少用calc计算
+```
+
+### 微信小程序的支付流程
+
+```js
+1.wx.login登录去拿到登录的code、再发送给后端获取openId
+2.把对应的商品参数和这个openId发送给后端、后端生成服务器订单数据、经过一定的签名算法、向微信支付发送请求、获取预支付prepayId、同时再次进行相应的规则签名、给前端发送必要的信息
+3.前端通过wx.requestPayment()发起微信支付、用户一系列操作后、在微信后台进行支付鉴权、成功了就直接返回前端支付结果、
+```
+
+### 登录流程
+
+```js
+初次登录的时候，前端调用登录接口，发送用户名和密码，后端收到请求，验证用户名和密码，验证成功，就给前端返回一个token，和一个用户信息的值，前端拿到token，将token储存到Vuex中，然后从Vuex中把token的值存入浏览器Cookies中。把用户信息存到Vuex然后再存储到LocalStroage中,然后跳转到下一个页面，根据后端接口的要求，只要不登录就不能访问的页面需要在前端每次跳转页面师判断Cookies中是否有token，没有就跳转到登录页，有就跳转到相应的页面，我们应该再每次发送post/get请求的时候应该加入token，常用方法再项目utils/service.js中添加全局拦截器，将token的值放入请求头中 后端判断请求头中有无token，有token，就拿到token并验证token是否过期，在这里过期会返回无效的token然后有个跳回登录页面重新登录并且清除本地用户的信息
+```
+
+### 取消请求的方法
+
+```js
+原生XMLhttpRequest是通过abort() 这个方法取消请求的
+axios.CancelToken.source()
+# 应用场景： 下载文件的时候中途取消
+```
+
+### window.location.search 返回的是什么？
+
+```js
+// ?name=zs&age=19
+```
+
+### window.location.reload( ) 
+
+```js
+// 刷新当前页面
+```
+
+### css实现一个谷歌浏览器的回退箭头
+
+```js
+// 思路： 
+先设置宽高实现那根横线（相对定位）、再用after伪类给盒子（绝对定位）设置border-top 和 border-right、然后transform: retate(45deg)旋转角度、
+```
+
+### js实现一个可拖拽盒子
+
+```js
+1.拖拽盒子设置position: absolute;脱离文档流
+2.盒子绑定onmousedown触发方法、用(clientX - offsetX)、(clientX - offsetX)得到鼠标在盒子内部的一个坐标定位、确保鼠标在盒子中定位不会偏差
+3.在这个方法内部去触发document.onmousemove、用(当前事件的clientX - 鼠标在盒子内x轴定位的长度)计算出盒子距离左上的长度、动态操作盒子dom、改变其top/left值
+4.在这个onmousedown方法内部去触发onmouseup去赋空document.onmousemove
+```
+
+### 组件通信
+
+```js
+1.props/$emit
+2.eventBus、$bus.$emit、$bus.$on、兄弟、父子
+3.$parent、$children、父子
+4.provide/inject 例：父子、祖孙(provide: {name: 'zs'}   inject: ['name'])
+5.$attrs、$listeners 
+例：父组件绑定属性name、子组件下的子组件标签绑定v-bind="$attrs"、孙组件通过$attrs.name去那父组件绑定的属性、通过$listeners.iptClick去调用父组件的事件(iptClick)
+6.vuex
+7.ref
+8.localStorage/sessionStorage
+```
+
+### 深拷贝浅拷贝有什么区别?
+
+```js
+// 基础类型：String、Number、Boolean、undefined、null、Symbol
+// 引用类型：Object、Array、Function、Date、RegExp
+1.深拷贝浅拷贝有什么区别?
+ >>> 浅拷贝：拷贝的是指针、旧值的修改和新值的修改会同步更新
+ # 场景：
+   二维对象的Object.assign({}, obj)、
+   二维数组的Array.concat()、
+   二维对象或数组的解构赋值、
+   引用类型的等号赋值
+
+ >>> 深拷贝：旧值和新值的修改不会相互影响、它不仅拷贝了指针、还拷贝了内容
+ # 场景：
+   JSON.parse(JSON.stringIfy())
+   一维对象的Object.assign({}, obj)、
+   一维数组的Array.concat()、
+   一维对象或数组的解构赋值、
+   基础类型的等号赋值
+
+2.解构赋值是深拷贝吗?
+ （一维数组、对象是深拷贝、二维对象、数组是浅拷贝）
+
+3.业务中经常用到的深拷贝或浅拷贝方法? 
+  JSON.parse(JSON.StringIfy()) 针对数组和对象, 不能拷贝funtion、undefined、正则
+
+5.实现一个深拷贝? （递归）
+// 支持（null、undefined、regExp、func、object、array、NaN、number、boolean、Date）类型
+function deepClone(obj) {
+    let newObj
+    let type = Object.prototype.toString.call(obj)
+    
+    if (typeof obj != 'object' || obj == null) {
+       if (type === '[object Date]') return new Date(obj)
+       if (type === '[object RegExp]') return new RegExp(obj)
+       if (type === '[object Symbol]') return Symbol(obj)
+       return obj
+    }
+    
+    newObj = obj instanceof Array ? [] : {}
+    
+    for (let i in obj) {
+        newObj[i] = obj[i] instanceof Array || obj[i] instanceof Object ? deepClone(obj[i]) : obj[i]
+    }
+    
+    return newObj
+}
+```
+
+```js
+  // TODO: 二维的对象解构出来的值是浅拷贝、一维是深拷贝
+  let obj = { name: 'zs', data: [1, 2], form: { a: '1', b: '2' } }
+  let { name, data, form } = obj
+
+  // 1.修改解构的现值、测试原值是否被改变
+  name = 'ls' // 一维修改、深拷贝、不会影响
+  data[0] = 2 // 二维修改、浅拷贝、原值被影响
+  form['b'] = '3' // 二维修改、浅拷贝、原值被影响
+  // console.log(obj) //{ name: 'zs', data: [2, 2], form: { a: '1', b: '3' } }
+
+  // 2.修改原值、测试解构出的现值是否被影响
+  obj.name = 'ls' // 一维修改、深拷贝、不影响
+  obj.data = [2, 3] // 一维修改、深拷贝、不影响
+  obj.form['a'] = '2' // 二维修改、浅拷贝、会影响
+  // console.log(name, data, form) // zs, [1, 2], { a: '2', b: '2' }
+
+
+
+
+  // TODO: 二维数组解构赋值是浅拷贝、一维是深拷贝
+  let arr1 = [{ c: 'zz' }, [3, 4]]
+  let [a, b] = arr1
+
+  // 1.改变解构的现值、测试是否改变原值
+  a = 1 // 一维修改、深拷贝
+  b[0] = 4 // 二维修改、浅拷贝
+  // console.log(arr1) // [{ c: 'zz' }, [4, 4]]
+
+  // 2.改变原值、测试是否改变现值
+  arr1[0] = 1 // 一维修改、深拷贝、不会影响
+  arr1[1][0] = 4 // 二维修改、浅拷贝、修改原值同步影响现值
+  // console.log(a, b) // [{c: 'zz'}, [4, 4]]
+```
+
+```js
+1.不用循环输出1-100整数
+// 方法一
+let arr = Object.keys(Array.from({length: 101}))
+// 方法二
+let arr = Object.keys([...Array(101)])
+arr.shift()
+console.log(arr.join(',')) // 1...100
+
+// 方法三
+console.log([...Array(100)].map((item, i) => i + 1)
+            
+// 方法四
+Array.apply(null, {length: 80})
+```
+
+```js
+1.key值的作用是什么、可以用数组下标代替吗? 
+ （不建议下标代替 1.多个数组 2.数组的增加删除操作）
+ 提供虚拟Dom唯一的值、通过这个key、让虚拟Dom更高效、让diff操作更加快速和准确
+
+2.为什么data()是函数? （闭包、独立作用域）
+组件里面data写成一个函数、类似每个组件实例上都创建了一个私有数据空间、让每个组件各自维护自己的数据、如果写成对象的话、会造成数据一更改、所有组件用到data的就会跟着改变
+```
+
+### require 和 import区别
+
+```js
+// require 和 import区别
+1.require是浅拷贝：修改会影响到原数据，import是引用：基本类型修改不会影响原数据、但是对象修改属性会影响
+2.两者性能import较高
+3.导入require 对应导出为 exports/module.exports (CommonJs标准)、导入import对应的export (ES标准)
+4.import为异步加载、require为同步加载
+```
+
+### 随机生成一个字符串  &  一个生成唯一id的js库
+
+```js
+// 随机生成一个字符串
+Math.random().toString(36).substr(2)
+
+// 一个生成唯一id的js库
+import { nanoid } from 'nanoid'
+model.id = nanoid() //=> "V1StGXR8_Z5jdHi6B-myT"
+
+// 系统内置加密模块、直接使用
+console.log("唯一id:", crypto.randomUUID());
+```
+
+###  面试问到 '==='  和 Object.is()
+
+```js
+# 面试问到 '===' 时、举一反三
+'=='比较值、先转换再比较
+'==='比较值和类型、仅比较不转换
+Object.is() //当两个参数类型一致才会进行比较、类型不一致直接返回false、相对于 ‘===’ 更符合预期
+
+Object.is(a, b) // 用来比较两个值是否相等(ie不支持)、等同于 === 
+Object.is([], []) 			// false
+Object.is(window, window) 	// true
+Object.is(null, null) 		// true  
+Object.is(0, 0) 		   // true  
+
+// 特例
+Object.is(0, -0);            // false
+Object.is(0, +0);            // true
+Object.is(-0, -0);           // true
+Object.is(NaN, 0/0);         // true
+
+// 如果浏览器不支持Object.is封装个方法
+if (!Object.is) {
+  Object.is = function(x, y) {
+    // SameValue algorithm
+    if (x === y) { // Steps 1-5, 7-10
+      // Steps 6.b-6.e: +0 != -0
+      return x !== 0 || 1 / x === 1 / y;
+    } else {
+      // Step 6.a: NaN == NaN
+      return x !== x && y !== y;
+    }
+  };
+}
+```
+
+### String.endsWith( ) 用法 
+
+```js
+// String.endsWith('.vue') 用来判断字符串是否以指定子字符串结尾(区分大小写)、第二个参数默认为字符长度、可以指定字符长度
+'../a.vue'.endsWith('.vue') // true
+
+var str = "To be, or not to be, that is the question.";
+str.endsWith("to be");      // false
+str.endsWith("to be", 19);  // true
+```
+
+### forEach 和 for循环本质区别
+
+```js
+// forEach 和 for循环本质区别
+1.for循环性能好于forEach、for循环要终止循环使用return必须写在函数体内、否则报错、也可以用continue(跳出当前循环、继续执行下一个循环)、或breack(结束当前所有循环)
+2.for循环可以跳出循环、forEach不行（里面写return不会执行、break和continue会报错、要跳出循环用try...catch）
+3.forEach本质是迭代（迭代是递归的一种特殊形式、是迭代器提供的一种方法、默认情况下是按照一定顺序逐个访问是数据机构成员）
+迭代：（定义：强调将一个数据集合依次取出数据、并不保证会全部取完）、
+遍历：（定义：强调依次将数据集合全部取完）
+
+# PS: （forEach空数组不会执行回调）
+forEach的第二个参数是this指向绑定
+Array.prototype.forEach.call([3, 4, 5], function(item) {
+    console.log(item, this) // 此时的this已经指向了数组[1, 2, 3]
+}, [1, 2, 3])
+
+[1, 2, 3].forEach(function(item) {
+    console.log(item, this) // 此时this指向 ''
+}, '') // 不写或写null、undefined默认指向window
+
+
+// 关于多重for循环终止循环的方法、（例：在for循环上使用 loop1: 表示这个循环的名字、for循环的名字只能使用在for循环上、不能用在forEach上）
+let data = [
+    { name: '张三', hobbies: ['西瓜', '香蕉'] },
+    { name: '李四', hobbies: ['苹果', '草莓'] },
+    { name: '王五', hobbies: ['芒果', '苹果'] },
+  ]
+
+  let name = null
+  loop1:
+  for (let i = 0; i < data.length; i++) {
+    loop2:
+    for (let j = 0; j < data[i].hobbies.length; j++) {
+      const hobby = data[i].hobbies
+      if (hobby[j] == '苹果') {
+        name = data[i].name
+        console.log('第一个爱吃苹果的是：', name)
+        break loop1; // 终止内层loop2循环
+      }
+    }
+  }
+  console.log('外层输出：', name)
+```
+
+### 字符串下划线转驼峰  &  字符串驼峰转下划线
+
+```js
+// 字符串下划线转驼峰
+const formatToHump = (value) => {
+  return value.replace(/\_(\w)/g, (_, letter) => letter.toUpperCase())
+}
+ 
+// 字符串驼峰转下划线
+const formatToLine = (value) => {
+  return value.replace(/([A-Z])/g, '_$1').toLowerCase()
+}
+
+# 应用场景：
+ 1.将str去除'-'、并将'-'后第一个字母转成大写 (get-element-by-id -> getElementById)
+  // 方法一 
+   let str = "get-element-by-id";
+   let arr = [];
+   const a = str.replace(/\-(\w)/g, (_, word) => word.toUpperCase());
+   console.log("正则转化后的----------", a);
+
+ // 方法二
+  for (let i = 1; i < str.split('-').length; i++ ) {
+  	  arr[i] = arr[i].charAt(0).toUpcase() + arr[i].substr(1, arr[i].length - 1)
+  }
+  console.log(arr.join(''))
+    
+    
+ 2.驼峰转下划线 (getElementById -> get-element-by-id)
+   let str = "getElementById";
+   const a = str.replace(/([A-Z])/g, "_$1").toLowerCase();
+   console.log("正则转化后的----------", a);
+    
+    
+ 3.小写驼峰 --> 下划线形式 (saKuRa -> sa_ku_ra)
+   var str = 'saKuRa';
+   function code(str) {
+      return str.replace(/[A-Z]/g, (word) => '_' + word.toLowerCase())
+   }
+   console.log(code(str));
+```
+
+### react和vue区别
+
+```js
+// react和vue区别
+	相同点：
+        1.都有组件化开发和虚拟dom
+        2.都支持props进行父子组件通信
+        3.都支持数据驱动视图、不直接操作dom、更新状态数据、界面同步更新、都有状态管理
+        4.都有服务端渲染、vue有nuxtJs、react有nextJs
+        5.都支持native方案、react有react native、vue有weex
+        
+	不同点：	
+    	1.vue是双向绑定、react是单项数据流
+        2.组件写法不一样、react推荐JSX、vue就是SFC规范
+        3.react针对MVC的view层、vue是MVVM模式
+        
+# React 本身并不支持自定义事件，而Vue中子组件向父组件传递消息有两种方式：事件和回调函数，但Vue更倾向于使用事件。在React中我们都是使用回调函数的，这可能是他们二者最大的区别。
+更多参考： https://blog.csdn.net/qq_46658751/article/details/123797777
+```
+
+### react组件中为什么又要设置key?
+
+```js
+1.react组件中为什么又要设置key?
+答： key值的作用就是保证同级元素中具有唯一性、在react Diff算法中会借助key值来判断元素是否新创建的还是被移动而来的元素、减少不必要的元素重新渲染
+```
+
+### vue项目怎么优化首屏响应速度
+
+```js
+// vue项目怎么优化首屏响应速度
+·增加带宽
+·CDN加速
+·路由懒加载（plugin-syntax-dynamic-import插件）
+·压缩静态资源、Gzip压缩
+·预加载
+·SSR（vue: Nuxt、react: Next）
+·骨架屏 loading
+·webpack entry单入口改成多入口 (他会对打包的生成的文件代码分割、生成多个js、要渲染那个页面就只加载某个js、这样加载资源就少、速度自然更快)
+```
+
+```js
+// 微前端技术栈框架: vue和react、angurJS整合在一起的框架（MicroApp、qiankun）
+MicroApp: https://cangdu.org/micro-app/
+qiankun: https://qiankun.umijs.org/zh/
+```
+
+### 什么时候不适用箭头函数？
+
+```js
+// 什么时候不适用箭头函数？ https://mp.weixin.qq.com/s/auhLMMnqK9pWU1mcxcYyvQ
+1.对象方法中、不适用箭头函数
+2.原型方法中、不适用箭头函数
+3.构造函数也不行、直接报错 （构造函数通过new关键字来生成对象实例、生成实例的过程也是通过钩爪函数给实例绑定this的过程、箭头函数没有this、所以不能用箭头函数作为构造函数、也就不能用new操作符调用箭头函数）
+4.动态上下文的回调函数、（addEventListener）
+const btn1 = document.getElementById('btn1')
+btn1.addEventListener('click', () => {
+    this.innerHTML = 'clicked' // 此时这个this指向的是window、而不是这个btn1、所以需要使用普通函数
+})
+5.vue生命周期method中不能使用箭头函数（vue组件本质是对象、而react组件(非Hook)本质是class）、他的本质是一个对象、所以不适用箭头函数
+
+// 箭头函数相关：
+箭头函数中没有 this、arguments、super、new.target 
+它的这些属性都是定义函数时绑定外层的this、arguments、super、new.target
+箭头函数要拿到实参可以搭配...扩展运算符解构使用、拿到的值是一个真正的数组
+箭头函数本身就适用写匿名函数、并且不能用作构造函数
+```
+
+https://segmentfault.com/a/1190000016418021/  
+
+https://www.jb51.net/article/74347.htm
+
+###   数组去重（三种熟练掌握）
+
+```js
+//空数组.indexOf()找不到值等于-1作判断条件,push到空数组 (es5常用)
+//遍历数组、indexOf(a, b)a表示要查找的值，b表示要从哪开始查，没有找到返回-1、forEach里面return没有效果
+var arr = [1,3,5,7,1,4,6,5]
+	var arr1 = []
+	function uncode(arr) {
+		arr.forEach(item => {
+            arr1.indexOf(item, 0) === -1 && arr1.push(item)
+        })
+		console.log(arr1);
+	}
+	uncode(arr)
+
+
+//Array.from(new Set(arr)) (es6常用) 
+Set()是一个的构造函数、可以存储任何类型的唯一值
+https://www.cnblogs.com/ajaemp/p/11820339.html
+//Array.from()、把带有length属性的对象返回一个数组、new Set()返回唯一的值
+var arr = [1,3,1,4,1,5,3,6,4]
+founction code(arr) {
+    console.log(Array.from(new Set(arr)))
+    console.log([...new Set(arr)])
+}
+code(arr)
+
+
+//for循环嵌套，两项相等删除一项 (最普遍)
+var arr = [1,3,1,4,1,5,3,6,4]
+for (var i = 0, len = arr.length; i++) {
+    for (var j = i + 1; j < len; j++) {
+        arr[i] === arr[j] && arr.splice(j, 1)
+    }
+}
+console.log(arr)
+
+```
+
+
+
+### 针对某一对象的某一个值进行每一项数据去重、使用 reduce(pre, item)
+
+```js
+  var arr = [{ name: 1, age: 28}, { name: 2, age: 28 }, { name: 3, age: 28 }, { name: 1, age: 28 }]
+  function code() {
+    obj = {}
+    return arr.reduce((pre, item) => {
+      obj[item.name] ? '' : obj[item.name] = true && pre.push(item)
+      return pre
+    }, [])
+  }
+  console.log(code()); // [{ name: 1, age: 28}, { name: 2, age: 28 }, { name: 3, age: 28 }]
+```
+
+
+
+### 数组排序（中文排序）
+
+```js
+//array.sort((a,b) => {return a - b}), sort方法       (a-b)升序,(b-a)降序
+var arr = [2,0,3,7,1,9,4]
+function desc(arr) {
+    return arr.sort((a, b) => a-b)
+}
+console.log(desc(arr))
+
+
+// 中文排序
+let arr = ['爸爸', '妈妈', '爷爷', '奶奶']
+let res = ['妈妈', '奶奶','爸爸', '爷爷', ] // 后端返回的数据
+let sortArr = res.sort((a,b) => arr.indexof(a) - arr.indexof(b))
+console.log(sortArr) // ['爸爸', '妈妈', '爷爷', '奶奶']
+
+
+
+// JS 对象排序-按照键值排序
+let arrData = {"张三":15,"李四":30,"万系":2,"是三":3}, newD = {};
+let keysSorted = Object.keys(arrData).sort(function(a,b){return arrData[b]-arrData[a]})   //排序健名
+console.log(keysSorted) // [ "李四", "张三", "是三", "万系" ]
+
+for(let i=0;i<keysSorted.length;i++){
+	newD[keysSorted[i]]=arrData[keysSorted[i]];
+}
+console.log(newD) // { "李四": 30, "张三": 15, "是三": 3, "万系": 2 }
+```
+
+### base64编码 encodeURIComponent  & decodeURIComponent
+
+```js
+// 创建一个base64编码字符串
+window.btoa('123') // 'MTIz'
+
+// base64解码方法
+window.atob('MTIz')  // 123
+
+// encodeURIComponent() 函数可把字符串作为 URI 组件进行编码。
+window.encodeURIComponent('https://www.fff.cc')
+
+// decodeURIComponent() 函数可对 encodeURIComponent() 函数编码的 URI 进行解码。
+window.decodeURIComponent(uri)
+
+
+// 应用场景：
+1.加密localstorage存储
+localStorage.setItem("list", 
+	window.btoa( 
+	  window.encodeURIComponent(
+	    JSON.stringify(date.data.data)
+	  )
+	)
+)
+
+2.解密localstorage存储
+JSON.parse(decodeURIComponent(window.atob(localStorage.getItem("list")))
+```
+
+### 实现一个LazyMan方法
+
+```js
+// 实现一个LazyMan方法: https://blog.csdn.net/fe_watermelon/article/details/124718557
+
+# 要求：
+LazyMan("Hank")
+输出:
+Hi! This is Hank!
+
+LazyMan("Hank").sleep(10).eat("dinner")
+输出
+Hi! This is Hank!
+//等待10秒..
+Wake up after 10
+Eat dinner
+
+LazyMan("Hank").eat("dinner").eat("supper")
+输出
+Hi! This is Hank!
+Eat dinner
+Eat supper
+
+LazyMan("Hank").sleepFirst(5).eat("supper")输出
+//等待5秒
+Wake up after 5
+Hi! This is Hank!
+Eat supper
+```
+
+```js
+# 函数实现 LazyMan
+function LazyMan(name) {
+    const queue = [
+      {
+        msg: `Hi! This is ${name}`,
+        t: undefined,
+      },
+    ];
+
+    setTimeout(() => { // 确保在同步代码后执行
+      run();
+    });
+
+    function run() { // 依次执行任务
+      if (queue.length === 0) return;
+      const { msg, t } = queue.shift();
+
+      // 不需要延迟执行的任务，我把它们转为同步执行了
+      // 让它们都一致用异步执行也是可以的
+      if (t === undefined) {
+        console.log(msg);
+        run(); // 执行
+      } else {
+        setTimeout(() => {
+          console.log(msg);
+          run();
+        }, t * 1000);
+      }
+    }
+
+    const solver = {
+      sleep(second) {
+        console.log(11111111111)
+        queue.push({
+          msg: `Wake up after ${second}`,
+          t: second,
+        });
+        return solver;
+      },
+      eat(something) {
+        console.log(22222222222)
+        queue.push({
+          msg: `Eat ${something}`,
+          t: undefined,
+        });
+        return solver;
+      },
+      sleepFirst(second) {
+        console.log(33333333333)
+        // 比较特殊，要放到队列开头
+        queue.unshift({
+          msg: `Wake up after ${second}`,
+          t: second,
+        });
+        return solver;
+      },
+    };
+    return solver;
+  }
+
+  LazyMan('董涵').sleepFirst(4).sleep(3)
+```
+
+```js
+# 类实现 LazyMan
+ function LazyMan(name) {
+    return new MyLazyMan(name);
+  }
+
+  class MyLazyMan {
+    constructor(name) {
+      this.queue = [];
+      this.queue.push(() => {
+        setTimeout(() => {
+          console.log(`Hi! This is ${name}`);
+        })
+        this.next(); // 千万不要忘记执行 next
+      })
+      // 这里依旧是确保在同步代码后执行
+      setTimeout(() => {
+        this.next();
+      })
+    }
+    next() {
+      setTimeout(() => {
+        if (this.queue.length === 0) return;
+        const task = this.queue.shift();
+        task();
+      })
+    }
+    eat(something) {
+      this.queue.push(() => {
+        console.log(`Eat ${something}`);
+        this.next();
+      });
+      return this;
+    }
+    sleep(second) {
+      this.queue.push(() => {
+        setTimeout(() => {
+          console.log(`Wake up after ${second}`);
+          this.next();
+        }, second * 1000);
+      });
+      return this;
+    }
+    sleepFirst(second) {
+      this.queue.unshift(() => {
+        setTimeout(() => {
+          console.log(`Wake up after ${second}`);
+          this.next();
+        }, second * 1000)
+      });
+      return this;
+    }
+  }
+
+  LazyMan('董涵').sleepFirst(4).sleep(3)
+```
+
+### 特定区域内取随机取整
+
+```js
+ // 特定区域内取随机取整
+  function getRandom(min, max) {
+    if (min > max) {
+      [min, max] = [max, min]
+    }
+    min = Math.floor(min)
+    max = Math.ceil(max)
+    return Math.floor(Math.random() * (max - min + 1) + min)
+  }
+  console.log(getRandom(1, 1.8))
+```
+
+### valueOf() &  toString()
+
+```js
+valueOf()  //返回一个对象的原始值
+toString() //把一个逻辑值转换为字符串并返回
+
+console.log((undefined).toString());//报错
+console.log((null).toString());//报错
+console.log((function(){}).toString());//function(){}
+console.log([1,2,3,4].toString());//1,2,3,4
+
+
+console.log((undefined).valueOf());//报错
+console.log((null).valueOf());//报错
+console.log((function(){}).valueOf());//function(){}
+console.log([1,2,3,4].valueOf());//[1,2,3,4]
+
+# 两者区别：
+1.null和undefined都没有valueOf()和toString()方法
+2.valueOf()返回的是原值、toString()返回的是字符串
+3.Date类型toString()返回的是字符串、valueOf()返回的是时间戳（现在离1970年1月1日的毫秒数）
+4.Number类型可以用toString()转换不同进制的字符串数值、valueOf()不支持转换基数
+
+new Date().getTime() === new Date().valueOf() // true
+Date.now() === new Date().valueOf() // true
+```
+
+### 函数没长度或直接在全局的情况下、不声明变量直接赋值、该变量会提升为全局变量
+
+```js
+//参考：（例8 和 例9） https://blog.csdn.net/qq_43412333/article/details/102163675
+n = 2
+function setA() {
+  a = 1
+}
+setA()
+console.log(a, n)  // 1, 2
+
+// 为什么以上代码 a 和 n 没有声明、不会报错
+当函数执行的时候会暴露给全局、或是全局中未声明直接赋值、默认也是全局的变量
+# 针对基础类型直接赋值、如果是 obj.a = '11' 这种obj为引用类型的情况、obj会直接报错没定义
+// 注意: 如果函数有长度的话、函数里面的 变量直接赋值 是不会提升为全局变量的
+```
+
+###  变量提升 和 函数声明优先级问题
+
+```js
+# 变量提升（var声明才有变量提升） 和 函数声明优先级问题
+function fn(a) {
+  console.log(a);
+  var a = 2;
+  function a() { }
+  console.log(a);
+}
+fn(1);
+
+
+//上面代码正确执行逻辑如下：(注意 函数声明 优先于 变量提升、先全部走定义、再全部走执行)
+var a = 1
+(function() {
+  function a() { }
+  var a // 这一步已经声明了a、可以省略
+  console.log(a); // func ()
+  a = 2;
+  console.log(a); // 2
+})()
+
+
+// 函数表达式没有提升
+a() //  直接报错
+var a = function () { console.log('函数表达式没有提升') }
+```
+
+```js
+Http中、Origin、Host、Referer区别
+Origin： 由三部分组成（Origin 会在跨域请求时带上，服务端据此判断是否允许跨域，是 CORS 机制的重要一环。）
+ scheme: 协议，http、https
+ host: 域名或ip
+ port: 端口，可选、（http默认80、https默认443）
+ 
+Host: 由两部分组成
+ host: 域名或ip
+ port: 端口，可选
+ 
+Referer：当前请求的开源页面
+ 所以可以用来做图片防盗链，当 Referer 不在白名单中，就返回 403，或返回一个比较小的 “你盗我的图了” 的图片，或重  定向到不要自己钱的公域图片上。
+```
+
+```js
+async function async1() {
+  console.log("async1 start");
+  await async2();
+  console.log("async1 end");
+}
+
+async function async2() {
+  console.log("async2");
+}
+
+console.log("script start");
+
+setTimeout(function() {
+  console.log("setTimeout");
+}, 0);
+
+async1();
+
+new Promise(function(resolve) {
+  console.log("promise1");
+  resolve();
+}).then(function() {
+  console.log("promise2");
+});
+console.log('script end')
+
+// 以上代码执行顺序为：同步代码 -> 微任务 -> 宏任务
+输出：
+
+// 同步代码
+script start
+async1 start
+async2
+promise1
+script end
+
+// 微任务
+async1 end
+promise2
+
+// 宏任务
+setTimeout
+```
+
+###  foo.x的值是什么？
+
+```js
+// 问题：foo.x的值是什么？
+var foo = {n: 1}; 
+var bar = foo;
+foo.x = foo = {n: 2}; // 这里 赋值顺序是从右往左、后面提升全局变量foo = {n: 2}、 而foo.x指向还是它原来的对象{n: 1}、所以bar也是指向原来的foo、及bar.x = {n: 2}、所以bar = {n: 1, x: {n: 2}}
+
+console.log(bar);  // { n: 1, x:{n:2} }
+console.log(foo);  // {n: 2}
+console.log(foo.x);  //undefined
+
+let a = b = 2
+// 相当于下面代码
+b = 2 // 未声明直接赋值、变成全局变量
+let a = b
+
+
+let a = b = 10
+(function() {
+    var a = b = 20 // a为局部变量、b重新赋值全局变量b
+})()
+console.log(a) // 10
+console.log(b) // 20
+
+// https://blog.csdn.net/DepressedPrince/article/details/80838043
+1. 立即执行函数要用分号或void、感叹号修饰、不然报错
+2. 连等赋值、是从右往左赋值的、后者会提升为全局变量、
+3. 如果赋值的是基础类型、值不会同步更改、而是引用类型、因为两个变量都是指向同一个对象、对象的修改会同步更改
+4. 基础类型：String、Number、Boolean、undefined、null、Symbol
+5. 引用类型：Object、Array、Function、Date、RegExp
+let a = b = { c: 1, d: 2 }
+  ;(function aa() {
+    a.c = 20
+  }())
+console.log(b) // { c: 20, d: 2 }
+console.log(a) // { c: 20, d: 2 }
+```
+
+### 闭包
+
+```js
+// 闭包 （缺点：内存泄漏、 优点：利于封装、防抖、节流）
+# 定义： 函数内部的参数和变量可以访问函数外部的参数和变量、外部的参数和变量不会被垃圾回收机制回收（函数内部嵌套了另外一个函数）
+
+# 垃圾回收机制： js内存管理中、没有被引用的对象会被当成垃圾、自动执行并清理
+
+# 内存泄漏： 没有被引用的对象占据了内存、得不到释放
+
+# 闭包形成原因： 内层函数作用域链 引用 函数外层作用域对象 而无法释放
+
+# 闭包表现形式： (高阶函数的两种情况: 1.函数被当成return返回值、2.函数被当成参数传递) 3.IIFE
+https://www.icode9.com/content-4-989563.html
+
+
+function fun(n, y) {
+  console.log(n, y)
+  return {
+    fun(m) {
+      return fun(m, n)
+    }
+  }
+}
+
+const a = fun(0) // 0 undefined  a  => {fun(m)}
+a.fun(1) // 1 0
+a.fun(2) // 2 0
+a.fun(3) // 3 0
+
+fun(0).fun(1).fun(2).fun(3)  
+// 0 undefined
+// 1 0
+// 2 1
+// 3 2
+```
+
+### 如何实现以下函数？ 函数柯里化
+
+```js
+// 问题：如何实现以下函数？ 函数柯里化
+函数柯里化：比如一个方法add方法调用 add(1)(2) 相当于 add(1, 2)
+function add(x) {
+    return function (y) {
+        return function (z) {
+            console.log(x+y+z);
+        }
+    }
+}
+
+
+// 方法一、函数的长度就是它的形参长度
+function curry(fn, args = []) {
+    return function(){
+        let rest = [...args, ...arguments];
+        if (rest.length < fn.length) {
+            return curry.call(this, fn, rest);
+        }else{
+            return fn.apply(this,rest);
+        }
+    }
+}
+
+const sum = (a, b, c) => a + b + c;
+let sumFn = curry(sum);
+console.log(sumFn(1)(2)(3)); //6
+console.log(sumFn(1, 2, 3)); //6
+
+
+
+// 方法二
+function curry2(fn) {
+    if (fn.length <= 1) return fn
+    
+    const recursive = (...arg) => {
+        if (fn.length === arg.length) {
+            return fn(...arg) // 直接执行fn
+        } else {
+            return (...arg2) => recursive(...arg, ...arg2) // 递归
+        }
+    }
+    return recursive
+}
+let rest = (a, b, c) => a + b + c
+let add = curry2(rest)
+console.log(add(1)(2)(3)) // 6
+console.log(add(1, 2, 3)) // 6
+            
+            
+            
+ // 方法三
+ function add() {
+    arg = [...arguments]
+    // 这里写箭头函数会导致结果不一致
+    function fn() {
+        arg.push(...arguments)
+        return fn
+    }
+    fn.toString = () => arg.reduce((pre, item) => pre + item)
+    return fn
+}       
+console.log(add(1)(2)(3).toString()) // 6
+console.log(add(1,2,3).toString()) // 6
+console.log(add(1,2)(3).toString()) // 6
+```
+
+### EventLoop的理解
+
+```js
+// EventLoop的理解
+1.Js是一门单线程非阻塞脚本语言、可以说他是一种对js异步任务的有序执行的一种机制
+2.每一个宏任务执行完毕都必须将当前的微任务队列清空
+3.主线程会不断重复上面步骤、直到执行完所有任务
+异步任务又分为宏任务和微任务、这就造成了代码执行顺序：（同步 -> 微任务 -> dom渲染 -> nextTick ->  宏任务）
+```
+
+### Object.create(null)
+
+```js
+// 对象字面量创建对象 和 Object.create(null) 创建对象有什么区别
+1.对象字面量创建对象、new Object() 和 Object.create(null) 效果一致
+2.Object.create(null)创建的对象非常纯净、没有携带原型链的属性和方法、从对象中取值、提高循环效率
+
+Object.create(a, b) 
+# 用法：第一个参数是要创建的对象、第二个参数是给创建对象添加属性 和 属性的描述
+
+# 手写Object.create()
+Object.myCreate = function(obj) {
+    F = function() {}
+    F.prototype = obj
+    return new F()
+}
+```
+
+###  去除数组中的假值
+
+```js
+const arr = [1, 2, undefined, 0, null, NaN, '', false]
+let r = arr.filter(Boolean)
+console.log(r) // [1, 2]
+
+# 去除数组中的假值：
+// Array.filter(Boolean) 相当于  Array.filter(item => Boolean(item))
+```
+
+### 准确判断对象的内置类型
+
+```js
+// 准确判断对象的内置类型
+Object.prototype.toString.call(null)   			// '[object Null]'
+Object.prototype.toString.call('str')  			// '[object String]'
+Object.prototype.toString.call(true)  			// '[object Boolean]'
+Object.prototype.toString.call(123)   			// '[object Number]'
+Object.prototype.toString.call(undefined) 		// '[object Undefined]'
+Object.prototype.toString.call([])  		    // '[object Array]'
+Object.prototype.toString.call(function() {})    // '[object Function]'
+Object.prototype.toString.call(new Date()) 		// '[object Date]'
+Object.prototype.toString.call(/\d/) 		    // '[object RegExp]'
+Object.prototype.toString.call({name: 1}) 		// '[object Object]'
+
+function Person(){};
+Object.prototype.toString.call(new Person) 		// '[object Object]'
+
+var isNativeJSON = window.JSON && Object.prototype.toString.call(JSON);
+console.log(isNativeJSON);  // [object JSON]
+
+
+typeof只会返回 string、number、boolean、undefined function、object
+console.log(typeof(2)) 				   //"number"
+console.log(typeof("abc"))  		   //"string"
+console.log(typeof(true))  			   //"boolean"
+console.log(typeof(undefined))  	   //"undefined"
+console.log(typeof(function fun(){}))  //"function"
+console.log(typeof(null))  			  //"object"
+console.log(typeof([1,2,3,4,5]))	  //"object"
+console.log(typeof({}))  			 //"object"
+```
+
+### 获取时间戳的多种写法
+
+```js
+// 获取时间戳的多种写法
+1.Date.parse(new Date()) // Date.parse(new Date('2020/05/21'))
+2.+ new Date
+3.Date.now()
+4.new Date().getTime()
+5.new Date().valueOf()
+```
+
+### 输出什么？
+
+> 参考：https://mp.weixin.qq.com/s/0uw_vDfWewtdV31yAv-Bmg
+
+```js
+[1,2,3].map(ParseInt) // [1,NaN,NaN]
+
+[typeof null, null instanceof object] // [ object, false ]
+
+[3,'2',2].reduce(Math.pow) // 3的2次方的2次方、81
+
+[].reduce(Math.pow) // 报错
+```
+
+```js
+# 说出以下执行结果：
+const arr = [];
+// let又是另外一种结果
+for (var u = 0; u < 10; u++) {
+  console.log(u); // 0 2 4 6 8
+  u++;
+  setTimeout(() => console.log('setTimeout', u), 0); // 'setTimeout', 10
+  arr.push(() => console.log(u)); // [fn(1), fn(3), fn(5), fn(7), fn(9)]
+}
+console.log(arr[1]()); // 3
+
+
+打印： 
+0
+2
+4
+6
+8
+3
+5遍 'setTimeout', 10
+```
+
+```js
+class Student {
+    constructor(name) {
+      this.name = "Tom";
+    }
+
+    getInfo() {
+      console.log(this) // {name: Tom}
+      return {
+        name: "Jerry",
+        getName: () => {
+          console.log(this) // {name: Tom}
+        },
+        getAA() {
+          console.log(this) // {name: Jerry}
+        }
+      };
+    }
+  }
+  let s = new Student();
+  s.getInfo().getName()
+  s.getInfo().getAA()
+
+```
+
+```js
+// 输出什么 （普通参数是值的传递不影响原数据、而对象是引用类型、修改属性会改变原值）
+function getInfo(obj, number) {
+    obj.name = '李四'
+    number = '2000'
+}
+
+const persoon = {name: '张三'}
+const birth = '1997'
+
+getInfo(persoon, birth)
+
+console.log(persoon, birth) // {name: '李四'}, '1997'
+```
+
+```js
+function Person(name) {
+    this.name = name
+}
+function f1(person) {
+    person.name = 'ls'
+    person = new Person('aa')
+}
+var p = new Person('zs')
+console.log(p.name) // zs
+f1(p)
+console.log(p.name) // ls
+// 每次new Person其实是放在堆内存中、在f1(p)调用后、p执行的是new Person('zs')这个堆内存、f1()方法内的new Person和下面要执行的打印不影响、所以第二个打印就是'ls'
+```
+
+```js
+// obj实例化、修改属性和重新实例化指针问题
+function changeObj(obj) {
+    obj.siteUrl = 'www.a.com'
+    console.log('1----', obj) // {siteUrl: 'www.a.com'}
+
+    obj = new Object(); // XXX 这里的obj和上面的obj指向不是同一个实例、所以外面拿到的obj是上面的实例obj
+    obj.siteUrl = 'www.b.com'
+
+    console.log('2----', obj)  // {siteUrl: www.b.com}
+  }
+
+  let s = new Object();
+  changeObj(s)
+
+  console.log('3----', s) // {siteUrl: 'www.a.com'}
+```
+
+```js
+ function f1() {
+    var tmp = 1
+    this.x = 3
+    console.log(tmp) // 1
+    console.log(this.x) // 3
+  }
+  var obj = new f1()
+  
+  console.log(obj.x) // 3
+  console.log(f1()) // undefined
+```
+
+```js
+  var a = 5;
+  function test() {
+    a = 0;
+    console.log(a)
+    console.log(this.a);
+    var a;
+    console.log(a)
+  }
+  // test(); // 0, 5, 0
+  new test(); // 0, undefined, 0 
+```
+
+```js
+  var obj = {
+    name: 'leipeng',
+    showName: function () {
+      console.log(this.name) // leipeng
+    }
+  }
+  obj.showName();
+```
+
+```js
+// 函数表达式形式是没有函数声明提升的、
+console.log('1---', str)
+var str = '111';
+a = () => {
+ // 这里是函数内的局部作用域、str取值会优先高于函数外部的str、因为是var声明的str、会变量提升在if语句之前、所 以str的值是undefined
+ if (typeof str === 'undefined') {
+    var str = '222';
+    console.log('2---', str);
+ } else {
+   console.log('3---', str);
+ }
+}
+a()
+```
+
+```js
+var str = 'qqq'
+// +号优先级会高于三元运算、所以先是得到 valqqq、再执行三元、得到 BBB
+console.log('val' + str === 'qqq' ? 'AAA' : 'BBB')  // BBB
+// 这里先得到valtrue、再执行输出 AAA
+console.log('val' + (str === 'qqq') ? 'AAA' : 'BBB')   // AAA
+```
+
+```js
+// 死循环陷阱、js中2的53次方是最大的值、所以下面的循环中 2 ** 53 + 1 == 2 ** 53、就会造成循环不会终止
+var end = 2 ** 53, start = end - 100, count = 0;
+for (var i = start; i <= end; i++) {
+  count++
+}
+console.log(count)
+```
+
+```js
+var ary = [0, 1, 2, undefined, null, false, NaN, ""];
+ary[10] = 10; // [0, 1, 2, undefined, null, false, NaN, "", 空属性, 空属性,  10]
+
+// 去假值（0、undefined、null、false, NaN、""）
+let a = ary.filter(Boolean);
+console.log(a) // [1, 2, 10]
+
+
+// 求出六大价值中互相双等的情况并打印
+let arr = [0, false, NaN, null, undefined, ''], len = arr.length;
+for (let i = 0; i < len; i++) {
+  for (let j = 1; j < len; j++) {
+    if (arr[j] == arr[i]) {
+      if (arr[j] !== arr[i]) {
+        console.log(arr[j] + ' == ' + arr[i])
+      }
+    }
+  }
+}
+// 0 == ''、undefined == null、0 == false
+```
+
+```js
+[0.2 - 0.1 == 0.1, 0.8 - 0.6 == 0.2]  // [true, false]
+// js采用的是双精度浮点64位的数据类型、及IEEE 754标准
+```
+
+
+
+### 清除浮动
+
+```js
+// 清除浮动三种方式
+1.同级标签后面添加空标签设置clear:both  （缺点：另外加dom）
+2.父级标签设置 
+（overflow: hidden; float: left; display: inline-block/table-cell; position: fixed/absolute）
+任意一种触发bfc方式
+3.（推荐）父级标签设置伪元素 ::after {
+    content: "";
+    display: block; // 伪元素默认是行内元素、需要设置块级元素才能生效
+    clear: both
+}
+
+// bfc(块级格式化上下文、一个受外接影响也不会影响外界的一个盒子)
+
+# 高度塌陷: 父子元素中、父元素不设置高度、子元素脱离文档流导致
+解决办法：父元素触发bfc、或如果子元素是浮动、则清浮动
+
+# margin上下重叠、塌陷:
+1.同级元素设置margin出现（margin上下会重叠取最大的、左右会叠加 ）
+解决办法：给其中一个元素添加父级标签并设置触发bfc的样式
+
+2.父子盒子中、设置子盒子一个mrgin-top、父盒子会受到影响
+解决办法：父盒子加个border 或 设置padding 或 触发bfc的任意一种
+```
+
+### setInterval 和 setTimeout & requestAnimationFrame
+
+```js
+// setInterval 和 setTimeout（应用场景：长短轮询）
+两者都存在误差、不会严格按照设置的使时间执行、尽量不用setInterval、规避潜在问题
+
+1.setInterval:
+  # 应用场景： 验证码倒计时
+  无视代码错误（代码出错、还会执行）
+  无视网络延迟（轮询别用这个）
+  不保证执行（与setTimeout不同、并不能保证到了时间、就能立即执行）
+
+2.requestAnimationFrame: 根据系统的动画帧来决定回调函数的执行时机、替代定时器做更加高性能的动画、用法和定时器用法差不多
+# 应用场景：返回顶部按钮、进度条
+  let t = requestAnimationFrame(() => {})
+  window.cancelAnimationFrame(t) // 取消执行回调
+
+
+  // 注意： js中想要通过elem.style操作样式、元素上必须是行内样式、不然不会生效
+  // 如果其他方式写样式可以用getComputedStyle(elem)获取样式
+
+  // 兼容性代码块
+  window.requestAnimFrame = (function () {
+    return window.requestAnimationFrame ||
+      window.webkitRequestAnimationFrame ||
+      window.mozRequestAnimationFrame ||
+      window.oRequestAnimationFrame ||
+      window.msRequestAnimationFrame ||
+      function (callback) {
+        window.setTimeout(callback, 1000 / 60);
+      };
+  })();
+
+# setTimeout实现setInterval
+  const myInterval = (fn, time) => {
+     const timeout = () => {
+       setTimeout(() => {
+         fn();
+         timeout();
+       }, time);
+     };
+     timeout();
+   };
+
+# Date.now() 代替setTimeout()
+function sleep(numberMillis) {
+    var now = new Date();
+    var exitTime = now.getTime() + numberMillis;
+    while (true) {
+        now = new Date();
+        if (now.getTime() > exitTime)
+            return;
+    }
+}
+```
+
+```js
+// 实现js金额格式化 2000000 -> 2,000,000
+方法一：正则
+String(2000000).replace(/\B(?=(\d{3})+(?!\d))/g, ',') // 2,000,000
+
+方法二: js内置api
+(2000000).toLocaleString() // 2,000,000
+// 还可以加参数，进行更优雅的做法
+const options = {
+  style: 'currency',
+  currency: 'CNY',
+};
+(2000000).toLocaleString('zh-CN', options); // ¥2,000,000.00
+```
+
+### TS
+
+```js
+基础类型：string、number、boolean、undefined、null、array、object、any、void、nerver
+元组（一个已知元素数量和类型的数组、各元素类型不必相同）
+enum枚举
+type、interface
+联合类型 | 
+交叉类型 & (联合类型一次只能是一种类型、而交叉类型每次都是多个类型的合并类型)
+
+1.ts的好处？
+ts是js的超集、在js的基础上又增加了比如（类、接口、继承、泛型）不能直接浏览器运行、需要编译成js才能运行
+好处就是利于维护、代码可读性高、可以在编译的时候就检查到错误、js只能在运行时才能发现错误
+
+2.type和interface的区别？
+interface用来描述数据结构、type用来描述数据类型
+定义相同命名的interface默认会合并
+
+# 相同点：
+ // 都可以用来描述对象或函数
+  interface Person{
+   name: string;
+   age: number;
+  }
+  interface SetPerson {
+   (name: string, age: number): void;
+  }
+
+  type Person= {
+   name: string;
+   age: number
+  };
+  type SetPerson = (name: string, age: number)=> void;
+ 
+ // 都可以扩展、interface可以继承接口也可以继承type、type也可以继承type或interface
+ interface A { name: string }
+ type C = { hobby: string }
+ 
+ interface B extends A {  age: number } // interface extends interface
+ interface D extends C { address: string } // interface extends type
+ 
+ type E = C & { sex: string }  // type extends type
+ type F = B & { name: string } // type extends interface
+
+# 只有type能做的：
+ type可以声明基本类型别名、联合类型、元组
+ type A = string // 声明基本类型
+
+ interface B {}
+ interface C {}
+ type D = B | C  // 联合类型
+
+type ArrY = [1, 'qwe', false] // 元组
+
+ // 当想要获取一个变量的类型时、使用typeof
+ let div = document.createElement('div')
+ type E = typeof div
+
+3.什么是泛型？
+泛型指的是定义函数、接口或类的时候、不去预先指定具体类型、使用的时候才去指定类型
+interface A<T = any> {
+    id: T
+}
+
+type B = A<string>
+type C = A<number>
+
+const a: B = { id: '111' }
+const b: C = { id: 111 }
+
+
+function identity<T>(arg: T): T {      
+    return arg;      
+}      
+let output1 = identity<string>("myString");      
+let output2 = identity<number>( 100 );   
+
+4.类型断言：手动指定一个值的类型
+  语法： 
+   方式1：<类型>值
+   方式2：值 as 类型 （tsx种只能用这种方式）
+   
+5.enum枚举：为一组数值赋予友好的名字
+ // 字符串枚举 
+ enum sex {
+     man = '男',
+     woman = '女'
+ }
+console.log(sex.man, sex.woman) // 男， 女
+
+// 数字枚举
+enum Color {
+    red,
+    yellow,
+    white
+}
+enum Color1 {
+    red = 1,
+    yellow,
+    white
+}
+console.log(Color.red, Color.yellow, Color.white) // 0, 1, 2
+console.log(Color1.red, Color1.yellow, Color1.white) // 1, 2, 3
+
+
+//异构枚举
+enum Types {
+  yes = 1,
+  no = 'no'
+}
+console.log(Types.yes, Types.no)  // 1 no
+
+//反向映射
+enum TT {
+  success
+}
+let success:number = TT.success
+let key = TT[success]
+console.log(success, key) // 0 success
+```
+
+
+
+### vue2 & 3响应式原理
+
+```js
+# vue2: 实现原理（Object.defineProperty）它的作用就是给对象的某个属性添加get、set方法、从而实现外部对该属性的读和写能够被内部监听、实现同步视图的功能
+
+# vue3: 实现原理（Proxy）与Object.defineProperty用法大同小异、都是接收一个对象、然后对该对象监听、而proxy相对于它有两点不同、对比vue2实现方式性能得到优化
+1.对对象key值全监听
+ Object.defineProperty只能监听指定key对应的value值的变化、而proxy可以直接监听对象所有key、就是说proxy不用手动对监听对象个进行遍历
+
+2.触发更新不同（嵌套监听）
+Object.definedProperty触发更新是直接修改原对象、实现嵌套监听方式直接通过递归调用、
+而proxy是通过代理的方式、只需要修改代理对象、由于proxy嵌套赋值会触发get、用这个特性、在get里面判断获取的是Object、则返回proxy方法调用
+```
+
+### vue2 & 3双向绑定原理
+
+```js
+# vue2 双向绑定原理
+同时完成事件监听和数据绑定、比如说inpuet标签 type="text"是input事件和value的语法糖
+使用原因： 使用v-model、可以减少大量繁琐的事件处理代码、提高代码开发效率
+
+//  .sync和v-model都能实现双向绑定、.sync区别于v-model可以在一个标签绑定多个、v-model只能绑定一个
+子组件$emit触发一个update:name、并传递参数  this.$emit('update:name', 'zs')
+父组件标签上直接 
+ <child :name.sync="myName" />
+    等价于
+ <child :name="myName" @update:name="myName = $event" />
+
+// 自定义组件上的v-model
+通过子组件上开启model属性来自定义（和props同级）
+// 默认是 model: { value: 'value', event: 'input' }
+model: { prop: 'checkrd', event: 'change1' }
+model内的prop是指定子组件接收父组件的props内参数名为'checked'、如果不写、则props默认接收value
+model内的event指定的是子组件标签上触发的事件方法里$emit给父组件的事件名为'change1'
+	
+
+# vue3 双向绑定原理   https://juejin.cn/post/7124602963058196516
+vue3中v-model类似于vue2中.sync修饰符那种方式、最终展开的是modelValue属性和update:modelValue事件、
+可以用参数的形式定义多个不用的绑定、v-model:value、v-model:value1
+<Son v-model="aaa" />
+    等价于
+<Son :aaa="aaa" @update:aaa="aaa = $event.target.value" />
+    
+// 如果希望自定义model参数
+<Son v-model:visible="visible"/>
+setup(props, ctx){
+    ctx.emit("update:visible", false)
+}
+```
+
+### nextTick实现原理
+
+```js
+定义： nextTick是等待下一次Dom更新刷新的工具方法
+vue的数据更新是异步的、使用nextTick方法可以保证用户定义的逻辑在dom更新之后执行
+它有两种用法： 
+1.一种是nextTick(() => {}) 内部传一个回调函数
+2.nextTick() 返回的是一个Prommise、可直接 await nextTick() 之后的代码就是dom已经更新了操作
+
+# 原理：
+在vue内部、nextTick之所以能够让我们看到dom更新后的结果、是因为我们传入的callback会添加到队列刷新方法（flushScheduleQueue）的后面、这样等队列内部的更新函数都执行完毕、所有Dom操作也就结束了、callback自然能够拿到最新的Dom值
+```
+
+### vue自定义指令
+
+```js
+自定义指令本质上就是装饰器 Vue.directive
+有五个钩子函数（bind, inserted, update, componentUpdated, unbind）
+1.bind：只调用一次，指令第一个绑定到元素时调用，在这里可以进行一次性的初始化设置
+2.inserted: 被绑定元素插入父节点时调用（仅保证父节点存在，但不一定已被插入文档中）
+3.update: 被绑定于元素所在的模板更新时调用，而无论绑定值是否变化。通过比较更新前后的绑定值，可以忽略不必要的模板更新。
+4. componentUpdated：被绑定元素所在模板完成一次更新周期时调用。
+5. unbind：只调用一次，指令与元素解绑时调用。
+```
+
+### vue是如何对数组进行监听的？
+
+```js
+# vue2响应式缺点：
+1.无法监听数组变化（无法检测通过下标方式修改数组、vue2使用$set解决这个问题）
+2.必须遍历对象的每个属性、必须深层遍历嵌套的对象
+
+vue2通过Object.defineProperty去实现响应式监听的、而数组上调用get方法性能开销会很大、从而是采用重写数组的部分方法来实现响应式、但局限于7种（push、pop、shift、unshift、splice、sort、reverse）
+
+# vue3中使用proxy代替了Object.defineProperty解决了这个问题
+```
+
+### 怎么理解vue是单项数据流
+
+```js
+1.数据总是从父组件传到子组件、子组件没有权利修改父组件传来的数据、子组件上v-model是不能直接绑定父组件传过来的props的值
+2.如果要绑定这个props的值、可以先在data里面拷贝一份搭配watch监听、或用computed搭配set/get方法
+```
+
+### 虚拟Dom是什么
+
+```js
+// 由于dom操作是很昂贵的、频繁操作dom会产生一定性能问题、所有产生了虚拟Dom、他是对真实dom的一层抽象、本质上是一个js对象
+优点：
+1.保证性能下限
+2.无需手动操作dom
+3.跨平台（服务端渲染、weex）
+
+缺点：
+无法进行极致的优化
+首次渲染大量dom时、由于多了一层虚拟dom的计算、会比innerHTML插入慢
+```
+
+### Es6
+
+```js
+let 
+const 
+Promise
+async/await
+
+for await of 遍历中使用异步
+
+flat(number) 多维数组扁平化、infinity关键字表示不管多少层都转成一维数组、number默认 1
+flatMap() 对数组每项执行一个函数、再对返回值组成的数组执行flat()、返回新数组、不会改变原数组
+// 相当于 [[2, 4], [3, 6], [4, 8]].flat()
+[2, 3, 4].flatMap((x) => [x, x * 2])
+// [2, 4, 3, 6, 4, 8]
+
+
+箭头函数（没有自己的this、arguments、prototype、call/bind/apply改变this指向无效、不能做构造函数）
+模板字符串 ``
+解构赋值 
+扩展运算符（对象合并、数组合并）
+剩余运算符（函数剩余参数用...代替、拿到的值是一个数组）
+```
+
+### Vue.$set
+
+```js
+作用：保证视图和数据的同步更新（对象、数组）
+
+// 以下两种情况下、视图是不会更新的
+1.在实例创建之后 给响应式对象添加属性
+2.直接通过数组下标方式修改数组
+```
+
+### vue中如何扩展一个组件
+
+```js
+mixins、slots、extends、composition api(vue3)
+
+Vue.extend(); 使用Vue构造器创建一个子类、参数是一个包含组件选项的对象
+```
+
+### vue-router的两种模式
+
+```js
+hash（路由默认模式）和 history
+两者区别：
+1.hash模式会有'#'、history没有
+2.history模式访问二级页面的时候、刷新操作会出现404、需要后端nginx配置url重定向到首页路由
+3.history模式有pushState和replaceState方法、可对历史记录修改操作
+```
+
+### 发布订阅模式  &  观察者模式
+
+```js
+发布者 不会把消息直接发送给 订阅者
+vue组件通信中的props和emit以及eventBus的方式思想就是基于发布订阅模式来实现的
+
+// 发布订阅模式 和 观察者模式区别 就是观察者模式没有事件中心
+1.发布订阅模式：（订阅者、发布者、事件中心）
+# Vue中应用场景： 父子、兄弟组件通信、自定义事件
+
+2.观察者模式：（观察者、可以被理解为是 发布/订阅模式的订阅者）
+# Vue中应用场景：数据实时更新
+```
+
+### MVC  &  MVVM
+
+```js
+MVC: 控制层把模型里的数据赋值给视图层
+MVVM: M 模型层、 v 视图层、 
+VM viewModel层，里面做了两件事实现了双向绑定、将数据转化成页面（数据绑定）、将页面转化成数据（dom事件监听）
+
+// 两者区别 (相当于vue和react区别的双向绑定)
+区别在于MVVM实现了 视图层 和 数据模型层 的自动同步
+```
+
+### vue2 & 3生命周期
+
+````js
+//vue2 选项Api
+ created,mounted,updated, destoryed
+如果被keep-alive包裹、又多了两个 组件激活时（activated）、和组件销毁时(deactivated)
+
+//如果使用了keep-alive （切换组件过程中将状态保留在内存中、防止重复渲染Dom）
+初次进入顺序： created -> mounted -> activated 退出触发deactivated
+再次进入: 只会触发activated
+只执行一次放在mounted中、组件每次进去执行的方法放在activated中
+
+
+//vue3 组合式Api
+setup代替了beforeCreate、created
+onBeforeMount、onMounted
+onBeforeUpdate、onUpdated
+onBeforeUnmount、onUnmounted
+// 使用keep-alive
+onActivated 和 onDeactivated
+
+
+// vue父子组件执行顺序
+父created -> 子created -> 子mounted -> 父mounted -> 子destoryed -> 父destoryed
+
+// vue 组件挂载顺序
+props -> data -> computed -> methods -> watch -> created -> mounted
+````
+
+```js
+# js中函数、数组、字符串有length属性
+
+// 以下是js内置的构造函数、长度是第一个具有默认值的形参之前的形参的个数
+Number.length  // 1
+String.length  // 1
+Array.length  // 1
+Function.length  // 1
+Boolean.length  // 1
+Object.length  // 1
+Sysmbol.length // 0
+RegExp.lenth  // 2
+Date.length  // 7
+```
+
+```js
+// new Set() 类似于数组、特性：所有元素都是唯一值
+let list = new Set()
+1.增加 
+list.add(1) // 同样的值只会被添加一次
+
+2.删除
+list.delete(1) // 直接删除值为1的元素、不是下标
+
+3.是否存在
+list.has(2) //false
+
+4.遍历方法
+list.keys()、返回键名
+list.values()、返回键值
+list.entries()、返回键值对的遍历器
+list.forEach((value, key) => {})、使用回调函数遍历每个成员
+
+// 字符串去重
+let str = "352255";
+let unique = [...new Set(str)].join("");     // 352
+
+
+let a = new Set([1, 2, 3]);
+let b = new Set([4, 3, 2]);
+ 
+// 并集
+let union = new Set([...a, ...b]);
+// Set {1, 2, 3, 4}
+ 
+// 交集
+let intersect = new Set([...a].filter(x => b.has(x)));
+// set {2, 3}
+ 
+// （a 相对于 b 的）差集
+let difference = new Set([...a].filter(x => !b.has(x)));
+// Set {1}
+```
+
+### 网络安全
+
+```js
+1.XSS攻击 (添加恶意脚本诱导用户点击、从而触发想恶意服务器发送敏感信息)
+防范：
+比如'小于号'转义成&lt; '大于号'转义成&gt;
+
+2.CSRF攻击 (用户访问A网站cookie保存在浏览器、黑客通过广告邮件等方式h、对用户发送恶意链接、用户点击了就会自动访问网站b、这个时候网站b就能提取到cookie发送到网站b、之后就可以假冒用户访问网站A)
+
+防范：
+1.验证 Http Referer字段（服务端验证方式） https://blog.51cto.com/u_12699853/5285702
+2、添加验证码
+3、添加 token
+```
+
+### 递归的几种表现形式
+
+```js
+1.函数内部调用自己
+2.函数内部调用自己 (arguments.callee()就是当前函数名、解藕作用)
+function add(n) {
+    if (n === 1) return 1
+    return n * arguments.callee(n-1)
+}
+
+3.尾递归优化递归 (函数最后return 一个函数)
+// 相比2数量大不会造成栈溢出、只有一个调用帧、不会特别消耗内存
+function add(n, total = 1)  {
+    if (n === 1) return total
+    return add(n - 1, n * total)
+}
+```
+
+### 排序
+
+```js
+// 冒泡排序 (依次比较两个相邻的元素、从大到小、Z到A的交换、重复进行直到没有相邻元素要交换就会停下来)
+let arr = [5, 2, 7, 8, 34, 7, 39, 12, 56, 9, 1]
+function sortArr(arr) {
+    let len  = arr.length
+    for (let i = 0; i < len; i++) {
+        for (let j = 1; j < len; j++) {
+            if (arr[j-1] < arr[j]) {
+                [ arr[j-1], arr[j]  ] = [ arr[j], arr[j-1] ]
+            }
+         }
+    }
+    return arr
+}
+sortArr(arr) //[56, 39, 34, 12, 9, 8, 7, 7, 5, 2, 1]
+```
+
+### mpa & spa
+
+```js
+1.spa (单页面应用一般称CSR客户端渲染)
+// spa页面就是只有一个html文件、通过路由不断切换组件、实现无刷新切换页面、而非整个页面刷新
+原理：js会感知url的变化、通过onhashchange事件来监听url中的hash值变化、从而动态切换组件、实现无刷新切换页面
+优点： 页面切换快（组件预先加载好了）、用户体验好
+缺点：首屏加载慢、不利于SEO
+
+
+2.mpa (多页面应用、SSR服务端渲染)
+// 程序中有多个html页面、每个页面必须重复加载js\css资源、多页面跳转需要整个页面刷新
+优点：SEO效果好、首屏加载快
+缺点：切换页面慢、用户体验不好
+```
+
+### display: none;  visibility: hidden;  opacity: 0；之间区别
+
+```js
+# 共同点：
+三者都是隐藏
+
+# 不同点：
+1.display 不会占据空间、visibility和opacity会占据位置
+2.display 不会被子元素继承、visibility和opaity会被继承
+3.过渡动画、transition 对display和visibility是无效的、opacity有效
+```
+
+### new 关键字做了什么 
+
+```js
+// 构造函数内部 
+return 普通类型 最后new出来的还是一个实例对象、
+如果 return 空、会终止代码、new出来的依旧返回的是这个实例
+如果 return 对象、new 出来的实例对象会被覆盖 
+
+// new 关键字做了什么? 分为四步骤：
+1.创建一个js空对象
+2.将构造函数的原型指向这个空对象的隐式原型
+3.将步骤1的js空对象作为this上下文（执行这个构造函数、this指向这个空对象）
+4.如果该构造函数没有返回对象、则返回这个空对象
+
+// 手写一个new 
+function myNew(constructor, ...args) {
+  let obj = Object.create(constructor.prototype)
+  let res =  myFunc.call(obj, args)
+  return typeof res == 'object' ? res : obj
+}
+
+function Person(name, age) {
+  this.name = name
+  this.age = age
+  return { name, age }
+}
+
+let p1 = myNew(Person, '小米', 19)
+console.log(p1)
+
+参考： https://blog.csdn.net/lqsssssss/article/details/109344078
+```
+
+### 继承有哪些
+
+```js
+1.原型链继承（将父类的实例作为子类的原型）
+SubType.prototype = new SuperType()
+
+
+2.构造函数继承（经典继承）
+function Woman(name){
+ //继承了People
+  People.call(this); //People.call(this，'wangxiaoxia'); 
+  this.name = name || 'renbo'
+}
+let womanObj = new Woman();
+
+
+3.es6的class extends继承
+class People{
+  constructor(name='wang',age='27'){
+    this.name = name;
+    this.age = age;
+  }
+  eat(){
+    console.log(`${this.name} ${this.age} eat food`)
+  }
+}
+//继承父类
+class Woman extends People{ 
+   constructor(name = 'ren',age = '27'){ 
+     //继承父类属性
+     super(name, age); 
+   } 
+    eat(){ 
+     //继承父类方法
+      super.eat() 
+    } 
+} 
+let wonmanObj=new Woman('xiaoxiami'); 
+wonmanObj.eat();
+```
+
+### dependencies  和  devDependencies的区别
+
+```js
+1.dependencies: 指的是生产模式下的依赖（生产环境可以用、开发环境也可以用）
+安装时加上 -S 或 不写 或 --save
+
+2.devDependencies：指的是开发模式下的依赖（只能在开发环境才能用）
+安装的时候命令加上 -D 或 --save-dev
+
+// 比如一些跟上线没有关系的依赖vite、webpack scss/less就应该放在devDependencies
+```
+
+### 防抖 （oninput事件、控制高频执行、只执行最后一次）
+
+```js
+function debounce(fn, delay) {
+  let timer
+  return function (...args) {
+    if (timer) {
+      clearTimeout(timer)
+    }
+    timer = setTimeout(() => {
+      fn.apply(this, args) // 等同于this.fn(ages)
+    }, delay)
+  }
+}
+
+// 测试
+function task() {
+  console.log('run task')
+}
+const debounceTask = debounce(task, 1000)
+window.addEventListener('scroll', debounceTask)
+
+// lodash中使用防抖
+import _ from "lodash";
+method: {
+    disShow: _.debounce((val) => {
+        console.log('防抖', val)
+    }, 300)
+}
+```
+
+### 节流的三种版本（onscroll事件、控制高频执行的次数、节约性能）
+
+```js
+1.普通版本（定时器版）
+// 1.定时器版本，鼠标滚动1s后才执行函数
+function throttle(func, delay){
+    let timeout;
+    return function(){
+        let context = this;
+        if (!timeout) {
+            timeout = setTimeout(()=> {
+                func.apply(context, arguments);
+            }, delay);
+        }
+    }
+}
+
+window.addEventListener('scroll', throttle(incNum, 1000));
+
+
+2.时间戳版本（立即执行事件的第一次）
+// 2.时间戳版本、鼠标滚动立即执行、间隔1s再执行下一次 （滚动第一次就触发）
+function throttle(fn, delay) {
+  let last = 0 // 上次触发时间
+  return () => {
+    const now = Date.now()
+    if (now - last > delay) {
+      last = now
+      fn.apply(this, arguments)
+    }
+  }
+}
+
+// 测试
+function task() {
+  console.log('run task')
+}
+const throttleTask = throttle(task, 1000)
+window.addEventListener('scroll', throttleTask)
+
+
+3.定时器和时间戳合并版（执行事件最后一次）
+// 3.时间戳、定时器合并版本 与取消 （最后一次的延迟也要触发）
+将定时器和时间戳两个版本合并在一起，可以实现滚动鼠标，函数就立即执行，间隔1s再执行下一次，然后停止滚动鼠标后，还会多执行一次的效果。
+function throttle(func, delay) {
+    let previous = 0;
+    let timeout;
+    let now;
+    
+    let throttled = function() {
+        now = Date.now();
+        let context = this;
+        let args = arguments;
+        if ( (now - previous) >= delay ) {
+            if (timeout) {
+                clearTimeout(timeout);
+                timeout = null;
+            }
+            previous = now;
+            func.apply(context, args);            
+        } else if (!timeout) {
+            timeout = setTimeout(()=> {
+                previous = now;
+                timeout = null;
+                func.apply(context, args);
+            }, delay - (now - previous));
+        }
+    }
+    
+    // 取消函数
+    throttled.cancel = function() {
+        clearTimeout(timeout);
+        previous = 0;
+        timeout = null;
+    }
+    
+    return throttled;
+}
+
+let testFunc = throttle(incNum, 1000);
+window.addEventListener('scroll', testFunc, false);
+// 在页面的按钮上绑定取消函数
+document.getElementById('cancel').addEventListener('click', testFunc.cancel, false);
+```
+

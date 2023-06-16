@@ -4,9 +4,7 @@
     <h3>宏任务： 定时器、RAF、Dom操作、ajax请求</h3>
     <h3>微任务：Promise.then()回调、async/await后面的代码块</h3>
     <h3>执行顺序：同步 -> 微任务 -> dom渲染 -> nextTick -> 宏任务</h3>
-    <h4 style="color: green">
-      (nextTick在第一个宏任务执行之前执行、在微任务和宏任务之间)
-    </h4>
+    <h4 style="color: green">(nextTick在第一个宏任务执行之前执行、在微任务和宏任务之间)</h4>
     <pre class="ft-20 ft-bold bg-pink border-10 pg-t-20">
       <span class="pSpan">
       console.log('----------start-----------')
@@ -18,7 +16,7 @@
       new Promise((res, rej) => {
           for(var i = 0; i &lt 4; i++) {
               console.log(i)
-          } 
+          }
           this.$nextTick(() => {
         	 console.log("nextTick");
           });

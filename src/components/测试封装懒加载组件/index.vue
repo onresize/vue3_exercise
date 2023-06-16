@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mixinHeight">
     <h4>
       vite + vue3中不能使用require方式引入静态资源、可用两种方式替代
       <br />
@@ -8,34 +8,14 @@
       2. import xxx from 'xxx.jpg'
     </h4>
     <div class="lazy-com-box" id="scrollBox">
-      <picCard
-        class="item-box"
-        v-for="(item, i) in pArr"
-        :key="i"
-        :pTitle="item.title"
-        :pic="item.src"
-      ></picCard>
+      <picCard class="item-box" v-for="(item, i) in pArr" :key="i" :pTitle="item.title" :pic="item.src"></picCard>
     </div>
-    <el-button
-      v-show="isShow"
-      circle
-      title="返回顶部"
-      class="toTop"
-      @click.prevent="toTopClick"
-      >👆</el-button
-    >
+    <el-button v-show="isShow" circle title="返回顶部" class="toTop" @click.prevent="toTopClick">👆</el-button>
   </div>
 </template>
 
 <script setup>
-import {
-  ref,
-  reactive,
-  onMounted,
-  watch,
-  getCurrentInstance,
-  nextTick,
-} from "vue";
+import { ref, reactive, onMounted, watch, getCurrentInstance, nextTick } from "vue";
 import { useIntersectionObserver } from "@vueuse/core";
 import picCard from "@/myCom/lazyCom/index.vue";
 // import picCard from "@/myCom/lazyCom/asyncCom.vue";
@@ -125,9 +105,7 @@ const toTopClick = () => {
 };
 
 onMounted(() => {
-  document
-    .getElementById("scrollBox")
-    .addEventListener("scroll", rolling, false);
+  document.getElementById("scrollBox").addEventListener("scroll", rolling, false);
 });
 </script>
 

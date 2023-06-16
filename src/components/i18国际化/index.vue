@@ -1,38 +1,20 @@
 <template>
-  <div>
+  <div class="mixinHeight">
     <div>
       <h2>
         i18国际化基本使用：
         <!-- <el-tag class="bg-pink ft-22 h-30 ft-white">
         npm i @types/node -D
       </el-tag> -->
-        <el-tag class="bg-pink ft-22 h-30 ft-white">
-          npm i --save-dev @intlify/vite-plugin-vue-i18n -D
-        </el-tag>
-        <el-tag class="bg-pink ft-22 h-30 ft-white">
-          npm i vue-i18n@next -S
-        </el-tag>
-        <el-link
-          href="https://blog.csdn.net/qq_43485006/article/details/120034213"
-          target="_blank"
-          >参考：(推荐）</el-link
-        >
-        <el-link
-          href="https://segmentfault.com/a/1190000041106650"
-          target="_blank"
-          >其他参考：</el-link
-        >
+        <el-tag class="bg-pink ft-22 h-30 ft-white"> npm i --save-dev @intlify/vite-plugin-vue-i18n -D </el-tag>
+        <el-tag class="bg-pink ft-22 h-30 ft-white"> npm i vue-i18n@next -S </el-tag>
+        <el-link href="https://blog.csdn.net/qq_43485006/article/details/120034213" target="_blank">参考：(推荐）</el-link>
+        <el-link href="https://segmentfault.com/a/1190000041106650" target="_blank">其他参考：</el-link>
       </h2>
       <h2>
-        <el-link
-          href="https://blog.csdn.net/mrhaoxiaojun/article/details/125267804"
-          target="_blank"
-          >关于报错Must be called at the top of a `setup`参考：</el-link
-        >
+        <el-link href="https://blog.csdn.net/mrhaoxiaojun/article/details/125267804" target="_blank">关于报错Must be called at the top of a `setup`参考：</el-link>
         <div>
-          <h4 class="ft-bold">
-            注意下面两个库的版本、如果版本太高会导致上面的报错、正常CompotitionAPI使用修改语言会不正常
-          </h4>
+          <h4 class="ft-bold">注意下面两个库的版本、如果版本太高会导致上面的报错、正常CompotitionAPI使用修改语言会不正常</h4>
           <pre class="ft-bold bg-pink pg-t-20 border-10">
           @intlify/vite-plugin-vue-i18n": "^3.3.1",
           "vue-i18n": "^9.1.9",
@@ -45,14 +27,8 @@
         <el-button>{{ $t("btn.confirm") }}</el-button>
       </div>
     </div>
-    <el-button class="mg-5" @click="changeLocale"
-      >切换语言:当前({{ locale == "en" ? "en" : "中文" }})</el-button
-    >
-    <el-link
-      href="https://github.com/xiaoluoboding/vue-i18n-practice"
-      target="_blank"
-      >案例源码参考：</el-link
-    >
+    <el-button class="mg-5" @click="changeLocale">切换语言:当前({{ locale == "en" ? "en" : "中文" }})</el-button>
+    <el-link href="https://github.com/xiaoluoboding/vue-i18n-practice" target="_blank">案例源码参考：</el-link>
   </div>
 </template>
 

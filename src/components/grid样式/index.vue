@@ -1,5 +1,5 @@
 <template>
-  <el-card>
+  <el-card class="mixinHeight">
     <h3>常用grid布局</h3>
     <div class="grid_box">
       <div>0</div>
@@ -17,7 +17,7 @@
 import { ref, reactive } from "vue";
 </script>
 
-<style scoped lang='less'>
+<style scoped lang="less">
 .grid_box {
   width: 600px;
   height: 500px;

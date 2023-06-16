@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mixinHeight">
     <h3>service Worker实践</h3>
     <h3>
       <el-link href="https://developer.mozilla.org/zh-CN/docs/Web/API/notification" target="_bank">MDN参考(Notification API)</el-link>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mixinHeight">
     <h2>使用自定义useTimer倒计时Hook</h2>
     <h3>
       {{ time }}

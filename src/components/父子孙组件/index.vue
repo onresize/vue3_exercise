@@ -1,16 +1,9 @@
 <template>
-  <div>
-    <h3>
-      父、子、孙元素分别hover没有像js一样阻止冒泡方法、想要实现效果：用js方法onmouseover和onmouseout处理
-    </h3>
+  <div class="mixinHeight">
+    <h3>父、子、孙元素分别hover没有像js一样阻止冒泡方法、想要实现效果：用js方法onmouseover和onmouseout处理</h3>
     <br />
     <h3>useAttrs()向下传递参数 和 useSlots()子组件获取父组件中的插槽</h3>
-    <div
-      class="father-box"
-      :style="{ backgroundColor: PiniaStore.fatherColor, color: pColor }"
-      @mouseover="mouseoverClick"
-      @mouseout="mouseoutClick"
-    >
+    <div class="father-box" :style="{ backgroundColor: PiniaStore.fatherColor, color: pColor }" @mouseover="mouseoverClick" @mouseout="mouseoutClick">
       <h2>父组件: {{ obj.age }}</h2>
       <child v-bind="obj">
         <!-- 默认插槽 -->

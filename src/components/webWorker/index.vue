@@ -1,6 +1,5 @@
-
 <template>
-  <div>
+  <div class="mixinHeight">
     <h3>
       <el-input
         autosize

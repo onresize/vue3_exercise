@@ -1,7 +1,9 @@
 <template>
-  <div class="delete-box">
-    <h2>删除带children的数据</h2>
-    <pre v-text="List.data"></pre>
+  <div class="mixinHeight">
+    <div class="delete-box">
+      <h2>删除带children的数据</h2>
+      <pre v-text="List.data"></pre>
+    </div>
   </div>
 </template>
 

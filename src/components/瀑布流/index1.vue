@@ -1,14 +1,9 @@
 <template>
-  <div>
+  <div class="mixinHeight">
     <h2>css布局方式实现瀑布流</h2>
     <div class="content">
       <div class="box">
-        <el-card
-          class="item"
-          v-for="(item, idx) in imgList"
-          :key="idx"
-          :data-num="idx"
-        >
+        <el-card class="item" v-for="(item, idx) in imgList" :key="idx" :data-num="idx">
           <img :src="item.src" :alt="item.title" />
           <h3>{{ item.title }}</h3>
         </el-card>
