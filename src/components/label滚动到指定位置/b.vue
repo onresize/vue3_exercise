@@ -1,10 +1,10 @@
 <template>
   <div class="demo">
     <div class="box">
-      <div class="list"><input id="oneID" readonly />11</div>
-      <div class="list bg-blue"><input id="twoID" readonly />22</div>
-      <div class="list bg-olive"><input id="threeID" readonly />33</div>
-      <div class="list bg-orange"><input id="fourID" readonly />44</div>
+      <div class="list"><input id="oneID" readonly />111</div>
+      <div class="list bg-blue"><input id="twoID" readonly />222</div>
+      <div class="list bg-olive"><input id="threeID" readonly />333</div>
+      <div class="list bg-orange"><input id="fourID" readonly />444</div>
     </div>
     <div>
       <label class="click" for="oneID">1</label>

@@ -1108,6 +1108,16 @@
     hookable "^5.5.3"
     unhead "1.1.27"
 
+"@unhead/vue@^1.1.27":
+  version "1.1.27"
+  resolved "https://registry.npmmirror.com/@unhead/vue/-/vue-1.1.27.tgz#611a94d52a4be7bff90a2d35ad71c2dffab0826e"
+  integrity sha512-ibe7/QW4ZtyCI/et/fI3CnwC+oxqp+7LrhmuLUS93ib1Sl70D51dcAy9eAvh0MG7wWUyMUrf3T95MRifJo7uzA==
+  dependencies:
+    "@unhead/schema" "1.1.27"
+    "@unhead/shared" "1.1.27"
+    hookable "^5.5.3"
+    unhead "1.1.27"
+
 "@vitejs/plugin-vue-jsx@^3.0.1":
   version "3.0.1"
   resolved "https://registry.npmmirror.com/@vitejs/plugin-vue-jsx/-/plugin-vue-jsx-3.0.1.tgz"
@@ -3183,6 +3193,11 @@ gitconfiglocal@^1.0.0:
   integrity sha512-spLUXeTAVHxDtKsJc8FkFVgFtMdEN9qPGpL23VfSHx4fP4+Ds097IXLvymbnDH8FnmxX5Nr9bPw3A+AQ6mWEaQ==
   dependencies:
     ini "^1.3.2"
+
+github-markdown-css@^5.2.0:
+  version "5.2.0"
+  resolved "https://registry.npmmirror.com/github-markdown-css/-/github-markdown-css-5.2.0.tgz#9f9e30f16cbc1d3b76110667b7c36ca3d96c9cdc"
+  integrity sha512-hq5RaCInSUZ48bImOZpkppW2/MT44StRgsbsZ8YA4vJFwLKB/Vo3k7R2t+pUGqO+ThG0QDMi96TewV/B3vyItg==
 
 glob-parent@^5.1.2, glob-parent@~5.1.2:
   version "5.1.2"
