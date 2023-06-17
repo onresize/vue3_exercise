@@ -172,15 +172,16 @@ const handleNodeClick = ({ id }) => {
 
         // 局部滚动条美化
         &::-webkit-scrollbar {
-          width: 3px;
-          height: 8px;
+          width: 6px;
+          height: 6px;
+          display: block;
         }
         // 局部滚动轴
         &::-webkit-scrollbar-thumb {
-          background-color: #ffcc99;
+          // background-color: #ffcc99;
           border-radius: 10px;
           &:hover {
-            background-color: #ffcc99;
+            // background-color: #ffcc99;
           }
         }
       }

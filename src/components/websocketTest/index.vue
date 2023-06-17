@@ -120,12 +120,18 @@ onUnmounted(() => {
 .itemBoxCard {
   margin-top: 10px;
   width: 100%;
-  height: 500px;
+  height: calc(100vh - 250px);
   .p_Card {
     width: 100%;
-    height: 400px;
+    height: calc(100vh - 350px);
     overflow-y: auto;
     overflow-x: hidden;
+    // 局部滚动条美化
+    &::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+      display: block;
+    }
   }
   .ipt {
     margin: 5px;
