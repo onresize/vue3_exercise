@@ -19,14 +19,16 @@ const highLight = {
       let pHTML = { html: v.innerHTML, id: pId };
       leftArr = [...leftArr, pHTML];
     });
+    console.log("指令加载大纲数组:", leftArr);
     PiniaStore.changeMDList(leftArr);
 
     // md代码块
     blocks.forEach((itemEl) => {
       hljs.highlightBlock(itemEl);
     });
-
-    el.addEventListener("click", el.__handleClick__);
+  },
+  beforeUnmount(el) {
+    PiniaStore.changeMDList([]);
   },
 };
 

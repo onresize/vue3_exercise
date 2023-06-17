@@ -7,8 +7,8 @@
       <div class="card_left">
         <el-tree v-if="state.showTree" :data="state.treeList" :props="defaultProps" @node-click="handleNodeClick">
           <template #default="{ node }">
-            <a target="_self" :href="`#pId${node.id}`">
-              <span class="break_span" :style="{ color: state.pId == `pId${node.id}` ? '#ffcc99' : '#000000' }"> {{ node.label }}</span>
+            <a target="_self" :href="`#${node?.data?.id}`">
+              <span class="break_span" :style="{ color: state.pId == `${node?.data?.id}` ? '#ffcc99' : '#000000' }"> {{ node.label }}</span>
             </a>
           </template>
         </el-tree>
@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, watch, computed } from "vue";
+import { ref, reactive, watch } from "vue";
 import { useMainStore } from "@/store/pinia";
 import WebInterview from "@/md/面试总结题.md";
 
