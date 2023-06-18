@@ -8,19 +8,11 @@
     <div class="left-box">
       <payCom style="payBox"></payCom>
     </div>
-    <div class="left-bottom-box">
-      <colaCom></colaCom>
-    </div>
     <div class="right-box">
-      <a href="https://gitee.com/Embrance-T/vue3_exercise"
-        ><img
-          src="https://gitee.com/Embrance-T/vue3_exercise/widgets/widget_1.svg"
-          alt="Fork me on Gitee"
-      /></a>
+      <a href="https://gitee.com/Embrance-T/vue3_exercise"><img src="https://gitee.com/Embrance-T/vue3_exercise/widgets/widget_1.svg" alt="Fork me on Gitee" /></a>
     </div>
   </div>
 </template>
-
 
 <script setup>
 import { onMounted } from "vue";
@@ -28,7 +20,6 @@ import { useRouter } from "vue-router";
 import { loginBroadcast } from "@/utils/broadcast";
 import { getTimeState } from "@/utils/tools.js";
 import payCom from "@/myCom/payCom/index.vue";
-import colaCom from "@/myCom/colaCom/index.vue";
 
 const Router = useRouter();
 
@@ -109,14 +100,10 @@ onMounted(() => {
 
   function updateParticles() {
     for (var i = 0; i < particles.length; i++) {
-      particles[i].velocity.x =
-        particles[i].velocity.x + particles[i].acceleration.x;
-      particles[i].velocity.y =
-        particles[i].velocity.y + particles[i].acceleration.y;
-      particles[i].position.x =
-        particles[i].position.x + particles[i].velocity.x;
-      particles[i].position.y =
-        particles[i].position.y + particles[i].velocity.y;
+      particles[i].velocity.x = particles[i].velocity.x + particles[i].acceleration.x;
+      particles[i].velocity.y = particles[i].velocity.y + particles[i].acceleration.y;
+      particles[i].position.x = particles[i].position.x + particles[i].velocity.x;
+      particles[i].position.y = particles[i].position.y + particles[i].velocity.y;
       checkNextBoundaries(i, particles[i].position.y);
       if (particles[i]) {
         particles[i].length = particles[i].velocity.y * 1.8;
@@ -130,10 +117,7 @@ onMounted(() => {
 
   function checkNextBoundaries(i, nextPy) {
     // floor condition
-    if (
-      nextPy >=
-      canvas.height * 0.9 - particles[i].position.z * 55 - particles[i].radius
-    ) {
+    if (nextPy >= canvas.height * 0.9 - particles[i].position.z * 55 - particles[i].radius) {
       particles[i].velocity.y *= -1;
       particles[i].velocity.y *= collisionDamper;
       particles[i].length = 3;
@@ -145,21 +129,13 @@ onMounted(() => {
     }
 
     // right wall condition
-    if (
-      particles[i] &&
-      particles[i].position &&
-      particles[i].position.x >= canvas.width - particles[i].radius
-    ) {
+    if (particles[i] && particles[i].position && particles[i].position.x >= canvas.width - particles[i].radius) {
       particles[i].velocity.x *= -1;
       particles[i].velocity.x *= collisionDamper;
     }
 
     // left wall condition
-    if (
-      particles[i] &&
-      particles[i].position &&
-      particles[i].position.x <= particles[i].radius
-    ) {
+    if (particles[i] && particles[i].position && particles[i].position.x <= particles[i].radius) {
       particles[i].velocity.x *= -1;
       particles[i].velocity.x *= collisionDamper;
     }
@@ -171,25 +147,13 @@ onMounted(() => {
         var result = circleCollision(particles[i], particles[ii]);
         if (result) {
           var newVelX1 =
-            (particles[i].velocity.x *
-              (particles[i].mass - particles[ii].mass) +
-              2 * particles[ii].mass * particles[ii].velocity.x) /
-            (particles[i].mass + particles[ii].mass);
+            (particles[i].velocity.x * (particles[i].mass - particles[ii].mass) + 2 * particles[ii].mass * particles[ii].velocity.x) / (particles[i].mass + particles[ii].mass);
           var newVelY1 =
-            (particles[i].velocity.y *
-              (particles[i].mass - particles[ii].mass) +
-              2 * particles[ii].mass * particles[ii].velocity.y) /
-            (particles[i].mass + particles[ii].mass);
+            (particles[i].velocity.y * (particles[i].mass - particles[ii].mass) + 2 * particles[ii].mass * particles[ii].velocity.y) / (particles[i].mass + particles[ii].mass);
           var newVelX2 =
-            (particles[ii].velocity.x *
-              (particles[ii].mass - particles[i].mass) +
-              2 * particles[i].mass * particles[i].velocity.x) /
-            (particles[i].mass + particles[ii].mass);
+            (particles[ii].velocity.x * (particles[ii].mass - particles[i].mass) + 2 * particles[i].mass * particles[i].velocity.x) / (particles[i].mass + particles[ii].mass);
           var newVelY2 =
-            (particles[ii].velocity.y *
-              (particles[ii].mass - particles[i].mass) +
-              2 * particles[i].mass * particles[i].velocity.y) /
-            (particles[i].mass + particles[ii].mass);
+            (particles[ii].velocity.y * (particles[ii].mass - particles[i].mass) + 2 * particles[i].mass * particles[i].velocity.y) / (particles[i].mass + particles[ii].mass);
           particles[i].velocity.x = newVelX1 * ballFriction;
           particles[i].velocity.y = newVelY1 * ballFriction;
           particles[ii].velocity.x = newVelX2 * ballFriction;
@@ -284,12 +248,7 @@ onMounted(() => {
       line-height: 20px;
       /* 仅大写 */
       text-transform: uppercase;
-      background-image: linear-gradient(
-        270deg,
-        rgba(100, 181, 239, 0) 48.44%,
-        #64b5ef 75.52%,
-        rgba(100, 181, 239, 0) 100%
-      );
+      background-image: linear-gradient(270deg, rgba(100, 181, 239, 0) 48.44%, #64b5ef 75.52%, rgba(100, 181, 239, 0) 100%);
       background-repeat: no-repeat;
       animation: bg-move linear 5s infinite;
     }
@@ -311,14 +270,6 @@ onMounted(() => {
     position: absolute;
     inset: 0;
     zoom: 0.3;
-  }
-  .left-bottom-box {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 200px;
-    height: 200px;
-    border: 3px solid #fff;
   }
   .right-box {
     position: absolute;

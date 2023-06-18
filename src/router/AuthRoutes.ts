@@ -298,18 +298,16 @@ export const AdminRoutes = [
       {
         path: "/page1",
         name: "page1",
-        // components: {
-        //   default: () => import("@cp/动画/RouterAnimation/page1.vue"),
-        // },
-        component: () => import("@cp/动画/RouterAnimation/page1.vue"),
+        components: {
+          default: () => import("@cp/动画/RouterAnimation/page1.vue"),
+        },
       },
       {
         path: "/page2",
         name: "page2",
-        // components: {
-        //   default: () => import("@cp/动画/RouterAnimation/page2.vue"),
-        // },
-        component: () => import("@cp/动画/RouterAnimation/page2.vue"),
+        components: {
+          default: () => import("@cp/动画/RouterAnimation/page2.vue"),
+        },
       },
     ],
   },

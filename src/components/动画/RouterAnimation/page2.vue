@@ -1,7 +1,8 @@
 <template>
   <div class="page2 w240">
+    <colaCom class="cola_box"> </colaCom>
     <!-- <h2 @click="emitCount">{{ Store.state.shoesCount }}</h2> -->
-    <h2 @click="emitCount1">{{ PiniaStore.shoesCount }}</h2>
+    <h2 class="text_box" @click="emitCount1">{{ PiniaStore.shoesCount }}</h2>
   </div>
 </template>
 
@@ -12,6 +13,7 @@ import { useRoute, onBeforeRouteLeave } from "vue-router";
 import { useStore } from "vuex";
 import { useMainStore } from "@/store/pinia.ts";
 import { setStorage, getStorage } from "@/utils/funcTools";
+import colaCom from "@/myCom/colaCom/index.vue";
 
 const route = useRoute();
 const Store = useStore();
@@ -70,17 +72,29 @@ onMounted(() => {
 });
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .w240 {
   width: 240px;
   height: 240px;
   line-height: 240px;
   text-align: end;
   border-radius: 50%;
-  background-image: url("@/assets/img/shoes.webp");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
+  // background-image: url("@/assets/img/shoes.webp");
+  // background-size: 100% 100%;
+  // background-repeat: no-repeat;
+  // border: 2px solid red;
+
+  .cola_box {
+    position: relative;
+  }
+
+  .text_box {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+  }
 }
+
 h2 {
   user-select: none;
   cursor: pointer;

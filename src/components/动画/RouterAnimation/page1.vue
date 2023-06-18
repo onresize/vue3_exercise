@@ -1,7 +1,8 @@
 <template>
   <div class="page1 w240">
+    <colaCom class="cola_box"> </colaCom>
+    <h2 class="text_box" @click="emitCount">{{ PiniaStore.shoesCount }}</h2>
     <!-- <h2 @click="emitCount">{{ VuexStore.state.shoesCount }}</h2> -->
-    <h2 @click="emitCount">{{ PiniaStore.shoesCount }}</h2>
     <h3>getters中的值：{{ PiniaStore.doubleCount }}</h3>
     <h3>getters传参累加：{{ PiniaStore.doubleCountPlus(3) }}</h3>
   </div>
@@ -14,15 +15,12 @@ import { useRoute, onBeforeRouteLeave } from "vue-router";
 import { useStore } from "vuex";
 import { useMainStore } from "@/store/pinia.ts";
 import { setStorage, getStorage } from "@/utils/funcTools";
+import colaCom from "@/myCom/colaCom/index.vue";
 
 const route = useRoute();
 const VuexStore = useStore();
 const PiniaStore = useMainStore();
-console.log(
-  "pinia中getters中的值：",
-  PiniaStore.doubleCount,
-  PiniaStore.doubleCountPlus(3)
-);
+console.log("pinia中getters中的值：", PiniaStore.doubleCount, PiniaStore.doubleCountPlus(3));
 
 if (getStorage("shoesCount")) {
   PiniaStore.shoesCount = getStorage("shoesCount");
@@ -101,16 +99,27 @@ onMounted(() => {
 });
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .w240 {
   width: 240px;
   height: 240px;
   line-height: 240px;
   text-align: end;
   border-radius: 50%;
-  background-image: url("@/assets/img/shoes.webp");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
+  // background-image: url("@/assets/img/shoes.webp");
+  // background-size: 100% 100%;
+  // background-repeat: no-repeat;
+  // border: 2px solid red;
+
+  .cola_box {
+    position: relative;
+  }
+
+  .text_box {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+  }
 }
 
 h2 {

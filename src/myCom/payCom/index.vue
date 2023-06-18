@@ -1,35 +1,17 @@
 <template>
   <div :class="['bottom_box']">
-    <div
-      class="card"
-      @mouseover="(e) => $D(mouseoverClick, 500, e)"
-      @mouseleave="(e) => $D(mouseleaveClick, 500, e)"
-    >
+    <div class="card" @mouseover="(e) => $D(mouseoverClick, 500, e)" @mouseleave="(e) => $D(mouseleaveClick, 500, e)">
       <div :class="['content', isTurn ? 'turnActive' : '']">
-        <div class="front">
-          <h3 class="title linear colorful">请作者喝杯冰阔落🍻</h3>
-          <h3 class="title-pay">
-            使用微信支付 <span>鼠标悬停使用支付宝支付</span>
-          </h3>
-          <img
-            class="subtitle-img"
-            src="@/assets/img/wx.jpg"
-            alt=""
-            srcset=""
-          />
+        <div :class="['back']">
+          <h3 class="title">请作者喝杯咖啡☕️</h3>
+          <h2 class="title-pay">使用支付宝支付</h2>
+          <img class="subtitle-img" src="@/assets/img/zfb.jpg" alt="" srcset="" />
         </div>
 
-        <div class="back">
-          <h3 class="title">请作者喝杯咖啡☕️</h3>
-          <h3 class="title-pay">
-            使用支付宝支付 <span>移开鼠标使用微信支付</span>
-          </h3>
-          <img
-            class="subtitle-img"
-            src="@/assets/img/zfb.jpg"
-            alt=""
-            srcset=""
-          />
+        <div :class="['front']">
+          <h3 class="title linear colorful">请作者喝杯冰阔落🍻</h3>
+          <h2 class="title-pay">使用微信支付</h2>
+          <img class="subtitle-img" src="@/assets/img/wx.jpg" alt="" srcset="" />
         </div>
       </div>
     </div>
@@ -43,20 +25,21 @@ const isTurn = ref(true);
 
 const mouseoverClick = () => {
   console.log("鼠标移入");
-  isTurn.value = false;
+  // isTurn.value = false;
 };
 const mouseleaveClick = () => {
   console.log("鼠标移出");
-  isTurn.value = true;
+  // isTurn.value = true;
 };
 </script>
 
-<style scoped lang='less'>
+<style scoped lang="less">
 .bottom_box {
   animation-name: rightToLeft;
   animation-duration: 1s;
   position: absolute;
   transition: all 1s linear;
+
   &:hover {
     transform: scale(2) translate(25%, 26%);
   }
@@ -65,6 +48,7 @@ const mouseleaveClick = () => {
     from {
       transform: translateX(-100vw);
     }
+
     to {
       transform: translateX(0);
     }
@@ -112,6 +96,7 @@ const mouseleaveClick = () => {
     transform: translateZ(5rem);
     font-size: 1.7rem;
   }
+
   .subtitle-img {
     transform: translateZ(2rem);
     margin-top: 15px;
@@ -121,6 +106,7 @@ const mouseleaveClick = () => {
     height: 28vh;
     max-height: 380px;
   }
+
   .subtitle {
     transform: translateZ(2rem);
   }
@@ -133,19 +119,23 @@ const mouseleaveClick = () => {
   .title-pay {
     transform: translateZ(3rem);
   }
+
   .title-pay span {
     transform: translateZ(3rem);
     font-size: 0.7em;
   }
 }
+
 .turnActive {
   animation: turn25 60s 1.2s linear infinite;
+
   @keyframes turn25 {
     0% {
       transform: rotateY(25turn);
     }
   }
 }
+
 .flex {
   border: 3px solid transparent;
   border-radius: 10px;
@@ -167,6 +157,7 @@ const mouseleaveClick = () => {
     from {
       transform: translateX(-100vw);
     }
+
     to {
       transform: translateX(0);
     }
@@ -177,13 +168,14 @@ const mouseleaveClick = () => {
     font-weight: bold;
     height: 40px;
     margin: 3px;
-    text-shadow: 0 0 0.1rem #00c6ff, 0 0 0.2rem #00c6ff, 0 0 0.3rem #00c6ff,
-      0 0 0.4rem #00c6ff;
+    text-shadow: 0 0 0.1rem #00c6ff, 0 0 0.2rem #00c6ff, 0 0 0.3rem #00c6ff, 0 0 0.4rem #00c6ff;
   }
 }
+
 .infoZIndex {
   z-index: 1;
 }
+
 .beforeZIndex {
   z-index: -1;
 }
@@ -207,35 +199,14 @@ const mouseleaveClick = () => {
 
 .linear {
   color: transparent;
-  background: repeating-radial-gradient(
-    circle at 0 0,
-    #000 calc(var(--offset) - 5px),
-    #000 var(--offset),
-    #fff var(--offset),
-    #fff calc(var(--offset) + 5px)
-  );
+  background: repeating-radial-gradient(circle at 0 0, #000 calc(var(--offset) - 5px), #000 var(--offset), #fff var(--offset), #fff calc(var(--offset) + 5px));
   -webkit-background-clip: text;
   animation: move 0.5s infinite linear;
 }
 
 .colorful {
-  background-image: linear-gradient(
-      var(--deg),
-      red,
-      orange,
-      yellow,
-      green,
-      cyan,
-      blue,
-      darkviolet
-    ),
-    repeating-radial-gradient(
-      circle at 0 0,
-      #000 calc(var(--offset) - 5px),
-      #000 var(--offset),
-      #fff var(--offset),
-      #fff calc(var(--offset) + 5px)
-    );
+  background-image: linear-gradient(var(--deg), red, orange, yellow, green, cyan, blue, darkviolet),
+    repeating-radial-gradient(circle at 0 0, #000 calc(var(--offset) - 5px), #000 var(--offset), #fff var(--offset), #fff calc(var(--offset) + 5px));
   background-blend-mode: screen;
   animation: move 0.5s infinite linear, rotate 20s infinite linear;
 }
