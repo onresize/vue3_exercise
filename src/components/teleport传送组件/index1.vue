@@ -1,5 +1,5 @@
 <template>
-  <el-card style="overflow-y: scroll" class="mixinHeight">
+  <el-card style="overflow-y: scroll" class="mixinHeight cad">
     <h2>teleport传送门实现滚动小窗口播放器同状态切换video播放</h2>
     <h3 style="color: red">注意： 这里teleport的 to 属性在 index.html中的标签下才有效果</h3>
     <h2>
@@ -41,14 +41,21 @@ onMounted(() => {
 </script>
 
 <style lang="less" scoped>
-.videoContainerDom {
-  position: relative;
-  width: 800px;
-  height: 540px;
-  .videoTarget {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover;
+.cad {
+  &::-webkit-scrollbar {
+    display: block;
+  }
+
+  .videoContainerDom {
+    position: relative;
+    width: 800px;
+    height: 540px;
+
+    .videoTarget {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover;
+    }
   }
 }
 </style>

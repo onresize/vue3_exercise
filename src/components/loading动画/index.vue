@@ -13,20 +13,29 @@ import { ref } from "vue";
 const show = ref(false);
 const change = () => {
   show.value = !show.value;
+  setTimeout(() => {
+    show.value = false;
+  }, 4000);
 };
 </script>
 
 <style scoped lang="less">
 .container {
-  background: white;
+  position: fixed;
+  z-index: 30000;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
   transition: all 0.6s;
-  opacity: 0;
   visibility: hidden;
 }
+
 .active {
   visibility: visible;
   opacity: 1;
 }
+
 .spinner {
   width: 120px;
   height: 120px;
@@ -42,7 +51,7 @@ const change = () => {
     height: 31%;
     background: transparent;
     border-radius: 50%;
-    border: 10px dotted #1abc9c;
+    border: 10px dotted yellowgreen;
     opacity: 0.6;
     position: absolute;
     top: 0;
@@ -50,6 +59,7 @@ const change = () => {
     animation: loading 2s infinite ease-in-out;
   }
 }
+
 @keyframes loading {
   to {
     transform: rotate(360deg);

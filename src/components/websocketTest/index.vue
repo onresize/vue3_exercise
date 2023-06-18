@@ -121,11 +121,15 @@ onUnmounted(() => {
   margin-top: 10px;
   width: 100%;
   height: calc(100vh - 250px);
+  box-sizing: border-box;
+
   .p_Card {
     width: 100%;
     height: calc(100vh - 350px);
+    box-sizing: border-box;
     overflow-y: auto;
     overflow-x: hidden;
+
     // 局部滚动条美化
     &::-webkit-scrollbar {
       width: 6px;
@@ -133,6 +137,7 @@ onUnmounted(() => {
       display: block;
     }
   }
+
   .ipt {
     margin: 5px;
   }

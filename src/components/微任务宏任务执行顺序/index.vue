@@ -91,7 +91,8 @@ console.log("----------end-----------");
 
 <style scoped>
 .div-mb {
-  overflow-y: scroll;
+  height: fit-content;
+  /* overflow-y: scroll; */
 }
 .pSpan {
   color: #cc6600;
