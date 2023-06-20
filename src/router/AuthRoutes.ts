@@ -292,6 +292,16 @@ export const AdminRoutes = [
     component: () => import("@cp/corsTest/index.vue"),
   },
   {
+    path: "/FC_game",
+    name: "FC_game",
+    component: () => import("@cp/FC_game/index.vue"),
+  },
+  {
+    path: "/RAF",
+    name: "RAF",
+    component: () => import("@cp/RAF/index.vue"),
+  },
+  {
     path: "/animation3",
     component: () => import("@cp/动画/index3.vue"),
     children: [

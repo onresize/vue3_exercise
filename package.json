@@ -73,6 +73,7 @@
     "less": "^4.1.1",
     "lint-staged": "^12.1.2",
     "markdown-it-prism": "^2.3.0",
+    "nes-vue": "^1.6.7",
     "nodemon": "^2.0.22",
     "pinia-plugin-persistedstate": "^3.1.0",
     "prettier": "^2.5.1",

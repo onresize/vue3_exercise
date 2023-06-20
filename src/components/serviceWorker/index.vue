@@ -35,11 +35,13 @@
 
 <script setup>
 import { ref, reactive, nextTick } from "vue";
+import { storeToRefs } from "pinia";
 import { useMainStore } from "@/store/pinia.ts";
 import { subscribeUser } from "@/utils/subscribeUser.js";
 import myIcon from "@/assets/img/1.webp";
 
 const PiniaStore = useMainStore();
+const { JsonKey } = storeToRefs(PiniaStore); // storeToRefs解决pinia解构造丢失数据响应式
 
 const activeNames = ref(["1"]);
 const state = reactive({
@@ -77,7 +79,7 @@ const toMessage = () => {
 const toStartMessage = async () => {
   await subscribeUser(); // 开启消息订阅
   await nextTick();
-  state.pushSubscription = PiniaStore.JsonKey;
+  state.pushSubscription = JsonKey;
 };
 </script>
 
@@ -89,10 +91,12 @@ const toStartMessage = async () => {
   background: gold;
   padding: 15px;
   border-radius: 10px;
+
   span {
     display: inline-block;
   }
 }
+
 .json_code {
   min-height: 50px;
   display: block;
@@ -115,9 +119,11 @@ const toStartMessage = async () => {
     left: 10px;
   }
 }
+
 .msg_btn {
   margin: 10px 0;
 }
+
 .frame_box {
   width: calc(100vw - 330px);
   height: calc(100vh - 400px);

@@ -864,6 +864,11 @@
   resolved "https://registry.npmmirror.com/@socket.io/component-emitter/-/component-emitter-3.1.0.tgz"
   integrity sha512-+9jVqKhRSpsc591z5vX+X5Yyw+he/HCB4iQ/RYxw35CEPaY1gnsNE43nf9n9AaYjAQrTiI/mOwKUKdUs9vf7Xg==
 
+"@taiyuuki/utils@^0.4.0":
+  version "0.4.1"
+  resolved "https://registry.npmmirror.com/@taiyuuki/utils/-/utils-0.4.1.tgz#58de6dc6cca2c9b8fe8b9add1a6e5bc9579c9ff3"
+  integrity sha512-yH9v+qBydCnM/hBrPbfuhrSYQm5RELzK0Xwhj+x97xerEkye5DwKOrYClW+dFCzYXrxCkXldtuaGGTylDhSIkg==
+
 "@tsconfig/node10@^1.0.7":
   version "1.0.9"
   resolved "https://registry.npmmirror.com/@tsconfig/node10/-/node10-1.0.9.tgz"
@@ -1098,17 +1103,7 @@
     "@unhead/schema" "1.1.27"
     "@unhead/shared" "1.1.27"
 
-"@unhead/vue@^1.1.26":
-  version "1.1.27"
-  resolved "https://registry.npmmirror.com/@unhead/vue/-/vue-1.1.27.tgz"
-  integrity sha512-ibe7/QW4ZtyCI/et/fI3CnwC+oxqp+7LrhmuLUS93ib1Sl70D51dcAy9eAvh0MG7wWUyMUrf3T95MRifJo7uzA==
-  dependencies:
-    "@unhead/schema" "1.1.27"
-    "@unhead/shared" "1.1.27"
-    hookable "^5.5.3"
-    unhead "1.1.27"
-
-"@unhead/vue@^1.1.27":
+"@unhead/vue@^1.1.26", "@unhead/vue@^1.1.27":
   version "1.1.27"
   resolved "https://registry.npmmirror.com/@unhead/vue/-/vue-1.1.27.tgz#611a94d52a4be7bff90a2d35ad71c2dffab0826e"
   integrity sha512-ibe7/QW4ZtyCI/et/fI3CnwC+oxqp+7LrhmuLUS93ib1Sl70D51dcAy9eAvh0MG7wWUyMUrf3T95MRifJo7uzA==
@@ -4485,6 +4480,13 @@ neo-async@^2.6.0:
   version "2.6.2"
   resolved "https://registry.npmmirror.com/neo-async/-/neo-async-2.6.2.tgz"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
+
+nes-vue@^1.6.7:
+  version "1.6.7"
+  resolved "https://registry.npmmirror.com/nes-vue/-/nes-vue-1.6.7.tgz#d9c12773573f4d6fd26a25b698c7b3956df905dd"
+  integrity sha512-7tbB6MEi8jVWJtzFEtfBFR9864B7sxugGfKkLQCxoLx4ru9RJnhjYxPQQL2SxYs8HyNsCZm7SVUqC13lLZuyxw==
+  dependencies:
+    "@taiyuuki/utils" "^0.4.0"
 
 no-case@^3.0.4:
   version "3.0.4"
