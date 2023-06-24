@@ -6,8 +6,8 @@
       <el-card class="left_card">
         <el-aside class="home_container_aside" width="220px">
           <div v-for="(item, index) in RouteList.routes" :key="index" class="aa">
-            <div class="cc">
-              <router-link :to="item.path" active-class="bb" class="info_style" @click="scrollBy(item)">
+            <div class="cc" @click="scrollBy(item)">
+              <router-link :to="item.path" active-class="bb" class="info_style">
                 <svg-icon :name="item.ICON" />
                 {{ item.path.substr(1) }}页
               </router-link>
@@ -67,7 +67,9 @@
             <!-- 正则表达式 (使用 `v-bind`  :include="/home|about/") -->
             <!-- 数组 (使用 `v-bind`  :include="['home', 'about']") -->
             <keep-alive include="onlyId">
-              <component class="child-view" :is="Component" />
+              <div class="child-view">
+                <component :is="Component"></component>
+              </div>
             </keep-alive>
           </transition>
         </router-view>
@@ -134,6 +136,7 @@ let top = ref(0);
 let PathName = ref("");
 
 const scrollBy = (item) => {
+  console.log("scrollBy---------------");
   let pIndex = null;
   let activeRouterArr = PiniaStore.ActiveBread;
   activeRouterArr.find((v, i) => {

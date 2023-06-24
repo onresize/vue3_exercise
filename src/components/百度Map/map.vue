@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <bgGeoMap class="bdMap" :JsonData="JsonData"></bgGeoMap>
-  </div>
+  <bgGeoMap class="bdMap" :JsonData="JsonData"></bgGeoMap>
 </template>
 
 <script setup>
