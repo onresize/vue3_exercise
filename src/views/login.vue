@@ -2,8 +2,11 @@
   <div class="login_bg">
     <canvas id="canvasID" width="100%" height="100%"> </canvas>
     <div class="mask">
-      <div class="show" @click="toPage('admin')">admin用户</div>
-      <div class="show" @click="toPage('ordinary')">普通用户</div>
+      <loginAvatarCom></loginAvatarCom>
+      <div>
+        <div class="show" @click="toPage('admin')">admin用户</div>
+        <div class="show" @click="toPage('ordinary')">普通用户</div>
+      </div>
     </div>
     <div class="left-box">
       <payCom style="payBox"></payCom>
@@ -20,6 +23,7 @@ import { useRouter } from "vue-router";
 import { loginBroadcast } from "@/utils/broadcast";
 import { getTimeState } from "@/utils/tools.js";
 import payCom from "@/myCom/payCom/index.vue";
+import loginAvatarCom from "@/myCom/loginAvatarCom/index.vue";
 
 const Router = useRouter();
 
@@ -215,13 +219,16 @@ onMounted(() => {
   background-size: 100% 100%;
   overflow: hidden;
   position: relative;
+
   .mask {
     width: 500px;
-    height: 100px;
+    height: 300px;
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.12);
     border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     position: absolute;
     inset: 0;
     z-index: 2;
@@ -252,6 +259,7 @@ onMounted(() => {
       background-repeat: no-repeat;
       animation: bg-move linear 5s infinite;
     }
+
     .show:active {
       background-color: #1a8ad5;
     }
@@ -266,11 +274,13 @@ onMounted(() => {
       }
     }
   }
+
   .left-box {
     position: absolute;
     inset: 0;
     zoom: 0.3;
   }
+
   .right-box {
     position: absolute;
     right: 0;
