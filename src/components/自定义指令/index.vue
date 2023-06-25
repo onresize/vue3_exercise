@@ -114,6 +114,7 @@ const throttleClick = () => {
 .card-box {
   width: 100%;
   height: 230px;
+  box-sizing: border-box;
 }
 
 .content-box {

@@ -91,12 +91,20 @@ console.log("----------end-----------");
 
 <style scoped>
 .div-mb {
-  height: fit-content;
-  /* overflow-y: scroll; */
+  height: 100%;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    display: block !important;
+  }
 }
+
 .pSpan {
   color: #cc6600;
 }
+
 .nSpan {
   color: #999999;
 }

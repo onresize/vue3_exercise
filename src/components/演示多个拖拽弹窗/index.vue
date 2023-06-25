@@ -51,6 +51,7 @@ const closeState = (key) => {
   user-select: none;
   position: relative;
   border: 3px solid red;
+  height: calc(100% - 5px) !important;
   .btn {
     width: 80px;
     height: 30px;

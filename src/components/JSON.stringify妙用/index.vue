@@ -2,12 +2,7 @@
   <div class="box">
     <h2>
       JSON.stringify妙用
-      <el-link
-        href="https://www.cnblogs.com/frank-link/p/15041633.html"
-        target="_blank"
-      >
-        博客园参考：
-      </el-link>
+      <el-link href="https://www.cnblogs.com/frank-link/p/15041633.html" target="_blank"> 博客园参考： </el-link>
     </h2>
     <el-card class="card">
       <code class="code">
@@ -118,12 +113,21 @@ console.log(JSON.stringify(json1));
 
 <style scoped>
 .box {
+  height: 100%;
   overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    display: block !important;
+  }
 }
+
 .card {
   width: fit-content;
   /* aspect-ratio: 1/0.2; */
 }
+
 .code {
   font-family: "楷体";
   font-size: 20px;

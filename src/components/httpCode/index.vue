@@ -1,25 +1,23 @@
 <template>
-  <div class="mixinHeight">
-    <el-card class="cad">
-      <el-tree :data="data" :props="defaultProps" @node-click="handleNodeClick">
-        <template #default="{ node }">
-          <div>
-            <el-tag class="tag" type="success" color="#ffcc99" v-if="node.label.includes('http')">
-              <span> {{ node.label }}</span>
-            </el-tag>
-            <el-tag type="success" color="#ffcc99" v-else-if="node.label.includes('301') || node.label.includes('302') || node.label.includes('304')">
-              <span>
-                {{ node.label }}
-              </span>
-            </el-tag>
-            <span v-else>
+  <el-card class="cad">
+    <el-tree :data="data" :props="defaultProps" @node-click="handleNodeClick">
+      <template #default="{ node }">
+        <div>
+          <el-tag class="tag" type="success" color="#ffcc99" v-if="node.label.includes('http')">
+            <span> {{ node.label }}</span>
+          </el-tag>
+          <el-tag type="success" color="#ffcc99" v-else-if="node.label.includes('301') || node.label.includes('302') || node.label.includes('304')">
+            <span>
               {{ node.label }}
             </span>
-          </div>
-        </template>
-      </el-tree>
-    </el-card>
-  </div>
+          </el-tag>
+          <span v-else>
+            {{ node.label }}
+          </span>
+        </div>
+      </template>
+    </el-tree>
+  </el-card>
 </template>
 
 <script setup>
@@ -187,7 +185,7 @@ const handleNodeClick = (data) => {
 .cad {
   overflow-y: auto !important;
   overflow-x: hidden;
-  height: calc(100vh - 100px);
+  height: calc(100% - 3px);
   &::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -197,6 +195,7 @@ const handleNodeClick = (data) => {
   .tag {
     font-weight: bold;
   }
+
   .el-tag {
     color: #000;
   }

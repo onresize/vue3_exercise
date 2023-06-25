@@ -1,5 +1,5 @@
 <template>
-  <div class="mixinHeight">
+  <div class="mixinHeight regExpBox">
     <h3>正则基本使用</h3>
     <div class="pre-div">
       <pre>
@@ -109,9 +109,20 @@ console.log("正则转化后的str2----------", code(str2));
 </script>
 
 <style scoped lang="less">
+.regExpBox {
+  overflow-y: auto !important;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    display: block !important;
+  }
+}
+
 .noSelect {
   user-select: none; // 不可选中文本
 }
+
 .pre-div {
   background-color: pink;
   border-radius: 10px;
@@ -123,16 +134,19 @@ console.log("正则转化后的str2----------", code(str2));
     color: white;
     font-family: "楷体";
   }
+
   .nSpan {
     color: #ff9933;
     font-size: 19px;
     font-family: "楷体";
   }
+
   .pSpan {
     color: green;
     font-size: 19px;
     font-family: "楷体";
   }
+
   span {
     color: #000;
     font-size: 23px;

@@ -162,13 +162,13 @@ export default defineConfig(({ mode }) => {
        * 自动导入组件，不用每次都 import
        * @see https://github.com/antfu/unplugin-vue-components#configuration
        */
-      components({
-        dirs: [resolve("src/components")],
-        extensions: ["vue", "ts"],
-        deep: true,
-        dts: false,
-        resolvers: [ElementPlusResolver()],
-      }),
+      // components({
+      //   dirs: [resolve("src/components")],
+      //   extensions: ["vue", "ts"],
+      //   deep: true,
+      //   dts: false,
+      //   resolvers: [ElementPlusResolver()],
+      // }),
 
       /**
        * 版权注释
@@ -179,12 +179,11 @@ export default defineConfig(({ mode }) => {
     build: {
       outDir: "dist",
       // 报错安装: npm i terser --legacy--peer-deps
-      minify: "terser",
+      minify: "terser", // terser比esbuild（默认）慢20倍左右、可清除console、debugger
       terserOptions: {
         compress: {
-          //XXX 下面选项更改true 或 false无效果、待研究
-          drop_console: env.VITE_DROP_CONSOLE, // 打包去除console
-          drop_debugger: env.VITE_DROP_CONSOLE, // 打包去除debugger
+          drop_console: true, // 打包去除console
+          drop_debugger: true, // 打包去除debugger
         },
       },
       chunkSizeWarningLimit: 1500,
