@@ -186,6 +186,23 @@ const stopWatch = () => {
   stop();
   console.log("停止监听----");
 };
+
+# 监听数组或对象时、深拷贝一份确保新值和旧值不一样
+
+/** 数组监听的最佳实践- reactive且源采用函数式返回，返回拷贝后的数据 */
+let testArr = reactive([1,2,3])
+watch(() => [...testArr], (newVal, oldVal) => {
+   console.log('newVal', newVal);
+   console.log('oldVal', oldVal);
+});
+
+/** 对象深度监听的最佳实践- reactive且源采用函数式返回，返回深拷贝后的数据 */
+import _ from 'lodash';
+const objReactive = reactive({user: {name: 'aa', age: '18'}, brand: 'Channel'});
+watch(() => _.cloneDeep(objReactive), (newVal, oldVal) => {
+  console.log('newVal', newVal);
+  console.log('oldVal', oldVal);
+})
 ```
 
 ### 父子传值
