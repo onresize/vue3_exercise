@@ -63,6 +63,11 @@ export default defineConfig(({ mode }) => {
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, "/api"),
         },
+        "/gitee": {
+          target: "https://gitee.com",
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/gitee/, ""),
+        },
       },
     },
     resolve: {

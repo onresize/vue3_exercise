@@ -195,5 +195,42 @@ export default {
         }, 0);
       });
     },
+    // 截取字符
+    toSubstr(str, startNum = 0, endNum) {
+      return str.substring(startNum, endNum);
+    },
+    // 获取url参数
+    getQueryString(name) {
+      const reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+      const r = window.location.search.substr(1).match(reg);
+      if (r !== null) {
+        return decodeURI(r[2]);
+      }
+      return null;
+    },
+    OpenWindow(url, w, h) {
+      var left = Math.round((window.screen.availWidth - w) / 2);
+      var top = Math.round((window.screen.availHeight - 100 - h) / 2);
+      var MyWin = window.open(
+        url,
+        "",
+        "height=" + h + ", width=" + w + ",top=" + top + ",left=" + left + ", toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, status=no"
+      );
+
+      let tim = setInterval(() => {
+        console.log("通过定时器进行检测");
+        if (MyWin.location?.search?.includes("code")) {
+          clearTimeout(tim);
+          let codeStr = MyWin.location?.search;
+          let code = this.toSubstr(MyWin.location.search, 6, codeStr.length);
+          const msg = {
+            code,
+          };
+          console.log("同意授权：", msg);
+          MyWin.close(); // 关闭open的窗口
+          window.postMessage(msg, "http://localhost:3077/");
+        }
+      }, 500);
+    },
   },
 };

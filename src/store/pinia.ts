@@ -19,6 +19,7 @@ export const useMainStore = defineStore("piniaStore", {
     isShowRightChart: true,
     MessageList: [], // socket消息数组
     MDList: [], // md文件大纲列表
+    loginInfo: {}, // 登录信息
   }),
   // 声明getters
   getters: {
@@ -35,6 +36,10 @@ export const useMainStore = defineStore("piniaStore", {
     addCount(num) {
       // console.log("pinia方法addCount");
       this.shoesCount += num;
+    },
+    changeLoginInfo(res) {
+      console.log("pinia存储登录信息", res);
+      this.shoesCount = res;
     },
     changeRightChartShow(state) {
       // console.log("pinia改变状态：", state);

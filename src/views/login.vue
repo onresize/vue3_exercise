@@ -6,6 +6,7 @@
       <div>
         <div class="show" @click="toPage('admin')">admin用户</div>
         <div class="show" @click="toPage('ordinary')">普通用户</div>
+        <div class="show" @click="AuthLogin('gitee')">gitee登录</div>
       </div>
     </div>
     <div class="left-box">
@@ -17,15 +18,29 @@
   </div>
 </template>
 
+<script>
+import publicFunc from "@/mixins/publicFunc";
+
+export default {
+  mixins: [publicFunc],
+};
+</script>
+
 <script setup>
-import { onMounted } from "vue";
+import { onMounted, getCurrentInstance } from "vue";
 import { useRouter } from "vue-router";
+import { storeToRefs } from "pinia";
+import { useMainStore } from "@/store/pinia.ts";
 import { loginBroadcast } from "@/utils/broadcast";
 import { getTimeState } from "@/utils/tools.js";
+import { giteeLoginApi, giteeAuthApi } from "@/api/authLogin.js";
 import payCom from "@/myCom/payCom/index.vue";
 import loginAvatarCom from "@/myCom/loginAvatarCom/index.vue";
 
 const Router = useRouter();
+const store = useMainStore();
+const { loginInfo } = storeToRefs(store);
+const { appContext, proxy } = getCurrentInstance();
 
 const toPage = (name) => {
   if (name == "admin") {
@@ -45,6 +60,41 @@ const toPage = (name) => {
   });
   loginBroadcast.postMessage("true");
 };
+
+// gitee第三方登录授权
+const AuthLogin = async (str) => {
+  proxy.OpenWindow(
+    "https://gitee.com/oauth/authorize?client_id=9b6db952f18a91f9cb551f1da7c4d51c43e8a37c7f0172ba1c82f80bd51ed7c0&redirect_uri=http://localhost:3077/welcome&response_type=code",
+    800,
+    600
+  );
+};
+
+window.addEventListener("message", async (e) => {
+  console.log("父窗口监听消息：", e.data.code);
+  let actions = new Map([["gitee", giteeLoginApi]]);
+  let ApiFunc = actions.get("gitee");
+  const [_, data] = await ApiFunc({
+    code: e.data?.code,
+  });
+
+  const [err, res] = await giteeAuthApi({
+    access_token: data?.access_token,
+  });
+  // console.log('第三方登录:', res)
+  if (res?.id) {
+    store.changeLoginInfo(res);
+    window.localStorage.setItem("user", "Admin");
+    Router.push({ path: "/welcome" });
+    ElNotification({
+      title: getTimeState(),
+      message: "欢迎登录 vue3_exercise",
+      type: "success",
+      duration: 3000,
+    });
+    loginBroadcast.postMessage("true");
+  }
+});
 
 onMounted(() => {
   var maxParticles = 20000,
@@ -221,8 +271,8 @@ onMounted(() => {
   position: relative;
 
   .mask {
-    width: 500px;
-    height: 300px;
+    width: 600px;
+    height: 330px;
     box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.12);
     border-radius: 20px;
     display: flex;
