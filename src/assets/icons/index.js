@@ -12,6 +12,8 @@ const getStr = (str) => {
   return str.substring(r1, r2);
 };
 
+const iconWhiteList = ["gitee", "qq", "weibo"];
+
 let modules = Object.keys(files),
   iconList = [];
 
@@ -19,6 +21,8 @@ modules.forEach((v) => {
   iconList.push(getStr(v));
 });
 
-// console.log('本地图片svg：', iconList)
+iconList = iconList.filter((v) => !iconWhiteList.includes(v));
+
+// console.log("本地图片svg：", iconList);
 
 PiniaStore.changeSvgList(iconList);
