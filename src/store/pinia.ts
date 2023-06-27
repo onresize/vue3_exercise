@@ -2,6 +2,7 @@
 import { defineStore } from "pinia";
 import router from "@/router";
 import { AdminRoutes, OriginRoutes } from "@/router/AuthRoutes";
+import { setStorage, getStorage } from "@/utils/funcTools";
 
 export const useMainStore = defineStore("piniaStore", {
   // 声明store
@@ -39,6 +40,7 @@ export const useMainStore = defineStore("piniaStore", {
     },
     changeLoginInfo(res) {
       console.log("pinia存储登录信息", res);
+      setStorage("loginInfo", res);
       this.loginInfo = res;
     },
     changeRightChartShow(state) {

@@ -136,10 +136,14 @@ const route = useRoute();
 const Router = useRouter();
 const PiniaStore = useMainStore();
 const scrollbarRef = ref(null);
-let { AuthRoutes, loginInfo } = storeToRefs(PiniaStore); // 不丢失响应式
+let { AuthRoutes } = storeToRefs(PiniaStore); // 不丢失响应式
 // const key = computed(() =>
 //   route.name ? String(route.name) + new Date() : String(route.path) + new Date()
 // );
+
+let loginInfo = getStorage("loginInfo");
+console.log("本地storage取登录信息：", loginInfo);
+
 const { proxy } = getCurrentInstance();
 let visitedViews = reactive({
   arr: [{ path: "/welcome", title: "欢迎页" }],
@@ -192,22 +196,22 @@ const state = reactive({
 
 const loopAdd0 = () => {
   state.domList[0].num++;
-  if (state.domList[0].num >= loginInfo.value?.stared) return;
+  if (state.domList[0].num >= loginInfo?.stared) return;
   window.requestAnimationFrame(loopAdd0);
 };
 const loopAdd1 = () => {
   state.domList[1].num++;
-  if (state.domList[1].num >= loginInfo.value?.watched) return;
+  if (state.domList[1].num >= loginInfo?.watched) return;
   window.requestAnimationFrame(loopAdd1);
 };
 const loopAdd2 = () => {
   state.domList[2].num++;
-  if (state.domList[2].num >= loginInfo.value?.followers) return;
+  if (state.domList[2].num >= loginInfo?.followers) return;
   window.requestAnimationFrame(loopAdd2);
 };
 const loopAdd3 = () => {
   state.domList[3].num++;
-  if (state.domList[3].num >= loginInfo.value?.following) return;
+  if (state.domList[3].num >= loginInfo?.following) return;
   window.requestAnimationFrame(loopAdd3);
 };
 

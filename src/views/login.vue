@@ -119,6 +119,7 @@ window.addEventListener("message", async (e) => {
   !state.isCall && AuthFunc(e);
 });
 
+// 下雨canvas
 onMounted(() => {
   var maxParticles = 20000,
     particleSize = 3,

@@ -3,12 +3,10 @@
     <div class="card_one">
       <span class="sp">web面试markdown总结</span>
     </div>
-    <!-- <div class="flex_box">
-    </div> -->
     <div class="card_left">
-      <el-tree v-if="state.showTree" :data="state.treeList" :props="defaultProps" @node-click="handleNodeClick">
+      <el-tree v-if="state.showTree" :data="state.treeList" :props="defaultProps">
         <template #default="{ node }">
-          <a target="_self" :href="`#${node?.data?.id}`">
+          <a target="_self" :href="`#${node?.data?.id}`" @click="handleNodeClick(node)">
             <span class="break_span" :style="{ color: state.pId == `${node?.data?.id}` ? '#ffcc99' : '#000000' }"> {{ node.label }}</span>
           </a>
         </template>
@@ -56,9 +54,9 @@ watch(
   }
 );
 
-const handleNodeClick = ({ id }) => {
-  state.pId = id;
-  console.log("高亮id:", id);
+const handleNodeClick = (node) => {
+  state.pId = node.data.id;
+  console.log("高亮id:", state.pId);
 };
 </script>
 
@@ -108,11 +106,11 @@ const handleNodeClick = ({ id }) => {
   border: 1px solid #e4e7ed;
   overflow: auto;
   height: calc(100% - 98px);
-  width: fit-content;
+  width: 600px;
   border-radius: 10px;
   padding: 10px 10px 10px 0;
   position: sticky;
-  top: 80px;
+  top: 85px;
   z-index: 3;
 
   &::-webkit-scrollbar {
@@ -151,15 +149,16 @@ const handleNodeClick = ({ id }) => {
   overflow: hidden;
   display: flex;
   justify-content: flex-end;
-  width: calc(100vw - 340px);
+  width: 100%;
+  box-sizing: border-box;
   position: absolute;
   z-index: 1;
   top: 80px;
   right: 0px;
 
   :deep(.markdown-body) {
-    width: 100%;
-    max-width: 1147px !important;
+    width: calc(100% - 640px);
+    max-width: 2147px !important;
     min-width: 267px !important;
     box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.12);
     border: 1px solid #e4e7ed;
