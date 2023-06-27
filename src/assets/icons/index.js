@@ -12,7 +12,7 @@ const getStr = (str) => {
   return str.substring(r1, r2);
 };
 
-const iconWhiteList = ["gitee", "qq", "weibo"];
+const iconWhiteList = ["gitee", "qq", "weibo", "coding"];
 
 let modules = Object.keys(files),
   iconList = [];

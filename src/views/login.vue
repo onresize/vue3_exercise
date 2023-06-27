@@ -17,6 +17,7 @@
       <div class="kj_dl">
         <svg-icon name="gitee" class="ico1" @click="AuthLogin('gitee')" />
         <!-- <svg-icon name="qq" class="ico2" /> -->
+        <svg-icon name="coding" class="ico2" />
         <svg-icon name="weibo" class="ico2" />
       </div>
     </div>

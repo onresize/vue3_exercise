@@ -70,6 +70,8 @@ const handleNodeClick = (node) => {
   scroll-behavior: smooth;
   position: relative;
   inset: 0;
+  background: no-repeat 50% url(https://assets.codehub.cn/micro-frontend/layout/849cb4458294058234086af5bb1de6f3.png);
+  background-size: cover;
 
   &::-webkit-scrollbar {
     width: 8px;
@@ -111,7 +113,7 @@ const handleNodeClick = (node) => {
   padding: 10px 10px 10px 0;
   position: sticky;
   top: 85px;
-  z-index: 3;
+  z-index: 60;
 
   &::-webkit-scrollbar {
     display: block;
