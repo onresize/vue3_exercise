@@ -3,10 +3,21 @@
     <canvas id="canvasID" width="100%" height="100%"> </canvas>
     <div class="mask">
       <loginAvatarCom></loginAvatarCom>
+      <img class="login_avatar" src="@/assets/img/rotate.png" alt="" />
       <div>
         <div class="show" @click="toPage('admin')">admin用户</div>
         <div class="show" @click="toPage('ordinary')">普通用户</div>
-        <div class="show" @click="AuthLogin('gitee')">gitee登录</div>
+      </div>
+      <div class="fgx">
+        <div class="xian"></div>
+        <div class="txt">快捷登录</div>
+        <div class="xian"></div>
+      </div>
+      <!-- 快捷登录 -->
+      <div class="kj_dl">
+        <svg-icon name="gitee" class="ico1" @click="AuthLogin('gitee')" />
+        <svg-icon name="qq" class="ico2" />
+        <svg-icon name="weibo" class="ico2" />
       </div>
     </div>
     <div class="left-box">
@@ -262,6 +273,25 @@ onMounted(() => {
 </script>
 
 <style scoped lang="less">
+// 定义外部光环旋转动画
+@keyframes externalHalo {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(90deg);
+  }
+
+  50% {
+    transform: rotate(180deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .login_bg {
   width: 100%;
   height: 100%;
@@ -272,9 +302,10 @@ onMounted(() => {
 
   .mask {
     width: 600px;
-    height: 330px;
+    height: 410px;
     box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.12);
     border-radius: 20px;
+    // border: 1px solid red;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -284,6 +315,71 @@ onMounted(() => {
     z-index: 2;
     margin: auto;
     backdrop-filter: blur(10px);
+
+    .login_avatar {
+      width: 200px;
+      position: absolute;
+      z-index: -1;
+      left: calc(50% - 100px);
+      top: 8px;
+      box-sizing: border-box;
+      background: url("@/assets/img/rotate.png") no-repeat center;
+      background-size: 100% 100%;
+      animation: externalHalo 3s linear infinite;
+    }
+
+    .fgx {
+      width: 100%;
+      height: 24px;
+      line-height: 24px;
+      margin: 15px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .xian {
+        box-sizing: border-box;
+        margin: 0;
+        min-width: 0;
+        border-top: 1px solid;
+        border-color: #999999;
+        width: 124px;
+      }
+
+      .txt {
+        margin: 0 16px;
+        box-sizing: border-box;
+        min-width: 0;
+        color: #999999;
+        font-size: 13px;
+        overflow: hidden;
+        line-height: 17px;
+        white-space: nowrap;
+      }
+    }
+
+    .kj_dl {
+      width: 100%;
+      height: 70px;
+      line-height: 70px;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 20px;
+
+      .ico1 {
+        font-size: 32px;
+        margin: 0 20px;
+        cursor: pointer;
+      }
+
+      .ico2 {
+        font-size: 37px;
+        margin: 0 20px;
+        cursor: not-allowed;
+      }
+    }
 
     .show {
       opacity: 0.7;

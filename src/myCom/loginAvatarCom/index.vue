@@ -41,13 +41,15 @@ const toggleClick = () => {
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="less">
 .npm_logo {
   width: 102px;
   height: 42px;
 }
 
 .bizi_img {
+  user-select: none;
+  cursor: grab;
   width: 66px;
   height: 45px;
   position: absolute;
@@ -57,6 +59,8 @@ const toggleClick = () => {
 }
 
 .body_img {
+  user-select: none;
+  cursor: grab;
   width: 200px;
   height: 200px;
   position: absolute;
