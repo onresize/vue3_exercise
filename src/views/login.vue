@@ -385,12 +385,24 @@ onMounted(() => {
         font-size: 32px;
         margin: 0 20px;
         cursor: pointer;
+        border-radius: 50%;
+        padding: 10px;
+
+        &:hover {
+          background: hsla(210, 7%, 53%, 0.1);
+        }
       }
 
       .ico2 {
-        font-size: 37px;
+        font-size: 35px;
         margin: 0 20px;
         cursor: not-allowed;
+        border-radius: 50%;
+        padding: 10px;
+
+        // &:hover {
+        //   background: hsla(210, 7%, 53%, .1);
+        // }
       }
     }
 
