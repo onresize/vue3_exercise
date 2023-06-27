@@ -17,7 +17,7 @@
       <div class="kj_dl">
         <svg-icon name="gitee" class="ico1" @click="AuthLogin('gitee')" />
         <!-- <svg-icon name="qq" class="ico2" /> -->
-        <svg-icon name="coding" class="ico2" />
+        <svg-icon name="coding" class="ico1" @click="AuthLogin('coding')" />
         <svg-icon name="weibo" class="ico2" />
       </div>
     </div>
@@ -80,11 +80,24 @@ const toPage = (name) => {
 
 // gitee第三方登录授权
 const AuthLogin = async (str) => {
-  proxy.OpenWindow(
-    "https://gitee.com/oauth/authorize?client_id=9b6db952f18a91f9cb551f1da7c4d51c43e8a37c7f0172ba1c82f80bd51ed7c0&redirect_uri=http://localhost:3077/welcome&response_type=code",
-    800,
-    600
-  );
+  switch (str) {
+    case "gitee":
+      proxy.OpenWindow(
+        "https://gitee.com/oauth/authorize?client_id=9b6db952f18a91f9cb551f1da7c4d51c43e8a37c7f0172ba1c82f80bd51ed7c0&redirect_uri=http://127.0.0.1:3077/welcome&response_type=code",
+        800,
+        600
+      );
+      break;
+    case "coding":
+      proxy.OpenWindow(
+        "https://jembrace.coding.net/api/oauth/authorize?client_id=3545ff13350e1d650b9d40bde445c211&redirect_uri=http://127.0.0.1:3077/welcome&response_type=code&scope=user",
+        800,
+        600
+      );
+      break;
+    default:
+      break;
+  }
 };
 
 const AuthFunc = async (e) => {

@@ -33,6 +33,7 @@ export default defineConfig(({ mode }) => {
     base: "/",
     publicDir: "public",
     server: {
+      host: "127.0.0.1",
       port: 3077,
       hmr: {
         overlay: true, // 服务器错误显示在页面上

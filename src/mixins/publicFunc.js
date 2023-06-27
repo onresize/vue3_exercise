@@ -218,7 +218,7 @@ export default {
       );
 
       let tim = setInterval(() => {
-        console.log("通过定时器进行检测");
+        console.log("通过定时器进行检测", MyWin.location?.search);
         if (MyWin.location?.search?.includes("code")) {
           clearTimeout(tim);
           let codeStr = MyWin.location?.search;
@@ -228,7 +228,7 @@ export default {
           };
           console.log("同意授权：", msg);
           MyWin.close(); // 关闭open的窗口
-          window.postMessage(msg, "http://localhost:3077/");
+          window.postMessage(msg, "http://127.0.0.1:3077/");
         }
       }, 500);
     },
