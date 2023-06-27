@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, onUnmounted } from "vue";
+import { ref, reactive, nextTick, onMounted, onUnmounted } from "vue";
 import _ from "lodash";
 import { dependencies, devDependencies } from "../../package.json";
 // import { getWallpaper } from "@/api/welcome.js";
@@ -50,7 +50,7 @@ Wallpaper();
 
 // 防抖监听按键
 const ListenK = () => {
-  document.onkeydown = _.debounce(({ key }) => {
+  window.onkeydown = _.debounce(({ key }) => {
     console.log("key:", key);
     if (key == "k") {
       state.isPlayVideo = !state.isPlayVideo;
@@ -95,7 +95,7 @@ objArr.forEach((item) => {
 });
 // console.log(objArr);
 
-onMounted(() => {
+onMounted(async () => {
   ListenK();
   setTimeout(() => {
     isShow.value = false;
@@ -103,7 +103,7 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-  document.onkeydown = null;
+  window.onkeydown = null;
 });
 </script>
 
