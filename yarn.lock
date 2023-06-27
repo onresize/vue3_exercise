@@ -6324,6 +6324,11 @@ vue-content-loader@^2.0.1:
   resolved "https://registry.npmmirror.com/vue-content-loader/-/vue-content-loader-2.0.1.tgz"
   integrity sha512-pkof4+q2xmzNEdhqelxtJejeP/vQUJtLle4/v2ueG+HURqM9Q/GIGC8GJ2bVVWeLfTDET51jqimwQdmxJTlu0g==
 
+vue-dark-switch@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.npmmirror.com/vue-dark-switch/-/vue-dark-switch-1.0.1.tgz#a76d7ef87e4a31adc8398b04839a40be854de722"
+  integrity sha512-pgH9joytNjP6jYZ/Ml+Gqrbn9li/XWdyvDRfJnjQXz3vV1dW471ka+I7AvX3BwPA+3/dAZL7d++i7hco3/fFlw==
+
 vue-demi@*, vue-demi@>=0.14.0, vue-demi@>=0.14.5:
   version "0.14.5"
   resolved "https://registry.npmmirror.com/vue-demi/-/vue-demi-0.14.5.tgz"

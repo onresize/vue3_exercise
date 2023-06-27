@@ -16,7 +16,7 @@
       <!-- 快捷登录 -->
       <div class="kj_dl">
         <svg-icon name="gitee" class="ico1" @click="AuthLogin('gitee')" />
-        <svg-icon name="qq" class="ico2" />
+        <!-- <svg-icon name="qq" class="ico2" /> -->
         <svg-icon name="weibo" class="ico2" />
       </div>
     </div>
@@ -38,7 +38,7 @@ export default {
 </script>
 
 <script setup>
-import { onMounted, getCurrentInstance } from "vue";
+import { reactive, onMounted, getCurrentInstance } from "vue";
 import { useRouter } from "vue-router";
 import { storeToRefs } from "pinia";
 import { useMainStore } from "@/store/pinia.ts";
@@ -52,6 +52,11 @@ const Router = useRouter();
 const store = useMainStore();
 const { loginInfo } = storeToRefs(store);
 const { appContext, proxy } = getCurrentInstance();
+
+const state = reactive({
+  isCall: false,
+  ApiFunc: "",
+});
 
 const toPage = (name) => {
   if (name == "admin") {
@@ -81,10 +86,10 @@ const AuthLogin = async (str) => {
   );
 };
 
-window.addEventListener("message", async (e) => {
-  console.log("父窗口监听消息：", e.data.code);
-  let actions = new Map([["gitee", giteeLoginApi]]);
-  let ApiFunc = actions.get("gitee");
+const AuthFunc = async (e) => {
+  // 只执行一次
+  state.isCall = true;
+  let ApiFunc = state.ApiFunc;
   const [_, data] = await ApiFunc({
     code: e.data?.code,
   });
@@ -105,6 +110,13 @@ window.addEventListener("message", async (e) => {
     });
     loginBroadcast.postMessage("true");
   }
+};
+
+window.addEventListener("message", async (e) => {
+  console.log("父窗口监听消息：", e.data.code);
+  let actions = new Map([["gitee", giteeLoginApi]]);
+  state.ApiFunc = actions.get("gitee");
+  !state.isCall && AuthFunc(e);
 });
 
 onMounted(() => {

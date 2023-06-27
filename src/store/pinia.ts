@@ -39,7 +39,7 @@ export const useMainStore = defineStore("piniaStore", {
     },
     changeLoginInfo(res) {
       console.log("pinia存储登录信息", res);
-      this.shoesCount = res;
+      this.loginInfo = res;
     },
     changeRightChartShow(state) {
       // console.log("pinia改变状态：", state);

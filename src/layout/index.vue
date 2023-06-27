@@ -48,7 +48,16 @@
                 </router-link>
               </el-scrollbar>
             </div>
+            <div class="quit_box">
+              <div class="right_l">
+                <SwitchIcon unmount-persets />
+              </div>
+              <div class="right_r" @click="showDrawer">
+                <img :src="loginInfo?.avatar_url || state.avatarSrc" alt="" />
+              </div>
+            </div>
           </div>
+          <!-- 退出按钮 -->
           <div class="right_quit">
             <el-tooltip effect="dark" content="退出登录" placement="left-start">
               <div @click="quit">
@@ -78,28 +87,60 @@
         </div>
       </el-main>
     </el-container>
+    <!-- 登录信息抽屉 -->
+    <el-drawer v-model="state.drawer" title="" :with-header="false" size="400px">
+      <div class="avatar_box">
+        <img :src="loginInfo?.avatar_url || state.avatarSrc" alt="" />
+      </div>
+      <el-card class="avatar_card" v-show="loginInfo?.avatar_url">
+        <div>
+          <label>用户名：</label><span>{{ loginInfo?.name }}</span>
+        </div>
+        <div>
+          <label>简介：</label><span>{{ loginInfo?.bio }}</span>
+        </div>
+        <div>
+          <label>邮箱：</label><span>{{ loginInfo?.email }}</span>
+        </div>
+        <div class="flex_bottom">
+          <div class="item_box" v-for="(item, idx) in state.domList" :key="idx">
+            <div class="top_txt">{{ item.num }}</div>
+            <div class="name_txt">{{ item.name }}</div>
+          </div>
+        </div>
+      </el-card>
+    </el-drawer>
     <!-- 全局按钮音效 -->
     <audio src="" id="eventAudio" controls hidden></audio>
   </div>
 </template>
 
+<script>
+import publicFunc from "@/mixins/publicFunc";
+
+export default {
+  mixins: [publicFunc],
+};
+</script>
+
 <script setup>
-import { watch, computed, reactive, ref, onMounted } from "vue";
+import { watch, computed, reactive, ref, onMounted, getCurrentInstance } from "vue";
 import { useRoute, useRouter, onBeforeRouteUpdate } from "vue-router";
 import { storeToRefs } from "pinia";
 import { useMainStore } from "@/store/pinia.ts";
 import { setStorage, getStorage } from "@/utils/funcTools";
 import { loginBroadcast } from "@/utils/broadcast";
+import { SwitchIcon } from "vue-dark-switch";
 
 const route = useRoute();
 const Router = useRouter();
 const PiniaStore = useMainStore();
 const scrollbarRef = ref(null);
-let { AuthRoutes } = storeToRefs(PiniaStore); // 不丢失响应式
+let { AuthRoutes, loginInfo } = storeToRefs(PiniaStore); // 不丢失响应式
 // const key = computed(() =>
 //   route.name ? String(route.name) + new Date() : String(route.path) + new Date()
 // );
-
+const { proxy } = getCurrentInstance();
 let visitedViews = reactive({
   arr: [{ path: "/welcome", title: "欢迎页" }],
 });
@@ -137,6 +178,47 @@ let visible = ref(false);
 let left = ref(0);
 let top = ref(0);
 let PathName = ref("");
+
+const state = reactive({
+  drawer: false,
+  avatarSrc: "https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/6/11/172a2c2c076cd9f2~tplv-t2oaga2asx-no-mark:180:180:180:180.awebp",
+  domList: [
+    { name: "Stars", num: "0" },
+    { name: "Watches", num: "0" },
+    { name: "Followers", num: "0" },
+    { name: "Following", num: "0" },
+  ],
+});
+
+const loopAdd0 = () => {
+  state.domList[0].num++;
+  if (state.domList[0].num >= loginInfo.value?.stared) return;
+  window.requestAnimationFrame(loopAdd0);
+};
+const loopAdd1 = () => {
+  state.domList[1].num++;
+  if (state.domList[1].num >= loginInfo.value?.watched) return;
+  window.requestAnimationFrame(loopAdd1);
+};
+const loopAdd2 = () => {
+  state.domList[2].num++;
+  if (state.domList[2].num >= loginInfo.value?.followers) return;
+  window.requestAnimationFrame(loopAdd2);
+};
+const loopAdd3 = () => {
+  state.domList[3].num++;
+  if (state.domList[3].num >= loginInfo.value?.following) return;
+  window.requestAnimationFrame(loopAdd3);
+};
+
+const showDrawer = async () => {
+  state.drawer = true;
+  await proxy.sleepFunc(500);
+  window.requestAnimationFrame(loopAdd0);
+  window.requestAnimationFrame(loopAdd1);
+  window.requestAnimationFrame(loopAdd2);
+  window.requestAnimationFrame(loopAdd3);
+};
 
 const scrollBy = (item) => {
   console.log("scrollBy---------------");
@@ -183,9 +265,28 @@ watch(visible, (val) => {
   }
 });
 
+watch(
+  () => state.drawer,
+  (val) => {
+    console.log("监听抽屉开关：", val);
+    if (!val) {
+      state.domList = [
+        { name: "Stars", num: "0" },
+        { name: "Watches", num: "0" },
+        { name: "Followers", num: "0" },
+        { name: "Following", num: "0" },
+      ];
+    }
+  },
+  {
+    immediate: true,
+    deep: true,
+  }
+);
+
 const quit = () => {
-  Router.push("/login");
   loginBroadcast.postMessage("false");
+  Router.push("/login");
   window.localStorage.clear();
   PiniaStore.changeAuthRoutes([]);
   PiniaStore.changeActiveBread([{ path: "/welcome", title: "欢迎页" }]);
@@ -240,6 +341,67 @@ onMounted(() => {
 <style scoped lang="less">
 @import "@/styles/mixin.less";
 
+.avatar_card {
+  border-radius: 20px;
+  height: 250px;
+  position: relative;
+  top: 100px;
+  padding-top: 75px;
+
+  .flex_bottom {
+    width: 100%;
+    height: 80px;
+    box-sizing: border-box;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+
+    .item_box {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+
+      .top_txt {
+        font-size: 18px;
+        font-weight: bold;
+        color: #005980;
+      }
+
+      .name_txt {
+        padding-top: 2px;
+        color: #40485b;
+        font-size: 12px;
+        display: block;
+      }
+    }
+  }
+}
+
+.avatar_box {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 10;
+  left: calc(50% - 90px);
+  top: 24px;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.12);
+  border: 1px solid #e4e7ed;
+  background-color: #ffffff;
+  overflow: hidden;
+  // cursor: zoom-in;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+  }
+}
+
 .fixed_div {
   .clearfix();
   position: fixed;
@@ -255,13 +417,13 @@ onMounted(() => {
   box-sizing: border-box;
 
   .tags-view-wrapper {
-    width: 100%;
+    // border: 2px solid red;
+    width: calc(100% - 90px);
     height: 100%;
     white-space: nowrap;
 
     .tags-view-item {
       width: fit-content;
-      // position: relative;
       text-decoration: transparent;
       cursor: pointer;
       height: 24px;
@@ -317,6 +479,35 @@ onMounted(() => {
           margin-right: 2px;
         }
       }
+    }
+  }
+
+  .quit_box {
+    position: absolute;
+    right: 3px;
+    top: 3px;
+    box-sizing: border-box;
+    width: 80px;
+    height: 30px;
+    // border: 2px solid red;
+    display: flex;
+    justify-content: space-around;
+
+    .right_l {
+      display: flex;
+      align-items: center;
+    }
+
+    .right_r {
+      user-select: none;
+      cursor: pointer;
+    }
+
+    img {
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      object-fit: fill;
     }
   }
 }
