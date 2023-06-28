@@ -10,6 +10,10 @@ import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 import { createHtmlPlugin } from "vite-plugin-html";
 import VueSetupExtend from "vite-plugin-vue-setup-extend";
 import pkg from "./package.json";
+
+// devtools插件
+import VueDevTools from "vite-plugin-vue-devtools";
+
 //安装jsx插件 npm install @vitejs/plugin-vue-jsx -D
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import VueI18n from "@intlify/vite-plugin-vue-i18n";
@@ -127,6 +131,7 @@ export default defineConfig(({ mode }) => {
       vue({
         include: [/\.vue$/, /\.md$/],
       }),
+      VueDevTools(),
       Markdown({
         headEnabled: true,
         markdownItUses: [prism],

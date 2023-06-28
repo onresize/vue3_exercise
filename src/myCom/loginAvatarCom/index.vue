@@ -8,6 +8,10 @@ const state = reactive({
 const toggleClick = () => {
   state.showMask = !state.showMask;
 };
+
+defineExpose({
+  toggleClick,
+});
 </script>
 
 <template>
@@ -19,7 +23,7 @@ const toggleClick = () => {
       <div class="_6e1e0509"></div>
       <div class="_2dd7f49e"></div>
     </button>
-    <div class="_0c4ed431">
+    <div class="ani_box">
       <div class="bac87ec6">
         <button class="_83938fda _79c95847">
           <div class="_33c43af5">
@@ -112,25 +116,26 @@ const toggleClick = () => {
   background-color: #999;
 }
 
-._0c4ed431 {
-  animation-name: _26ff033a;
+.ani_box {
+  height: 100%;
+  animation-name: left_to_right;
   animation-duration: 3s;
   animation-iteration-count: infinite;
   transform: rotate(-5deg);
   transition-timing-function: ease;
-  transform-origin: bottom center;
+  transform-origin: center bottom;
   will-change: transform;
 }
 
 .bac87ec6 {
-  animation-name: _80e05d29;
+  animation-name: bottom_to_top;
   animation-duration: 1.5s;
   animation-iteration-count: infinite;
   transition-timing-function: ease;
   will-change: transform;
 }
 
-@keyframes _26ff033a {
+@keyframes left_to_right {
   0% {
     transform: rotate(-4deg);
   }
@@ -144,13 +149,13 @@ const toggleClick = () => {
   }
 }
 
-@keyframes _80e05d29 {
+@keyframes bottom_to_top {
   0% {
     transform: translateY(0);
   }
 
   50% {
-    transform: translateY(-4px);
+    transform: translateY(-1px);
   }
 
   100% {
@@ -163,13 +168,13 @@ const toggleClick = () => {
     transition: none;
   }
 
-  ._0c4ed431,
+  .ani_box,
   .bac87ec6 {
     animation-name: a798d89c;
     animation-name: _3bd2fb14;
   }
 
-  ._0c4ed431 {
+  .ani_box {
     transform: rotate(0deg);
   }
 }

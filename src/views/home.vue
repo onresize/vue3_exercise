@@ -10,12 +10,13 @@
 </template>
 
 <script setup>
-import { ref, reactive, nextTick, onMounted, onUnmounted } from "vue";
+import { ref, reactive, nextTick, onMounted, onUnmounted, getCurrentInstance } from "vue";
 import _ from "lodash";
 import { dependencies, devDependencies } from "../../package.json";
 // import { getWallpaper } from "@/api/welcome.js";
 import * as objApi from "@/api/welcome.js";
 
+const { proxy } = getCurrentInstance();
 const { getWallpaper } = objApi.default;
 let dataImg = ref("");
 const videoBoxRef = ref(null);

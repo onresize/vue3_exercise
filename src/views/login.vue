@@ -2,11 +2,11 @@
   <div class="login_bg">
     <canvas id="canvasID" width="100%" height="100%"> </canvas>
     <div class="mask">
-      <loginAvatarCom></loginAvatarCom>
+      <loginAvatarCom ref="avatarRef"></loginAvatarCom>
       <img class="login_avatar" src="@/assets/img/rotate.png" alt="" />
       <div>
-        <div class="show" @click="toPage('admin')">admin用户</div>
-        <div class="show" @click="toPage('ordinary')">普通用户</div>
+        <div class="show" @click="toPage('admin')" @mouseover="$T(mouseClick, 300)" @mouseout="$T(mouseClick, 300)">admin用户</div>
+        <div class="show" @click="toPage('ordinary')" @mouseover="$T(mouseClick, 300)" @mouseout="$T(mouseClick, 300)">普通用户</div>
       </div>
       <div class="fgx">
         <div class="xian"></div>
@@ -17,7 +17,7 @@
       <div class="kj_dl">
         <svg-icon name="gitee" class="ico1" @click="AuthLogin('gitee')" />
         <!-- <svg-icon name="qq" class="ico2" /> -->
-        <svg-icon name="coding" class="ico1" @click="AuthLogin('coding')" />
+        <svg-icon name="coding" class="ico2" />
         <svg-icon name="weibo" class="ico2" />
       </div>
     </div>
@@ -39,7 +39,7 @@ export default {
 </script>
 
 <script setup>
-import { reactive, onMounted, getCurrentInstance } from "vue";
+import { ref, reactive, onMounted, getCurrentInstance } from "vue";
 import { useRouter } from "vue-router";
 import { storeToRefs } from "pinia";
 import { useMainStore } from "@/store/pinia.ts";
@@ -54,10 +54,16 @@ const store = useMainStore();
 const { loginInfo } = storeToRefs(store);
 const { appContext, proxy } = getCurrentInstance();
 
+const avatarRef = ref(null);
+
 const state = reactive({
   isCall: false,
   ApiFunc: "",
 });
+
+const mouseClick = () => {
+  avatarRef.value.toggleClick();
+};
 
 const toPage = (name) => {
   if (name == "admin") {
@@ -84,17 +90,17 @@ const AuthLogin = async (str) => {
     case "gitee":
       proxy.OpenWindow(
         "https://gitee.com/oauth/authorize?client_id=9b6db952f18a91f9cb551f1da7c4d51c43e8a37c7f0172ba1c82f80bd51ed7c0&redirect_uri=http://127.0.0.1:3077/welcome&response_type=code",
-        800,
-        600
+        1200,
+        750
       );
       break;
-    case "coding":
-      proxy.OpenWindow(
-        "https://jembrace.coding.net/api/oauth/authorize?client_id=3545ff13350e1d650b9d40bde445c211&redirect_uri=http://127.0.0.1:3077/welcome&response_type=code&scope=user",
-        800,
-        600
-      );
-      break;
+    // case "coding":
+    //   proxy.OpenWindow(
+    //     "https://jembrace.coding.net/api/oauth/authorize?client_id=3545ff13350e1d650b9d40bde445c211&redirect_uri=http://127.0.0.1:3077/welcome&response_type=code&scope=user",
+    //     1200,
+    //     750
+    //   );
+    //   break;
     default:
       break;
   }
