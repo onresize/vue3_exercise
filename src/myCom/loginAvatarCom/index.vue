@@ -9,8 +9,17 @@ const toggleClick = () => {
   state.showMask = !state.showMask;
 };
 
+const toggleClickTrue = () => {
+  state.showMask = true;
+};
+const toggleClickFalse = () => {
+  state.showMask = false;
+};
+
 defineExpose({
   toggleClick,
+  toggleClickTrue,
+  toggleClickFalse,
 });
 </script>
 

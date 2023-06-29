@@ -5,8 +5,8 @@
       <loginAvatarCom ref="avatarRef"></loginAvatarCom>
       <img class="login_avatar" src="@/assets/img/rotate.png" alt="" />
       <div>
-        <div class="show" @click="toPage('admin')" @mouseover="$T(mouseClick, 300)" @mouseout="$T(mouseClick, 300)">admin用户</div>
-        <div class="show" @click="toPage('ordinary')" @mouseover="$T(mouseClick, 300)" @mouseout="$T(mouseClick, 300)">普通用户</div>
+        <div class="show" @click="toPage('admin')" @mouseover="$T(toggleClickTrue, 300)" @mouseout="$T(toggleClickFalse, 300)">admin用户</div>
+        <div class="show" @click="toPage('ordinary')" @mouseover="$T(toggleClickTrue, 300)" @mouseout="$T(toggleClickFalse, 300)">普通用户</div>
       </div>
       <div class="fgx">
         <div class="xian"></div>
@@ -61,8 +61,11 @@ const state = reactive({
   ApiFunc: "",
 });
 
-const mouseClick = () => {
-  avatarRef.value.toggleClick();
+const toggleClickTrue = () => {
+  avatarRef.value.toggleClickTrue();
+};
+const toggleClickFalse = () => {
+  avatarRef.value.toggleClickFalse();
 };
 
 const toPage = (name) => {

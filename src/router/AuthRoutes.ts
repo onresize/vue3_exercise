@@ -6,6 +6,11 @@ export const AdminRoutes = [
     component: () => import("@/views/home.vue"),
   },
   {
+    path: "/transform",
+    meta: { title: "transform" },
+    component: () => import("@cp/transform/index.vue"),
+  },
+  {
     path: "/web_Interview",
     meta: { title: "web_Interview" },
     component: () => import("@cp/web_Interview/index.vue"),

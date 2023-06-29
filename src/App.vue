@@ -41,8 +41,29 @@ if (storageUser) {
   window.location.pathname = "/login";
 }
 
+// 地址栏动画
+var e = ["🏻", "🏼", "🏽", "🏾", "🏿"];
+function loop() {
+  var s = "",
+    i,
+    m;
+  for (i = 0; i < 10; i++) {
+    m = Math.floor(e.length * ((Math.sin(Date.now() / 100 + i) + 1) / 2));
+    s += "👶" + e[m];
+  }
+  location.hash = s;
+  setTimeout(loop, 50);
+}
+// window.requestAnimationFrame(loop)
+
 onMounted(() => {
   console.log("APP.vue------onMounted---------", PiniaStore);
   beforeRefreshClose();
 });
 </script>
+
+<style>
+:root {
+  --fly-clock-width: 150px !important;
+}
+</style>

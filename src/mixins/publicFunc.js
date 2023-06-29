@@ -195,6 +195,10 @@ export default {
         }, 0);
       });
     },
+    // 处理url获取
+    getImageUrl(name, folder) {
+      return new URL(`@/assets/${folder}/${name}.png`, import.meta.url).href;
+    },
     // 截取字符
     toSubstr(str, startNum = 0, endNum) {
       return str.substring(startNum, endNum);

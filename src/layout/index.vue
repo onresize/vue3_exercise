@@ -50,6 +50,21 @@
             </div>
             <div class="quit_box">
               <div class="right_l">
+                <el-popover
+                  :width="174"
+                  popper-style="box-shadow: rgb(14 18 22 / 35%) 0px 10px 38px -10px, rgb(14 18 22 / 20%) 0px 10px 20px -15px; padding: 10px;border-radius: 50%;"
+                  @before-enter="beforeEnter"
+                  @after-leave="afterLeave"
+                >
+                  <template #reference>
+                    {{ state.nowTime }}
+                  </template>
+                  <template #default>
+                    <clock v-if="state.isShowClock"></clock>
+                  </template>
+                </el-popover>
+              </div>
+              <div class="right_center">
                 <SwitchIcon unmount-persets />
               </div>
               <div class="right_r" @click="showDrawer">
@@ -131,6 +146,7 @@ import { useMainStore } from "@/store/pinia.ts";
 import { setStorage, getStorage } from "@/utils/funcTools";
 import { loginBroadcast } from "@/utils/broadcast";
 import { SwitchIcon } from "vue-dark-switch";
+import clock from "@/myCom/clock/index.vue";
 
 const route = useRoute();
 const Router = useRouter();
@@ -153,6 +169,33 @@ let RouteList = reactive({
   routes: [],
   MapArr: [],
 });
+
+const state = reactive({
+  isShowClock: false,
+  nowTime: "",
+  drawer: false,
+  avatarSrc: "https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/6/11/172a2c2c076cd9f2~tplv-t2oaga2asx-no-mark:180:180:180:180.awebp",
+  domList: [
+    { name: "Stars", num: "0" },
+    { name: "Watches", num: "0" },
+    { name: "Followers", num: "0" },
+    { name: "Following", num: "0" },
+  ],
+});
+
+const beforeEnter = () => {
+  state.isShowClock = true;
+};
+const afterLeave = () => {
+  state.isShowClock = false;
+};
+
+const getNowTime = () => {
+  state.nowTime = new Date().toLocaleTimeString();
+
+  setTimeout(getNowTime, 1000);
+};
+getNowTime();
 
 const randomSvg = () => {
   return PiniaStore.iconList.sort(() => Math.random() - Math.random()).at(0);
@@ -182,17 +225,6 @@ let visible = ref(false);
 let left = ref(0);
 let top = ref(0);
 let PathName = ref("");
-
-const state = reactive({
-  drawer: false,
-  avatarSrc: "https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/6/11/172a2c2c076cd9f2~tplv-t2oaga2asx-no-mark:180:180:180:180.awebp",
-  domList: [
-    { name: "Stars", num: "0" },
-    { name: "Watches", num: "0" },
-    { name: "Followers", num: "0" },
-    { name: "Following", num: "0" },
-  ],
-});
 
 const loopAdd0 = () => {
   state.domList[0].num++;
@@ -422,7 +454,7 @@ onMounted(() => {
 
   .tags-view-wrapper {
     // border: 2px solid red;
-    width: calc(100% - 90px);
+    width: calc(100% - 160px);
     height: 100%;
     white-space: nowrap;
 
@@ -491,15 +523,27 @@ onMounted(() => {
     right: 3px;
     top: 3px;
     box-sizing: border-box;
-    width: 80px;
+    width: 150px;
     height: 30px;
-    // border: 2px solid red;
+    // border: 2px solid green;
     display: flex;
     justify-content: space-around;
 
     .right_l {
+      width: 65px;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      cursor: pointer;
+      font-weight: bold;
+      color: #606266;
+      // border: 2px solid red;
+    }
+
+    .right_center {
       display: flex;
       align-items: center;
+      margin-right: 5px;
     }
 
     .right_r {

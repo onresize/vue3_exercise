@@ -11,7 +11,9 @@
       <el-collapse v-model="activeNames" @change="handleChange">
         <el-collapse-item :title="`当前消息: ${PiniaStore.MessageList.length}条`" name="1">
           <el-card class="p_Card">
-            <el-input class="ipt" v-for="(item, idx) in PiniaStore.MessageList" :key="idx" :value="idx + ': ' + item" placeholder="" disabled></el-input>
+            <div class="bg">
+              <el-input class="ipt" v-for="(item, idx) in PiniaStore.MessageList" :key="idx" :value="idx + ': ' + item" placeholder="" disabled></el-input>
+            </div>
           </el-card>
         </el-collapse-item>
       </el-collapse>
@@ -55,6 +57,7 @@ const sendMessageClick = () => {
 // XXX关闭
 const destroyClick = () => {
   clear(myWebSocket);
+  PiniaStore.changeMessageListNUll([]);
 };
 
 function reconnectWebSocket() {
@@ -135,6 +138,14 @@ onUnmounted(() => {
       width: 6px;
       height: 6px;
       display: block;
+    }
+
+    .bg {
+      width: 100%;
+      height: 100%;
+      min-height: 540px;
+      background-image: linear-gradient(rgb(250, 250, 252) 14px, transparent 0px), linear-gradient(90deg, transparent 14px, rgb(55, 55, 57) 0px);
+      background-size: 16px 16px;
     }
   }
 
