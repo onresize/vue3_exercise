@@ -2635,6 +2635,11 @@ copy-anything@^2.0.1:
   dependencies:
     is-what "^3.14.1"
 
+core-js@^3.6.5:
+  version "3.31.0"
+  resolved "https://registry.npmmirror.com/core-js/-/core-js-3.31.0.tgz#4471dd33e366c79d8c0977ed2d940821719db344"
+  integrity sha512-NIp2TQSGfR6ba5aalZD+ZQ1fSxGhDo/s1w0nx3RYzf2pnJxt7YynxFlFScP6eV7+GZsKO95NSjGxyJsU3DZgeQ==
+
 core-util-is@~1.0.0:
   version "1.0.3"
   resolved "https://registry.npmmirror.com/core-util-is/-/core-util-is-1.0.3.tgz"
@@ -6522,6 +6527,10 @@ type-fest@^0.8.1:
   resolved "https://registry.npmmirror.com/type-fest/-/type-fest-0.8.1.tgz"
   integrity sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==
 
+typed.js@^2.0.12:
+  version "2.0.16"
+  resolved "git+https://github.com/mattboldt/typed.js.git#cd02e533c772e35ad60ee48656b33e610eadaca7"
+
 typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.npmmirror.com/typedarray/-/typedarray-0.0.6.tgz"
@@ -7075,7 +7084,16 @@ vue3-intro-step@^1.0.5:
   resolved "https://registry.npmmirror.com/vue3-intro-step/-/vue3-intro-step-1.0.5.tgz"
   integrity sha512-MV+Y2VZCRVWGFgmwxaAFq0opANe7Yj/xEyL5Zox2z+8JNbU1Y6vkbGivT+yKbqc4o+Q/ui0z45zizI7GCouDmw==
 
-vue@^3.2.37, vue@^3.2.6:
+vue3typed@^0.1.5:
+  version "0.1.5"
+  resolved "https://registry.npmmirror.com/vue3typed/-/vue3typed-0.1.5.tgz#9e55c0a2823f76531fd1e9398bc2838066792735"
+  integrity sha512-hJ20Nvuze8uYlAwJj9Q3vCYxQ03ePvyvLIl01XdhIQzyuP0eqPd9n7/9w872LE1skRVC/n4l/YTAnSmymImtpw==
+  dependencies:
+    core-js "^3.6.5"
+    typed.js "^2.0.12"
+    vue "^3.1.4"
+
+vue@^3.1.4, vue@^3.2.37, vue@^3.2.6:
   version "3.3.4"
   resolved "https://registry.npmmirror.com/vue/-/vue-3.3.4.tgz"
   integrity sha512-VTyEYn3yvIeY1Py0WaYGZsXnz3y5UnGi62GjVEqvEGPl6nxbOrCXbVOTQWBEJUqAyTUk2uJ5JLVnYJ6ZzGbrSw==

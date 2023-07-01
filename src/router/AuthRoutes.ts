@@ -11,6 +11,11 @@ export const AdminRoutes = [
     component: () => import("@cp/transform/index.vue"),
   },
   {
+    path: "/typed",
+    meta: { title: "typed" },
+    component: () => import("@cp/打字机效果typed/index.vue"),
+  },
+  {
     path: "/web_Interview",
     meta: { title: "web_Interview" },
     component: () => import("@cp/web_Interview/index.vue"),

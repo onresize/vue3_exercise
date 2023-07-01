@@ -91,6 +91,7 @@
     "vite-plugin-vue-setup-extend": "^0.4.0",
     "vue-dark-switch": "^1.0.1",
     "vue-tsc": "^0.3.0",
+    "vue3typed": "^0.1.5",
     "yorkie": "^2.0.0"
   },
   "gitHooks": {

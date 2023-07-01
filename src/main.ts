@@ -140,6 +140,10 @@ console.log("版本号：", version);
 //   }
 // }
 
+// 打字机效果
+import vueTyped from "vue3typed";
+app.use(vueTyped);
+
 // 引入全局图片预览组件
 import MyImageViewer from "@/myCom/MyImageViewer/index.js";
 app.use(MyImageViewer);

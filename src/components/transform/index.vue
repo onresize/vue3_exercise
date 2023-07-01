@@ -16,10 +16,18 @@ import maskImage1 from "@/assets/swipe/mask.png";
 
 const state = reactive({
   showBlackBg: true,
+  isChangeTxt: false,
 });
 
 const changeBg = () => {
   state.showBlackBg = !state.showBlackBg;
+  if (!state.isChangeTxt) {
+    setTimeout(() => {
+      state.isChangeTxt = true;
+    }, 600);
+  } else {
+    state.isChangeTxt = false;
+  }
 };
 </script>
 
@@ -27,7 +35,11 @@ const changeBg = () => {
   <div class="flex_box">
     <div class="box">
       <div class="circle" :style="{ transform: state.showBlackBg ? 'scale(18)' : 'scale(0)' }"></div>
-      <el-button class="btn" @click="changeBg">{{ !state.showBlackBg ? "dark" : "light" }}</el-button>
+      <el-button :class="['btn', state.showBlackBg ? 'darkColor' : 'lightColor']" @click="changeBg">
+        <svg-icon v-if="state.isChangeTxt" name="moon" style="margin-right: 5px" />
+        <svg-icon v-else name="sun" style="margin-right: 5px" />
+        {{ state.isChangeTxt ? "dark" : "light" }}
+      </el-button>
     </div>
     <MaskSwipe
       :duration="3"
@@ -52,7 +64,7 @@ const changeBg = () => {
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="less">
 .flex_box {
   display: flex;
 
@@ -77,6 +89,14 @@ const changeBg = () => {
     }
   }
 
+  .darkColor {
+    color: #000 !important;
+  }
+
+  .lightColor {
+    color: #fff !important;
+  }
+
   .btn {
     width: 70px;
     position: absolute;
@@ -85,11 +105,13 @@ const changeBg = () => {
     margin: auto 70px;
     color: #606266;
     border-color: #606266;
+    background-color: transparent;
     transition: all 0.4s linear;
     /* background-image: linear-gradient(-45deg, #bd34fe 50%, #47caff 50%); */
 
     &:hover {
-      color: #03ac66;
+      color: #03ac66 !important;
+      font-weight: 400;
       border-color: #03ac66;
       filter: drop-shadow(0px 0 62px #00bf72);
     }
