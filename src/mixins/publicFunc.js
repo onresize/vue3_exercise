@@ -1,3 +1,5 @@
+import { nextTick } from "vue";
+
 export default {
   methods: {
     getPie2D(pieData, xData, distance, alpha, pieHeight, opacity = 1) {
@@ -221,7 +223,7 @@ export default {
         "height=" + h + ", width=" + w + ",top=" + top + ",left=" + left + ", toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, status=no"
       );
 
-      let tim = setInterval(() => {
+      let tim = setInterval(async () => {
         console.log("通过定时器进行检测", MyWin.location?.search);
         if (MyWin.location?.search?.includes("code")) {
           clearTimeout(tim);
@@ -231,8 +233,10 @@ export default {
             code,
           };
           console.log("同意授权：", msg);
+          window.localStorage.setItem("giteeMsg", JSON.stringify(msg));
+          await this.sleepFunc(900);
           MyWin.close(); // 关闭open的窗口
-          window.postMessage(msg, "http://127.0.0.1:3077/");
+          // window.postMessage(msg, "http://127.0.0.1:3077/");
         }
       }, 500);
     },

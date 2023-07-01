@@ -3,10 +3,10 @@
     <canvas id="canvasID" width="100%" height="100%"> </canvas>
     <div class="mask">
       <loginAvatarCom ref="avatarRef"></loginAvatarCom>
-      <img class="login_avatar" src="@/assets/img/rotate.png" alt="" />
+      <img v-show="state.isLoading" :class="['login_avatar', state.isLoading ? 'loadingAni' : '']" src="@/assets/img/rotate.png" alt="" />
       <div>
-        <div class="show" @click="toPage('admin')" @mouseover="$T(toggleClickTrue, 300)" @mouseout="$T(toggleClickFalse, 300)">admin用户</div>
-        <div class="show" @click="toPage('ordinary')" @mouseover="$T(toggleClickTrue, 300)" @mouseout="$T(toggleClickFalse, 300)">普通用户</div>
+        <div class="show" @click="toPage('admin')">admin用户</div>
+        <div class="show" @click="toPage('ordinary')">普通用户</div>
       </div>
       <div class="fgx">
         <div class="xian"></div>
@@ -15,7 +15,7 @@
       </div>
       <!-- 快捷登录 -->
       <div class="kj_dl">
-        <svg-icon name="gitee" class="ico1" @click="AuthLogin('gitee')" />
+        <svg-icon name="gitee" class="ico1" @click.once="AuthLogin('gitee')" />
         <!-- <svg-icon name="qq" class="ico2" /> -->
         <svg-icon name="coding" class="ico2" />
         <svg-icon name="weibo" class="ico2" />
@@ -39,8 +39,9 @@ export default {
 </script>
 
 <script setup>
-import { ref, reactive, onMounted, getCurrentInstance } from "vue";
+import { ref, reactive, watch, onMounted, getCurrentInstance } from "vue";
 import { useRouter } from "vue-router";
+import { cloneDeep } from "lodash";
 import { storeToRefs } from "pinia";
 import { useMainStore } from "@/store/pinia.ts";
 import { loginBroadcast } from "@/utils/broadcast";
@@ -57,16 +58,11 @@ const { appContext, proxy } = getCurrentInstance();
 const avatarRef = ref(null);
 
 const state = reactive({
+  isLoading: false,
+  storageKey: "",
   isCall: false,
   ApiFunc: "",
 });
-
-const toggleClickTrue = () => {
-  avatarRef.value.toggleClickTrue();
-};
-const toggleClickFalse = () => {
-  avatarRef.value.toggleClickFalse();
-};
 
 const toPage = (name) => {
   if (name == "admin") {
@@ -109,14 +105,14 @@ const AuthLogin = async (str) => {
   }
 };
 
-const AuthFunc = async (e) => {
+const AuthFunc = async (code) => {
   // 只执行一次
   state.isCall = true;
   let ApiFunc = state.ApiFunc;
   const [_, data] = await ApiFunc({
-    code: e.data?.code,
+    code,
   });
-
+  state.isLoading = true;
   const [err, res] = await giteeAuthApi({
     access_token: data?.access_token,
   });
@@ -124,23 +120,51 @@ const AuthFunc = async (e) => {
   if (res?.id) {
     store.changeLoginInfo(res);
     window.localStorage.setItem("user", "Admin");
-    Router.push({ path: "/welcome" });
+    await Router.push({ path: "/welcome" });
     ElNotification({
       title: getTimeState(),
       message: "欢迎登录 vue3_exercise",
       type: "success",
       duration: 3000,
     });
+    state.isLoading = false;
     loginBroadcast.postMessage("true");
   }
 };
 
-window.addEventListener("message", async (e) => {
-  console.log("父窗口监听消息：", e.data.code);
-  let actions = new Map([["gitee", giteeLoginApi]]);
-  state.ApiFunc = actions.get("gitee");
-  !state.isCall && AuthFunc(e);
-});
+//XXX 优雅监听storage参考：https://blog.csdn.net/lambert00001/article/details/131031870
+// 监听gitee登录的弹窗传递的storage参数
+window.addEventListener(
+  "storage",
+  (e) => {
+    let key = window.localStorage.key(0);
+    if (key == "giteeMsg") {
+      state.storageKey = JSON.parse(window.localStorage.getItem(key));
+    }
+  },
+  false
+);
+
+watch(
+  () => cloneDeep(state.storageKey.code),
+  (newVal, oldVal) => {
+    if (newVal == oldVal) return;
+    console.log("父窗口监听消息：", newVal);
+    let actions = new Map([["gitee", giteeLoginApi]]);
+    state.ApiFunc = actions.get("gitee");
+    !state.isCall && AuthFunc(newVal);
+  },
+  {
+    deep: true,
+  }
+);
+
+// window.addEventListener("message", async (e) => {
+//   console.log("父窗口监听消息：", e.data.code);
+//   let actions = new Map([["gitee", giteeLoginApi]]);
+//   state.ApiFunc = actions.get("gitee");
+//   !state.isCall && AuthFunc(e);
+// });
 
 // 下雨canvas
 onMounted(() => {
@@ -361,6 +385,9 @@ onMounted(() => {
       box-sizing: border-box;
       background: url("@/assets/img/rotate.png") no-repeat center;
       background-size: 100% 100%;
+    }
+
+    .loadingAni {
       animation: externalHalo 3s linear infinite;
     }
 
