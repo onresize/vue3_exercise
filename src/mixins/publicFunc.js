@@ -233,10 +233,10 @@ export default {
             code,
           };
           console.log("同意授权：", msg);
-          window.localStorage.setItem("giteeMsg", JSON.stringify(msg));
-          await this.sleepFunc(900);
+          // window.localStorage.setItem("giteeMsg", JSON.stringify(msg));
+          // await this.sleepFunc(900);
           MyWin.close(); // 关闭open的窗口
-          // window.postMessage(msg, "http://127.0.0.1:3077/");
+          window.postMessage(msg, "http://127.0.0.1:3077/");
         }
       }, 500);
     },

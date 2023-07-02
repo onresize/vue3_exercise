@@ -73,6 +73,11 @@ export default defineConfig(({ mode }) => {
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/gitee/, ""),
         },
+        "/163": {
+          target: "http://www.codeman.ink:3000/",
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/163/, ""),
+        },
       },
     },
     resolve: {

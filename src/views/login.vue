@@ -16,9 +16,10 @@
       <!-- 快捷登录 -->
       <div class="kj_dl">
         <svg-icon name="gitee" class="ico1" @click.once="AuthLogin('gitee')" />
-        <!-- <svg-icon name="qq" class="ico2" /> -->
+        <svg-icon name="wangyiyun" class="ico1" @click="AuthLogin('163')" />
+        <!-- <svg-icon name="qq" class="ico2" />
         <svg-icon name="coding" class="ico2" />
-        <svg-icon name="weibo" class="ico2" />
+        <svg-icon name="weibo" class="ico2" /> -->
       </div>
     </div>
     <div class="left-box">
@@ -26,6 +27,36 @@
     </div>
     <div class="right-box">
       <a href="https://gitee.com/Embrance-T/vue3_exercise"><img src="https://gitee.com/Embrance-T/vue3_exercise/widgets/widget_1.svg" alt="Fork me on Gitee" /></a>
+    </div>
+
+    <!-- 网易云扫码登录弹窗 -->
+    <div class="mask_box" v-show="state.isShow163Dialog">
+      <div class="sm_login_box">
+        <div class="top_box">
+          <div class="left_txt">登录</div>
+          <div class="close" @click.stop="closeDialog">
+            <svg-icon name="close" />
+          </div>
+        </div>
+        <div class="center_box">
+          <div class="left_img"><img src="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/9643571155/525c/faac/2dc6/fe695c03c7c358ddaa4651736b26a55f.png" /></div>
+          <div class="right_box">
+            <h3>扫码登录</h3>
+            <div class="qr_code">
+              <qrcode-vue :value="state.qrCodeUrl" :size="148"></qrcode-vue>
+            </div>
+            <p class="bottom_line">
+              使用&nbsp;<a
+                href="https://music.163.com/#/download"
+                rel="noopener noreferrer"
+                target="_blank"
+                data-log='{"oid":"btn_web_music_download","isPage":false,"events":["_ec"]}'
+                >网易云音乐APP</a
+              >&nbsp;扫码登录
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -41,12 +72,13 @@ export default {
 <script setup>
 import { ref, reactive, watch, onMounted, getCurrentInstance } from "vue";
 import { useRouter } from "vue-router";
+import QrcodeVue from "qrcode.vue";
 import { cloneDeep } from "lodash";
 import { storeToRefs } from "pinia";
 import { useMainStore } from "@/store/pinia.ts";
 import { loginBroadcast } from "@/utils/broadcast";
 import { getTimeState } from "@/utils/tools.js";
-import { giteeLoginApi, giteeAuthApi } from "@/api/authLogin.js";
+import { giteeLoginApi, giteeAuthApi, qrCodeLoginKey, qrCodeLoginImg, qrCodeLoginCheck } from "@/api/authLogin.js";
 import payCom from "@/myCom/payCom/index.vue";
 import loginAvatarCom from "@/myCom/loginAvatarCom/index.vue";
 
@@ -58,11 +90,17 @@ const { appContext, proxy } = getCurrentInstance();
 const avatarRef = ref(null);
 
 const state = reactive({
+  isShow163Dialog: false,
+  qrCodeUrl: "",
   isLoading: false,
   storageKey: "",
   isCall: false,
   ApiFunc: "",
 });
+
+const closeDialog = () => {
+  state.isShow163Dialog = false;
+};
 
 const toPage = (name) => {
   if (name == "admin") {
@@ -83,6 +121,39 @@ const toPage = (name) => {
   loginBroadcast.postMessage("true");
 };
 
+const sm163Login = async () => {
+  state.isShow163Dialog = true;
+  // //调第一个接口拿key
+  const [err, { data }] = await qrCodeLoginKey(Date.now());
+  let key = data?.unikey;
+
+  // 调第二个接口拿二维码图片
+  const [_, { data: res }] = await qrCodeLoginImg(key);
+  console.log("二维码地址：", res.qrurl);
+  state.qrCodeUrl = res.qrurl;
+
+  let check = setInterval(async () => {
+    const [error, result] = await qrCodeLoginCheck(key, Date.now());
+    console.log("轮询检测扫码状态:", result);
+    // 授权成功
+    if (result.code == "803") {
+      state.isShow163Dialog = false;
+      clearTimeout(check);
+      window.localStorage.setItem("user", "Admin");
+      store.changeIsLogin163(true);
+      await Router.push({ path: "/welcome" });
+      ElNotification({
+        title: getTimeState(),
+        message: "欢迎登录 vue3_exercise",
+        type: "success",
+        duration: 3000,
+      });
+      state.isLoading = false;
+      loginBroadcast.postMessage("true");
+    }
+  }, 3000);
+};
+
 // gitee第三方登录授权
 const AuthLogin = async (str) => {
   switch (str) {
@@ -93,13 +164,9 @@ const AuthLogin = async (str) => {
         750
       );
       break;
-    // case "coding":
-    //   proxy.OpenWindow(
-    //     "https://jembrace.coding.net/api/oauth/authorize?client_id=3545ff13350e1d650b9d40bde445c211&redirect_uri=http://127.0.0.1:3077/welcome&response_type=code&scope=user",
-    //     1200,
-    //     750
-    //   );
-    //   break;
+    case "163":
+      sm163Login();
+      break;
     default:
       break;
   }
@@ -129,42 +196,49 @@ const AuthFunc = async (code) => {
     });
     state.isLoading = false;
     loginBroadcast.postMessage("true");
+  } else {
+    ElNotification({
+      title: "",
+      message: "出错了",
+      type: "error",
+      duration: 3000,
+    });
   }
 };
 
 //XXX 优雅监听storage参考：https://blog.csdn.net/lambert00001/article/details/131031870
 // 监听gitee登录的弹窗传递的storage参数
-window.addEventListener(
-  "storage",
-  (e) => {
-    let key = window.localStorage.key(0);
-    if (key == "giteeMsg") {
-      state.storageKey = JSON.parse(window.localStorage.getItem(key));
-    }
-  },
-  false
-);
+// window.addEventListener(
+//   "storage",
+//   (e) => {
+//     let key = window.localStorage.key(0);
+//     if (key == "giteeMsg") {
+//       state.storageKey = JSON.parse(window.localStorage.getItem(key));
+//     }
+//   },
+//   false
+// );
 
-watch(
-  () => cloneDeep(state.storageKey.code),
-  (newVal, oldVal) => {
-    if (newVal == oldVal) return;
-    console.log("父窗口监听消息：", newVal);
-    let actions = new Map([["gitee", giteeLoginApi]]);
-    state.ApiFunc = actions.get("gitee");
-    !state.isCall && AuthFunc(newVal);
-  },
-  {
-    deep: true,
-  }
-);
+// watch(
+//   () => cloneDeep(state.storageKey.code),
+//   (newVal, oldVal) => {
+//     if (newVal == oldVal) return;
+//     console.log("父窗口监听消息：", newVal);
+//     let actions = new Map([["gitee", giteeLoginApi]]);
+//     state.ApiFunc = actions.get("gitee");
+//     !state.isCall && AuthFunc(newVal);
+//   },
+//   {
+//     deep: true,
+//   }
+// );
 
-// window.addEventListener("message", async (e) => {
-//   console.log("父窗口监听消息：", e.data.code);
-//   let actions = new Map([["gitee", giteeLoginApi]]);
-//   state.ApiFunc = actions.get("gitee");
-//   !state.isCall && AuthFunc(e);
-// });
+window.addEventListener("message", async (e) => {
+  console.log("父窗口监听消息：", e.data.code);
+  let actions = new Map([["gitee", giteeLoginApi]]);
+  state.ApiFunc = actions.get("gitee");
+  !state.isCall && AuthFunc(e);
+});
 
 // 下雨canvas
 onMounted(() => {
@@ -508,6 +582,112 @@ onMounted(() => {
     top: 0;
     width: 110px;
     height: 110px;
+  }
+
+  @keyframes scaleBox {
+    0% {
+      transform: scale(0);
+    }
+
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .mask_box {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.35);
+
+    .sm_login_box {
+      user-select: none;
+      width: 598px;
+      height: 398px;
+      border-radius: 25px 25px 15px 15px;
+      background-color: #fff;
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      z-index: 2;
+      animation: scaleBox 0.3s ease-in;
+
+      .top_box {
+        position: relative;
+        margin: 0;
+        padding: 0 5px 0 18px;
+        height: 38px;
+        line-height: 38px;
+        z-index: 10;
+        border-bottom: 1px solid #191919;
+        border-radius: 15px 15px 0 0;
+        background: #2d2d2d;
+        font-weight: bold;
+        font-size: 14px;
+        color: #fff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .close {
+          font-size: 22px;
+          width: 32px;
+          height: 32px;
+          display: grid;
+          place-content: center;
+          cursor: pointer;
+        }
+      }
+
+      .center_box {
+        width: 100%;
+        height: 350px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .left_img {
+          width: 142px;
+          height: 250px;
+          margin-right: 20px;
+
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+
+        .right_box {
+          width: 220px;
+          height: 250px;
+          margin-left: 20px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          h3 {
+            font-size: 18px;
+            font-weight: 500;
+          }
+
+          qr_code {
+            width: 148px;
+            height: 148px;
+            border: 3px solid red;
+          }
+
+          .bottom_line {
+            a {
+              text-decoration: none;
+              color: #0c73c2;
+            }
+          }
+        }
+      }
+    }
   }
 }
 </style>

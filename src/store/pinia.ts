@@ -21,6 +21,7 @@ export const useMainStore = defineStore("piniaStore", {
     MessageList: [], // socket消息数组
     MDList: [], // md文件大纲列表
     loginInfo: {}, // 登录信息
+    isLogin163: false, // 网易云登录状态
   }),
   // 声明getters
   getters: {
@@ -42,6 +43,10 @@ export const useMainStore = defineStore("piniaStore", {
       console.log("pinia存储登录信息", res);
       setStorage("loginInfo", res);
       this.loginInfo = res;
+    },
+    changeIsLogin163(state) {
+      // console.log("pinia改变状态：", state);
+      this.isLogin163 = state;
     },
     changeRightChartShow(state) {
       // console.log("pinia改变状态：", state);

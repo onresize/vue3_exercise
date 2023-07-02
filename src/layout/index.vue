@@ -68,7 +68,7 @@
                 <SwitchIcon unmount-persets />
               </div>
               <div class="right_r" @click="showDrawer">
-                <img :src="loginInfo?.avatar_url || state.avatarSrc" alt="" />
+                <img :src="loginInfo?.avatarUrl || loginInfo?.avatar_url || state.avatarSrc" alt="" />
               </div>
             </div>
           </div>
@@ -105,8 +105,9 @@
     <!-- 登录信息抽屉 -->
     <el-drawer v-model="state.drawer" title="" :with-header="false" size="400px">
       <div class="avatar_box">
-        <img :src="loginInfo?.avatar_url || state.avatarSrc" alt="" />
+        <img :src="loginInfo?.avatarUrl || loginInfo?.avatar_url || state.avatarSrc" alt="" />
       </div>
+      <!-- gitee登录后信息模板 -->
       <el-card class="avatar_card" v-show="loginInfo?.avatar_url">
         <div>
           <label>用户名：</label><span>{{ loginInfo?.name }}</span>
@@ -124,6 +125,27 @@
           </div>
         </div>
       </el-card>
+      <!-- 网易云登录信息模板 -->
+      <el-card class="avatar_card" v-show="loginInfo?.avatarUrl">
+        <div>
+          <label>用户名：</label><span>{{ loginInfo?.nickname }}</span>
+        </div>
+        <div>
+          <label>简介：</label><span>{{ loginInfo?.signature }}</span>
+        </div>
+        <div>
+          <label>IP：</label><span class="top_txt">{{ loginInfo?.lastLoginIP }}</span>
+        </div>
+      </el-card>
+      <el-card class="avatar_card1" style="margin-top: 10px" v-show="state.FmList?.length && loginInfo?.avatarUrl">
+        <el-icon class="freshIcon" title="刷新" @click.prevent="getFmList">
+          <RefreshRight />
+        </el-icon>
+        <div class="item_box" v-for="(item, idx) in state.FmList" :key="idx" @click="playOrPauseSong(item, idx)">
+          <div :style="{ color: state.isPlayIdx == idx ? 'red' : '#303133' }" class="top_txt">{{ item.name }}</div>
+          <audio :src="state.audioUrl" id="Audio" preload></audio>
+        </div>
+      </el-card>
     </el-drawer>
     <!-- 全局按钮音效 -->
     <audio src="" id="eventAudio" controls hidden></audio>
@@ -139,7 +161,7 @@ export default {
 </script>
 
 <script setup>
-import { watch, computed, reactive, ref, onMounted, getCurrentInstance } from "vue";
+import { watch, computed, reactive, ref, nextTick, onMounted, getCurrentInstance } from "vue";
 import { useRoute, useRouter, onBeforeRouteUpdate } from "vue-router";
 import { storeToRefs } from "pinia";
 import { useMainStore } from "@/store/pinia.ts";
@@ -147,12 +169,13 @@ import { setStorage, getStorage } from "@/utils/funcTools";
 import { loginBroadcast } from "@/utils/broadcast";
 import { SwitchIcon } from "vue-dark-switch";
 import clock from "@/myCom/clock/index.vue";
+import { loginStatus, subcount, likelist, songUrl, personalFm } from "@/api/authLogin.js";
 
 const route = useRoute();
 const Router = useRouter();
 const PiniaStore = useMainStore();
 const scrollbarRef = ref(null);
-let { AuthRoutes } = storeToRefs(PiniaStore); // 不丢失响应式
+let { AuthRoutes, isLogin163 } = storeToRefs(PiniaStore); // 不丢失响应式
 // const key = computed(() =>
 //   route.name ? String(route.name) + new Date() : String(route.path) + new Date()
 // );
@@ -171,6 +194,9 @@ let RouteList = reactive({
 });
 
 const state = reactive({
+  isPlayIdx: null,
+  audioUrl: "",
+  FmList: [],
   isShowClock: false,
   nowTime: "",
   drawer: false,
@@ -248,12 +274,47 @@ const loopAdd3 = () => {
 };
 
 const showDrawer = async () => {
+  // await get163Info()
   state.drawer = true;
-  await proxy.sleepFunc(500);
-  window.requestAnimationFrame(loopAdd0);
-  window.requestAnimationFrame(loopAdd1);
-  window.requestAnimationFrame(loopAdd2);
-  window.requestAnimationFrame(loopAdd3);
+  if (loginInfo?.avatar_url) {
+    await proxy.sleepFunc(500);
+    window.requestAnimationFrame(loopAdd0);
+    window.requestAnimationFrame(loopAdd1);
+    window.requestAnimationFrame(loopAdd2);
+    window.requestAnimationFrame(loopAdd3);
+  }
+};
+
+const get163Info = async () => {
+  const [_, res] = await loginStatus(); // 获取登录状态
+  let { userId, avatarUrl, nickname, signature } = res.data?.profile;
+  console.log("用户login状态：", res.data?.profile);
+  PiniaStore.changeLoginInfo(res.data?.profile);
+  getFmList();
+};
+
+const getFmList = async () => {
+  const [err, data] = await personalFm();
+  console.log("私人FM:", data.data);
+  state.FmList = data.data;
+};
+
+const playOrPauseSong = async (item, idx) => {
+  state.audioUrl = "";
+  let music = document.getElementById("Audio");
+  console.log("播放/暂停歌曲：", item);
+  // 点击正在播放的歌曲、暂停操作
+  if (state.isPlayIdx == idx) {
+    music?.pause();
+    state.isPlayIdx = null;
+    return;
+  }
+  const [err, { data }] = await songUrl(item.id);
+  console.log("当前音乐url:", data[0].url);
+  state.isPlayIdx = idx;
+  state.audioUrl = data[0].url;
+  await nextTick();
+  state.audioUrl && music?.play();
 };
 
 const scrollBy = (item) => {
@@ -312,6 +373,20 @@ watch(
         { name: "Followers", num: "0" },
         { name: "Following", num: "0" },
       ];
+    }
+  },
+  {
+    immediate: true,
+    deep: true,
+  }
+);
+watch(
+  () => route,
+  (val) => {
+    // 登录了网易云的情况
+    if (val.name == "welcome" && isLogin163) {
+      console.log("layout页监听路由：", val);
+      get163Info();
     }
   },
   {
@@ -379,7 +454,7 @@ onMounted(() => {
 
 .avatar_card {
   border-radius: 20px;
-  height: 250px;
+  height: fit-content;
   position: relative;
   top: 100px;
   padding-top: 75px;
@@ -400,18 +475,59 @@ onMounted(() => {
       justify-content: center;
       cursor: pointer;
 
-      .top_txt {
-        font-size: 18px;
-        font-weight: bold;
-        color: #005980;
-      }
-
       .name_txt {
         padding-top: 2px;
         color: #40485b;
         font-size: 12px;
         display: block;
       }
+    }
+  }
+
+  .top_txt {
+    font-size: 18px;
+    font-weight: bold;
+    color: #005980;
+  }
+}
+
+.avatar_card1 {
+  border-radius: 20px;
+  height: fit-content;
+  position: relative;
+  top: 100px;
+
+  .freshIcon {
+    position: absolute;
+    right: 8px;
+    top: 5px;
+    cursor: pointer;
+  }
+
+  .item_box {
+    width: 100%;
+    padding: 5px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.12);
+    border: 1px solid #e4e7ed;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+
+    .top_txt {
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    &:hover {
+      transition: all 0.3s ease-in-out;
+      background: -moz-linear-gradient(-45deg, #ffffff 20%, #ffb08e 100%);
+      background: -webkit-linear-gradient(-45deg, #ffffff 20%, #ffb08e 100%);
+      background: linear-gradient(135deg, #ffffff 20%, #ffb08e 100%);
+    }
+
+    & + div {
+      margin-top: 5px;
     }
   }
 }
@@ -430,6 +546,14 @@ onMounted(() => {
   background-color: #ffffff;
   overflow: hidden;
   // cursor: zoom-in;
+
+  &:hover {
+    transform: rotate(666turn);
+    transition-delay: 0.3s;
+    transition-property: all;
+    transition-duration: 59s;
+    transition-timing-function: cubic-bezier(0.34, 0, 0.84, 1);
+  }
 
   img {
     width: 100%;
