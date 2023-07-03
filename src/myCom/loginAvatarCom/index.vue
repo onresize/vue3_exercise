@@ -27,7 +27,7 @@ defineExpose({
   <div class="_98d1fd92">
     <button class="_53b86379 _79c95847" :class="[state.showMask ? 'transformY' : '']" @click="toggleClick">
       <div class="_97329910">
-        <img alt="" role="presentation" src="https://static-production.npmjs.com/97ce287600f35d9d5f2ed500630bb0ad.png" class="npm_logo" />
+        <img alt="" role="presentation" src="@/assets/img/npm.png" class="npm_logo" />
       </div>
       <div class="_6e1e0509"></div>
       <div class="_2dd7f49e"></div>
@@ -38,16 +38,16 @@ defineExpose({
           <div class="_33c43af5">
             <div class="e7114814">
               <!-- 圆眼 -->
-              <img src="https://static-production.npmjs.com/a39ceb9e9ad640f4de8eee094063d890.png" alt="" role="presentation" class="bizi_img bz_img0" />
+              <img src="@/assets/img/bz.png" alt="" role="presentation" class="bizi_img bz_img0" />
 
               <!-- 咪咪眼 -->
-              <img src="https://static-production.npmjs.com/ecc2a793db0bd5966246e970f9c9ff5e.png" alt="" role="presentation" class="bizi_img bz_img1" />
+              <img src="@/assets/img/bz1.png" alt="" role="presentation" class="bizi_img bz_img1" />
 
               <!-- 笑眼 -->
-              <img src="https://static-production.npmjs.com/6bf09f9948c3044dbb2c7ed8b85098dc.png" alt="" role="presentation" class="bizi_img bz_img2" />
+              <img src="@/assets/img/bz2.png" alt="" role="presentation" class="bizi_img bz_img2" />
             </div>
           </div>
-          <img alt="" role="presentation" src="https://static-production.npmjs.com/c9e19250d48d66f0e9c70c9b3991bbdb.png" class="body_img" />
+          <img alt="" role="presentation" src="@/assets/img/bd.png" class="body_img" />
         </button>
       </div>
     </div>

@@ -121,9 +121,27 @@ const toPage = (name) => {
   loginBroadcast.postMessage("true");
 };
 
+// gitee第三方登录授权
+const AuthLogin = async (str) => {
+  switch (str) {
+    case "gitee":
+      proxy.OpenWindow(
+        "https://gitee.com/oauth/authorize?client_id=9b6db952f18a91f9cb551f1da7c4d51c43e8a37c7f0172ba1c82f80bd51ed7c0&redirect_uri=http://127.0.0.1:3077/welcome&response_type=code",
+        1200,
+        750
+      );
+      break;
+    case "163":
+      sm163Login();
+      break;
+    default:
+      break;
+  }
+};
+
 const sm163Login = async () => {
   state.isShow163Dialog = true;
-  // //调第一个接口拿key
+  // 调第一个接口拿key
   const [err, { data }] = await qrCodeLoginKey(Date.now());
   let key = data?.unikey;
 
@@ -135,6 +153,11 @@ const sm163Login = async () => {
   let check = setInterval(async () => {
     const [error, result] = await qrCodeLoginCheck(key, Date.now());
     console.log("轮询检测扫码状态:", result);
+    await proxy.sleepFunc(1000);
+    // 授权中....
+    if (result.code == "802") {
+      store.changeLoginInfo(result);
+    }
     // 授权成功
     if (result.code == "803") {
       state.isShow163Dialog = false;
@@ -152,24 +175,6 @@ const sm163Login = async () => {
       loginBroadcast.postMessage("true");
     }
   }, 3000);
-};
-
-// gitee第三方登录授权
-const AuthLogin = async (str) => {
-  switch (str) {
-    case "gitee":
-      proxy.OpenWindow(
-        "https://gitee.com/oauth/authorize?client_id=9b6db952f18a91f9cb551f1da7c4d51c43e8a37c7f0172ba1c82f80bd51ed7c0&redirect_uri=http://127.0.0.1:3077/welcome&response_type=code",
-        1200,
-        750
-      );
-      break;
-    case "163":
-      sm163Login();
-      break;
-    default:
-      break;
-  }
 };
 
 const AuthFunc = async (code) => {
@@ -208,37 +213,30 @@ const AuthFunc = async (code) => {
 
 //XXX 优雅监听storage参考：https://blog.csdn.net/lambert00001/article/details/131031870
 // 监听gitee登录的弹窗传递的storage参数
-// window.addEventListener(
-//   "storage",
-//   (e) => {
-//     let key = window.localStorage.key(0);
-//     if (key == "giteeMsg") {
-//       state.storageKey = JSON.parse(window.localStorage.getItem(key));
-//     }
-//   },
-//   false
-// );
+window.addEventListener(
+  "storage",
+  (e) => {
+    let key = window.localStorage.key(0);
+    if (key == "giteeMsg") {
+      state.storageKey = JSON.parse(window.localStorage.getItem(key));
+    }
+  },
+  false
+);
 
-// watch(
-//   () => cloneDeep(state.storageKey.code),
-//   (newVal, oldVal) => {
-//     if (newVal == oldVal) return;
-//     console.log("父窗口监听消息：", newVal);
-//     let actions = new Map([["gitee", giteeLoginApi]]);
-//     state.ApiFunc = actions.get("gitee");
-//     !state.isCall && AuthFunc(newVal);
-//   },
-//   {
-//     deep: true,
-//   }
-// );
-
-window.addEventListener("message", async (e) => {
-  console.log("父窗口监听消息：", e.data.code);
-  let actions = new Map([["gitee", giteeLoginApi]]);
-  state.ApiFunc = actions.get("gitee");
-  !state.isCall && AuthFunc(e);
-});
+watch(
+  () => cloneDeep(state.storageKey.code),
+  (newVal, oldVal) => {
+    if (newVal == oldVal) return;
+    console.log("父窗口监听消息：", newVal);
+    let actions = new Map([["gitee", giteeLoginApi]]);
+    state.ApiFunc = actions.get("gitee");
+    !state.isCall && AuthFunc(newVal);
+  },
+  {
+    deep: true,
+  }
+);
 
 // 下雨canvas
 onMounted(() => {
@@ -427,12 +425,12 @@ onMounted(() => {
 }
 
 .login_bg {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background: url("@/assets/img/login.webp") no-repeat center;
   background-size: 100% 100%;
   overflow: hidden;
-  position: relative;
+  position: fixed;
 
   .mask {
     width: 600px;
@@ -688,6 +686,13 @@ onMounted(() => {
         }
       }
     }
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .left-box,
+  .right-box {
+    display: none !important;
   }
 }
 </style>

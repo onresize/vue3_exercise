@@ -187,7 +187,7 @@ export default {
       };
       return option;
     },
-    sleepFunc(delay) {
+    sleepFunc(delay = 200) {
       return new Promise((res) => setTimeout(() => res(), delay));
     },
     awaitPromise(resData) {
@@ -229,14 +229,11 @@ export default {
           clearTimeout(tim);
           let codeStr = MyWin.location?.search;
           let code = this.toSubstr(MyWin.location.search, 6, codeStr.length);
-          const msg = {
-            code,
-          };
+          const msg = { code };
           console.log("同意授权：", msg);
-          // window.localStorage.setItem("giteeMsg", JSON.stringify(msg));
-          // await this.sleepFunc(900);
+          MyWin.localStorage.setItem("giteeMsg", JSON.stringify(msg));
+          // await this.sleepFunc(1000);
           MyWin.close(); // 关闭open的窗口
-          window.postMessage(msg, "http://127.0.0.1:3077/");
         }
       }, 500);
     },

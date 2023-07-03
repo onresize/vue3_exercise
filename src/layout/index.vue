@@ -67,6 +67,7 @@
               <div class="right_center">
                 <SwitchIcon unmount-persets />
               </div>
+              <!-- 默认头像 -->
               <div class="right_r" @click="showDrawer">
                 <img :src="loginInfo?.avatarUrl || loginInfo?.avatar_url || state.avatarSrc" alt="" />
               </div>
