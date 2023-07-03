@@ -1,5 +1,14 @@
+<script>
+import publicFunc from "@/mixins/publicFunc";
+
+export default {
+  mixins: [publicFunc],
+};
+</script>
+
 <script setup>
-import { reactive } from "vue";
+import { reactive, onMounted } from "vue";
+import { shuffle } from "lodash";
 import MaskSwipe from "@/myCom/swipe/index.vue";
 
 import img1 from "@/assets/swipe/img/1.jpg";
@@ -17,7 +26,18 @@ import maskImage1 from "@/assets/swipe/mask.png";
 const state = reactive({
   showBlackBg: true,
   isChangeTxt: false,
+  shuffleTimiing: "", // 定时器
+  // 背景图
+  bgList: ["bar_y", "bar_x", "line_gradient", "line", "funnel", "heatmap", "map", "pie", "radar"],
 });
+
+// 打乱
+const shuffleHandle = () => {
+  state.shuffleTimiing = setInterval(() => {
+    state.bgList = shuffle(state.bgList);
+    console.log("轮询打乱：", state.bgList);
+  }, 3000);
+};
 
 const changeBg = () => {
   state.showBlackBg = !state.showBlackBg;
@@ -29,6 +49,10 @@ const changeBg = () => {
     state.isChangeTxt = false;
   }
 };
+
+onMounted(() => {
+  shuffleHandle();
+});
 </script>
 
 <template>
@@ -41,6 +65,7 @@ const changeBg = () => {
         {{ state.isChangeTxt ? "dark" : "light" }}
       </el-button>
     </div>
+
     <MaskSwipe
       :duration="3"
       :transition-duration="1"
@@ -61,6 +86,14 @@ const changeBg = () => {
       indicator-position="right"
       class="swipe_box"
     />
+  </div>
+
+  <div class="imgBox">
+    <div class="bg-img-box" v-for="(item, idx) in state.bgList" :key="item">
+      <transition-group tag="div" name="coder">
+        <img :src="getImageUrl(item, 'charts')" :key="item" :alt="`chart${idx}`" />
+      </transition-group>
+    </div>
   </div>
 </template>
 
@@ -121,5 +154,40 @@ const changeBg = () => {
     width: 500px;
     margin: 0 20px;
   }
+}
+
+.imgBox {
+  margin-top: 30px;
+  width: 730px;
+  height: 530px;
+  border: 2px solid red;
+  border-radius: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+
+  .bg-img-box {
+    width: 230px;
+    height: 164px;
+    border-radius: 5px;
+    border: 2px solid black;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+      user-select: none;
+    }
+  }
+}
+
+.coder-enter-from,
+.coder-leave-to {
+  opacity: 0;
+}
+
+.coder-move {
+  transition: transform 1s ease;
 }
 </style>

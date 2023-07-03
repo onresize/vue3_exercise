@@ -82,8 +82,8 @@ export default defineConfig(({ mode }) => {
     },
     resolve: {
       alias: {
-        // "@": resolve("src"),
-        "@": fileURLToPath(new URL("./src", import.meta.url)),
+        "@": resolve("src"),
+        // "@": fileURLToPath(new URL("./src", import.meta.url)),
         "@img": resolve("src/assets/img"),
         "@less": resolve("src/assets/less"),
         "@libs": resolve("src/libs"),

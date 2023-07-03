@@ -66,36 +66,48 @@ onMounted(() => {
 </script>
 
 <template>
-  <h3>打字机效果多种实现方案</h3>
-  <el-link href="https://blog.csdn.net/qq_41581588/article/details/127050185" target="_bank">参考:</el-link>
+  <div class="mixinHeight pBox">
+    <h3>打字机效果多种实现方案</h3>
+    <el-link href="https://blog.csdn.net/qq_41581588/article/details/127050185" target="_bank">参考:</el-link>
 
-  <el-card class="p_card">
-    <h3>实现一：setTimeout()</h3>
-    <div id="content"></div>
-  </el-card>
-  <el-card class="p_card">
-    <h3>实现二：setInterval()</h3>
-    <div id="content1"></div>
-  </el-card>
-  <el-card class="p_card">
-    <h3>实现三：requestAnimationFrame()</h3>
-    <div id="content2"></div>
-  </el-card>
-  <el-card class="p_card">
-    <h3>实现四：css方式</h3>
-    <div id="content3">大江东去浪淘尽，千古风流人物</div>
-  </el-card>
-  <el-card class="p_card">
-    <h3>实现五(vue-typed-js暂不支持vue3)：yarn add vue3typed</h3>
-    <div id="content4">
-      <vuetyped :strings="['面试官你好', '我叫XYZ', '来自XXX']" :loop="true" :smart-backspace="true">
-        <div class="typing" />
-      </vuetyped>
-    </div>
-  </el-card>
+    <el-card class="p_card">
+      <h3>实现一：setTimeout()</h3>
+      <div id="content"></div>
+    </el-card>
+    <el-card class="p_card">
+      <h3>实现二：setInterval()</h3>
+      <div id="content1"></div>
+    </el-card>
+    <el-card class="p_card">
+      <h3>实现三：requestAnimationFrame()</h3>
+      <div id="content2"></div>
+    </el-card>
+    <el-card class="p_card">
+      <h3>实现四：css方式</h3>
+      <div id="content3">大江东去浪淘尽，千古风流人物</div>
+    </el-card>
+    <el-card class="p_card">
+      <h3>实现五(vue-typed-js暂不支持vue3)：yarn add vue3typed</h3>
+      <div id="content4">
+        <vuetyped :strings="['面试官你好', '我叫XYZ', '来自XXX']" :loop="true" :smart-backspace="true">
+          <div class="typing" />
+        </vuetyped>
+      </div>
+    </el-card>
+  </div>
 </template>
 
 <style scoped lang="less">
+.pBox {
+  overflow-y: auto !important;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    display: block !important;
+  }
+}
+
 .p_card {
   margin: 10px;
 }
