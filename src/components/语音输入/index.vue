@@ -12,15 +12,12 @@ const recognitionStatus = ref("识别未启动");
 const recognizedText = ref("");
 
 if (recognition) {
-  recognition.continuous = true; // 设置是持续听还是听到声音之后就关闭接收。
+  recognition.continuous = false; // 设置是持续听还是听到声音之后就关闭接收。
   recognition.interimResults = true; // 设置是否允许临时结果，临时结果是识别的中间过程，这时候返回结果的isFinal = false。
 
-  recognition.onstart = () => {
+  recognition.onstart = (e) => {
+    console.log("识别已启动---------", e);
     recognitionStatus.value = "识别已启动";
-  };
-
-  recognition.onend = () => {
-    recognitionStatus.value = "确认已结束";
   };
 
   recognition.onresult = (event) => {
@@ -28,6 +25,10 @@ if (recognition) {
     const recognized = event.results[event.results.length - 1][0].transcript;
     recognizedText.value = recognized;
   };
+
+  // recognition.onend = () => {
+  //   recognitionStatus.value = "确认已结束";
+  // };
 } else {
   recognitionStatus.value = "不支持识别";
 }
