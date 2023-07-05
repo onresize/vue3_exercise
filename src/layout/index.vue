@@ -143,7 +143,7 @@
           <RefreshRight />
         </el-icon>
         <div class="item_box" v-for="(item, idx) in state.FmList" :key="idx" @click="playOrPauseSong(item, idx)">
-          <div :style="{ color: state.isPlayIdx == idx ? 'red' : '#303133' }" class="top_txt">{{ item.name }}</div>
+          <div :style="{ color: state.isPlayIdx == idx ? 'red' : '#303133' }" class="top_txt">{{ item.name + "-" + item?.artists?.[0].name }}</div>
           <audio :src="state.audioUrl" id="Audio" preload></audio>
         </div>
       </el-card>

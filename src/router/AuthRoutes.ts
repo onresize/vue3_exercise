@@ -11,6 +11,11 @@ export const AdminRoutes = [
     component: () => import("@cp/transform/index.vue"),
   },
   {
+    path: "/speedInput",
+    meta: { title: "speedInput" },
+    component: () => import("@cp/语音输入/index.vue"),
+  },
+  {
     path: "/typed",
     meta: { title: "typed" },
     component: () => import("@cp/打字机效果typed/index.vue"),
