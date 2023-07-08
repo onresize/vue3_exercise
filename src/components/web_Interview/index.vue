@@ -65,6 +65,7 @@ const handleNodeClick = (node) => {
   width: calc(100vw - 330px);
   height: 100%;
   box-sizing: border-box;
+  scroll-padding-top: 90px;
   overflow-y: auto !important;
   overflow-x: hidden;
   scroll-behavior: smooth;

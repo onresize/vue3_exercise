@@ -26,9 +26,9 @@ if (recognition) {
     recognizedText.value = recognized;
   };
 
-  // recognition.onend = () => {
-  //   recognitionStatus.value = "确认已结束";
-  // };
+  recognition.onend = () => {
+    recognitionStatus.value = "确认已结束";
+  };
 } else {
   recognitionStatus.value = "不支持识别";
 }
@@ -56,6 +56,7 @@ const stopRecognition = () => {
   </el-input> -->
 
   <div>
+    <el-tag style="color: red; margin-right: 20px">需要开启梯子</el-tag>
     <el-button @click="startRecognition">开启语音识别</el-button>
     <el-button @click="stopRecognition">关闭语音识别</el-button>
     <p>{{ recognitionStatus }}</p>
