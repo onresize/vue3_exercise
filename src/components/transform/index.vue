@@ -7,7 +7,7 @@ export default {
 </script>
 
 <script setup>
-import { reactive, onMounted } from "vue";
+import { reactive, onMounted, onUnmounted } from "vue";
 import { shuffle } from "lodash";
 import MaskSwipe from "@/myCom/swipe/index.vue";
 
@@ -52,6 +52,9 @@ const changeBg = () => {
 
 onMounted(() => {
   shuffleHandle();
+});
+onUnmounted(() => {
+  clearTimeout(state.shuffleTimiing);
 });
 </script>
 

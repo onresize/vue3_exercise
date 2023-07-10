@@ -89,7 +89,7 @@ onMounted(() => {
     <el-card class="p_card">
       <h3>实现五(vue-typed-js暂不支持vue3)：yarn add vue3typed</h3>
       <div id="content4">
-        <vuetyped :strings="['面试官你好', '我叫XYZ', '来自XXX']" :loop="true" :smart-backspace="true">
+        <vuetyped :strings="['面试官你好', '我叫XYZ', '来自XXX']" :loop="false" :smart-backspace="true">
           <div class="typing" />
         </vuetyped>
       </div>
