@@ -1,6 +1,8 @@
 <script setup>
 import { ref, reactive } from "vue";
 
+const iptRef = ref(null);
+
 const state = reactive({
   isShowIpt: false,
   speedIptVal: "",
@@ -57,7 +59,9 @@ const mouseupClick = () => {
   console.log("鼠标抬起事件>>>>>");
   state.isShowSpeedAnimation = false;
   setTimeout(() => {
-    state.isShowIpt = true;
+    if (state.speedIptVal.length) {
+      state.isShowIpt = true;
+    }
   }, 500);
   // 结束录音
   recorder.stop();
@@ -120,6 +124,8 @@ function renderResult(resultData) {
   if (jsonData.data && jsonData.data.result) {
     let data = jsonData.data.result;
     let str = "";
+    let iptValue = "";
+    let iptIdx = 0;
     let ws = data.ws;
     for (let i = 0; i < ws.length; i++) {
       str = str + ws[i].cw[0].w;
@@ -136,7 +142,16 @@ function renderResult(resultData) {
     } else {
       resultText = resultText + str;
     }
-    state.speedIptVal = resultTextTemp || resultText || "";
+    iptValue = resultTextTemp || resultText || "";
+    function writing() {
+      if (iptIdx < iptValue.length) {
+        // 追加文字
+        state.speedIptVal += iptValue[iptIdx++];
+        let timer = setTimeout(writing, 100);
+        console.log(iptIdx);
+      }
+    }
+    writing();
   }
   if (jsonData.code === 0 && jsonData.data.status === 2) {
     iatWS.close();
@@ -220,6 +235,7 @@ recorder.onStop = () => {
 };
 
 function btnControlClick() {
+  iptRef.value.blur();
   if (btnStatus === "UNDEFINED" || btnStatus === "CLOSED") {
     connectWebSocket();
   } else if (btnStatus === "CONNECTING" || btnStatus === "OPEN") {
@@ -244,6 +260,7 @@ function btnControlClick() {
     <el-input
       v-model="state.speedIptVal"
       clearable
+      ref="iptRef"
       @clear="
         () => {
           state.isShowIpt = false;
@@ -259,11 +276,11 @@ function btnControlClick() {
         </div>
       </template>
     </el-input>
-    <p v-show="state.isShowIpt">
+    <!-- <p v-if="state.isShowIpt">
       <vuetyped :key="state.speedIptVal" :strings="[`${state.speedIptVal}`]" :loop="false" :smart-backspace="true">
         <div class="typing" />
       </vuetyped>
-    </p>
+    </p> -->
   </el-card>
 </template>
 
